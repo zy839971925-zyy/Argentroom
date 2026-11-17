@@ -87,7 +87,28 @@ struct GrainParams {
     // default) skips the mix, so the grain path is byte-identical to before;
     // a <= 0 skips the grain model entirely.
     double amount = 1.0;
+    // r5 BAND WINDOW. A banded render reads its grained density only on rows
+    // [need_row_begin, need_row_end) (its core plus the print side's reach);
+    // need_row_end < 0 means every row (the default, and every whole-frame
+    // render). The sublayer path then draws particles only on those rows plus
+    // its own FIR reach, which is exact for every row in the window: a pixel's
+    // draw depends only on its fixed 8192-pixel block (index + seed) and the
+    // blocks are still drawn whole, and the blurs that follow are FIRs that read
+    // no further than the reach. Anything that would break that (an IIR-class
+    // blur, active micro-structure, whose clumping stream is serial over the
+    // plane) draws the whole plane exactly as before.
+    int need_row_begin = 0;
+    int need_row_end = -1;
 };
+
+// r5: the rows [*row0, *row1) the sublayer sampler must draw so that every row of
+// grain.need_row_begin..need_row_end is exact (see GrainParams). Returns false
+// -- draw every row -- when no window was asked for, or when the window cannot be
+// made exact. Pure function of its arguments; develop() and
+// apply_grain_to_density_layers both call it and must agree.
+bool grain_layers_sample_window(const double* density_max_layers, int width, int height,
+                                double pixel_size_um, const GrainParams& grain,
+                                int* row0, int* row1);
 
 // layer_particle_model(density, density_max, n_particles_per_pixel,
 //                      grain_uniformity, seed, method='poisson_binomial',
@@ -114,11 +135,14 @@ void layer_particle_model(const float* density, int npix, int width, int height,
 // n_particles_per_pixel — mirroring grain.py::layer_particle_model's
 // `if blur_particle>0: grain = fast_gaussian_filter(grain, blur_particle*sqrt(od_particle))`.
 // (width, height) drive that 2D blur; npix == width*height.
+// `win_begin`/`win_end` (r5): pixel range the caller will read; blocks wholly
+// outside it are not drawn and read as 0. win_end < 0 = the whole plane.
 void layer_particle_model(const float* density, int npix, int width, int height,
                           double density_max, double n_particles_per_pixel,
                           double grain_uniformity, uint64_t seed,
                           double blur_particle, float* out,
-                          StatsRng::Generator generator = StatsRng::Generator::Exact);
+                          StatsRng::Generator generator = StatsRng::Generator::Exact,
+                          int64_t win_begin = 0, int64_t win_end = -1);
 
 // add_micro_structure(density_cmy_out, micro_structure, pixel_size_um):
 //

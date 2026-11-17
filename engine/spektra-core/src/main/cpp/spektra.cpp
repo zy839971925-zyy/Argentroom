@@ -2778,6 +2778,8 @@ spk_status run_scan_film(spk_engine* eng, const spk_image* in, const spk_params*
     return SPK_ERR_CANCELLED;
 }
 
+bool band_window_enabled();  // r5 band window switch, defined with the band planner
+
 // Run the negative -> print -> scan route, producing display RGB plus the
 // intermediate taps. `tap_*` pointers, when non-null, receive the corresponding
 // intermediate. Mirrors pipeline._pipeline_print under the print_portra toggles.
@@ -3216,6 +3218,38 @@ spk_status run_print(spk_engine* eng, const spk_image* in, const spk_params* p,
         sparams.edr = &prnt.edr_tone_map;
     }
 
+    // r5 BAND WINDOW (exact). A plain band of a banded export keeps only its core
+    // rows, and everything after the film's wide-margin effects (halation, DIR
+    // couplers, the camera blurs) reaches only a few rows: the grain sampler and
+    // its FIR blurs, the print exposure and development (per pixel), and scan()
+    // (per pixel, viewing glare drawn over the WHOLE band and read through its row
+    // window, then FIR lens blur / unsharp). So those run on the core plus that
+    // reach instead of on the core plus the film's margin -- ~3x fewer rows at
+    // 8192x6144 -- and every core row is computed from the very operands the full
+    // band would have used. Anything with a frame- or band-wide dependency on the
+    // print side (film edge, contrast mask, enlarger diffusion, an IIR-class
+    // scanner blur, a pre-pass, film reuse) keeps the full band.
+    int win0 = 0, win1 = height;
+    bool band_window = false;
+    if (band && band_window_enabled() && final_rgb && !tap_log_raw &&
+        !tap_film_density_cmy && !tap_print_density_cmy && !film_edge.params &&
+        !band->edge.plan && !band->boost_max_out && !band->camera_far_accumulate &&
+        !band->mask_accum && !band->enlarger_far && !band->film_store &&
+        !band->film_in_rest && !band->print_raw_store && !band->print_raw_in &&
+        !band->film_only && !pparams.contrast_mask.engaged() &&
+        !pparams.diffusion_filter.active && band->core_begin >= 0 &&
+        band->core_end <= height && band->core_begin < band->core_end) {
+        const int reach = spk::scan_window_reach_rows(sparams);
+        if (reach >= 0) {
+            win0 = std::max(0, band->core_begin - reach - 2);
+            win1 = std::min(height, band->core_end + reach + 2);
+            band_window = (win1 - win0) < height;
+        }
+    }
+    if (band_window && fparams.grain.active) {
+        fparams.grain.need_row_begin = win0;
+        fparams.grain.need_row_end = win1;
+    }
     const bool band_film_reuse =
         band && (band->film_in_rest != nullptr || band->film_store != nullptr);
     const char* pointwise_ineligible =
@@ -3694,6 +3728,10 @@ spk_status run_print(spk_engine* eng, const spk_image* in, const spk_params* p,
         const bool core_only =
             band && (band->mask_accum || band->enlarger_far_accumulate || band->film_only);
         int pr0 = 0, prows = height;
+        if (band_window && !core_only) {
+            pr0 = win0;
+            prows = win1 - win0;
+        }
         if (core_only) {
             pr0 = band->core_begin;
             prows = band->core_end - band->core_begin;
@@ -3728,8 +3766,9 @@ spk_status run_print(spk_engine* eng, const spk_image* in, const spk_params* p,
         // releases ~144 MB before print_develop/scan run (EXPORT_FASTPATH
         // item 4).
         { spk::FloatBuffer().swap(film_density_cmy); }
-        print_density_cmy.resize(out_elems);
-        spk::print_develop(prnt, pparams, print_log_raw.data(), npix,
+        const int print_npix = width * prows;  // == npix unless band_window
+        print_density_cmy.resize(static_cast<size_t>(print_npix) * 3);
+        spk::print_develop(prnt, pparams, print_log_raw.data(), print_npix,
                            print_density_cmy.data());
         if (cancellation_requested(cancel, cancel_user_data)) return SPK_ERR_CANCELLED;
         if (!pd_bypass) {
@@ -3789,8 +3828,18 @@ spk_status run_print(spk_engine* eng, const spk_image* in, const spk_params* p,
     // print paper is not negative.
     final_rgb->resize(static_cast<size_t>(npix) * 3);
     if (film_edge.layout.valid) sparams.output_cctf_encoding = false;
+    if (band_window && print_density_cmy.size() == static_cast<size_t>(width) * (win1 - win0) * 3) {
+        // The glare field is drawn for the whole band and read through the window.
+        sparams.glare_frame_rows = height;
+        sparams.glare_row0 = win0;
+        // Rows outside the window are never read (run_banded keeps the core).
+        std::fill(final_rgb->begin(), final_rgb->end(), 0.0f);
+        spk::scan(prnt, sparams, print_density_cmy.data(), width, win1 - win0,
+                  final_rgb->data() + static_cast<size_t>(win0) * width * 3);
+    } else {
     spk::scan(prnt, sparams, print_density_cmy.data(), width, height,
               final_rgb->data());
+    }
     if (film_edge.layout.valid)
         spk::apply_overscan_scan_light(film_edge, final_rgb->data(), p->output_cctf_encoding != 0,
                                        band ? band->y0 : 0, height);
@@ -3975,6 +4024,18 @@ void dump_export_params(const spk_image* in, const spk_params* p) {
 bool film_reuse_enabled() { return g_film_reuse.load(std::memory_order_relaxed) != 0; }
 bool print_raw_reuse_enabled() { return g_print_raw_reuse.load(std::memory_order_relaxed) != 0; }
 bool wide_margin_reuse_enabled() { return g_wide_margin_reuse.load(std::memory_order_relaxed) != 0; }
+// r5: the exact band window (run_print). On by default; SPK_BAND_WINDOW=0
+// restores the full-band print side for A/B.
+std::atomic<int> g_band_window{-1};
+bool band_window_enabled() {
+    int v = g_band_window.load(std::memory_order_relaxed);
+    if (v < 0) {
+        const char* e = std::getenv("SPK_BAND_WINDOW");
+        v = (e && e[0] == '0') ? 0 : 1;
+        g_band_window.store(v, std::memory_order_relaxed);
+    }
+    return v != 0;
+}
 
 struct BandPlan {
     bool active = false;

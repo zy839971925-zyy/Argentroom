@@ -63,7 +63,8 @@ void layer_particle_model(const float* density, int npix, int width, int height,
                           double density_max, double n_particles_per_pixel,
                           double grain_uniformity, uint64_t seed,
                           double blur_particle, float* out,
-                          StatsRng::Generator generator) {
+                          StatsRng::Generator generator,
+                          int64_t win_begin, int64_t win_end) {
     if (npix <= 0) return;
     if (!(n_particles_per_pixel > 0.0) ||
         !std::isfinite(n_particles_per_pixel)) {
@@ -113,6 +114,12 @@ void layer_particle_model(const float* density, int npix, int width, int height,
             if (b >= nblocks) break;
             const int i0 = b * kGrainBlockPixels;
             const int i1 = std::min(i0 + kGrainBlockPixels, npix);
+            if (win_end >= 0 && (i1 <= win_begin || i0 >= win_end)) {
+                // r5 band window: nobody reads this block. Its draw is a pure
+                // function of (seed, b), so skipping it changes no other block.
+                std::fill(out + i0, out + i1, 0.0f);
+                continue;
+            }
             StatsRng rng(grain_block_seed(seed, b), generator);
             for (int i = i0; i < i1; ++i) {
                 // Worker threads never touch the JNI-backed callback. They only
@@ -372,11 +379,68 @@ bool gpu_grain_accumulate(const float* density_cmy_layers, int npix, int width,
 
 }  // namespace
 
+namespace {
+
+// FIR radius gaussian_kernel_1d gives a sigma, padded by one; -1 for a sigma the
+// dispatcher would run as an IIR (whose output depends on the whole column).
+int grain_fir_reach(double sigma) {
+    if (!(sigma > 0.0)) return 0;
+    if (!(sigma < static_cast<double>(kSmallSigmaMax))) return -1;
+    return static_cast<int>(4.0 * sigma + 0.5) + 1;
+}
+
+}  // namespace
+
+bool grain_layers_sample_window(const double* density_max_layers, int width, int height,
+                                double pixel_size_um, const GrainParams& grain,
+                                int* row0, int* row1) {
+    if (grain.need_row_end < 0 || width <= 0 || height <= 0) return false;
+    if (grain.need_row_begin < 0 || grain.need_row_end > height ||
+        grain.need_row_begin >= grain.need_row_end)
+        return false;
+    // Micro-structure's clumping field is ONE serial stream over the plane.
+    if (grain.micro_structure[1] * 0.001 / pixel_size_um > 0.05) return false;
+    double dmax_total[3] = {0, 0, 0};
+    for (int sl = 0; sl < 3; ++sl)
+        for (int c = 0; c < 3; ++c) dmax_total[c] += density_max_layers[sl * 3 + c];
+    const double pixel_area_um2 = pixel_size_um * pixel_size_um;
+    int particle_reach = 0;
+    if (grain.blur_dye_clouds_um > 0.0) {
+        for (int sl = 0; sl < 3; ++sl) {
+            for (int c = 0; c < 3; ++c) {
+                // Same arithmetic as apply_grain_to_density_layers below.
+                const double frac = density_max_layers[sl * 3 + c] / dmax_total[c];
+                const double dmin = frac * grain.density_min[c];
+                const double dmax = density_max_layers[sl * 3 + c] + dmin;
+                const double area = grain.agx_particle_area_um2 * grain.agx_particle_scale[c] *
+                                    grain.agx_particle_scale_layers[sl];
+                const double nppp = pixel_area_um2 * frac / area;
+                if (!(nppp > 0.0) || !std::isfinite(nppp) || !std::isfinite(dmax)) return false;
+                const int r = grain_fir_reach(grain.blur_dye_clouds_um * std::sqrt(dmax / nppp));
+                if (r < 0) return false;
+                particle_reach = std::max(particle_reach, r);
+            }
+        }
+    }
+    const int final_reach = grain.blur > 0.0 ? grain_fir_reach(grain.blur) : 0;
+    if (final_reach < 0) return false;
+    const int reach = particle_reach + final_reach + 2;
+    *row0 = std::max(0, grain.need_row_begin - reach);
+    *row1 = std::min(height, grain.need_row_end + reach);
+    return true;
+}
+
 void apply_grain_to_density_layers(const float* density_cmy_layers, int npix,
                                    int width, int height,
                                    const double* density_max_layers,
                                    double pixel_size_um, const GrainParams& grain,
                                    float* out, std::unique_ptr<float[]>* release_layers) {
+    int win_row0 = 0, win_row1 = height;
+    const bool windowed = grain_layers_sample_window(density_max_layers, width, height,
+                                                     pixel_size_um, grain, &win_row0,
+                                                     &win_row1);
+    const int64_t win_begin = windowed ? static_cast<int64_t>(win_row0) * width : 0;
+    const int64_t win_end = windowed ? static_cast<int64_t>(win_row1) * width : -1;
     // One choice per render, from the params: the Fast GPU export route may
     // use the cheaper generator (#180); everything else keeps mt19937.
     const StatsRng::Generator generator = grain.fast_sampler
@@ -450,7 +514,7 @@ void apply_grain_to_density_layers(const float* density_cmy_layers, int npix,
             layer_particle_model(shifted.data(), npix, width, height,
                                  dmax_lay[sl][c], n_ppp[sl][c], grain.uniformity[c],
                                  seed, grain.blur_dye_clouds_um, layer_out.data(),
-                                 generator);
+                                 generator, win_begin, win_end);
             {
                 ScopedGrainPhase _p(GrainPhase::Accum);
                 spk::parallel_for(0, npix, [&](int i0, int i1) {

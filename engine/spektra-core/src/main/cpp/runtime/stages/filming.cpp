@@ -1430,6 +1430,28 @@ void develop(const float* log_raw, int width, int height, const Profile& film,
             // here, while density_curves is the normalized curve axis.
             // 450 MB at 12.5 MP, left uninitialised: the GPU or the CPU interp
             // below writes every element. Timed with the fill as one cost.
+            // density_max_layers[sl,c] = nanmax over the log-exposure axis of the
+            // RAW density_curves_layers (NOT normalized).
+            double density_max_layers[9];
+            for (int sl = 0; sl < 3; ++sl) {
+                for (int c = 0; c < 3; ++c) {
+                    double mx = -1.0;
+                    bool any = false;
+                    for (int k = 0; k < n; ++k) {
+                        float v = film.density_curves_layers[
+                            static_cast<size_t>(k) * 9 + sl * 3 + c];
+                        if (std::isnan(v)) continue;
+                        if (!any || v > mx) { mx = v; any = true; }
+                    }
+                    density_max_layers[sl * 3 + c] = any ? mx : 2.2;
+                }
+            }
+            // r5 band window (GrainParams::need_row_*): the layers are only
+            // the sampler's input, so outside the rows it draws they are zero.
+            int win_row0 = 0, win_row1 = height;
+            const bool windowed = grain_layers_sample_window(
+                density_max_layers, width, height, params.pixel_size_um, grain,
+                &win_row0, &win_row1);
             std::unique_ptr<float[]> layers;
             {
                 ScopedGrainPhase _p(GrainPhase::Layers);
@@ -1447,25 +1469,21 @@ void develop(const float* log_raw, int width, int height, const Profile& film,
                                       static_cast<uint32_t>(n), film.is_positive(),
                                       layers.get(), &gd);
                 note_gpu_filming("grain_layers", gd);
-                if (!on_gpu)
+                if (!on_gpu && windowed) {
+                    const size_t row9 = static_cast<size_t>(width) * 9;
+                    float* lay = layers.get();
+                    std::fill(lay, lay + static_cast<size_t>(win_row0) * row9, 0.0f);
+                    std::fill(lay + static_cast<size_t>(win_row1) * row9,
+                              lay + static_cast<size_t>(height) * row9, 0.0f);
+                    interp_density_cmy_layers(
+                        density_cmy_out + static_cast<size_t>(win_row0) * width * 3,
+                        (win_row1 - win_row0) * width, ndc.data(),
+                        film.density_curves_layers.data(), n, film.is_positive(),
+                        lay + static_cast<size_t>(win_row0) * row9);
+                } else if (!on_gpu) {
                     interp_density_cmy_layers(density_cmy_out, npix, ndc.data(),
                                               film.density_curves_layers.data(), n,
                                               film.is_positive(), layers.get());
-            }
-            // density_max_layers[sl,c] = nanmax over the log-exposure axis of the
-            // RAW density_curves_layers (NOT normalized).
-            double density_max_layers[9];
-            for (int sl = 0; sl < 3; ++sl) {
-                for (int c = 0; c < 3; ++c) {
-                    double mx = -1.0;
-                    bool any = false;
-                    for (int k = 0; k < n; ++k) {
-                        float v = film.density_curves_layers[
-                            static_cast<size_t>(k) * 9 + sl * 3 + c];
-                        if (std::isnan(v)) continue;
-                        if (!any || v > mx) { mx = v; any = true; }
-                    }
-                    density_max_layers[sl * 3 + c] = any ? mx : 2.2;
                 }
             }
             apply_grain_to_density_layers(layers.get(), npix, width, height,
