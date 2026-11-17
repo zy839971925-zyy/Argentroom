@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 1.0.1: only the diagnostics report the user chose to export (Diagnostics.shareAsFile). -->
+<paths>
+    <cache-path name="diag_export" path="diag-export/" />
+</paths>

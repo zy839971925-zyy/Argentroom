@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Argentroom camera ("拍摄直出", camera/SpCameraScreen.kt). Wording follows Silverphase
+     MobileCamera.swift T() pairs where one exists. Only en + zh-rCN; other locales fall back. -->
+<resources>
+    <string name="spcam_entry">Camera</string>
+    <string name="spcam_title">Camera</string>
+    <string name="spcam_back">Back</string>
+    <string name="spcam_shutter">Take Photo</string>
+    <string name="spcam_flip_to_front">Switch to the front camera</string>
+    <string name="spcam_flip_to_back">Switch to the rear camera</string>
+    <string name="spcam_flash">Flash</string>
+    <string name="spcam_flash_off">Off</string>
+    <string name="spcam_flash_auto">Auto</string>
+    <string name="spcam_flash_on">On</string>
+    <string name="spcam_metering">Metering Mode</string>
+    <string name="spcam_metering_center_weighted">Center weighted</string>
+    <string name="spcam_metering_matrix">Matrix</string>
+    <string name="spcam_metering_highlight">Highlight weighted</string>
+    <string name="spcam_metering_average">Average</string>
+    <string name="spcam_metering_off">Film auto exposure off</string>
+    <string name="spcam_metering_note">The film engine meters the shot when it develops. Off keeps the camera\'s own exposure.</string>
+    <string name="spcam_composition">Composition aids</string>
+    <string name="spcam_grid_off">No grid</string>
+    <string name="spcam_grid_thirds">Rule of thirds</string>
+    <string name="spcam_grid_golden">Golden ratio</string>
+    <string name="spcam_level">Level</string>
+    <string name="spcam_choose_film">Choose Film</string>
+    <string name="spcam_film_label">Film</string>
+    <string name="spcam_preview_raw">Raw viewfinder · film look appears when developed</string>
+    <string name="spcam_developing">Developing…</string>
+    <string name="spcam_developing_progress">Developing %1$d%%</string>
+    <string name="spcam_saved">Developed · saved to Photos</string>
+    <string name="spcam_develop_failed">This shot could not be developed. The original is kept.</string>
+    <string name="spcam_capture_failed">Could not take the photo</string>
+    <string name="spcam_latest">Latest shot, open in the editor</string>
+    <string name="spcam_latest_developing">Still developing</string>
+    <string name="spcam_ev_badge">Film %1$s EV</string>
+    <string name="spcam_ev_reset">Reset film exposure</string>
+    <string name="spcam_ae_af_lock">AE/AF lock</string>
+    <string name="spcam_permission_title">Camera access</string>
+    <string name="spcam_permission_body">Argentroom uses the camera to take photos and develop them through the film engine. Photos stay on this device.</string>
+    <string name="spcam_permission_allow">Allow camera</string>
+    <string name="spcam_permission_denied">Camera access is off for Argentroom. Turn it on in Settings to shoot.</string>
+    <string name="spcam_open_settings">Open Settings</string>
+    <string name="spcam_unavailable">No camera is available on this device.</string>
+    <string name="spcam_camera_error">The camera is unavailable right now</string>
+    <string name="spcam_retry">Retry</string>
+    <string name="spcam_opening">Opening the camera</string>
+    <string name="spcam_prefer_raw">Prefer RAW capture</string>
+</resources>

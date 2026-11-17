@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Argentroom 相机（拍摄直出，camera/SpCameraScreen.kt）。措辞沿用 Silverphase MobileCamera.swift 的 T() 简体。 -->
+<resources>
+    <string name="spcam_entry">拍摄直出</string>
+    <string name="spcam_title">相机</string>
+    <string name="spcam_back">返回</string>
+    <string name="spcam_shutter">拍照</string>
+    <string name="spcam_flip_to_front">切换到前置相机</string>
+    <string name="spcam_flip_to_back">切换到后置相机</string>
+    <string name="spcam_flash">闪光灯</string>
+    <string name="spcam_flash_off">关闭</string>
+    <string name="spcam_flash_auto">自动</string>
+    <string name="spcam_flash_on">开启</string>
+    <string name="spcam_metering">测光模式</string>
+    <string name="spcam_metering_center_weighted">中央加权</string>
+    <string name="spcam_metering_matrix">矩阵测光</string>
+    <string name="spcam_metering_highlight">高光加权</string>
+    <string name="spcam_metering_average">平均测光</string>
+    <string name="spcam_metering_off">关闭胶片自动测光</string>
+    <string name="spcam_metering_note">显影时由胶片引擎测光；关闭后保留相机自身的曝光。</string>
+    <string name="spcam_composition">构图辅助</string>
+    <string name="spcam_grid_off">无网格</string>
+    <string name="spcam_grid_thirds">三分网格</string>
+    <string name="spcam_grid_golden">黄金分割</string>
+    <string name="spcam_level">水平仪</string>
+    <string name="spcam_choose_film">选择胶片</string>
+    <string name="spcam_film_label">胶片</string>
+    <string name="spcam_preview_raw">原始取景 · 显影后呈现胶片效果</string>
+    <string name="spcam_developing">显影中…</string>
+    <string name="spcam_developing_progress">显影中 %1$d%%</string>
+    <string name="spcam_saved">显影完成 · 已存入相册</string>
+    <string name="spcam_develop_failed">这张未能显影，原片已保留。</string>
+    <string name="spcam_capture_failed">未能拍下照片</string>
+    <string name="spcam_latest">最近一张，在编辑器中打开</string>
+    <string name="spcam_latest_developing">仍在显影</string>
+    <string name="spcam_ev_badge">胶片 %1$s EV</string>
+    <string name="spcam_ev_reset">重置胶片曝光</string>
+    <string name="spcam_ae_af_lock">自动曝光／自动对焦锁定</string>
+    <string name="spcam_permission_title">相机权限</string>
+    <string name="spcam_permission_body">Argentroom 需要使用相机拍摄照片，并交给胶片引擎显影。照片只保存在本机。</string>
+    <string name="spcam_permission_allow">允许使用相机</string>
+    <string name="spcam_permission_denied">Argentroom 的相机权限已关闭，请在系统设置中开启后拍摄。</string>
+    <string name="spcam_open_settings">打开设置</string>
+    <string name="spcam_unavailable">此设备没有可用的相机。</string>
+    <string name="spcam_camera_error">相机暂时不可用</string>
+    <string name="spcam_retry">重试</string>
+    <string name="spcam_opening">正在打开相机</string>
+    <string name="spcam_prefer_raw">优先拍摄 RAW</string>
+</resources>

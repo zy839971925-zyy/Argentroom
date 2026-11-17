@@ -1,0 +1,108 @@
+{
+  "assets": {
+    "profile_refit": "andreavolpato/spektrafilm@ad5c8d2b5bbf295f6d3912091f3b137b0aef805a",
+    "sha256": {
+      "filters/neutral_print_filters.json": "5b81f743212082721be313594260230f07982f34eb6be875852fe6f114126f80",
+      "profiles/kodak_ektar_100.json": "60acbd46c75005771569eafb97f534a4495e9d4e1e9c1e419b90cea2676ec7cf",
+      "profiles/kodak_supra_endura.json": "8d49b240952c77b8302d6d7e652400e21bed595233f926bcc588481d100d2055"
+    },
+    "source": "Argentroom C06 bundled assets (Silverphase v1.2.5)"
+  },
+  "case_id": "print_ektar",
+  "film_profile": "kodak_ektar_100",
+  "generator": "gen_goldens.py",
+  "image": {
+    "input_color_space": "ProPhoto RGB (linear)",
+    "kind": "synthetic_ramp_macbeth",
+    "seed": 20260529,
+    "shape": [
+      64,
+      64,
+      3
+    ],
+    "size": 64
+  },
+  "notes": "Second negative/paper pair to catch profile-coupled regressions.",
+  "oracle": {
+    "colour_version": "0.4.7",
+    "commit": "c1d0e44b962d80a51ea096d33faea346e4f3836c",
+    "repository": "https://github.com/andreavolpato/spektrafilm",
+    "worktree": "clean"
+  },
+  "print_profile": "kodak_supra_endura",
+  "scan_film": false,
+  "spkvec_version": 1,
+  "taps": {
+    "film_density_cmy": {
+      "file": "film_density_cmy.spkvec",
+      "max": 1.5461125373840332,
+      "mean": 0.9114887118339539,
+      "min": 0.0,
+      "shape": [
+        64,
+        64,
+        3
+      ]
+    },
+    "film_log_raw": {
+      "file": "film_log_raw.spkvec",
+      "max": 1.0980863571166992,
+      "mean": 0.27131906151771545,
+      "min": -3.9665095806121826,
+      "shape": [
+        64,
+        64,
+        3
+      ]
+    },
+    "final_rgb": {
+      "file": "final_rgb.spkvec",
+      "max": 0.935504138469696,
+      "mean": 0.5539200305938721,
+      "min": 0.0,
+      "shape": [
+        64,
+        64,
+        3
+      ]
+    },
+    "print_density_cmy": {
+      "file": "print_density_cmy.spkvec",
+      "max": 2.430683135986328,
+      "mean": 0.5301182270050049,
+      "min": 0.0014718046877533197,
+      "shape": [
+        64,
+        64,
+        3
+      ]
+    }
+  },
+  "toggles": {
+    "auto_exposure": false,
+    "auto_exposure_method": "center_weighted",
+    "deactivate_spatial_effects": true,
+    "deactivate_stochastic_effects": true,
+    "diffusion_active": false,
+    "diffusion_family": "black_pro_mist",
+    "diffusion_halo_warmth": 0.0,
+    "diffusion_spatial_scale": 1.0,
+    "diffusion_strength": 0.5,
+    "exposure_compensation_ev": 0.0,
+    "grain_active": false,
+    "halation_off": false,
+    "lens_blur_um": 0.0,
+    "normalize_print_exposure": true,
+    "print_exposure_compensation": true,
+    "scanner_black_correction": false,
+    "scanner_black_level": 0.01,
+    "scanner_lut_resolutions": [],
+    "scanner_white_correction": false,
+    "scanner_white_level": 0.98,
+    "spectral_gaussian_blur": 0.0
+  },
+  "tolerance": {
+    "max_abs": 0.0001,
+    "rms": 1e-05
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "description": "grain statistical reference (non-sublayer apply_grain_to_density)",
+  "provenance": {
+    "oracle": {
+      "commit": "c1d0e44b962d80a51ea096d33faea346e4f3836c",
+      "worktree": "clean"
+    },
+    "grain_params_commit": "8a6d8dd606e617b7d9c6a02c06364d9eea34c265",
+    "assets": {
+      "source": "Argentroom C06 bundled assets (Silverphase v1.2.5)",
+      "profile_refit": "andreavolpato/spektrafilm@ad5c8d2b5bbf295f6d3912091f3b137b0aef805a",
+      "sha256": {
+        "profiles/kodak_portra_400.json": "b5cdc73dbec8f462f488bca70bedf23fd13ce79969c0457e8ac2a2565d92bf5d",
+        "profiles/kodak_portra_endura.json": "ad5ac4b98640c2d6ad0ba24c33ac880d927cbbf1c60551594f2a081cfc2d8d9a",
+        "filters/neutral_print_filters.json": "5b81f743212082721be313594260230f07982f34eb6be875852fe6f114126f80"
+      }
+    }
+  },
+  "size": 64,
+  "npix": 4096,
+  "n_realisations": 5,
+  "pixel_size_um": 546.875,
+  "params": {
+    "agx_particle_area_um2": 0.2,
+    "agx_particle_scale": [
+      1.6,
+      1.6,
+      3.2
+    ],
+    "density_min": [
+      0.03,
+      0.03,
+      0.03
+    ],
+    "density_max_curves": [
+      1.99179637953822,
+      1.7988370707022954,
+      2.1639109464828126
+    ],
+    "uniformity": [
+      0.97,
+      0.99,
+      0.97
+    ],
+    "blur": 0.65,
+    "n_sub_layers": 1
+  },
+  "stats": {
+    "smooth_mean": [
+      0.8470624582584207,
+      0.8297810409490012,
+      1.045161941411493
+    ],
+    "grainy_mean": [
+      0.8470676845572893,
+      0.8297679330433331,
+      1.0451098075687828
+    ],
+    "noise_std": [
+      0.04350448565914431,
+      0.03929412991617433,
+      0.04667799422465924
+    ]
+  }
+}

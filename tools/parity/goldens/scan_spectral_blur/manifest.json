@@ -1,0 +1,97 @@
+{
+  "assets": {
+    "profile_refit": "andreavolpato/spektrafilm@ad5c8d2b5bbf295f6d3912091f3b137b0aef805a",
+    "sha256": {
+      "filters/neutral_print_filters.json": "5b81f743212082721be313594260230f07982f34eb6be875852fe6f114126f80",
+      "profiles/kodak_portra_400.json": "b5cdc73dbec8f462f488bca70bedf23fd13ce79969c0457e8ac2a2565d92bf5d",
+      "profiles/kodak_portra_endura.json": "ad5ac4b98640c2d6ad0ba24c33ac880d927cbbf1c60551594f2a081cfc2d8d9a"
+    },
+    "source": "Argentroom C06 bundled assets (Silverphase v1.2.5)"
+  },
+  "case_id": "scan_spectral_blur",
+  "film_profile": "kodak_portra_400",
+  "generator": "gen_goldens.py",
+  "image": {
+    "input_color_space": "ProPhoto RGB (linear)",
+    "kind": "synthetic_ramp_macbeth",
+    "seed": 20260529,
+    "shape": [
+      64,
+      64,
+      3
+    ],
+    "size": 64
+  },
+  "notes": "scan_film with the SPECTRAL GAUSSIAN BLUR ON (settings.spectral_gaussian_blur=5.0). Exercises the optional blur in compute_hanatos2025_tc_lut: HANATOS2025_SPECTRA_LUT is blurred along its spectral axis (axis 2) with scipy.ndimage.gaussian_filter(sigma=(0,0,5.0)) (SciPy defaults order=0, mode='reflect', truncate=4.0) BEFORE the sensitivity contraction, changing the filming tc_lut and therefore film_log_raw / film_density_cmy / final_rgb. The blur is independent of deactivate_spatial_effects (it is in the LUT-build path, not the per-pixel spatial branch), so spatial + grain are kept off and the case stays deterministic/bit-stable. Tested by tests/test_spectral_blur_e2e.cpp.",
+  "oracle": {
+    "colour_version": "0.4.7",
+    "commit": "c1d0e44b962d80a51ea096d33faea346e4f3836c",
+    "repository": "https://github.com/andreavolpato/spektrafilm",
+    "worktree": "clean"
+  },
+  "print_profile": "kodak_portra_endura",
+  "scan_film": true,
+  "spkvec_version": 1,
+  "taps": {
+    "film_density_cmy": {
+      "file": "film_density_cmy.spkvec",
+      "max": 1.637691617012024,
+      "mean": 0.924170970916748,
+      "min": 0.0,
+      "shape": [
+        64,
+        64,
+        3
+      ]
+    },
+    "film_log_raw": {
+      "file": "film_log_raw.spkvec",
+      "max": 1.1254664659500122,
+      "mean": 0.3045576810836792,
+      "min": -3.4973132610321045,
+      "shape": [
+        64,
+        64,
+        3
+      ]
+    },
+    "final_rgb": {
+      "file": "final_rgb.spkvec",
+      "max": 0.8630646467208862,
+      "mean": 0.24585652351379395,
+      "min": 0.0,
+      "shape": [
+        64,
+        64,
+        3
+      ]
+    }
+  },
+  "toggles": {
+    "auto_exposure": false,
+    "auto_exposure_method": "center_weighted",
+    "deactivate_spatial_effects": true,
+    "deactivate_stochastic_effects": true,
+    "diffusion_active": false,
+    "diffusion_family": "black_pro_mist",
+    "diffusion_halo_warmth": 0.0,
+    "diffusion_spatial_scale": 1.0,
+    "diffusion_strength": 0.5,
+    "exposure_compensation_ev": 0.0,
+    "grain_active": false,
+    "halation_off": false,
+    "lens_blur_um": 0.0,
+    "normalize_print_exposure": true,
+    "print_exposure_compensation": true,
+    "scanner_black_correction": false,
+    "scanner_black_level": 0.01,
+    "scanner_lut_resolutions": [],
+    "scanner_white_correction": false,
+    "scanner_white_level": 0.98,
+    "spectral_gaussian_blur": 5.0
+  },
+  "tolerance": {
+    "max_abs": 0.0001,
+    "rms": 1e-05
+  }
+}

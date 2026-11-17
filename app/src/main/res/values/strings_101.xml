@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="diag_device_heading">Device and GPU</string>
+    <string name="diag_exits_heading">How earlier sessions ended</string>
+    <string name="diag_exits_note">Android\'s own record (Android 11 and later): crashes, native crashes, ANRs and low-memory kills, with the memory the app held when it ended.</string>
+    <string name="diag_exits_none">No abnormal exits recorded.</string>
+    <string name="diag_events_heading">Event log</string>
+    <string name="diag_events_note">Engine and export events from this and earlier sessions, kept on this phone only (at most 1 MB). The newest 16 KB is shown; the exported report carries the rest.</string>
+    <string name="diag_clear_logs">Clear event log and exit history</string>
+    <string name="settings_diag_row">Diagnostics and error logs</string>
+    <string name="settings_diag_row_note">Device and GPU, crash and exit history, the event log, and a report to export</string>
+    <string name="settings_gpu_heading">Performance</string>
+    <string name="settings_gpu_device">Render GPU</string>
+    <string name="about_oss_heading">Open-source components</string>
+    <string name="about_oss_note">Every library and data set built into this app, with its version, licence and source. The full licence texts are under Open-source notices.</string>
+</resources>

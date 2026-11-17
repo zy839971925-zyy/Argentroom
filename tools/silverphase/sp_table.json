@@ -1,0 +1,370 @@
+{
+"sp_film": [
+"胶片",
+"Film"
+],
+"sp_paper": [
+"相纸",
+"Paper"
+],
+"sp_the_latitude_graph_needs_silverphase_s_sc": [
+"宽容度测量图需要 Silverphase 的场景测光探针，Android 引擎暂未提供。",
+"The latitude graph needs Silverphase's scene metering probe, which the Android engine does not have yet."
+],
+"sp_metering_exposure": [
+"测光与曝光",
+"Metering & Exposure"
+],
+"sp_metering_mode": [
+"测光模式",
+"Metering Mode"
+],
+"sp_auto_exposure_off_raw_baseline": [
+"关闭胶片自动测光",
+"Auto exposure off (RAW baseline)"
+],
+"sp_balanced": [
+"均衡",
+"Balanced"
+],
+"sp_center": [
+"中央主体",
+"Center"
+],
+"sp_protect_highlights": [
+"保护高光",
+"Protect highlights"
+],
+"sp_center_weighted": [
+"中央加权",
+"Center weighted"
+],
+"sp_exposure_compensation_ev": [
+"曝光补偿 · EV",
+"Exposure Compensation · EV"
+],
+"sp_tone": [
+"影调",
+"Tone"
+],
+"sp_highlights": [
+"高光",
+"Highlights"
+],
+"sp_shadows": [
+"阴影",
+"Shadows"
+],
+"sp_whites": [
+"白色色阶",
+"Whites"
+],
+"sp_blacks": [
+"黑色色阶",
+"Blacks"
+],
+"sp_white_balance": [
+"白平衡",
+"White Balance"
+],
+"sp_white_balance_preset": [
+"白平衡预设",
+"White Balance Preset"
+],
+"sp_as_shot": [
+"拍摄时",
+"As Shot"
+],
+"sp_daylight": [
+"日光",
+"Daylight"
+],
+"sp_cloudy": [
+"多云",
+"Cloudy"
+],
+"sp_tungsten": [
+"钨丝灯",
+"Tungsten"
+],
+"sp_fluorescent": [
+"荧光灯",
+"Fluorescent"
+],
+"sp_custom": [
+"自定",
+"Custom"
+],
+"sp_temperature_k": [
+"色温 · K",
+"Temperature · K"
+],
+"sp_tint": [
+"色调",
+"Tint"
+],
+"sp_temperature_as_shot": [
+"色温使用拍摄时设置",
+"Temperature as shot"
+],
+"sp_restore_as_shot_white_balance": [
+"恢复拍摄时白平衡",
+"Restore as-shot white balance"
+],
+"sp_white_balance_is_baked_into_this_file_a_r": [
+"此文件已完成白平衡；RAW 可调整拍摄色温与色调。",
+"White balance is baked into this file. A RAW capture allows the as-shot temperature and tint to be changed."
+],
+"sp_lens_diffusion": [
+"镜头与柔光",
+"Lens & Diffusion"
+],
+"sp_colour_filter": [
+"光谱滤镜",
+"Colour Filter"
+],
+"sp_off": [
+"关闭",
+"Off"
+],
+"sp_shooting_diffusion": [
+"拍摄柔光",
+"Shooting Diffusion"
+],
+"sp_frame": [
+"画幅",
+"Frame"
+],
+"sp_film_format": [
+"胶片规格",
+"Film Format"
+],
+"sp_size_basis": [
+"尺寸基准",
+"Size Basis"
+],
+"sp_short": [
+"短边",
+"Short"
+],
+"sp_long_edge": [
+"长边",
+"Long edge"
+],
+"sp_length_unit": [
+"长度单位",
+"Length Unit"
+],
+"sp_grain_halation": [
+"颗粒与光晕",
+"Grain & Halation"
+],
+"sp_grain": [
+"颗粒",
+"Grain"
+],
+"sp_grain_strength": [
+"颗粒强度 · 倍率",
+"Grain Strength · ×"
+],
+"sp_sub_layers": [
+"分层颗粒",
+"Sub-layers"
+],
+"sp_grain_size": [
+"颗粒尺度",
+"Grain Size"
+],
+"sp_grain_softness": [
+"颗粒柔化 · 倍率",
+"Grain Softness · ×"
+],
+"sp_film_halation": [
+"胶片光晕",
+"Film Halation"
+],
+"sp_follow_film": [
+"跟随胶片",
+"Follow film"
+],
+"sp_the_high_medium_low_anti_halation_presets": [
+"“高 / 中 / 低”抗光晕预设需要 Silverphase 的 antihalation_mode，Android 引擎暂缺，暂只提供跟随胶片与关闭。",
+"The High / Medium / Low anti-halation presets need Silverphase's antihalation_mode, which the Android engine lacks; only Follow film and Off are offered."
+],
+"sp_halation_strength": [
+"光晕强度",
+"Halation Strength"
+],
+"sp_highlight_headroom_ev": [
+"高光余量 · EV",
+"Highlight Headroom · EV"
+],
+"sp_scatter": [
+"散射",
+"Scatter"
+],
+"sp_negative_response": [
+"负片响应",
+"Negative Response"
+],
+"sp_development_contrast": [
+"显影反差",
+"Development Contrast"
+],
+"sp_dir_effect": [
+"DIR 效应",
+"DIR Effect"
+],
+"sp_couplers_strength": [
+"成色剂强度",
+"Couplers Strength"
+],
+"sp_scan_film_directly": [
+"直接扫描胶片",
+"Scan film directly"
+],
+"sp_digital_intermediate": [
+"数字中间片",
+"Digital Intermediate"
+],
+"sp_exposure_filtration": [
+"曝光与滤色",
+"Exposure & Filtration"
+],
+"sp_enlarger_exposure_ev": [
+"放大曝光 · EV",
+"Enlarger Exposure · EV"
+],
+"sp_paper_contrast": [
+"相纸反差",
+"Paper Contrast"
+],
+"sp_paper_grade": [
+"相纸等级",
+"Paper Grade"
+],
+"sp_yellow_y": [
+"黄滤色（Y）",
+"Yellow (Y)"
+],
+"sp_magenta_m": [
+"品红滤色（M）",
+"Magenta (M)"
+],
+"sp_print_effects": [
+"相纸效果",
+"Print Effects"
+],
+"sp_pre_flash": [
+"相纸预闪",
+"Pre-flash"
+],
+"sp_soft_focus_enlargement": [
+"柔光放大",
+"Soft-Focus Enlargement"
+],
+"sp_direct_scan_and_digital_intermediate_bypa": [
+"直接扫描与数字中间片绕过相纸印相。",
+"Direct scan and Digital Intermediate bypass the paper print."
+],
+"sp_scan_rendering": [
+"扫描呈现",
+"Scan Rendering"
+],
+"sp_scan_sharpening": [
+"扫描锐化",
+"Scan Sharpening"
+],
+"sp_sharpening_strength": [
+"锐化强度 · 倍率",
+"Sharpening Strength · ×"
+],
+"sp_paper_glare": [
+"相纸眩光",
+"Paper Glare"
+],
+"sp_glare_strength": [
+"耀光强度",
+"Glare Strength"
+],
+"sp_highlight_expansion": [
+"高光层次展开",
+"Highlight Expansion"
+],
+"sp_on": [
+"开启",
+"On"
+],
+"sp_composition": [
+"构图",
+"Composition"
+],
+"sp_film_edge": [
+"片边",
+"Film Edge"
+],
+"sp_silverphase_develops_the_film_edge_perfor": [
+"Silverphase 的负片片边（齿孔、片门、帧号、边缘雾化、漏光）在负片上物理成像，Android 引擎暂无该阶段。下面是 Android 版现有的导出片框，作为最接近的替代。",
+"Silverphase develops the film edge (perforations, gate, frame numbers, edge fog, light leaks) on the negative; the Android engine has no such stage. Below is the Android export frame, the closest available substitute."
+],
+"sp_date_back": [
+"日期背",
+"Date Back"
+],
+"sp_date_exposure": [
+"日期曝光",
+"Date Exposure"
+],
+"sp_date_text": [
+"日期文字",
+"Date Text"
+],
+"sp_date_exposure_ev": [
+"日期曝光 · EV",
+"Date Exposure · EV"
+],
+"sp_date_size": [
+"日期尺寸",
+"Date Size"
+],
+"sp_date_corner": [
+"日期角落",
+"Date Corner"
+],
+"sp_bottom_right": [
+"右下",
+"Bottom right"
+],
+"sp_bottom_left": [
+"左下",
+"Bottom left"
+],
+"sp_top_right": [
+"右上",
+"Top right"
+],
+"sp_top_left": [
+"左上",
+"Top left"
+],
+"sp_nothing_is_printed_while_the_text_is_empt": [
+"未填文字时不打印。日期样式、片边位置和毫米边距依赖 Silverphase 的片边模型，Android 引擎暂缺。",
+"Nothing is printed while the text is empty. Date style, edge placement and millimetre margins depend on Silverphase's film-edge model, which the Android engine lacks."
+],
+"sp_black_pro_mist": [
+"黑柔",
+"Black Pro-Mist"
+],
+"sp_pro_mist": [
+"白柔",
+"Pro-Mist"
+],
+"sp_diffusion_strength": [
+"柔光强度",
+"Diffusion Strength"
+],
+"sp_diffusion_spread": [
+"扩散范围",
+"Diffusion Spread"
+]
+}

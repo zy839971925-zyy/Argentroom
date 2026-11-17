@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Argentroom C03: colour grade and creative white balance in the Silverphase panels. GPLv3. -->
+<resources>
+    <string name="sp_colour_grade">Colour grade</string>
+    <string name="sp_grade_contrast">Contrast</string>
+    <string name="sp_grade_saturation">Saturation</string>
+    <string name="sp_grade_vibrance">Vibrance</string>
+    <string name="sp_grade_gamut">Gamut compression</string>
+    <string name="sp_help_grade">Digital adjustments after the scan. They change the finished image, not the film or paper model. 0 = off.</string>
+    <string name="sp_help_grade_contrast">Overall contrast as a tone curve on the scan. Negative flattens, positive adds punch.</string>
+    <string name="sp_help_grade_saturation">Scales all colour evenly while keeping brightness and hue. −100 is black and white.</string>
+    <string name="sp_help_grade_vibrance">Lifts muted colours more than strong ones, so skin and skies don\'t clip.</string>
+    <string name="sp_help_grade_gamut">Softens harsh fringes on very saturated colours near the edge of the gamut.</string>
+    <string name="sp_creative_warmth">Warmth</string>
+    <string name="sp_creative_tint">Tint</string>
+    <string name="sp_help_creative_wb">A creative warm/cool and green/magenta shift on the light entering the camera. Works on every file.</string>
+    <string name="sp_balance_to_film">Balance to film\'s light</string>
+    <string name="sp_help_balance_to_film">Like an 85 / 80A filter: adapts the scene to the film\'s reference light, so a tungsten stock renders daylight neutral.</string>
+    <string name="sp_filter_w8">No. 8 · Yellow</string>
+    <string name="sp_filter_w11">No. 11 · Yellow-Green</string>
+    <string name="sp_filter_w12">No. 12 · Deep Yellow</string>
+    <string name="sp_filter_w15">No. 15 · Deep Yellow</string>
+    <string name="sp_filter_w21">No. 21 · Orange</string>
+    <string name="sp_filter_w25">No. 25 · Red</string>
+    <string name="sp_filter_w47">No. 47 · Blue</string>
+    <string name="sp_filter_w58">No. 58 · Green</string>
+    <string name="sp_help_camera_tone">Shapes the scene before it reaches the film: highlights and shadows lift or hold back their region, whites and blacks move the ends. Applied to the light, so the film still rolls it off.</string>
+    <string name="sp_help_colour_filter">A Kodak Wratten filter on the lens, changing how each colour exposes the film. The filter factor is compensated.</string>
+    <!-- Silverphase wave 2: anti-halation presets, metering intents, Digital Intermediate. -->
+    <string name="sp_halation_high">High</string>
+    <string name="sp_halation_medium">Medium</string>
+    <string name="sp_halation_low">Low</string>
+    <string name="sp_protect_shadows">Protect shadows</string>
+    <string name="sp_di_blue_compensation">Digital Intermediate blue compensation</string>
+    <string name="sp_help_di_blue">Blue compensation applies to Digital Intermediate output only. Off by default.</string>
+</resources>

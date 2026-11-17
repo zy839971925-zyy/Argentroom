@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="diag_device_heading">设备与 GPU</string>
+    <string name="diag_exits_heading">之前的会话是怎么结束的</string>
+    <string name="diag_exits_note">安卓系统自己的记录（安卓 11 起）：Java 崩溃、原生崩溃、无响应（ANR）、内存不足被杀，以及结束时应用占用的内存。</string>
+    <string name="diag_exits_none">没有异常退出记录。</string>
+    <string name="diag_events_heading">事件日志</string>
+    <string name="diag_events_note">本次及之前会话的引擎与导出事件，只保存在这台手机上（最多 1 MB）。这里显示最新 16 KB，导出的报告包含全部。</string>
+    <string name="diag_clear_logs">清空事件日志和退出记录</string>
+    <string name="settings_diag_row">诊断与错误日志</string>
+    <string name="settings_diag_row_note">设备与 GPU、崩溃与退出记录、事件日志，以及可导出的报告</string>
+    <string name="settings_gpu_heading">性能</string>
+    <string name="settings_gpu_device">渲染 GPU</string>
+    <string name="about_oss_heading">开源组件明细</string>
+    <string name="about_oss_note">本应用内置的每一个库和数据集，及其版本、许可证和源码地址。许可证全文见“开源声明”。</string>
+</resources>

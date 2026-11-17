@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Argentroom (银间) launcher icon, from the artwork the user supplied on 2026-11-15.
+     Layers: cream background colour, film-strip foreground inside the 66dp safe zone,
+     and a silhouette for Android 13+ themed icons. -->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@color/ic_launcher_background" />
+    <foreground android:drawable="@mipmap/ic_launcher_fg" />
+    <monochrome android:drawable="@mipmap/ic_launcher_mono" />
+</adaptive-icon>

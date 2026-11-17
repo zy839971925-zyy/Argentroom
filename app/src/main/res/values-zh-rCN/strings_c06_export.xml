@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_export_fast_noise">加快颗粒和扫描眩光</string>
+    <string name="settings_export_fast_noise_note">启用较快的采样方式，颗粒和眩光的分布位置可能变化。</string>
+    <string name="settings_default_export_frame">全局默认边框 · %1$s</string>
+    <string name="export_use_global_frame">使用全局默认边框</string>
+</resources>

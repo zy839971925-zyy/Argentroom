@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Argentroom camera originals (camera/SpCameraStorage.kt), served by the camera's own
+     NON-exported FileProvider so the editor can open them as content:// sources. Nothing
+     outside the app can read them. Kept apart from shared_source_paths.xml, whose folders are
+     pruned down to the editor's current source. -->
+<paths>
+    <files-path name="captures" path="camera/" />
+</paths>

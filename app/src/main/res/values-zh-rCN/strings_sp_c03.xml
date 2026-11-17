@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sp_colour_grade">调色</string>
+    <string name="sp_grade_contrast">对比度</string>
+    <string name="sp_grade_saturation">饱和度</string>
+    <string name="sp_grade_vibrance">自然饱和度</string>
+    <string name="sp_grade_gamut">色域压缩</string>
+    <string name="sp_help_grade">扫描之后的数字调整，只改变成片，不改变胶片与相纸的物理模型。0 为关闭。</string>
+    <string name="sp_help_grade_contrast">以色调曲线调整整体反差。负值更平，正值更有力。</string>
+    <string name="sp_help_grade_saturation">等比例调整全部色彩，保持亮度与色相不变。−100 为黑白。</string>
+    <string name="sp_help_grade_vibrance">优先提升灰淡的颜色，已经浓郁的颜色变化较少，肤色和天空不易溢出。</string>
+    <string name="sp_help_grade_gamut">柔化色域边缘高饱和颜色的生硬色边。</string>
+    <string name="sp_creative_warmth">冷暖</string>
+    <string name="sp_creative_tint">色调</string>
+    <string name="sp_help_creative_wb">对进入镜头的光做创意性冷暖和绿/品偏移，所有文件都可用。</string>
+    <string name="sp_balance_to_film">平衡到胶片光源</string>
+    <string name="sp_help_balance_to_film">相当于 85 / 80A 校色滤镜：把场景适配到胶片的参考光源，灯光片在日光下也能还原中性。</string>
+    <string name="sp_filter_w8">8号 · 黄</string>
+    <string name="sp_filter_w11">11号 · 黄绿</string>
+    <string name="sp_filter_w12">12号 · 深黄</string>
+    <string name="sp_filter_w15">15号 · 深黄</string>
+    <string name="sp_filter_w21">21号 · 橙</string>
+    <string name="sp_filter_w25">25号 · 红</string>
+    <string name="sp_filter_w47">47号 · 蓝</string>
+    <string name="sp_filter_w58">58号 · 绿</string>
+    <string name="sp_help_camera_tone">在光线到达胶片之前塑形：高光、阴影调整各自区域，白色、黑色色阶移动两端。作用在曝光上，仍由胶片自然过渡。</string>
+    <string name="sp_help_colour_filter">镜头前的柯达 Wratten 滤镜，改变各颜色对胶片的曝光；滤镜系数已自动补偿。</string>
+    <!-- Silverphase 第二批：抗光晕预设、测光意图、数字中间片。 -->
+    <string name="sp_halation_high">高</string>
+    <string name="sp_halation_medium">中</string>
+    <string name="sp_halation_low">低</string>
+    <string name="sp_protect_shadows">保护阴影</string>
+    <string name="sp_di_blue_compensation">数字中间片蓝色补偿</string>
+    <string name="sp_help_di_blue">蓝色补偿仅作用于数字中间片；默认关闭。</string>
+</resources>

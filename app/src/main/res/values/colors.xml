@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Window colour shown before Compose draws: Silverphase's #181818 canvas (dark-only app). -->
+<resources>
+    <color name="window_background">#FF181818</color>
+</resources>

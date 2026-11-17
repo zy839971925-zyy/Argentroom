@@ -1,0 +1,112 @@
+{
+  "description": "grain statistical reference (sublayer apply_grain_to_density_layers + micro_structure)",
+  "provenance": {
+    "oracle": {
+      "commit": "c1d0e44b962d80a51ea096d33faea346e4f3836c",
+      "worktree": "clean"
+    },
+    "grain_params_commit": "8a6d8dd606e617b7d9c6a02c06364d9eea34c265",
+    "assets": {
+      "source": "Argentroom C06 bundled assets (Silverphase v1.2.5)",
+      "profile_refit": "andreavolpato/spektrafilm@ad5c8d2b5bbf295f6d3912091f3b137b0aef805a",
+      "sha256": {
+        "profiles/kodak_portra_400.json": "b5cdc73dbec8f462f488bca70bedf23fd13ce79969c0457e8ac2a2565d92bf5d",
+        "profiles/kodak_portra_endura.json": "ad5ac4b98640c2d6ad0ba24c33ac880d927cbbf1c60551594f2a081cfc2d8d9a",
+        "filters/neutral_print_filters.json": "5b81f743212082721be313594260230f07982f34eb6be875852fe6f114126f80"
+      }
+    }
+  },
+  "size": 64,
+  "npix": 4096,
+  "n_realisations": 5,
+  "pixel_size_um": 546.875,
+  "params": {
+    "sublayers_active": true,
+    "agx_particle_area_um2": 0.2,
+    "agx_particle_scale": [
+      1.6,
+      1.6,
+      3.2
+    ],
+    "agx_particle_scale_layers": [
+      2.0,
+      1.0,
+      0.5
+    ],
+    "density_min": [
+      0.03,
+      0.03,
+      0.03
+    ],
+    "density_max_layers": [
+      [
+        0.5969828586509809,
+        0.562265196432347,
+        0.6551735208450508
+      ],
+      [
+        0.691070814325651,
+        0.6175492890038192,
+        0.7474022721721612
+      ],
+      [
+        0.7026774797532338,
+        0.6180538753860751,
+        0.7598787571636958
+      ]
+    ],
+    "uniformity": [
+      0.97,
+      0.99,
+      0.97
+    ],
+    "blur": 0.65,
+    "blur_dye_clouds_um": 1.0,
+    "micro_structure": [
+      0.2,
+      30
+    ]
+  },
+  "stats": {
+    "smooth_mean": [
+      0.8470624582584207,
+      0.8297810409490012,
+      1.045161941411493
+    ],
+    "grainy_mean": [
+      0.8461311335571923,
+      0.8290196243602661,
+      1.0445492215112415
+    ],
+    "noise_std": [
+      0.04347127074632144,
+      0.03941570907289016,
+      0.04665076168783751
+    ],
+    "mean_abs_dev": [
+      0.0009313247012284753,
+      0.0007614165887350755,
+      0.0006127199002514683
+    ]
+  },
+  "noise_character": {
+    "char_pixel_size_um": 10.0,
+    "char_size": 128,
+    "char_density": 0.8,
+    "sublayer_noise_std": [
+      0.016728771156865375,
+      0.014574291925437794,
+      0.024973565495628205
+    ],
+    "nonsublayer_noise_std": [
+      0.02591676854044179,
+      0.023214015316557847,
+      0.03832663215597067
+    ],
+    "rel_gap": [
+      0.3545194058140009,
+      0.37217703500684796,
+      0.34840177467203504
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+# Every change is reviewed by the maintainer. The engine and the release
+# machinery are listed separately so a reviewer can see at a glance when a
+# pull request touches a gated surface.
+
+*                                   @zy839971925-zyy
+
+# The parity-gated engine: any change here must keep the parity suite in ci.yml
+# green at both flag legs.
+/engine/spektra-core/src/main/cpp/  @zy839971925-zyy
+/tools/parity/                      @zy839971925-zyy
+
+# Release, signing and CI integrity.
+/.github/workflows/                 @zy839971925-zyy
+/tools/r8_check/                    @zy839971925-zyy
+/tools/compliance/                  @zy839971925-zyy
+
+# Licensing and attribution are GPL obligations, not preferences.
+/LICENSE                            @zy839971925-zyy
+/NOTICE.md                          @zy839971925-zyy
+/docs/LICENSING.md                  @zy839971925-zyy

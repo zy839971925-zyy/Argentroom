@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sp_edge_show">Show Film Edge</string>
+    <string name="sp_edge_format">Negative Format</string>
+    <string name="sp_edge_135">135</string>
+    <string name="sp_edge_half">135 half-frame</string>
+    <string name="sp_edge_645">645</string>
+    <string name="sp_edge_6x6">6×6</string>
+    <string name="sp_edge_6x7">6×7</string>
+    <string name="sp_edge_6x8">6×8</string>
+    <string name="sp_edge_6x9">6×9</string>
+    <string name="sp_edge_xpan">XPan</string>
+    <string name="sp_edge_6x12">6×12</string>
+    <string name="sp_edge_6x17">6×17</string>
+    <string name="sp_edge_mode">Edge Rendering</string>
+    <string name="sp_edge_strip">Film strip</string>
+    <string name="sp_edge_filed">Filed carrier</string>
+    <string name="sp_edge_gate">Gate</string>
+    <string name="sp_edge_auto">Auto</string>
+    <string name="sp_edge_square">Square</string>
+    <string name="sp_edge_rounded">Rounded</string>
+    <string name="sp_edge_eared">Eared</string>
+    <string name="sp_edge_shouldered">Shouldered</string>
+    <string name="sp_edge_kicked">Kicked</string>
+    <string name="sp_edge_holes">Sprocket holes</string>
+    <string name="sp_edge_white">White</string>
+    <string name="sp_edge_black">Black</string>
+    <string name="sp_edge_frame_number">Frame number · 0 = auto</string>
+    <string name="sp_edge_fog">Edge fog</string>
+    <string name="sp_edge_leaks">Light leaks</string>
+    <string name="sp_edge_carrier">Carrier</string>
+    <string name="sp_edge_none">None</string>
+    <string name="sp_edge_open">Open</string>
+    <string name="sp_edge_body">Change Body</string>
+    <string name="sp_edge_advance">Advance Film</string>
+    <string name="sp_edge_date_style">Date Style</string>
+    <string name="sp_edge_date_lcd">LCD</string>
+    <string name="sp_edge_date_dots">Dot matrix</string>
+    <string name="sp_edge_date_data">Data back</string>
+    <string name="sp_edge_date_order">Date Format</string>
+    <string name="sp_edge_date_japan">Y · M · D</string>
+    <string name="sp_edge_date_us">M · D · Y</string>
+    <string name="sp_edge_date_with_data">Also print capture data</string>
+    <string name="sp_edge_date_placement">Date Position</string>
+    <string name="sp_edge_date_frame">In frame</string>
+    <string name="sp_edge_date_inset_x">Horizontal Inset · mm</string>
+    <string name="sp_edge_date_inset_y">Vertical Inset · mm</string>
+    <string name="sp_edge_date_help">Empty text uses the EXIF capture date. If no date is recorded, nothing is printed. A 120 date needs the film edge. Panoramic formats have no date back.</string>
+</resources>

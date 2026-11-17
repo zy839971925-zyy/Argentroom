@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Argentroom adaptive-icon background: the cream of the supplied artwork. -->
+<resources>
+    <color name="ic_launcher_background">#F9F1EB</color>
+</resources>

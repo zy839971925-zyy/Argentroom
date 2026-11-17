@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_export_fast_noise">Faster grain and glare</string>
+    <string name="settings_export_fast_noise_note">Uses a faster sampler. The grain and glare pattern can change.</string>
+    <string name="settings_default_export_frame">Default export frame · %1$s</string>
+    <string name="export_use_global_frame">Use the default export frame</string>
+</resources>
