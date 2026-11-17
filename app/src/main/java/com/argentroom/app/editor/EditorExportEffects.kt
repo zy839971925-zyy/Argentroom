@@ -317,7 +317,7 @@ internal suspend fun CoroutineScope.runSpeculativePrerender(
     // The source cannot change under a stable Uri, so hash it once per source, not once
     // per idle: it is a full read of the file (~37 MB on the bench corpus).
     val digest = prerenderDigest ?: withContext(dispatchers.io) {
-        ExportCacheKey.digestSource { app.contentResolver.openInputStream(activeUri) }
+        SourceDigests.of(app, activeUri)
     }?.also { prerenderDigest = it } ?: return
     // #492: opening the store, the contract version and the holds() probe all read files
     // (StrictMode caught up to ~39 ms on Main per idle pass), so they run on IO.

@@ -232,10 +232,11 @@ internal fun startEditorExport(
                         if (exportFmt == ExportFormat.SCENE_LINEAR_TIFF) {
                             null
                         } else {
-                            ExportCacheKey.digestSource {
-                                exportSourceUri?.let {
-                                    exportContext.contentResolver.openInputStream(it)
-                                }
+                            // perf r5: a digest confirmed earlier (by the idle pre-render
+                            // or a previous export) is reused when the file's fstat identity
+                            // and head/tail content sample still match; otherwise full hash.
+                            exportSourceUri?.let {
+                                SourceDigests.of(exportContext, it)
                             }?.let { (sha, bytes) ->
                                 ExportCacheKey.Source(
                                     sha, bytes, EXPORT_MAX_EDGE_PX,
