@@ -135,12 +135,17 @@ static void note_gpu_filming(const char* what, const gpu::FilmingStageDiagnostic
                  d.upload_ms, d.gpu_ms, d.readback_ms);
 }
 
+// `resident` (r5): run against the caller's open resident frame instead of a
+// host plane -- `raw` is then ignored and the result stays on the device. It
+// returns true only when the pass really ran resident; on false the frame is
+// left exactly as it was (the kernel writes the other half and flips last).
 bool gpu_halation_pass(double* raw, int width, int height,
-                       const HalationParams& p, double pixel_size_um) {
+                       const HalationParams& p, double pixel_size_um,
+                       bool resident = false) {
     if (!(pixel_size_um > 0.0) || !std::isfinite(pixel_size_um) || !gpu::available())
         return false;
     gpu::HalationScatterRequest request{};
-    request.raw_rgb = raw;
+    request.raw_rgb = resident ? nullptr : raw;
     request.width = width;
     request.height = height;
     request.pixel_size_um = pixel_size_um;
@@ -183,6 +188,17 @@ bool gpu_halation_pass(double* raw, int width, int height,
         }
     }
     const size_t total = static_cast<size_t>(width) * static_cast<size_t>(height) * 3u;
+    if (resident) {
+        gpu::HalationScatterDiagnostics diagnostics{};
+        const bool ok = gpu::halation_scatter(request, nullptr, &diagnostics);
+        stage_timing_note_gpu_halation(diagnostics.attempted, diagnostics.engaged,
+                                       diagnostics.reason, diagnostics.bands,
+                                       diagnostics.dispatches, diagnostics.upload_ms,
+                                       diagnostics.gpu_ms, diagnostics.readback_ms);
+        if (!ok || !diagnostics.engaged || !diagnostics.resident) return false;
+        g_gpu_halation_frames.fetch_add(1, std::memory_order_relaxed);
+        return true;
+    }
     // Keep the GPU result packed during readback and any between-pass band
     // staging. Copy back only after success, including on devices which cannot
     // hold an entire frame in their four Vulkan work buffers.
@@ -856,6 +872,125 @@ struct SrcDate {
     }
 };
 
+// r5: escape hatch for A/B and for a device that misbehaves resident.
+// SPK_GPU_RESIDENT=0 keeps the staged per-pass route.
+bool resident_chain_enabled() {
+    const char* v = std::getenv("SPK_GPU_RESIDENT");
+    return !(v && v[0] == '0');
+}
+
+// Closes (discards) the caller's resident frame on every exit that did not
+// close it already -- an early return, a refusal, or a ParallelCancelled thrown
+// out of a host-side conversion. A stale plane must never outlive its render.
+struct ResidentFrameGuard {
+    int w, h;
+    ~ResidentFrameGuard() {
+        if (gpu::frame_active(w, h)) gpu::frame_discard();
+    }
+};
+
+// The device-resident filming chain. Every node it runs on the GPU is the SAME
+// pass the staged route runs (same shader, same f32 operands: the staged route
+// rounds each f64 host plane to f32 on upload, and every such plane already holds
+// the previous pass's f32 output widened), so a resident render is expected to be
+// byte-identical to a staged Fast GPU one -- the r5 A/B checks exactly that.
+//
+// Supported nodes, in filming.py order: expose, highlight boost (frame maximum
+// derived on the device, i.e. not a band carrying the frame's), CineStill
+// headroom (a CPU node: an explicit sync -- read back, apply, re-upload), halation
+// (required: it is what makes the chain worth it), log10. Anything else between
+// expose and log10 (film edge, diffusion filter, lens blur, b/w correction, a
+// measuring pre-pass) keeps the staged route; the caller checks most of them and
+// this function the rest.
+//
+// Returns true only when log_raw_out holds the complete result.
+bool resident_expose_chain(int width, int height, const FilmingParams& params,
+                           const NdArray& tc_lut, double exp_mult,
+                           const double* rgb_f64, const float* rgb_f32, double gain,
+                           float* log_raw_out) {
+    if (!resident_chain_enabled()) return false;
+    if (params.overscan || params.diffusion_filter.active ||
+        params.bw_exposure_correction != 1.0)
+        return false;
+    if (params.lens_blur_um > 0.0 && params.pixel_size_um > 0.0 &&
+        params.lens_blur_um / params.pixel_size_um > 0.0)
+        return false;
+    const bool boost_on = params.halation.boost_ev > 0.0;
+    if (boost_on && params.halation.boost_frame_max > 0.0) return false;
+    if (!(params.pixel_size_um > 0.0) || !std::isfinite(params.pixel_size_um)) return false;
+    const int npix = width * height;
+    const size_t comps = static_cast<size_t>(npix) * 3u;
+    ResidentFrameGuard guard{width, height};
+    gpu::FrameDiagnostics fd{};
+    if (!gpu::frame_open_source(rgb_f64, rgb_f32, width, height, &fd)) {
+        note_gpu_filming("resident_open",
+                         gpu::FilmingStageDiagnostics{true, false, fd.reason});
+        return false;
+    }
+    gpu::FilmingStageDiagnostics gd{};
+    bool exposed = false;
+    {
+        ScopedStage _t(STG_FILMING_EXPOSE);
+        exposed = gpu::filming_expose(nullptr, nullptr, gain, static_cast<uint32_t>(npix),
+                                      width, height, tc_lut.data.data(),
+                                      static_cast<uint32_t>(tc_lut.shape[0]), exp_mult,
+                                      /*out_raw=*/nullptr, /*out_log_raw=*/nullptr, &gd,
+                                      params.tungsten_reference) &&
+                  gd.resident;
+    }
+    if (!exposed) {
+        note_gpu_filming("resident_expose", gd);
+        return false;
+    }
+    if (boost_on) {
+        // The CPU's identity cases (raw_x0 == max_raw) are refused by the GPU pass
+        // rather than reproduced; the staged route then runs the CPU boost, so
+        // this chain must not guess -- it hands the whole frame back.
+        gpu::FilmingStageDiagnostics bd{};
+        if (!gpu::highlight_boost(nullptr, width, height, params.halation.boost_ev,
+                                  params.halation.boost_range, params.halation.protect_ev,
+                                  &bd) ||
+            !bd.resident) {
+            note_gpu_filming("resident_boost", bd);
+            return false;
+        }
+    }
+    if (headroom_wanted(params.halation)) {
+        // Explicit CPU node: read the post-boost irradiance back, apply the
+        // headroom exactly as the staged route does on its f64 plane, re-upload.
+        std::unique_ptr<double[]> host(new double[comps]);
+        gpu::FrameDiagnostics cd{};
+        if (!gpu::frame_close(host.get(), &cd)) return false;
+        {
+            ScopedStage _t(STG_HIGHLIGHT_BOOST);
+            const double clip = params.halation.headroom_frame_max > 0.0
+                                    ? params.halation.headroom_frame_max
+                                    : highlight_boost_max(host.get(), width, height);
+            apply_highlight_headroom(host.get(), width, height, params.halation, clip,
+                                     params.pixel_size_um);
+        }
+        if (!gpu::frame_open_source(host.get(), nullptr, width, height, &fd)) return false;
+    }
+    {
+        ScopedStage _t(STG_HALATION);
+        if (!gpu_halation_pass(nullptr, width, height, params.halation,
+                               params.pixel_size_um, /*resident=*/true))
+            return false;
+    }
+    {
+        ScopedStage _t(STG_FILMING_EXPOSE);
+        gpu::FilmingStageDiagnostics ld{};
+        if (!gpu::exposure_log10(nullptr, nullptr, width, height, &ld) || !ld.resident) {
+            note_gpu_filming("resident_log10", ld);
+            return false;
+        }
+        gpu::FrameDiagnostics cd{};
+        if (!gpu::frame_close_f32(log_raw_out, &cd)) return false;
+    }
+    note_gpu_filming("resident_chain", gpu::FilmingStageDiagnostics{true, true, "", true});
+    return true;
+}
+
 template <typename Src>
 void expose_impl(const Src& src, int width, int height,
                  const FilmingParams& params, const NdArray& tc_lut,
@@ -935,6 +1070,19 @@ void expose_impl(const Src& src, int width, int height,
                 }
             }
         });
+        return;
+    }
+
+    // r5 GPU-RESIDENT EXPOSE CHAIN (Fast GPU route only; see resident_expose_chain).
+    // expose -> [highlight boost] -> [CineStill headroom] -> halation -> log10 with
+    // the irradiance kept on the device: one upload of the source, one f32
+    // readback of log_raw, and no full-frame f64 `raw` plane at all. It either
+    // writes all of log_raw_out or nothing, so on any refusal the staged path
+    // below runs from scratch over the same source.
+    if (gpu_expose_ok && params.allow_gpu_halation && params.halation.active &&
+        !measure_boost_max && !banded_diffusion &&
+        resident_expose_chain(width, height, params, tc_lut, exp_mult, gpu_rgb_f64,
+                              gpu_rgb_f32, gpu_gain, log_raw_out)) {
         return;
     }
 
