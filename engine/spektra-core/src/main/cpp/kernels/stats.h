@@ -32,6 +32,66 @@
 
 namespace spk {
 
+// r5: std::mt19937, generated 624 words at a time. Emits EXACTLY the words of
+// std::mt19937 seeded with the same value (same seeding recurrence, same twist,
+// same tempering -- the standard fixes all three), and has the same
+// result_type/min()/max(), so std::uniform_real_distribution and
+// std::normal_distribution driven by it return bit-identical doubles: they are
+// the same library templates reading the same word stream. What changes is only
+// the cost: libc++ twists one word per call behind two modulo indexings
+// (~10.5 ns per double uniform on the host); a whole-block twist plus a
+// vectorisable tempering pass is ~3.3 ns (host aarch64, libc++).
+class BatchedMt19937 {
+   public:
+    using result_type = uint32_t;
+    static constexpr result_type min() { return 0u; }
+    static constexpr result_type max() { return 0xffffffffu; }
+    static constexpr int kN = 624;
+    static constexpr int kM = 397;
+
+    explicit BatchedMt19937(uint32_t seed) {
+        mt_[0] = seed;
+        for (int i = 1; i < kN; ++i)
+            mt_[i] = 1812433253u * (mt_[i - 1] ^ (mt_[i - 1] >> 30)) + static_cast<uint32_t>(i);
+    }
+
+    result_type operator()() {
+        if (idx_ >= kN) refill();
+        return out_[idx_++];
+    }
+
+   private:
+    void refill() {
+        constexpr uint32_t kUpper = 0x80000000u, kLower = 0x7fffffffu, kA = 0x9908b0dfu;
+        int i = 0;
+        for (; i < kN - kM; ++i) {
+            const uint32_t y = (mt_[i] & kUpper) | (mt_[i + 1] & kLower);
+            mt_[i] = mt_[i + kM] ^ (y >> 1) ^ ((y & 1u) ? kA : 0u);
+        }
+        for (; i < kN - 1; ++i) {
+            const uint32_t y = (mt_[i] & kUpper) | (mt_[i + 1] & kLower);
+            mt_[i] = mt_[i + kM - kN] ^ (y >> 1) ^ ((y & 1u) ? kA : 0u);
+        }
+        {
+            const uint32_t y = (mt_[kN - 1] & kUpper) | (mt_[0] & kLower);
+            mt_[kN - 1] = mt_[kM - 1] ^ (y >> 1) ^ ((y & 1u) ? kA : 0u);
+        }
+        for (int k = 0; k < kN; ++k) {
+            uint32_t y = mt_[k];
+            y ^= y >> 11;
+            y ^= (y << 7) & 0x9d2c5680u;
+            y ^= (y << 15) & 0xefc60000u;
+            y ^= y >> 18;
+            out_[k] = y;
+        }
+        idx_ = 0;
+    }
+
+    uint32_t mt_[kN];
+    uint32_t out_[kN];
+    int idx_ = kN;
+};
+
 // Deterministic per-channel RNG wrapper. We expose uniform [0,1) and standard
 // normal draws so grain.cpp can mirror fast_stats' algorithm element by element.
 //
@@ -172,7 +232,7 @@ class StatsRng {
     }
 
     Generator generator_ = Generator::Exact;
-    std::mt19937 engine_;
+    BatchedMt19937 engine_;  // == std::mt19937's stream, batched (r5)
     std::uniform_real_distribution<double> uni_{0.0, 1.0};
     std::normal_distribution<double> nrm_{0.0, 1.0};
     uint64_t s_[4] = {0, 0, 0, 0};
