@@ -1,6 +1,6 @@
 /*
- * Spektrafilm Android -- embedded RAW preview extraction contract.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom Android -- embedded RAW preview extraction contract.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  *
  * Covers raw_preview.cpp and pread_datastream.h:
  *  1. PreadDatastream is differentially equivalent to LibRaw_buffer_datastream
@@ -32,7 +32,7 @@
 #include <unistd.h>
 #include <vector>
 
-using namespace spectrafilm;
+using namespace argentroom;
 
 namespace {
 
@@ -197,7 +197,7 @@ std::vector<uint8_t> makePreviewDng(const std::vector<uint8_t>& previewBytes,
         shortEntry(258, {8, 8, 8}),
         shortEntry(259, {7}),
         shortEntry(262, {6}),
-        asciiEntry(271, "Spektrafilm"),
+        asciiEntry(271, "Argentroom"),
         asciiEntry(272, "Preview Fixture"),
         longEntry(273, {0}),
         shortEntry(274, {orientation}),
@@ -206,7 +206,7 @@ std::vector<uint8_t> makePreviewDng(const std::vector<uint8_t>& previewBytes,
         longEntry(279, {static_cast<uint32_t>(previewBytes.size())}),
         longEntry(330, {rawIfd}),
         byteEntry(50706, {1, 4, 0, 0}),
-        asciiEntry(50708, "Spektrafilm Preview Fixture"),
+        asciiEntry(50708, "Argentroom Preview Fixture"),
         srationalEntry(50721, {10000, 0, 0, 0, 10000, 0, 0, 0, 10000}),
         shortEntry(50778, {21}),
     }, &mainFields);

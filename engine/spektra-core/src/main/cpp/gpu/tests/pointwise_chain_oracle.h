@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2026 Spektrafilm Android contributors
+// SPDX-FileCopyrightText: 2026 Argentroom Android contributors
 // SPDX-License-Identifier: GPL-3.0-only
 // Small f64 reference for the focused resident filming -> printing -> scan gate.
 // Keep this test helper compiled without -ffast-math: it intentionally evaluates

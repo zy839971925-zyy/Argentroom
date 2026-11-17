@@ -1,7 +1,7 @@
 # UI_SCREEN_MAP — Silverphase iOS 视图 → Android Composable（C01，2026-11-14）
 
 范围：手机竖屏编辑器（`EditorFrame` 判定 `wide == false` 的窗口）。宽屏/平板/横屏手机仍走原 `EditorTopBar` + `EditorBody`，未改。
-iOS 真源：`sources/silverphase-v1.2.5/ios/Silverphase/Sources`（SHA 061fc495）。Android 代码：`workspace/android-app/app/src/main/java/com/spectrafilm/app/silverphase/`。
+iOS 真源：`sources/silverphase-v1.2.5/ios/Silverphase/Sources`（SHA 061fc495）。Android 代码：`workspace/android-app/app/src/main/java/com/argentroom/app/silverphase/`。
 状态：**已接**＝接到 ParamsState/引擎并可操作；**禁用**＝位置保留、灰显、标“引擎暂缺”，点按显示原因；**缺失**＝本轮未做。
 所有结论均为源码/编译层面；**DEVICE_NOT_AVAILABLE**：没有任何一项在真机或模拟器上运行过。
 

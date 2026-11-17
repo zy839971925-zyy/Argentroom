@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: film grain (AgX particle model).
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — native engine: film grain (AgX particle model).
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,8 +8,8 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Ports the Poisson-Binomial AgX particle grain model of
- * spektrafilm/model/grain.py:
+ * argentroom. Ports the Poisson-Binomial AgX particle grain model of
+ * argentroom/model/grain.py:
  *   - layer_particle_model (method='poisson_binomial')
  *   - apply_grain_to_density (the non-sublayer path)
  *
@@ -32,7 +32,7 @@
 namespace spk {
 
 // Digested grain parameters. Field names mirror
-// spektrafilm.runtime.params_schema.GrainParams. Defaults are the schema
+// argentroom.runtime.params_schema.GrainParams. Defaults are the schema
 // defaults; the only stock-specific override under the parity toggles is that
 // blur stays at 0.65 when deactivate_spatial_effects is False (the grain-ON
 // statistical case). Under deactivate_spatial_effects the Python digest forces

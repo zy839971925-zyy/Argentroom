@@ -63,22 +63,22 @@ bool sameBits(const float values[3], const std::uint32_t expected[3],
     return ok;
 }
 
-spectrafilm::DecodeOptions optionsFor(const Vector& fixture) {
-    spectrafilm::DecodeOptions options;
+argentroom::DecodeOptions optionsFor(const Vector& fixture) {
+    argentroom::DecodeOptions options;
     options.whiteBalance =
-        static_cast<spectrafilm::WhiteBalanceMode>(fixture.mode);
+        static_cast<argentroom::WhiteBalanceMode>(fixture.mode);
     options.temperatureK = fixture.temperature_k;
     options.tint = fixture.tint;
     return options;
 }
 
-bool rejectsWithoutMutation(spectrafilm::DecodeOptions options) {
+bool rejectsWithoutMutation(argentroom::DecodeOptions options) {
     float values[3] = {0.25f, -0.5f, 2.0f};
     const std::uint32_t before[3] = {
         bitsOf(values[0]), bitsOf(values[1]), bitsOf(values[2]),
     };
-    if (spectrafilm::rawWhiteBalanceOptionsValid(options)) return false;
-    if (spectrafilm::applyAcesWhiteBalance(values, 1, options)) return false;
+    if (argentroom::rawWhiteBalanceOptionsValid(options)) return false;
+    if (argentroom::applyAcesWhiteBalance(values, 1, options)) return false;
     return bitsOf(values[0]) == before[0] &&
            bitsOf(values[1]) == before[1] &&
            bitsOf(values[2]) == before[2];
@@ -149,9 +149,9 @@ int main(int argc, char** argv) {
             floatOf(fixture.input_aces_bits[1]),
             floatOf(fixture.input_aces_bits[2]),
         };
-        const spectrafilm::DecodeOptions options = optionsFor(fixture);
-        if (!spectrafilm::rawWhiteBalanceOptionsValid(options) ||
-            !spectrafilm::applyAcesWhiteBalance(values, 1U, options)) {
+        const argentroom::DecodeOptions options = optionsFor(fixture);
+        if (!argentroom::rawWhiteBalanceOptionsValid(options) ||
+            !argentroom::applyAcesWhiteBalance(values, 1U, options)) {
             std::cerr << "FAIL valid vector rejected " << fixture.scenario
                       << '/' << fixture.patch << '\n';
             ++failures;
@@ -184,7 +184,7 @@ int main(int argc, char** argv) {
             evidenceBits.push_back(bitsOf(values[channel]));
         }
 
-        spectrafilm::aces2065ToProPhotoRGB(values, 1U);
+        argentroom::aces2065ToProPhotoRGB(values, 1U);
         if (!sameBits(values, fixture.expected_prophoto_bits, fixture,
                       "ProPhoto-f32")) {
             ++failures;
@@ -200,13 +200,13 @@ int main(int argc, char** argv) {
         ++failures;
     }
 
-    spectrafilm::DecodeOptions boundary;
-    boundary.whiteBalance = spectrafilm::WhiteBalanceMode::Custom;
+    argentroom::DecodeOptions boundary;
+    boundary.whiteBalance = argentroom::WhiteBalanceMode::Custom;
     for (const double temperature : {1000.0, 12000.0}) {
         for (const double tint : {0.2, 1.8}) {
             boundary.temperatureK = temperature;
             boundary.tint = tint;
-            if (!spectrafilm::rawWhiteBalanceOptionsValid(boundary)) {
+            if (!argentroom::rawWhiteBalanceOptionsValid(boundary)) {
                 std::cerr << "FAIL documented product boundary rejected\n";
                 ++failures;
             }
@@ -217,8 +217,8 @@ int main(int argc, char** argv) {
     const double nan = std::numeric_limits<double>::quiet_NaN();
     for (const double invalidTemperature :
          {nan, infinity, -infinity, 0.0, -1.0, 999.999, 12000.001}) {
-        spectrafilm::DecodeOptions invalid;
-        invalid.whiteBalance = spectrafilm::WhiteBalanceMode::Custom;
+        argentroom::DecodeOptions invalid;
+        invalid.whiteBalance = argentroom::WhiteBalanceMode::Custom;
         invalid.temperatureK = invalidTemperature;
         if (!rejectsWithoutMutation(invalid)) {
             std::cerr << "FAIL invalid temperature accepted\n";
@@ -227,8 +227,8 @@ int main(int argc, char** argv) {
     }
     for (const double invalidTint :
          {nan, infinity, -infinity, -1.0, 0.0, 0.199999, 1.800001}) {
-        spectrafilm::DecodeOptions invalid;
-        invalid.whiteBalance = spectrafilm::WhiteBalanceMode::Custom;
+        argentroom::DecodeOptions invalid;
+        invalid.whiteBalance = argentroom::WhiteBalanceMode::Custom;
         invalid.tint = invalidTint;
         if (!rejectsWithoutMutation(invalid)) {
             std::cerr << "FAIL invalid tint accepted\n";
@@ -236,8 +236,8 @@ int main(int argc, char** argv) {
         }
     }
     for (int mode = 0; mode < 4; ++mode) {
-        spectrafilm::DecodeOptions invalid;
-        invalid.whiteBalance = static_cast<spectrafilm::WhiteBalanceMode>(mode);
+        argentroom::DecodeOptions invalid;
+        invalid.whiteBalance = static_cast<argentroom::WhiteBalanceMode>(mode);
         invalid.temperatureK = nan;
         if (!rejectsWithoutMutation(invalid)) {
             std::cerr << "FAIL non-finite unused setting accepted for mode="
@@ -246,27 +246,27 @@ int main(int argc, char** argv) {
         }
     }
     {
-        spectrafilm::DecodeOptions invalid;
-        invalid.whiteBalance = static_cast<spectrafilm::WhiteBalanceMode>(99);
+        argentroom::DecodeOptions invalid;
+        invalid.whiteBalance = static_cast<argentroom::WhiteBalanceMode>(99);
         if (!rejectsWithoutMutation(invalid)) {
             std::cerr << "FAIL unknown native WB mode accepted\n";
             ++failures;
         }
     }
     {
-        spectrafilm::DecodeOptions invalid;
-        invalid.whiteBalance = spectrafilm::WhiteBalanceMode::Custom;
+        argentroom::DecodeOptions invalid;
+        invalid.whiteBalance = argentroom::WhiteBalanceMode::Custom;
         invalid.temperatureK = nan;
         const std::uint8_t input = 0;
-        const spectrafilm::DecodeResult result =
-            spectrafilm::decodeFromBuffer(&input, 1U, invalid);
-        if (result.status != spectrafilm::SFRAW_ERR_INPUT) {
+        const argentroom::DecodeResult result =
+            argentroom::decodeFromBuffer(&input, 1U, invalid);
+        if (result.status != argentroom::SFRAW_ERR_INPUT) {
             std::cerr << "FAIL buffer decode seam did not return typed INPUT\n";
             ++failures;
         }
-        const spectrafilm::DecodeResult fdResult =
-            spectrafilm::decodeFromFd(-1, invalid);
-        if (fdResult.status != spectrafilm::SFRAW_ERR_INPUT) {
+        const argentroom::DecodeResult fdResult =
+            argentroom::decodeFromFd(-1, invalid);
+        if (fdResult.status != argentroom::SFRAW_ERR_INPUT) {
             std::cerr << "FAIL fd decode seam did not return typed INPUT\n";
             ++failures;
         }

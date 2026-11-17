@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: print density-curve morph (s023).
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — native engine: print density-curve morph (s023).
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,7 +8,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Ports utils/morph_curves.py::apply_print_curves_morph (the s023
+ * argentroom. Ports utils/morph_curves.py::apply_print_curves_morph (the s023
  * coupled-gamma print-curve morph) for the 'cdfs' density-curves model.
  *
  * OPT-IN / DEFAULT-OFF. The morph is an alternative way to *develop* the print:

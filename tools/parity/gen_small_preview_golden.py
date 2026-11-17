@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-# Spektrafilm for Android — generate the focused small_preview anti-aliasing golden.
-# Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+# Argentroom for Android — generate the focused small_preview anti-aliasing golden.
+# Copyright (C) 2026 Argentroom Android contributors. GPLv3.
 # Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
 #
 # ResizingService.small_preview(image, max_size=256) is literally
 #   rescale(image, max_size / max(H, W), channel_axis=2, order=0)
-# (spektrafilm/runtime/services/resize.py). For a float image whose long edge
+# (argentroom/runtime/services/resize.py). For a float image whose long edge
 # exceeds max_size, skimage 0.26 leaves anti_aliasing at its default (None) which
 # resolves to True on a downscale and runs a scipy.ndimage.gaussian_filter
 # prefilter (sigma = max(0, (in/out - 1)/2) per spatial axis, mode='mirror',
@@ -14,7 +14,7 @@
 #
 # This golden is STAGE-LOCAL (depends only on skimage, not the negative->print->
 # scan pipeline), so unlike the end-to-end goldens it is independent of the
-# spektrafilm oracle SHA. Regenerate with: python3 gen_small_preview_golden.py
+# argentroom oracle SHA. Regenerate with: python3 gen_small_preview_golden.py
 import json
 import pathlib
 import sys

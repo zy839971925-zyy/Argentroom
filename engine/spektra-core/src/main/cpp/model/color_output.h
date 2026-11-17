@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: scan color output (XYZ->RGB + CCTF).
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — native engine: scan color output (XYZ->RGB + CCTF).
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,9 +8,9 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Provides the constants and helpers the scanning stage needs to
+ * argentroom. Provides the constants and helpers the scanning stage needs to
  * mirror colour.XYZ_to_RGB(..., illuminant=scan_illuminant_xy) + the sRGB CCTF
- * encode in spektrafilm/runtime/stages/scanning.py.
+ * encode in argentroom/runtime/stages/scanning.py.
  *
  * The XYZ->output-RGB matrix in colour bakes in chromatic adaptation from the
  * scan illuminant's xy to the output colourspace whitepoint. For every route,

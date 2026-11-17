@@ -5,7 +5,7 @@
 #include <exception>
 #include <new>
 
-namespace spectrafilm::tiffjni {
+namespace argentroom::tiffjni {
 
 enum class NativeExceptionKind {
     None,
@@ -84,6 +84,6 @@ Result containNativeExceptions(Function&& function,
     return Result{};
 }
 
-}  // namespace spectrafilm::tiffjni
+}  // namespace argentroom::tiffjni
 
 #endif  // SPECTRAFILM_TIFF_WRITER_JNI_BOUNDARY_H

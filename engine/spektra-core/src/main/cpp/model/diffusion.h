@@ -1,7 +1,7 @@
 /*
- * Spektrafilm for Android — native engine: in-emulsion scatter + halation +
+ * Argentroom for Android — native engine: in-emulsion scatter + halation +
  * the optical diffusion-filter (Black Pro-Mist etc.) PSF stage.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -9,7 +9,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Ports spektrafilm/model/diffusion.py:
+ * argentroom. Ports argentroom/model/diffusion.py:
  *   - apply_halation_um (in-emulsion scatter + back-reflection halation), and
  *   - apply_diffusion_filter_um (the optical diffusion-filter PSF: a per-family
  *     core/halo/bloom sum of 2D isotropic exponentials, energy-conserving convex
@@ -17,7 +17,7 @@
  *     diffusion_filter params drive it (issue #6 exposed-but-inert params).
  *
  * apply_halation_um / apply_diffusion_filter_um run on the float64 pre-log
- * irradiance `raw` (the spektrafilm pipeline carries the image as float64).
+ * irradiance `raw` (the argentroom pipeline carries the image as float64).
  *
  * Diffusion-filter convolution note: the oracle uses scipy.signal.fftconvolve
  * (mode='same') on a numpy-'reflect'-padded image. fftconvolve is a plain linear
@@ -36,7 +36,7 @@ namespace spk {
 struct DiffusionFarField;
 
 // Halation parameters, mirroring the digested
-// spektrafilm.runtime.params_schema.HalationParams fields consumed by
+// argentroom.runtime.params_schema.HalationParams fields consumed by
 // apply_halation_um. Per-channel arrays are RGB-ordered.
 struct HalationParams {
     bool active = false;
@@ -132,16 +132,16 @@ void apply_halation_um(double* raw, int w, int h, const HalationParams& params,
                        double pixel_size_um);
 
 // Diffusion-filter family selector. Values mirror the keys of
-// _DIFFUSION_FILTER_SHAPES in spektrafilm/model/diffusion.py.
+// _DIFFUSION_FILTER_SHAPES in argentroom/model/diffusion.py.
 enum class DiffusionFamily {
     kGlimmerglass = 0,
-    kBlackProMist = 1,   // spektrafilm DiffusionFilterParams default family.
+    kBlackProMist = 1,   // argentroom DiffusionFilterParams default family.
     kProMist = 2,
     kCinebloom = 3,
 };
 
 // Optical diffusion-filter params, mirroring the consumed fields of
-// spektrafilm.runtime.params_schema.DiffusionFilterParams. Defaults match the
+// argentroom.runtime.params_schema.DiffusionFilterParams. Defaults match the
 // schema so a default-constructed instance is a strict no-op:
 //   active=false  -> apply_diffusion_filter_um returns the image untouched.
 struct DiffusionFilterParams {
@@ -178,7 +178,7 @@ struct DiffusionFilterParams {
 // PSF (the halo is colour-tinted via an energy-conserving warmth redistribution).
 // `pixel_size_um` converts the image-plane µm widths to pixels. No-op (image left
 // untouched) when params.active is false, strength<=0, spatial_scale<=0, or the
-// derived p_s<=0 — exactly mirroring spektrafilm.model.diffusion.apply_diffusion_filter_um.
+// derived p_s<=0 — exactly mirroring argentroom.model.diffusion.apply_diffusion_filter_um.
 // Observability for the FFT convolution path (see diffusion.cpp). Counts the
 // renders where the cost model chose the FFT but the transform buffers could not
 // be allocated, so the stage silently ran the direct O(w*h*ks^2) loop instead --
@@ -292,10 +292,10 @@ void apply_diffusion_filter_banded(double* raw, int w, int h, int frame_y0,
 // cheaply -- and at a cost that stops growing with the radius once the wide
 // components are run at a reduced resolution. So each exponential term is replaced
 // by `terms` Gaussians and the whole PSF becomes one weighted set of separable
-// blurs. The decomposition technique is adapted from chaert-s/spektrafilm-ofx
+// blurs. The decomposition technique is adapted from chaert-s/argentroom-ofx
 // (`makeDiffusionComponents`, `shaders/vulkan/SpektraDiffusion.comp`) at
 // 86476afc5b077de77e2278e3658d1ba9309892a1, GPL-3.0-only; see
-// docs/research/spektrafilm-ofx-port.md. Every PARAMETER here comes from this
+// docs/research/argentroom-ofx-port.md. Every PARAMETER here comes from this
 // engine's own family configuration, not from OFX's -- only the fit does.
 //
 // THIS IS AN APPROXIMATION AND IT IS NOT THE EXPORT PATH. Fitting an exponential

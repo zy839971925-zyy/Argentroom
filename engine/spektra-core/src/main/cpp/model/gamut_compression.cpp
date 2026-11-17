@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: output gamut compression.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — native engine: output gamut compression.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,7 +8,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Ports utils/gamut_compression.py::reinhard_knee,
+ * argentroom. Ports utils/gamut_compression.py::reinhard_knee,
  * compress_rgb_aces_rgc, and compress_rgb_oklch_chroma (the OkLch output-gamut
  * chroma reduction). All math is in double precision to match the oracle
  * (NumPy float64); the knee uses std::pow, the same transcendental NumPy calls.

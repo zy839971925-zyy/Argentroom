@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: Silverphase's Digital Intermediate.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — native engine: Silverphase's Digital Intermediate.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  *
  * Port of Silverphase v1.2.5 core/digital_intermediate.cpp, shaders/nodes.metal
  * spk_di_encode and modern_UI Canvas/CineonLUT.swift. See the header.

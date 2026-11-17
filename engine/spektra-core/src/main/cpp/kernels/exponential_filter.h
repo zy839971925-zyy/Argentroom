@@ -1,7 +1,7 @@
 /*
- * Spektrafilm for Android — native engine: double-precision spatial filters
+ * Argentroom for Android — native engine: double-precision spatial filters
  * (Gaussian + exponential-mixture) for the spatial-effects branch.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -9,14 +9,14 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Ports the float64 path of spektrafilm/utils/fast_gaussian_filter.py:
+ * argentroom. Ports the float64 path of spektrafilm/utils/fast_gaussian_filter.py:
  *   - fast_gaussian_filter  (per-channel 2D Gaussian, mode='reflect')
  *   - fast_exponential_filter (2D isotropic exponential via a fixed Gaussian
  *     mixture; n_gaussians=3 by default — amplitudes sum to 0.9999, NOT 1.0).
  *
  * Unlike kernels/gaussian.{h,cpp} (which stores float32 between separable passes
  * for the spatial-OFF path that never invokes a blur), this implementation keeps
- * the image in float64 throughout. The spektrafilm pipeline runs the whole image
+ * the image in float64 throughout. The argentroom pipeline runs the whole image
  * as float64, so for the spatial branch (halation / scatter / coupler diffusion)
  * bit-exactness requires matching that precision. The kernel construction, the
  * SMALL_SIGMA_MAX=3 FIR/IIR dispatch, the radius=int(truncate*sigma+0.5) rule,

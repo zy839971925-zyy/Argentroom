@@ -1,8 +1,8 @@
 /*
- * Spektrafilm for Android — END-TO-END host parity test for the spectral-domain
+ * Argentroom for Android — END-TO-END host parity test for the spectral-domain
  * Gaussian blur (settings.spectral_gaussian_blur) run through the WHOLE scan_film
  * pipeline.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * The spectral blur is the optional blur in compute_hanatos2025_tc_lut: the
@@ -52,7 +52,7 @@ extern void spk_test_tc_lut_cache_set_dynamic_budget(spk_engine* eng,
 
 namespace {
 
-const char* kAssetDir = "/home/user/spektrafilm/src/spektrafilm/data";
+const char* kAssetDir = "/home/user/spektrafilm/src/argentroom/data";
 const char* kBlurGoldenDir =
     "/home/user/Spectrafilmandroid/tools/parity/goldens/scan_spectral_blur";
 const char* kInputF64 =

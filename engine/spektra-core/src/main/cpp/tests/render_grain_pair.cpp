@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2026 Spektrafilm Android contributors
+// SPDX-FileCopyrightText: 2026 Argentroom Android contributors
 // SPDX-License-Identifier: GPL-3.0-only
 //
 // TOOL, NOT A GATE. Absent from the engine-parity table and from CI on purpose:

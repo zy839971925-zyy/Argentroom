@@ -35,7 +35,7 @@ spektra-core/
 │   ├── io/                              # npy/.lut asset loaders
 │   ├── profiles/                        # profile JSON loaders
 │   └── tests/                           # host g++ parity tests (tools/parity/run_engine_parity.sh)
-├── src/main/kotlin/com/spectrafilm/engine/
+├── src/main/kotlin/com/argentroom/engine/
 │   ├── SpektraEngine.kt                 # ★ Kotlin facade (loads .so, marshals buffers)
 │   └── SpektraParams.kt                 # ★ params mirror of RuntimePhotoParams
 └── src/main/assets/spektra/             # profiles/ luts/ filters/ icc/  (see docs/ASSETS.md)
@@ -44,8 +44,8 @@ spektra-core/
 ## Contract
 
 - C API: see [`src/main/cpp/spektra.h`](src/main/cpp/spektra.h).
-- Kotlin: [`SpektraEngine`](src/main/kotlin/com/spectrafilm/engine/SpektraEngine.kt),
-  [`SpektraParams`](src/main/kotlin/com/spectrafilm/engine/SpektraParams.kt).
+- Kotlin: [`SpektraEngine`](src/main/kotlin/com/argentroom/engine/SpektraEngine.kt),
+  [`SpektraParams`](src/main/kotlin/com/argentroom/engine/SpektraParams.kt).
 
 The Kotlin/C API mirror spektrafilm's `simulate(image, params)` /
 `simulate_preview(image, params)` and the `RuntimePhotoParams` dataclass tree so behavior can be

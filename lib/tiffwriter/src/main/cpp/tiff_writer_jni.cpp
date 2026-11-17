@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — lib:tiffwriter JNI bridge.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — lib:tiffwriter JNI bridge.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  */
 #include <jni.h>
 
@@ -15,7 +15,7 @@
 #include "tiff_writer_jni_boundary.h"
 
 #define JNI_TIFF(ret, name) extern "C" JNIEXPORT ret JNICALL \
-    Java_com_spectrafilm_tiffwriter_TiffWriter_##name
+    Java_com_argentroom_tiffwriter_TiffWriter_##name
 
 namespace {
 
@@ -86,11 +86,11 @@ void throwCancelled(JNIEnv* env) noexcept {
 
 template <typename Function>
 jlong jniBoundary(JNIEnv* env, Function&& function) noexcept {
-    spectrafilm::tiffjni::NativeExceptionKind kind;
-    const jlong result = spectrafilm::tiffjni::containNativeExceptions<jlong>(
+    argentroom::tiffjni::NativeExceptionKind kind;
+    const jlong result = argentroom::tiffjni::containNativeExceptions<jlong>(
         static_cast<Function&&>(function), kind);
-    if (kind != spectrafilm::tiffjni::NativeExceptionKind::None) {
-        throwIse(env, spectrafilm::tiffjni::stableMessage(kind));
+    if (kind != argentroom::tiffjni::NativeExceptionKind::None) {
+        throwIse(env, argentroom::tiffjni::stableMessage(kind));
     }
     return result;
 }
@@ -123,7 +123,7 @@ bool stringValue(JNIEnv* env, jstring value, std::string& out) {
     return !env->ExceptionCheck();
 }
 
-bool readIcc(JNIEnv* env, jbyteArray icc, spectrafilm::TiffMetadata& meta) {
+bool readIcc(JNIEnv* env, jbyteArray icc, argentroom::TiffMetadata& meta) {
     if (icc == nullptr) return true;
     const jsize length = env->GetArrayLength(icc);
     if (env->ExceptionCheck()) return false;
@@ -136,7 +136,7 @@ bool readIcc(JNIEnv* env, jbyteArray icc, spectrafilm::TiffMetadata& meta) {
 
 bool buildMeta(JNIEnv* env, jstring software, jstring dateTime,
                jint exifColorSpace, jbyteArray icc,
-               spectrafilm::TiffMetadata& meta) {
+               argentroom::TiffMetadata& meta) {
     if (software != nullptr && !stringValue(env, software, meta.software)) return false;
     if (dateTime != nullptr && !stringValue(env, dateTime, meta.dateTime)) return false;
     meta.exifColorSpace = static_cast<uint16_t>(exifColorSpace & 0xffff);
@@ -213,11 +213,11 @@ bool validateDirectBuffer(JNIEnv* env, jobject buffer, jint width, jint height,
     const jint javaCapacity = env->CallIntMethod(buffer, capacityMethod);
     if (env->ExceptionCheck()) return false;
 
-    spectrafilm::tiffjni::BufferWindow window;
-    const auto windowError = spectrafilm::tiffjni::validateBufferWindow(
+    argentroom::tiffjni::BufferWindow window;
+    const auto windowError = argentroom::tiffjni::validateBufferWindow(
         position, limit, javaCapacity, nativeCapacity, needed, window);
-    if (windowError != spectrafilm::tiffjni::BufferWindowError::None) {
-        throwIae(env, spectrafilm::tiffjni::stableMessage(windowError));
+    if (windowError != argentroom::tiffjni::BufferWindowError::None) {
+        throwIae(env, argentroom::tiffjni::stableMessage(windowError));
         return false;
     }
 
@@ -252,12 +252,12 @@ bool outputPathValue(JNIEnv* env, jstring value, std::string& path) {
     return true;
 }
 
-spectrafilm::TiffCompression compression(jboolean packBits) noexcept {
-    return packBits == JNI_TRUE ? spectrafilm::TiffCompression::PackBits
-                                : spectrafilm::TiffCompression::None;
+argentroom::TiffCompression compression(jboolean packBits) noexcept {
+    return packBits == JNI_TRUE ? argentroom::TiffCompression::PackBits
+                                : argentroom::TiffCompression::None;
 }
 
-void throwResult(JNIEnv* env, const spectrafilm::TiffWriteResult& result) {
+void throwResult(JNIEnv* env, const argentroom::TiffWriteResult& result) {
     if (result.cancelled) {
         throwCancelled(env);
         return;
@@ -280,7 +280,7 @@ JNI_TIFF(jlong, nativeWriteBuffer)(JNIEnv* env, jobject /*thiz*/, jobject direct
         if (!validateDirectBuffer(env, directBuffer, width, height, 2u,
                                   alignof(uint16_t), address)) return 0;
 
-        spectrafilm::TiffMetadata meta;
+        argentroom::TiffMetadata meta;
         std::string path;
         if (!outputPathValue(env, outPath, path)) return 0;
 
@@ -291,10 +291,10 @@ JNI_TIFF(jlong, nativeWriteBuffer)(JNIEnv* env, jobject /*thiz*/, jobject direct
             return 0;
         }
         if (!buildMeta(env, software, dateTime, exifColorSpace, iccBytes, meta)) return 0;
-        spectrafilm::TiffCancellation cancellation{&javaCancellation, JavaCancellation::poll};
-        const spectrafilm::TiffCancellation* cancellationPtr =
+        argentroom::TiffCancellation cancellation{&javaCancellation, JavaCancellation::poll};
+        const argentroom::TiffCancellation* cancellationPtr =
             javaCancellation.present() ? &cancellation : nullptr;
-        const spectrafilm::TiffWriteResult result = spectrafilm::writeTiff16ToFile(
+        const argentroom::TiffWriteResult result = argentroom::writeTiff16ToFile(
             static_cast<const uint16_t*>(address), width, height, meta,
             compression(packBits), path, cancellationPtr);
         if (javaCancellation.callbackFailed() || env->ExceptionCheck()) return 0;
@@ -322,7 +322,7 @@ JNI_TIFF(jlong, nativeWriteShorts)(JNIEnv* env, jobject /*thiz*/, jshortArray rg
             throwIae(env, "pixel short array is too small for packed RGB pixels");
             return 0;
         }
-        spectrafilm::TiffMetadata meta;
+        argentroom::TiffMetadata meta;
         std::string path;
         if (!outputPathValue(env, outPath, path)) return 0;
 
@@ -339,10 +339,10 @@ JNI_TIFF(jlong, nativeWriteShorts)(JNIEnv* env, jobject /*thiz*/, jshortArray rg
             if (!env->ExceptionCheck()) throwIse(env, "TIFF write failed: cannot access pixels");
             return 0;
         }
-        spectrafilm::TiffCancellation cancellation{&javaCancellation, JavaCancellation::poll};
-        const spectrafilm::TiffCancellation* cancellationPtr =
+        argentroom::TiffCancellation cancellation{&javaCancellation, JavaCancellation::poll};
+        const argentroom::TiffCancellation* cancellationPtr =
             javaCancellation.present() ? &cancellation : nullptr;
-        const spectrafilm::TiffWriteResult result = spectrafilm::writeTiff16ToFile(
+        const argentroom::TiffWriteResult result = argentroom::writeTiff16ToFile(
             reinterpret_cast<const uint16_t*>(pixels.get()), width, height, meta,
             compression(packBits), path, cancellationPtr);
         if (javaCancellation.callbackFailed() || env->ExceptionCheck()) return 0;
@@ -364,7 +364,7 @@ JNI_TIFF(jlong, nativeWriteFloat16Buffer)(JNIEnv* env, jobject /*thiz*/, jobject
         if (!validateDirectBuffer(env, directBuffer, width, height, 4u,
                                   alignof(float), address)) return 0;
 
-        spectrafilm::TiffMetadata meta;
+        argentroom::TiffMetadata meta;
         std::string path;
         if (!outputPathValue(env, outPath, path)) return 0;
 
@@ -375,10 +375,10 @@ JNI_TIFF(jlong, nativeWriteFloat16Buffer)(JNIEnv* env, jobject /*thiz*/, jobject
             return 0;
         }
         if (!buildMeta(env, software, dateTime, exifColorSpace, iccBytes, meta)) return 0;
-        spectrafilm::TiffCancellation cancellation{&javaCancellation, JavaCancellation::poll};
-        const spectrafilm::TiffCancellation* cancellationPtr =
+        argentroom::TiffCancellation cancellation{&javaCancellation, JavaCancellation::poll};
+        const argentroom::TiffCancellation* cancellationPtr =
             javaCancellation.present() ? &cancellation : nullptr;
-        const spectrafilm::TiffWriteResult result = spectrafilm::writeTiffFloatToFile(
+        const argentroom::TiffWriteResult result = argentroom::writeTiffFloatToFile(
             static_cast<const float*>(address), width, height, meta,
             compression(packBits), path, cancellationPtr);
         if (javaCancellation.callbackFailed() || env->ExceptionCheck()) return 0;
@@ -397,7 +397,7 @@ JNI_TIFF(jlong, nativeWriteFloatBuffer)(JNIEnv* env, jobject /*thiz*/, jobject d
         if (!validateDirectBuffer(env, directBuffer, width, height, 4u,
                                   alignof(float), address)) return 0;
 
-        spectrafilm::TiffMetadata meta;
+        argentroom::TiffMetadata meta;
         std::string path;
         if (!outputPathValue(env, outPath, path)) return 0;
 
@@ -408,10 +408,10 @@ JNI_TIFF(jlong, nativeWriteFloatBuffer)(JNIEnv* env, jobject /*thiz*/, jobject d
             return 0;
         }
         if (!buildMeta(env, software, dateTime, exifColorSpace, iccBytes, meta)) return 0;
-        spectrafilm::TiffCancellation cancellation{&javaCancellation, JavaCancellation::poll};
-        const spectrafilm::TiffCancellation* cancellationPtr =
+        argentroom::TiffCancellation cancellation{&javaCancellation, JavaCancellation::poll};
+        const argentroom::TiffCancellation* cancellationPtr =
             javaCancellation.present() ? &cancellation : nullptr;
-        const spectrafilm::TiffWriteResult result = spectrafilm::writeTiff32fToFile(
+        const argentroom::TiffWriteResult result = argentroom::writeTiff32fToFile(
             static_cast<const float*>(address), width, height, meta,
             compression(packBits), path, cancellationPtr);
         if (javaCancellation.callbackFailed() || env->ExceptionCheck()) return 0;

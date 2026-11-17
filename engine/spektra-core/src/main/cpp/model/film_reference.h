@@ -1,6 +1,6 @@
 /*
  * Argentroom — film exposure reference.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Copyright (C) 2026 Argentroom Android contributors.
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 #pragma once
@@ -9,7 +9,7 @@
 
 namespace spk {
 
-// Silverphase v1.2.5, spektrafilm_constants.bin. Its T reference is the
+// Silverphase v1.2.5, argentroom_constants.bin. Its T reference is the
 // Incandescent spectrum (380–780 nm in 5 nm steps), normalized by the mean.
 inline constexpr double kTungstenFilmIlluminant[81] = {
     0.044290860487078712, 0.051585750595832348, 0.060695365776210666, 0.080526357118237163,

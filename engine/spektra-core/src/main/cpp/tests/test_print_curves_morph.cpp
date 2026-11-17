@@ -1,7 +1,7 @@
 /*
- * Spektrafilm for Android — host parity test for the s023 print density-curve
+ * Argentroom for Android — host parity test for the s023 print density-curve
  * morph (model/morph_curves.cpp), the opt-in print-develop alternative.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * apply_print_curves_morph rebuilds a print paper's density table from its

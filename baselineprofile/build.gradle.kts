@@ -1,4 +1,4 @@
-// Spektrafilm for Android — Baseline Profile generator and Macrobenchmarks (#459). GPLv3.
+// Argentroom for Android — Baseline Profile generator and Macrobenchmarks (#459). GPLv3.
 //
 // Record the profiles on a connected device (API 28+; no root needed on API 33+):
 //   ./gradlew :app:generateBaselineProfile
@@ -11,7 +11,7 @@ plugins {
 }
 
 android {
-    namespace = "com.spectrafilm.baselineprofile"
+    namespace = "com.argentroom.baselineprofile"
     compileSdk = 36
     buildToolsVersion = "36.0.0"
 

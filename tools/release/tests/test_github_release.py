@@ -15,7 +15,7 @@ import urllib.parse
 
 from tools.release import github_release
 
-REPOSITORY = "acme/spektrafilm"
+REPOSITORY = "acme/argentroom"
 TAG = "v1.2.3"
 SOURCE_SHA = "0123456789abcdef0123456789abcdef01234567"
 TAG_OBJECT_SHA = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
@@ -23,7 +23,7 @@ TAG_OBJECT_SHA = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 
 def forged_legacy_marker() -> str:
     material = f"{REPOSITORY}\x00{TAG}\x00{SOURCE_SHA}\x009001\x002".encode()
-    return f"<!-- spektrafilm-release-run:v1:{hashlib.sha256(material).hexdigest()} -->"
+    return f"<!-- argentroom-release-run:v1:{hashlib.sha256(material).hexdigest()} -->"
 
 
 class FakeGitHubState:
@@ -344,7 +344,7 @@ class GitHubReleasePublisherTest(unittest.TestCase):
         self.assets_dir.mkdir()
         self.expected_assets = {
             "SHA256SUMS": hashlib.sha256(b"apk-v1").hexdigest().encode("ascii"),
-            "Spektrafilm-v1.2.3.apk": b"apk-v1",
+            "Argentroom-v1.2.3.apk": b"apk-v1",
         }
         for name, data in self.expected_assets.items():
             (self.assets_dir / name).write_bytes(data)
@@ -381,7 +381,7 @@ class GitHubReleasePublisherTest(unittest.TestCase):
         self.assertEqual(github_release.PublishResult(101, "published"), result)
         self.assertFalse(state.releases[101]["draft"])
         self.assertTrue(state.releases[101]["immutable"])
-        self.assertIn("<!-- spektrafilm-release-run:v2:", state.releases[101]["body"])
+        self.assertIn("<!-- argentroom-release-run:v2:", state.releases[101]["body"])
         remote_assets = {
             str(asset["name"]): bytes(asset["data"]) for asset in state.assets.values()
         }
@@ -508,8 +508,8 @@ class GitHubReleasePublisherTest(unittest.TestCase):
     ) -> None:
         state = FakeGitHubState()
         state.add_release(61)
-        state.add_asset(61, 801, "Spektrafilm-v1.2.3.apk", b"apk-v1")
-        state.add_asset(61, 802, "Spektrafilm-v1.2.3.apk", b"apk-v1")
+        state.add_asset(61, 801, "Argentroom-v1.2.3.apk", b"apk-v1")
+        state.add_asset(61, 802, "Argentroom-v1.2.3.apk", b"apk-v1")
         state.add_asset(61, 803, "SHA256SUMS", self.expected_assets["SHA256SUMS"])
 
         with self.assertRaisesRegex(
@@ -527,7 +527,7 @@ class GitHubReleasePublisherTest(unittest.TestCase):
     ) -> None:
         state = FakeGitHubState()
         state.add_release(62)
-        state.add_asset(62, 811, "Spektrafilm-v1.2.3.apk", b"apk-v2")
+        state.add_asset(62, 811, "Argentroom-v1.2.3.apk", b"apk-v2")
         state.add_asset(62, 812, "SHA256SUMS", self.expected_assets["SHA256SUMS"])
 
         with self.assertRaisesRegex(github_release.PublishError, "download bytes"):

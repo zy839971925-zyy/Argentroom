@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android — sfraw::readAllFromFd host regression (#287). GPLv3.
+ * Argentroom for Android — sfraw::readAllFromFd host regression (#287). GPLv3.
  *
  * The RAW fd decode now reads its source with fstat + 1 MiB read(2) instead of
  * 64 KiB fread chunks. This pins what must not change: exact bytes, start at the

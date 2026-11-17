@@ -10,13 +10,13 @@
 -->
 <data-extraction-rules>
     <cloud-backup disableIfNoEncryptionCapabilities="true">
-        <include domain="sharedpref" path="spectrafilm_settings.xml" />
+        <include domain="sharedpref" path="argentroom_settings.xml" />
         <include domain="file" path="datastore/back_exit_hint.preferences_pb" />
-        <include domain="file" path="datastore/spectrafilm_settings.preferences_pb" />
+        <include domain="file" path="datastore/argentroom_settings.preferences_pb" />
     </cloud-backup>
     <device-transfer>
-        <include domain="sharedpref" path="spectrafilm_settings.xml" />
+        <include domain="sharedpref" path="argentroom_settings.xml" />
         <include domain="file" path="datastore/back_exit_hint.preferences_pb" />
-        <include domain="file" path="datastore/spectrafilm_settings.preferences_pb" />
+        <include domain="file" path="datastore/argentroom_settings.preferences_pb" />
     </device-transfer>
 </data-extraction-rules>

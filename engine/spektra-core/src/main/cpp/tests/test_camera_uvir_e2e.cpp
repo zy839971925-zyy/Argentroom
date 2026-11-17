@@ -1,8 +1,8 @@
 /*
- * Spektrafilm for Android — END-TO-END host parity test for the CAMERA UV/IR cut
+ * Argentroom for Android — END-TO-END host parity test for the CAMERA UV/IR cut
  * band-pass filter (camera.filter_uv / filter_ir) run through the WHOLE scan_film
  * pipeline.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * The band-pass is the camera UV/IR cut filter of FilmingStage._rgb_to_film_raw:
@@ -45,7 +45,7 @@
 
 namespace {
 
-const char* kAssetDir = "/home/user/spektrafilm/src/spektrafilm/data";
+const char* kAssetDir = "/home/user/spektrafilm/src/argentroom/data";
 const char* kUvirGoldenDir =
     "/home/user/Spectrafilmandroid/tools/parity/goldens/scan_portra_uvir";
 const char* kInputF64 =

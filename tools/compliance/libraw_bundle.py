@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build and verify Spektrafilm's deterministic LibRaw compliance bundle.
+"""Build and verify Argentroom's deterministic LibRaw compliance bundle.
 
 This tool intentionally has no network client and never discovers a CMake
 ``build/_deps`` tree.  The caller supplies the official archive explicitly;
@@ -24,13 +24,13 @@ from datetime import date, datetime, timezone
 from pathlib import Path, PurePosixPath
 from urllib.parse import urlsplit
 
-SCHEMA = "spektrafilm.libraw-compliance-bundle/v1"
+SCHEMA = "argentroom.libraw-compliance-bundle/v1"
 SPDX_VERSION = "SPDX-2.3"
 MANIFEST_PATH = "manifest.json"
 SBOM_PATH = "sbom.spdx.json"
 ROUTE_REPOSITORY_PATH = Path("lib/libraw/compliance/license-route.txt")
 ROUTE_BUNDLE_PATH = "relink/lib/libraw/compliance/license-route.txt"
-DECISION_SCHEMA = "spektrafilm.libraw-license-decision/v1"
+DECISION_SCHEMA = "argentroom.libraw-license-decision/v1"
 DECISION_REPOSITORY_PATH = Path("lib/libraw/compliance/license-decision.json")
 DECISION_BUNDLE_PATH = "relink/lib/libraw/compliance/license-decision.json"
 SPDX_CREATED_REPOSITORY_PATH = Path("lib/libraw/compliance/spdx-created-at.txt")
@@ -71,13 +71,13 @@ ROUTE_MARKER_REPOSITORY_PATHS = (
     Path("NOTICE.md"),
     Path("lib/libraw/README.md"),
     Path("lib/libraw/patches/README.md"),
-    Path("app/src/main/assets/legal/spektrafilm/NOTICE.md"),
+    Path("app/src/main/assets/legal/argentroom/NOTICE.md"),
 )
 APP_NOTICE_ASSET_REPOSITORY_PATH = Path(
-    "app/src/main/assets/legal/spektrafilm/NOTICE.md"
+    "app/src/main/assets/legal/argentroom/NOTICE.md"
 )
 APP_LICENSE_ASSET_REPOSITORY_PATH = Path(
-    "app/src/main/assets/legal/spektrafilm/LICENSE.GPL-3.0"
+    "app/src/main/assets/legal/argentroom/LICENSE.GPL-3.0"
 )
 ROUTE_PROSE_REPOSITORY_PATHS = (
     Path("docs/PRODUCTION_READINESS_PLAN.md"),
@@ -86,14 +86,14 @@ ROUTE_PROSE_REPOSITORY_PATHS = (
     Path("lib/libraw/src/main/cpp/raw_decoder.cpp"),
     Path("lib/libraw/src/main/cpp/raw_decoder.h"),
     Path("lib/libraw/src/main/cpp/raw_decoder_jni.cpp"),
-    Path("lib/libraw/src/main/kotlin/com/spectrafilm/libraw/RawDecoder.kt"),
-    Path("lib/libraw/src/main/kotlin/com/spectrafilm/libraw/RawCoilDecoder.kt"),
+    Path("lib/libraw/src/main/kotlin/com/argentroom/libraw/RawDecoder.kt"),
+    Path("lib/libraw/src/main/kotlin/com/argentroom/libraw/RawCoilDecoder.kt"),
 )
 ABOUT_SCREEN_REPOSITORY_PATH = Path(
-    "app/src/main/java/com/spectrafilm/app/AboutScreen.kt"
+    "app/src/main/java/com/argentroom/app/AboutScreen.kt"
 )
 ABOUT_TEST_REPOSITORY_PATH = Path(
-    "app/src/test/java/com/spectrafilm/app/AboutLegalNoticeTest.kt"
+    "app/src/test/java/com/argentroom/app/AboutLegalNoticeTest.kt"
 )
 MARKDOWN_ROUTE_MARKER = re.compile(
     r"<!-- libraw-license-route: (UNRESOLVED|LGPL-2\.1-only|CDDL-1\.0) -->"
@@ -985,7 +985,7 @@ def _relinking_text(version: str, route: str) -> bytes:
     text = f"""# Relinking the bundled LibRaw source
 
 This archive contains the authenticated, fully patched LibRaw {version} source
-used by Spektrafilm plus the native `libsfraw.so` wrapper source and build files.
+used by Argentroom plus the native `libsfraw.so` wrapper source and build files.
 Its recorded license route is `{route}`. This record is build evidence, not an
 independent legal approval; release verification accepts only `LGPL-2.1-only`.
 
@@ -1152,12 +1152,12 @@ def _spdx_document(
         "SPDXID": "SPDXRef-DOCUMENT",
         "creationInfo": {
             "created": created_at,
-            "creators": ["Tool: spektrafilm-libraw-bundle-v1"],
+            "creators": ["Tool: argentroom-libraw-bundle-v1"],
         },
         "dataLicense": "CC0-1.0",
         "documentNamespace": namespace,
         "files": files,
-        "name": f"Spektrafilm-LibRaw-{pins.version}-compliance",
+        "name": f"Argentroom-LibRaw-{pins.version}-compliance",
         "packages": [
             {
                 "SPDXID": "SPDXRef-Package-LibRaw-Pristine",
@@ -1182,7 +1182,7 @@ def _spdx_document(
                 "licenseConcluded": concluded,
                 "licenseDeclared": "LGPL-2.1-only OR CDDL-1.0",
                 "licenseInfoFromFiles": ["NOASSERTION"],
-                "name": "Spektrafilm patched LibRaw source",
+                "name": "Argentroom patched LibRaw source",
                 "packageVerificationCode": {
                     "packageVerificationCodeValue": _package_verification_code(
                         payload, patched_paths
@@ -1190,7 +1190,7 @@ def _spdx_document(
                 },
                 "sourceInfo": (
                     f"Official archive plus {len(pins.patches)} ordered, SHA-256-pinned "
-                    "Spektrafilm hardening patches"
+                    "Argentroom hardening patches"
                 ),
                 "versionInfo": pins.version,
             },
@@ -1202,7 +1202,7 @@ def _spdx_document(
                 "licenseConcluded": "GPL-3.0-only",
                 "licenseDeclared": "GPL-3.0-only",
                 "licenseInfoFromFiles": ["NOASSERTION"],
-                "name": "Spektrafilm LibRaw JNI wrapper",
+                "name": "Argentroom LibRaw JNI wrapper",
                 "packageVerificationCode": {
                     "packageVerificationCodeValue": _package_verification_code(
                         payload, wrapper_paths
@@ -1259,7 +1259,7 @@ def _verify_modification_notices(source_root: Path, modified_paths: Sequence[str
     # Patches are authored on different dates; each file carries its own dated
     # notice (0001-0023 stamp 2026-08-30, 0024/0025 stamp 2026-09-01).
     first = re.compile(
-        rb"Modified by Spektrafilm Android contributors, "
+        rb"Modified by Argentroom Android contributors, "
         rb"[0-9]{4}-[0-9]{2}-[0-9]{2}; see the"
     )
     second = b"corresponding source distribution's bundled patch manifest."
@@ -1283,7 +1283,7 @@ def _modifications_text(
         "",
         f"- Upstream version: `{pins.version}`",
         f"- Modification date: `{MODIFICATION_DATE}`",
-        "- Contributor: `Spektrafilm Android contributors`",
+        "- Contributor: `Argentroom Android contributors`",
         f"- Recorded license route: `{route}`",
         f"- Patched-tree SHA-256: `{pins.patched_tree_sha256}`",
         "",

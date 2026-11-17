@@ -1,5 +1,5 @@
-# Spektrafilm for Android — LUT-acceleration golden generator.
-# Copyright (C) 2026 Spektrafilm Android contributors.
+# Argentroom for Android — LUT-acceleration golden generator.
+# Copyright (C) 2026 Argentroom Android contributors.
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -7,10 +7,10 @@
 # version. See <https://www.gnu.org/licenses/>.
 #
 # Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
-# spektrafilm.
+# argentroom.
 """Generate a golden for the OPT-IN LUT-acceleration path.
 
-The spektrafilm scanner/enlarger density->light->XYZ transforms can be
+The argentroom scanner/enlarger density->light->XYZ transforms can be
 accelerated with a precomputed 3D LUT (settings.use_scanner_lut /
 use_enlarger_lut, settings.lut_resolution). The oracle builds the LUT with
 ``utils.lut.compute_with_lut`` (a per-channel uniform grid over [xmin, xmax],
@@ -37,7 +37,7 @@ normalized input, and asserts:
   * native pchip-LUT output ~= oracle pchip-LUT output  (interpolator parity),
   * documents native LUT vs. direct error  (the opt-in acceleration tolerance).
 
-Requires a working spektrafilm environment (tools/parity/setup_env.sh):
+Requires a working argentroom environment (tools/parity/setup_env.sh):
     PYTHONPATH=/home/user/spektrafilm/src:/tmp/spkstubs \
         python tools/parity/gen_lut_golden.py
 """
@@ -84,10 +84,10 @@ def analytic_transform(x):
 def main() -> int:
     try:
         import numpy as np
-        from spektrafilm.utils.lut import compute_with_lut
+        from argentroom.utils.lut import compute_with_lut
     except Exception as exc:  # noqa: BLE001
         sys.stderr.write(
-            "ERROR: could not import spektrafilm.\n"
+            "ERROR: could not import argentroom.\n"
             f"  ({type(exc).__name__}: {exc})\n"
             "Run tools/parity/setup_env.sh then re-run with PYTHONPATH set "
             "(see module docstring).\n")

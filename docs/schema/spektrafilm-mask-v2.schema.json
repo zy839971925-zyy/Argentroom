@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Spektrafilm mask-set v2",
-  "description": "Canonical JSON emitted for an ordered Spektrafilm local-adjustment mask set that contains at least one semantic (AI) component. Documents without one are written as v1.",
+  "title": "Argentroom mask-set v2",
+  "description": "Canonical JSON emitted for an ordered Argentroom local-adjustment mask set that contains at least one semantic (AI) component. Documents without one are written as v1.",
   "type": "object",
   "required": [
     "schema",
@@ -10,7 +10,7 @@
   ],
   "properties": {
     "schema": {
-      "const": "org.spektrafilm.mask-set"
+      "const": "org.argentroom.mask-set"
     },
     "version": {
       "const": 2

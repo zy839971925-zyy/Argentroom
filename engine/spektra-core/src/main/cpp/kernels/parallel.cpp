@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android — native engine: deterministic parallel-for (worker
+ * Argentroom for Android — native engine: deterministic parallel-for (worker
  * count resolution). GPLv3. Film modeling powered by spektrafilm (GPLv3).
  */
 #include "kernels/parallel.h"

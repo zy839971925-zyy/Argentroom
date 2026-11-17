@@ -1,6 +1,6 @@
 /*
- * Spektrafilm Android -- bounded LibRaw public-API regression support.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom Android -- bounded LibRaw public-API regression support.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  */
 #ifndef SFRAW_PUBLIC_API_TEST_SUPPORT_H
 #define SFRAW_PUBLIC_API_TEST_SUPPORT_H

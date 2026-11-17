@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Offline consistency checks for Spektrafilm's current authority documents."""
+"""Offline consistency checks for Argentroom's current authority documents."""
 
 from __future__ import annotations
 

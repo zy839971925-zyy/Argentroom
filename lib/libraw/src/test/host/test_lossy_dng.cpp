@@ -1,6 +1,6 @@
 /*
- * Spektrafilm Android -- lossy-JPEG DNG (Compression 0x884C) contract.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom Android -- lossy-JPEG DNG (Compression 0x884C) contract.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  *
  * Samsung / Pixel "Expert RAW" can write DNG 1.4 lossy JPEG LinearRaw. The
  * build links the pinned libjpeg-turbo (USE_JPEG) so LibRaw decodes these, and
@@ -41,7 +41,7 @@ void check(bool condition, const std::string& label,
   if (!condition) ++failures;
 }
 
-std::string describe(const spectrafilm::DecodeResult& result) {
+std::string describe(const argentroom::DecodeResult& result) {
   return "status=" + std::to_string(result.status) +
       " libraw=" + std::to_string(result.librawCode) +
       " error=" + result.error;
@@ -205,7 +205,7 @@ std::vector<std::uint8_t> makeLossyDng(const LossyOptions& options) {
       shorts(258, {8, 8, 8}),
       shorts(259, {0x884C}),
       shorts(262, {34892}),
-      ascii(271, "Spektrafilm"),
+      ascii(271, "Argentroom"),
       ascii(272, "Lossy Fixture"),
       shorts(274, {1}),
       shorts(277, {3}),
@@ -215,7 +215,7 @@ std::vector<std::uint8_t> makeLossyDng(const LossyOptions& options) {
       longs(324, std::vector<std::uint32_t>(tiles.size(), 0U)),  // patched below
       longs(325, tileSizes),
       bytes(50706, {1, 4, 0, 0}),
-      ascii(50708, "Spektrafilm Lossy Fixture"),
+      ascii(50708, "Argentroom Lossy Fixture"),
       srationals(50721, 9, true),
       srationals(50722, 9, true),
       rationals(50728, 3),
@@ -280,13 +280,13 @@ std::vector<std::uint8_t> makeLossyDng(const LossyOptions& options) {
   return out;
 }
 
-spectrafilm::DecodeResult decode(const std::vector<std::uint8_t>& dng) {
-  spectrafilm::DecodeOptions options;
-  options.whiteBalance = spectrafilm::WhiteBalanceMode::Daylight;
-  return spectrafilm::decodeFromBuffer(dng.data(), dng.size(), options);
+argentroom::DecodeResult decode(const std::vector<std::uint8_t>& dng) {
+  argentroom::DecodeOptions options;
+  options.whiteBalance = argentroom::WhiteBalanceMode::Daylight;
+  return argentroom::decodeFromBuffer(dng.data(), dng.size(), options);
 }
 
-double meanChannel(const spectrafilm::DecodeResult& result, int x0, int x1,
+double meanChannel(const argentroom::DecodeResult& result, int x0, int x1,
                    int channel) {
   double sum = 0.0;
   std::size_t n = 0U;
@@ -304,12 +304,12 @@ double meanChannel(const spectrafilm::DecodeResult& result, int x0, int x1,
 
 int main() {
   {
-    const spectrafilm::DecodeResult result = decode(makeLossyDng({}));
-    check(result.ok && result.status == spectrafilm::SFRAW_OK,
+    const argentroom::DecodeResult result = decode(makeLossyDng({}));
+    check(result.ok && result.status == argentroom::SFRAW_OK,
           "baseline lossy-JPEG LinearRaw DNG decodes natively", describe(result));
     if (result.ok) {
       const auto& d = result.descriptor;
-      check(d.packing == spectrafilm::RawPacking::LossyCompressed,
+      check(d.packing == argentroom::RawPacking::LossyCompressed,
             "descriptor labels the samples LossyCompressed");
       check(d.containerCompression == 0x884C,
             "descriptor keeps the container compression 0x884C");
@@ -318,9 +318,9 @@ int main() {
             "declared=" + std::to_string(d.declaredBitsPerSample) +
                 " effective=" + std::to_string(d.effectiveBitsPerSample));
       check(d.whiteLevelProvenance ==
-                spectrafilm::RawLevelProvenance::DecoderMetadata,
+                argentroom::RawLevelProvenance::DecoderMetadata,
             "WhiteLevel provenance is the decoder, not DNG metadata");
-      check(d.pixelLayout == spectrafilm::RawPixelLayout::Linear &&
+      check(d.pixelLayout == argentroom::RawPixelLayout::Linear &&
                 d.colorChannels == 3,
             "lossy LinearRaw reports a three-plane linear layout");
       check(result.width == kWidth && result.height == kHeight,
@@ -336,18 +336,18 @@ int main() {
   {
     LossyOptions options;
     options.progressive = true;
-    const spectrafilm::DecodeResult result = decode(makeLossyDng(options));
+    const argentroom::DecodeResult result = decode(makeLossyDng(options));
     check(!result.ok &&
-              result.status == spectrafilm::SFRAW_ERR_LOSSY_JPEG_DNG,
+              result.status == argentroom::SFRAW_ERR_LOSSY_JPEG_DNG,
           "progressive JPEG tiles fail closed with the platform fallback status",
           describe(result));
   }
   {
     LossyOptions options;
     options.garbageTiles = true;
-    const spectrafilm::DecodeResult result = decode(makeLossyDng(options));
+    const argentroom::DecodeResult result = decode(makeLossyDng(options));
     check(!result.ok &&
-              result.status == spectrafilm::SFRAW_ERR_LOSSY_JPEG_DNG,
+              result.status == argentroom::SFRAW_ERR_LOSSY_JPEG_DNG,
           "non-JPEG tile data fails closed with the platform fallback status",
           describe(result));
   }
@@ -355,17 +355,17 @@ int main() {
     LossyOptions options;
     options.opcodeList2 = mapPolynomial(
         0U, {std::numeric_limits<double>::quiet_NaN(), 1e300, -1e300});
-    const spectrafilm::DecodeResult result = decode(makeLossyDng(options));
+    const argentroom::DecodeResult result = decode(makeLossyDng(options));
     // Reaching this line under UBSan (halt_on_error) is the real assertion:
     // the clamp keeps NaN / out-of-range polynomial values defined.
-    check(result.ok || result.status != spectrafilm::SFRAW_OK,
+    check(result.ok || result.status != argentroom::SFRAW_OK,
           "hostile MapPolynomial coefficients stay defined", describe(result));
   }
   {
     LossyOptions options;
     options.opcodeList2 = mapPolynomial(0U, {0.0, 1.0});
-    const spectrafilm::DecodeResult identity = decode(makeLossyDng(options));
-    const spectrafilm::DecodeResult standard = decode(makeLossyDng({}));
+    const argentroom::DecodeResult identity = decode(makeLossyDng(options));
+    const argentroom::DecodeResult standard = decode(makeLossyDng({}));
     check(identity.ok && standard.ok,
           "a linear MapPolynomial on one plane decodes", describe(identity));
     if (identity.ok && standard.ok) {
@@ -381,9 +381,9 @@ int main() {
     LossyOptions options;
     options.withBlackLevel = true;
     options.blackLevel = 16U;
-    const spectrafilm::DecodeResult result = decode(makeLossyDng(options));
+    const argentroom::DecodeResult result = decode(makeLossyDng(options));
     check(!result.ok &&
-              result.status == spectrafilm::SFRAW_ERR_PRECISION_METADATA,
+              result.status == argentroom::SFRAW_ERR_PRECISION_METADATA,
           "lossy BlackLevel (left in LibRaw's 8-bit domain) fails closed",
           describe(result));
   }

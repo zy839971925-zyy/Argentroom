@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android — native engine entry (capstone wiring).
+ * Argentroom for Android — native engine entry (capstone wiring).
  * GPLv3. Port of spektrafilm (GPLv3) — film modeling powered by spektrafilm.
  *
  * Implements the C API for the scan_film route by orchestrating the already-ported,
@@ -1050,7 +1050,7 @@ void digest_user_halation_preset(spk::FilmingParams& fparams, const spk::Profile
     }
     spk::digest_halation_params(fparams, film.use.c_str(), none ? "no" : mode, true);
     if (none && fparams.halation.back_reflection) {
-        // An override to "none" is spektrafilm's no-backing Gaussian preset,
+        // An override to "none" is argentroom's no-backing Gaussian preset,
         // never the fitted back-reflection PSF (Silverphase: ah == "no" &&
         // !own_no -> 0.30, 0.10, 0.015).
         fparams.halation.halation_strength[0] = 0.30;
@@ -5596,7 +5596,7 @@ spk_status spk_bake_cube_lut_cancellable(
     out.reserve(count * 33 + 1024);
     char line[256];
 
-    out += "# Spektrafilm for Android — baked film-look 3D LUT (.cube)\n";
+    out += "# Argentroom for Android — baked film-look 3D LUT (.cube)\n";
     out += "# Film modeling powered by spektrafilm (GPLv3).\n";
     std::snprintf(line, sizeof(line), "# Film profile: %s\n",
                   p->film_profile ? p->film_profile : "(none)");
@@ -5621,7 +5621,7 @@ spk_status spk_bake_cube_lut_cancellable(
     out += "#   printing, scanning, output color-space transform.\n";
     out += "# Data order: BLUE fastest, then GREEN, then RED.\n";
 
-    std::snprintf(line, sizeof(line), "TITLE \"Spektrafilm %s\"\n",
+    std::snprintf(line, sizeof(line), "TITLE \"Argentroom %s\"\n",
                   p->film_profile ? p->film_profile : "look");
     out += line;
     std::snprintf(line, sizeof(line), "LUT_3D_SIZE %d\n", n);

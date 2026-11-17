@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Spektrafilm for Android. GPLv3. -->
+<!-- Argentroom for Android. GPLv3. -->
 <!-- Machine-drafted translation (Claude, 2026-11); needs review by a native speaker. -->
 <resources>
     <string name="stock_browser_change">変更</string>
@@ -289,7 +289,7 @@
     <string name="editor_sim_camera_lens_blur">カメラレンズのぼけ um</string>
     <string name="editor_sim_camera_lens_blur_tooltip">カメラレンズのぼけのガウスフィルターのシグマ（um）。空間的な効果で、ハレーションが有効なとき（空間処理の経路）だけ適用されます。</string>
     <string name="editor_sim_scene_latitude">シーンのラチチュード</string>
-    <string name="editor_sim_scene_latitude_tooltip">フィルムより広いシーンを露光前にフィルムに収めます。ニーを超えるハイライトとシャドウは滑らかに圧縮され、中間調は変わりません。コントラストの高いスマートフォンのDNGに便利です。上流のspektrafilmにはない機能で、SpektraLabのアイデアです。</string>
+    <string name="editor_sim_scene_latitude_tooltip">フィルムより広いシーンを露光前にフィルムに収めます。ニーを超えるハイライトとシャドウは滑らかに圧縮され、中間調は変わりません。コントラストの高いスマートフォンのDNGに便利です。上流のargentroomにはない機能で、SpektraLabのアイデアです。</string>
     <string name="editor_sim_scene_latitude_highlight_knee">ハイライトのニー（段）</string>
     <string name="editor_sim_scene_latitude_highlight_knee_tooltip">測光した中間グレーから何段上でハイライトの圧縮が始まるか。それより下は変化しません。</string>
     <string name="editor_sim_scene_latitude_highlight_room">ハイライトの余裕（段）</string>
@@ -303,7 +303,7 @@
     <string name="editor_sim_scene_latitude_max_lift">シャドウの最大持ち上げ（段）</string>
     <string name="editor_sim_scene_latitude_max_lift_tooltip">ニーからどれだけ下にあっても、最も深いシャドウを明るくする量の上限。小さくすると黒が黒のまま保たれます。</string>
     <string name="editor_sim_date_stamp">デート写し込み</string>
-    <string name="editor_sim_date_stamp_tooltip">カメラのデートバックの写し込みをネガに露光します。LEDの数字が上から貼り付けるのではなく、写真と一緒に現像され、にじみ、粒状が乗ります。上流のspektrafilmにはない機能で、SpektraLabのアイデアです。</string>
+    <string name="editor_sim_date_stamp_tooltip">カメラのデートバックの写し込みをネガに露光します。LEDの数字が上から貼り付けるのではなく、写真と一緒に現像され、にじみ、粒状が乗ります。上流のargentroomにはない機能で、SpektraLabのアイデアです。</string>
     <string name="editor_sim_date_stamp_text">写し込み内容</string>
     <string name="editor_sim_date_stamp_text_help">数字、スペース、\' - . : / のみ</string>
     <string name="editor_sim_date_stamp_photo_date">撮影日</string>
@@ -343,7 +343,7 @@
     <string name="editor_sim_print_diffusion">プリントのディフュージョンフィルター</string>
     <string name="editor_sim_scan_lens_blur">スキャンレンズのぼけ px</string>
     <string name="editor_sim_scan_lens_blur_tooltip">スキャナーのレンズのぼけのガウスフィルターのシグマ（ピクセル）。空間的な効果で、ハレーションが有効なとき（空間処理の経路）だけ適用されます。</string>
-    <string name="editor_sim_scan_correction_noop">スキャンの白/黒補正は、ネガフィルムのリバーサルモードでは効果がありません。リバーサル/ポジフィルムかプリントモードでのみ適用されます。spektrafilmエンジンと同じ挙動です。</string>
+    <string name="editor_sim_scan_correction_noop">スキャンの白/黒補正は、ネガフィルムのリバーサルモードでは効果がありません。リバーサル/ポジフィルムかプリントモードでのみ適用されます。argentroomエンジンと同じ挙動です。</string>
     <string name="editor_sim_scan_white_correction">スキャンの白補正</string>
     <string name="editor_sim_scan_white_correction_tooltip">スキャンの白点を下の目標白レベルに合わせます。既定の0.98では控えめで、白レベルを下げるとハイライトが下がるのがわかります。</string>
     <string name="editor_sim_scan_white_level">スキャンの白レベル</string>

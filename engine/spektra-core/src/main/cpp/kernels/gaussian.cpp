@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: separable 2D Gaussian blur kernel.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — native engine: separable 2D Gaussian blur kernel.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,7 +8,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Ports spektrafilm/utils/fast_gaussian_filter.py:
+ * argentroom. Ports spektrafilm/utils/fast_gaussian_filter.py:
  *   - _gaussian_kernel_1d / _reflect / _fir_2d_fused  (small-sigma FIR)
  *   - _yvv_coeffs / _iir_horizontal / _iir_vertical   (Young-van Vliet IIR)
  *   - _dispatch_2d / _apply_per_channel               (dispatch + channels)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-# Spektrafilm for Android — generate the numpy.interp parity golden for the
+# Argentroom for Android — generate the numpy.interp parity golden for the
 # DIR-coupler non-monotonic interpolation (model/couplers.cpp::np_interp_array).
-# Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+# Copyright (C) 2026 Argentroom Android contributors. GPLv3.
 # Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
 #
 # np.interp IS the oracle for the coupler interpolation. Its result on a

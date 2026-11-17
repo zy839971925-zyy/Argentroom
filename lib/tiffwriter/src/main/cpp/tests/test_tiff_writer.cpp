@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — host unit test for the 16-bit baseline TIFF writer.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — host unit test for the 16-bit baseline TIFF writer.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  *
  * Pure host test (no Android / no Gradle). Writes a small known 16-bit RGB buffer
  * to /tmp with an embedded ICC blob + metadata, then parses the file back from
@@ -37,7 +37,7 @@
 #include <vector>
 #include <dirent.h>
 
-using namespace spectrafilm;
+using namespace argentroom;
 
 namespace {
 
@@ -164,7 +164,7 @@ void runCase(const char* label, TiffCompression comp, const std::vector<uint8_t>
     }
 
     TiffMetadata meta;
-    meta.software = "Spektrafilm-test";
+    meta.software = "Argentroom-test";
     meta.dateTime = "2026:05:29 12:00:00";
     meta.xResolution = 300.0;
     meta.yResolution = 300.0;
@@ -234,9 +234,9 @@ void runCase(const char* label, TiffCompression comp, const std::vector<uint8_t>
     if (ifd.count(305)) {
         size_t off = valueDataOffset(ifd[305]);
         std::string s(reinterpret_cast<const char*>(&file[off]));
-        sw = (s == "Spektrafilm-test");
+        sw = (s == "Argentroom-test");
     }
-    CHECK(sw, "Software tag = 'Spektrafilm-test'");
+    CHECK(sw, "Software tag = 'Argentroom-test'");
 
     // ICC presence + byte round-trip.
     if (!icc.empty()) {
@@ -311,7 +311,7 @@ void runFloat16IdentityCase(const char* label, TiffCompression comp) {
     }
 
     TiffMetadata meta;
-    meta.software = "Spektrafilm-test";
+    meta.software = "Argentroom-test";
     meta.dateTime = "2026:05:29 12:00:00";
     meta.exifColorSpace = 0xFFFF;
     meta.writeExifIfd = true;
@@ -342,7 +342,7 @@ void runFloatCase(const char* label, TiffCompression comp) {
     pixels[0] = 2.5f; pixels[1] = -1.0f; pixels[2] = 0.0f;
 
     TiffMetadata meta;
-    meta.software = "Spektrafilm-test";
+    meta.software = "Argentroom-test";
     meta.exifColorSpace = 0xFFFF;
     meta.writeExifIfd = true;
 
@@ -542,11 +542,11 @@ void runSafetyCases() {
 }
 
 void runExceptionTranslationCases() {
-    using spectrafilm::tiffjni::NativeExceptionKind;
-    using spectrafilm::tiffjni::BufferWindow;
-    using spectrafilm::tiffjni::BufferWindowError;
-    using spectrafilm::tiffjni::containNativeExceptions;
-    using spectrafilm::tiffjni::stableMessage;
+    using argentroom::tiffjni::NativeExceptionKind;
+    using argentroom::tiffjni::BufferWindow;
+    using argentroom::tiffjni::BufferWindowError;
+    using argentroom::tiffjni::containNativeExceptions;
+    using argentroom::tiffjni::stableMessage;
 
     std::printf("[jni-exception-translation]\n");
     NativeExceptionKind kind = NativeExceptionKind::None;
@@ -569,15 +569,15 @@ void runExceptionTranslationCases() {
           "unknown exception maps to a stable Kotlin error message");
 
     BufferWindow window;
-    auto windowError = spectrafilm::tiffjni::validateBufferWindow(
+    auto windowError = argentroom::tiffjni::validateBufferWindow(
         4, 16, 20, 20, 12, window);
     CHECK(windowError == BufferWindowError::None && window.offset == 4 && window.length == 12,
           "direct-buffer validation honours the logical position and limit");
-    windowError = spectrafilm::tiffjni::validateBufferWindow(
+    windowError = argentroom::tiffjni::validateBufferWindow(
         4, 15, 20, 20, 12, window);
     CHECK(windowError == BufferWindowError::TooSmall,
           "direct-buffer validation rejects a short logical window");
-    windowError = spectrafilm::tiffjni::validateBufferWindow(
+    windowError = argentroom::tiffjni::validateBufferWindow(
         4, 16, 20, 19, 12, window);
     CHECK(windowError == BufferWindowError::Malformed,
           "direct-buffer validation rejects inconsistent capacities");

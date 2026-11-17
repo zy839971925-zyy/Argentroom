@@ -38,7 +38,7 @@ JPEG / PNG8 / PNG16 / TIFF16 / TIFF32F / Ultra HDR --> digest-verified publicati
 
 | Module | What it is |
 |---|---|
-| `:app` | `com.spectrafilm.app`. Compose UI, editor state (`EditorViewModel` and friends), Library, recipes, presets, masks, preview and export orchestration, updater. Manual DI in `AppContainer`. |
+| `:app` | `com.argentroom.app`. Compose UI, editor state (`EditorViewModel` and friends), Library, recipes, presets, masks, preview and export orchestration, updater. Manual DI in `AppContainer`. |
 | `:engine:spektra-core` | `libspektra.so` and the Kotlin facade `SpektraEngine` / `SpektraParams`. Profiles, spectral LUTs and ICC profiles under `src/main/assets/spektra/`. |
 | `:lib:libraw` | `libsfraw.so`, patched LibRaw: RAW/DNG to linear ProPhoto RGB. See [lib/libraw/README.md](../lib/libraw/README.md). |
 | `:lib:tiffwriter`, `:lib:pngwriter` | 16-bit and float TIFF/PNG writers. |
@@ -155,13 +155,13 @@ All dependencies must already be present in the Gradle cache:
 
 ```powershell
 .\gradlew.bat --offline :app:testDebugUnitTest `
-  --tests "com.spectrafilm.app.ExportTransactionTest" `
-  --tests "com.spectrafilm.app.AtomicJsonStoreTest" `
-  --tests "com.spectrafilm.app.ExportForegroundServiceGenerationGateTest" `
-  --tests "com.spectrafilm.app.SourceAccessTest" `
-  --tests "com.spectrafilm.app.RecipeOperationGateTest" `
-  --tests "com.spectrafilm.app.RecipeDocumentCodecTest" `
-  --tests "com.spectrafilm.app.masks.MasksRoundTripTest"
+  --tests "com.argentroom.app.ExportTransactionTest" `
+  --tests "com.argentroom.app.AtomicJsonStoreTest" `
+  --tests "com.argentroom.app.ExportForegroundServiceGenerationGateTest" `
+  --tests "com.argentroom.app.SourceAccessTest" `
+  --tests "com.argentroom.app.RecipeOperationGateTest" `
+  --tests "com.argentroom.app.RecipeDocumentCodecTest" `
+  --tests "com.argentroom.app.masks.MasksRoundTripTest"
 ```
 
 ### API 29+ device gate
@@ -211,7 +211,7 @@ once to recover tagged pending rows and prior-process cache stages, then remove 
 afterward with:
 
 ```powershell
-& $adb uninstall com.spectrafilm.app.test
+& $adb uninstall com.argentroom.app.test
 ```
 
 ## Updater
@@ -220,7 +220,7 @@ The only metadata request is `GET https://api.github.com/repos/thetechgeekko/Spe
 at most once a day (switchable) or on demand, fail-closed on scheme, host and path. The integrity
 gate is signing-certificate continuity, not the asset digest:
 
-1. Before the installer, `UpdateVerifier` requires package `com.spectrafilm.app`, a strictly
+1. Before the installer, `UpdateVerifier` requires package `com.argentroom.app`, a strictly
    higher `versionCode`, a `versionName` equal to the tag, and signers that include every
    certificate of the installed app (or a proven v3 rotation lineage).
 2. Android's installer enforces continuity again, and the user confirms. Nothing installs

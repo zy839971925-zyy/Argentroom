@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: scanning stage.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — native engine: scanning stage.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,7 +8,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Ports spektrafilm/runtime/stages/scanning.py for the scan_film
+ * argentroom. Ports argentroom/runtime/stages/scanning.py for the scan_film
  * route (negative film scanned directly, default params, spatial + stochastic
  * effects disabled): density_cmy -> spectral density -> light -> XYZ ->
  * output RGB -> sRGB CCTF encode + clip.
@@ -145,7 +145,7 @@ struct ScanningParams {
     // per channel right after CCTF encode + clip (kernels/tonecurve). Default
     // inactive => strict no-op (apply() returns the input unchanged), so existing
     // parity goldens — which carry no curve — stay bit-exact. This is a NEW look
-    // control beyond the spektrafilm oracle, gated like grain/glare.
+    // control beyond the argentroom oracle, gated like grain/glare.
     ToneCurveSet tone_curve;
 
     // OPT-IN output gamut compression (gamut_compression.py::compress_rgb, applied in

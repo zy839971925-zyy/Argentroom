@@ -1,5 +1,5 @@
 /*
- * Spektrafilm — libFuzzer harness for the DNG compression sniffer (GPLv3).
+ * Argentroom — libFuzzer harness for the DNG compression sniffer (GPLv3).
  *
  * The sniffer (dngsniff::compressionOf / classifyUnpackFailure) is the part of the
  * RAW decoder that parses FULLY UNTRUSTED bytes (a malformed DNG/TIFF header + IFD
@@ -19,19 +19,19 @@
 #include <cstddef>
 #include <cstdint>
 
-namespace spectrafilm {
+namespace argentroom {
 namespace dngsniff {
 int compressionOf(const uint8_t* data, size_t len, bool* isDng);
 int classifyUnpackFailure(const uint8_t* data, size_t len);
 }  // namespace dngsniff
-}  // namespace spectrafilm
+}  // namespace argentroom
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
     bool isDng = false;
     // Exercise the IFD walker / compression detector on arbitrary bytes.
-    volatile int c = spectrafilm::dngsniff::compressionOf(data, size, &isDng);
+    volatile int c = argentroom::dngsniff::compressionOf(data, size, &isDng);
     (void)c;
-    volatile int s = spectrafilm::dngsniff::classifyUnpackFailure(data, size);
+    volatile int s = argentroom::dngsniff::classifyUnpackFailure(data, size);
     (void)s;
     return 0;
 }

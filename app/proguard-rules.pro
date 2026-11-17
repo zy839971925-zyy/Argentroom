@@ -12,19 +12,19 @@
 # ---- Native (name-based JNI) boundary: all four *_jni.cpp bind via exported
 # Java_<fqcn>_<method> symbols (no RegisterNatives) and resolve classes/methods/ctors
 # by literal string from C++. Keep these un-renamed and un-removed. ----
--keep class com.spectrafilm.engine.** { *; }
--keep class com.spectrafilm.libraw.RawDecoder { *; }
--keep class com.spectrafilm.libraw.RawDecoder$NativeResult { *; }
--keep class com.spectrafilm.libraw.RawDecodeException { *; }
+-keep class com.argentroom.engine.** { *; }
+-keep class com.argentroom.libraw.RawDecoder { *; }
+-keep class com.argentroom.libraw.RawDecoder$NativeResult { *; }
+-keep class com.argentroom.libraw.RawDecodeException { *; }
 # Ticket #158's separately packaged release probe hashes the production
 # malloc-backed result through this public lease ABI. R8 cannot see that
 # cross-APK call edge, so retain the exact method/class names it invokes.
--keep class com.spectrafilm.libraw.LinearResult { *; }
--keep class com.spectrafilm.libraw.LinearResult$DataLease { *; }
--keep class com.spectrafilm.tiffwriter.TiffWriter { *; }
--keep class com.spectrafilm.pngwriter.PngWriter { *; }
--keep class com.spectrafilm.tiffwriter.TiffCancellationToken { *; }
--keep class com.spectrafilm.pngwriter.PngCancellationToken { *; }
+-keep class com.argentroom.libraw.LinearResult { *; }
+-keep class com.argentroom.libraw.LinearResult$DataLease { *; }
+-keep class com.argentroom.tiffwriter.TiffWriter { *; }
+-keep class com.argentroom.pngwriter.PngWriter { *; }
+-keep class com.argentroom.tiffwriter.TiffCancellationToken { *; }
+-keep class com.argentroom.pngwriter.PngCancellationToken { *; }
 -keepclasseswithmembernames class * { native <methods>; }
 # LiteRT (on-device skin finder): its native runtime looks up Kotlin/Java classes, fields and
 # methods by name, which R8 cannot see. Keep the whole runtime package rather than trusting its
@@ -40,76 +40,76 @@
 # failure cleanup, durable URI grants, and duplicate-name MediaStore publication
 # against the exact minified app. These package-private Kotlin types are referenced
 # across the APK boundary, so R8 must not merge/remove them from the target APK.
--keep class com.spectrafilm.app.export.EncodedArtifact { *; }
--keep class com.spectrafilm.app.export.EncodedArtifact$Companion { *; }
--keep class com.spectrafilm.app.export.ExportDestinationSpec { *; }
--keep class com.spectrafilm.app.export.ExportTransaction { *; }
--keep class com.spectrafilm.app.export.ExportRecoveryReport { *; }
--keep class com.spectrafilm.app.export.AndroidPendingExportBackend { *; }
--keep class com.spectrafilm.app.export.SharedPreferencesPendingExportJournal { *; }
--keep class com.spectrafilm.app.export.StoredExportState { *; }
--keep interface com.spectrafilm.app.export.PendingExportBackend { *; }
--keep interface com.spectrafilm.app.export.PendingExportJournal { *; }
--keep class com.spectrafilm.app.export.ExportTransactionKt { *; }
--keep class com.spectrafilm.app.source.PersistedSourceRef { *; }
--keep class com.spectrafilm.app.source.SourceAccessMode { *; }
--keep class com.spectrafilm.app.source.SourceAccessCoordinator { *; }
--keep class com.spectrafilm.app.source.SourceRestoreResult { *; }
--keep class com.spectrafilm.app.source.SourceRestoreResult$* { *; }
--keep class com.spectrafilm.app.source.SharedPreferencesSourceRefStore { *; }
--keep interface com.spectrafilm.app.source.SourceRefStore { *; }
--keep interface com.spectrafilm.app.source.UriGrantBackend { *; }
--keep class com.spectrafilm.app.source.AndroidUriGrantBackend { *; }
--keep class com.spectrafilm.app.look.Recipes { *; }
+-keep class com.argentroom.app.export.EncodedArtifact { *; }
+-keep class com.argentroom.app.export.EncodedArtifact$Companion { *; }
+-keep class com.argentroom.app.export.ExportDestinationSpec { *; }
+-keep class com.argentroom.app.export.ExportTransaction { *; }
+-keep class com.argentroom.app.export.ExportRecoveryReport { *; }
+-keep class com.argentroom.app.export.AndroidPendingExportBackend { *; }
+-keep class com.argentroom.app.export.SharedPreferencesPendingExportJournal { *; }
+-keep class com.argentroom.app.export.StoredExportState { *; }
+-keep interface com.argentroom.app.export.PendingExportBackend { *; }
+-keep interface com.argentroom.app.export.PendingExportJournal { *; }
+-keep class com.argentroom.app.export.ExportTransactionKt { *; }
+-keep class com.argentroom.app.source.PersistedSourceRef { *; }
+-keep class com.argentroom.app.source.SourceAccessMode { *; }
+-keep class com.argentroom.app.source.SourceAccessCoordinator { *; }
+-keep class com.argentroom.app.source.SourceRestoreResult { *; }
+-keep class com.argentroom.app.source.SourceRestoreResult$* { *; }
+-keep class com.argentroom.app.source.SharedPreferencesSourceRefStore { *; }
+-keep interface com.argentroom.app.source.SourceRefStore { *; }
+-keep interface com.argentroom.app.source.UriGrantBackend { *; }
+-keep class com.argentroom.app.source.AndroidUriGrantBackend { *; }
+-keep class com.argentroom.app.look.Recipes { *; }
 
 # Process-owned native/export probes are also compiled into the separate test
 # APK. Keep their exact target-APK ABI: otherwise R8 may inline/staticize object
 # methods, remove data-class accessors, or delete Kotlin interface DefaultImpls
 # even though the instrumentation still invokes their original JVM descriptors.
--keep class com.spectrafilm.app.render.EngineHolder { *; }
--keep class com.spectrafilm.app.export.ExportWorkRuntime { *; }
--keep class com.spectrafilm.app.export.ExportRuntimeState { *; }
--keep class com.spectrafilm.app.export.ExportRuntimeState$* { *; }
--keep class com.spectrafilm.app.export.ExportTerminalOutcome { *; }
--keep class com.spectrafilm.app.export.ExportTerminalOutcome$* { *; }
--keep class com.spectrafilm.app.export.ExportPhaseSnapshot { *; }
--keep class com.spectrafilm.app.export.ExportFormat { *; }
--keep class com.spectrafilm.app.export.PendingExportBackend$DefaultImpls { *; }
+-keep class com.argentroom.app.render.EngineHolder { *; }
+-keep class com.argentroom.app.export.ExportWorkRuntime { *; }
+-keep class com.argentroom.app.export.ExportRuntimeState { *; }
+-keep class com.argentroom.app.export.ExportRuntimeState$* { *; }
+-keep class com.argentroom.app.export.ExportTerminalOutcome { *; }
+-keep class com.argentroom.app.export.ExportTerminalOutcome$* { *; }
+-keep class com.argentroom.app.export.ExportPhaseSnapshot { *; }
+-keep class com.argentroom.app.export.ExportFormat { *; }
+-keep class com.argentroom.app.export.PendingExportBackend$DefaultImpls { *; }
 
 # Ticket #139 deliberately exposes one narrow, fixed-fixture bridge instead of making the entire
 # editor-session/store/source implementation a cross-APK ABI. The release test APK calls only these
 # public methods; their bodies keep the app-internal implementation edges visible to target R8.
--keep class com.spectrafilm.app.diagnostics.Ticket139EditorTestBridge { public *; }
+-keep class com.argentroom.app.diagnostics.Ticket139EditorTestBridge { public *; }
 
 # Ticket #181's accessibility scan (same release test APK) walks every editor category by its
 # tab label, so the enum's values()/getLabelRes() are cross-APK ABI. String ids are resolved by
 # name (getIdentifier) on purpose: AGP 8 keeps R ids non-final and R8 drops R$string entirely.
--keep class com.spectrafilm.app.editor.Category { *; }
+-keep class com.argentroom.app.editor.Category { *; }
 
 # The #139 Activity-recreation probe binds its export's source identity from the release test APK
 # (StorageReliabilityChecks), so the authority and the value types that cross with it are cross-APK
 # ABI exactly like ExportWorkRuntime above. Without these, R8 class-inlines the singleton (its only
 # in-app callers are direct) and the test APK dies with NoSuchFieldError: INSTANCE at runtime.
--keep class com.spectrafilm.app.export.ExportSourceIdentityAuthority { *; }
--keep class com.spectrafilm.app.export.ExportSourceIdentity { *; }
--keep class com.spectrafilm.app.export.ExportSourceIdentity$* { *; }
--keep class com.spectrafilm.app.source.SourceKind { *; }
+-keep class com.argentroom.app.export.ExportSourceIdentityAuthority { *; }
+-keep class com.argentroom.app.export.ExportSourceIdentity { *; }
+-keep class com.argentroom.app.export.ExportSourceIdentity$* { *; }
+-keep class com.argentroom.app.source.SourceKind { *; }
 
 # Ticket #174's separate release test APK calls the production descriptor/color contract and the
 # production float-to-tagged-Bitmap bridge, then parses the encoded files on a physical device.
--keep class com.spectrafilm.app.export.OutputDescriptor { *; }
--keep class com.spectrafilm.app.export.OutputDescriptor$Companion { *; }
--keep class com.spectrafilm.app.export.OutputMetadataPolicy { *; }
--keep class com.spectrafilm.app.export.OutputBitDepth { *; }
--keep class com.spectrafilm.app.export.OutputEncoder { *; }
--keep class com.spectrafilm.app.export.OutputReleaseStatus { *; }
--keep class com.spectrafilm.app.export.ExportOptions { *; }
--keep class com.spectrafilm.app.export.ExportSize { *; }
--keep class com.spectrafilm.app.export.ColorManagement { *; }
+-keep class com.argentroom.app.export.OutputDescriptor { *; }
+-keep class com.argentroom.app.export.OutputDescriptor$Companion { *; }
+-keep class com.argentroom.app.export.OutputMetadataPolicy { *; }
+-keep class com.argentroom.app.export.OutputBitDepth { *; }
+-keep class com.argentroom.app.export.OutputEncoder { *; }
+-keep class com.argentroom.app.export.OutputReleaseStatus { *; }
+-keep class com.argentroom.app.export.ExportOptions { *; }
+-keep class com.argentroom.app.export.ExportSize { *; }
+-keep class com.argentroom.app.export.ColorManagement { *; }
 # The same check calls the 3-argument simResultToBitmap (the synthetic default-argument bridge)
 # and packToArgb as its reference packer. The app never calls either, so R8 removed them and
 # the v1.0.0 candidate died with NoSuchMethodError: packToArgb([F[II)V.
--keepclassmembers class com.spectrafilm.app.render.DisplayBitmapsKt {
+-keepclassmembers class com.argentroom.app.render.DisplayBitmapsKt {
     public static android.graphics.Bitmap simResultToBitmap(...);
     public static android.graphics.Bitmap simResultToBitmap$default(...);
     public static void packToArgb(float[], int[], int);
@@ -118,31 +118,31 @@
 # Ticket #177's benchmark phase (same release test APK) measures the SHIPPING export path:
 # it calls the production decode, params, engine, grade and encoder entry points on the
 # minified app rather than re-implementing them, so those are cross-APK ABI too.
--keep class com.spectrafilm.app.render.ImagePipelineKt { *; }
+-keep class com.argentroom.app.render.ImagePipelineKt { *; }
 # #273 split the export writers and EXIF copy out of ImagePipeline.kt; their top-level
 # functions now compile into these file classes, which the same release test APK calls.
--keep class com.spectrafilm.app.export.GalleryExportKt { *; }
--keep class com.spectrafilm.app.export.ExportExifKt { *; }
+-keep class com.argentroom.app.export.GalleryExportKt { *; }
+-keep class com.argentroom.app.export.ExportExifKt { *; }
 # #198: the bench passes decodeToLinearProPhoto a DecodeTimings sink that no app code
 # constructs, so without this R8 deletes its constructor (InstantiationError in the test APK).
--keep class com.spectrafilm.app.render.DecodeTimings { *; }
--keep class com.spectrafilm.app.look.ParamsState { *; }
--keep class com.spectrafilm.app.look.BuiltInPresets { *; }
--keep class com.spectrafilm.app.look.BuiltInPreset { *; }
--keep class com.spectrafilm.app.look.ColorGrade { *; }
--keep class com.spectrafilm.app.export.ExportClock { *; }
+-keep class com.argentroom.app.render.DecodeTimings { *; }
+-keep class com.argentroom.app.look.ParamsState { *; }
+-keep class com.argentroom.app.look.BuiltInPresets { *; }
+-keep class com.argentroom.app.look.BuiltInPreset { *; }
+-keep class com.argentroom.app.look.ColorGrade { *; }
+-keep class com.argentroom.app.export.ExportClock { *; }
 # #179/#140: the benchmark drives the shipping export cache and the render-derived gain map
 # across the APK boundary. The trailing ** matters -- ExportCacheKey.Source/Grade are nested
 # types and compile to separate classes that a bare keep would not cover.
--keep class com.spectrafilm.app.export.ExportCache** { *; }
--keep class com.spectrafilm.app.export.HdrGainMap** { *; }
+-keep class com.argentroom.app.export.ExportCache** { *; }
+-keep class com.argentroom.app.export.HdrGainMap** { *; }
 # Same boundary for the pre-render payload store: the app only ever constructs it with default
 # arguments, so R8 rewrote the constructor the (unminified) instrumentation calls and the check
 # died with NoSuchMethodError on a device.
--keep class com.spectrafilm.app.render.RenderPayloadCache** { *; }
--keep class com.spectrafilm.app.render.RenderPayloads** { *; }
--keep class com.spectrafilm.app.masks.MaskCompositor { *; }
--keepclassmembers class com.spectrafilm.app.render.DisplayBitmapsKt {
+-keep class com.argentroom.app.render.RenderPayloadCache** { *; }
+-keep class com.argentroom.app.render.RenderPayloads** { *; }
+-keep class com.argentroom.app.masks.MaskCompositor { *; }
+-keepclassmembers class com.argentroom.app.render.DisplayBitmapsKt {
     public static android.graphics.Bitmap simResultToBitmapGraded(...);
 }
 

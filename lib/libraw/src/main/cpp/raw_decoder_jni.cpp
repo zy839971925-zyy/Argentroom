@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android -- hardened lib:libraw JNI bridge.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android -- hardened lib:libraw JNI bridge.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Uses statically included, dual-offered LibRaw; distribution is governed by the
  * bundled decision record and fail-closed release audit.
  */
@@ -29,7 +29,7 @@
 #endif
 
 #define JNI(ret, name) extern "C" JNIEXPORT ret JNICALL \
-    Java_com_spectrafilm_libraw_RawDecoder_##name
+    Java_com_argentroom_libraw_RawDecoder_##name
 
 namespace {
 
@@ -66,7 +66,7 @@ void throwRawDecodeException(JNIEnv* env, const char* message, jint status,
     if (env->ExceptionCheck()) env->ExceptionClear();
     const char* stableMessage = message != nullptr ? message : "RAW decode failed";
     jclass exceptionClass =
-        env->FindClass("com/spectrafilm/libraw/RawDecodeException");
+        env->FindClass("com/argentroom/libraw/RawDecodeException");
     if (exceptionClass != nullptr) {
         jmethodID constructor = env->GetMethodID(
             exceptionClass, "<init>", "(Ljava/lang/String;II)V");
@@ -88,7 +88,7 @@ void throwRawDecodeException(JNIEnv* env, const char* message, jint status,
 }
 
 void throwDecodeResult(JNIEnv* env,
-                       const spectrafilm::DecodeResult& result) noexcept {
+                       const argentroom::DecodeResult& result) noexcept {
     throwRawDecodeException(
         env,
         result.error.empty() ? "RAW decode failed" : result.error.c_str(),
@@ -98,15 +98,15 @@ void throwDecodeResult(JNIEnv* env,
 
 void throwCancelled(JNIEnv* env,
                     const char* message = "RAW decode cancelled") noexcept {
-    throwRawDecodeException(env, message, spectrafilm::SFRAW_ERR_CANCELLED, 0);
+    throwRawDecodeException(env, message, argentroom::SFRAW_ERR_CANCELLED, 0);
 }
 
 void throwCaught(JNIEnv* env, bool noMemory) noexcept {
     throwRawDecodeException(
         env,
         noMemory ? "RAW JNI bridge out of memory" : "RAW JNI bridge failure",
-        noMemory ? spectrafilm::SFRAW_ERR_NO_MEMORY
-                 : spectrafilm::SFRAW_ERR_UNKNOWN,
+        noMemory ? argentroom::SFRAW_ERR_NO_MEMORY
+                 : argentroom::SFRAW_ERR_UNKNOWN,
         0);
 }
 
@@ -128,17 +128,17 @@ bool isCancelled(const CancellationLease& lease) {
     return lease != nullptr && lease->load(std::memory_order_acquire);
 }
 
-spectrafilm::DecodeOptions readOptions(
+argentroom::DecodeOptions readOptions(
     jint wbMode, jdouble temperatureK, jdouble tint, jboolean halfSize,
     jint maxLongEdge, jboolean hotPixels, jfloat chromaNoise,
     const CancellationLease& cancellation) {
-    spectrafilm::DecodeOptions options;
+    argentroom::DecodeOptions options;
     switch (wbMode) {
-        case 0: options.whiteBalance = spectrafilm::WhiteBalanceMode::AsShot; break;
-        case 1: options.whiteBalance = spectrafilm::WhiteBalanceMode::Daylight; break;
-        case 2: options.whiteBalance = spectrafilm::WhiteBalanceMode::Tungsten; break;
-        case 3: options.whiteBalance = spectrafilm::WhiteBalanceMode::Custom; break;
-        default: options.whiteBalance = spectrafilm::WhiteBalanceMode::AsShot; break;
+        case 0: options.whiteBalance = argentroom::WhiteBalanceMode::AsShot; break;
+        case 1: options.whiteBalance = argentroom::WhiteBalanceMode::Daylight; break;
+        case 2: options.whiteBalance = argentroom::WhiteBalanceMode::Tungsten; break;
+        case 3: options.whiteBalance = argentroom::WhiteBalanceMode::Custom; break;
+        default: options.whiteBalance = argentroom::WhiteBalanceMode::AsShot; break;
     }
     options.temperatureK = temperatureK;
     options.tint = tint;
@@ -152,7 +152,7 @@ spectrafilm::DecodeOptions readOptions(
     return options;
 }
 
-bool checkedOutputBytes(const spectrafilm::DecodeResult& result,
+bool checkedOutputBytes(const argentroom::DecodeResult& result,
                         std::size_t* byteCount) {
     if (result.width <= 0 || result.height <= 0) return false;
     const std::size_t width = static_cast<std::size_t>(result.width);
@@ -179,7 +179,7 @@ enum class JavaPublicationFailure {
 
 struct JavaPublicationContext {
     JNIEnv* env = nullptr;
-    const spectrafilm::DecodeResult* decoded = nullptr;
+    const argentroom::DecodeResult* decoded = nullptr;
     jobject javaResult = nullptr;
     JavaPublicationFailure failure = JavaPublicationFailure::None;
     std::chrono::steady_clock::time_point phaseAt;
@@ -208,12 +208,12 @@ enum class DescriptorArrayResult {
 };
 
 DescriptorArrayResult createDescriptorArrays(
-        JNIEnv* env, const spectrafilm::RawPrecisionDescriptor& source,
+        JNIEnv* env, const argentroom::RawPrecisionDescriptor& source,
         jintArray* javaWords, jfloatArray* javaReals) {
     constexpr std::size_t kWordCount =
-        spectrafilm::RawPrecisionDescriptor::kJniWordCount;
+        argentroom::RawPrecisionDescriptor::kJniWordCount;
     constexpr std::size_t kRealCount =
-        spectrafilm::RawPrecisionDescriptor::kJniRealCount;
+        argentroom::RawPrecisionDescriptor::kJniRealCount;
     constexpr std::size_t kBlackPatternAt = 24U;
     constexpr std::size_t kWhiteLevelsAt = 88U;
     constexpr std::size_t kCfaPatternCountAt = 92U;
@@ -225,13 +225,13 @@ DescriptorArrayResult createDescriptorArrays(
     constexpr std::size_t kOutputSubsampleStepAt = 133U;
     constexpr std::size_t kCfaPatternRowsAt = 134U;
     constexpr std::size_t kCfaPatternColumnsAt = 135U;
-    static_assert(spectrafilm::RawPrecisionDescriptor::kMaxBlackPatternEntries == 64U);
-    static_assert(spectrafilm::RawPrecisionDescriptor::kMaxCfaPatternEntries == 36U);
+    static_assert(argentroom::RawPrecisionDescriptor::kMaxBlackPatternEntries == 64U);
+    static_assert(argentroom::RawPrecisionDescriptor::kMaxCfaPatternEntries == 36U);
     static_assert(kBlackPatternAt +
-                      spectrafilm::RawPrecisionDescriptor::kMaxBlackPatternEntries ==
+                      argentroom::RawPrecisionDescriptor::kMaxBlackPatternEntries ==
                   kWhiteLevelsAt);
     static_assert(kCfaPatternAt +
-                      spectrafilm::RawPrecisionDescriptor::kMaxCfaPatternEntries ==
+                      argentroom::RawPrecisionDescriptor::kMaxCfaPatternEntries ==
                   kBaselinePresentAt);
     static_assert(kCfaPatternColumnsAt + 1U == kWordCount);
     const bool blackShapeValid =
@@ -254,9 +254,9 @@ DescriptorArrayResult createDescriptorArrays(
               source.cfaPatternCount));
     if (!blackShapeValid || !cfaShapeValid ||
         source.blackPatternCount >
-            spectrafilm::RawPrecisionDescriptor::kMaxBlackPatternEntries ||
+            argentroom::RawPrecisionDescriptor::kMaxBlackPatternEntries ||
         source.cfaPatternCount >
-            spectrafilm::RawPrecisionDescriptor::kMaxCfaPatternEntries ||
+            argentroom::RawPrecisionDescriptor::kMaxCfaPatternEntries ||
         source.requestedMaxLongEdge < 0 || source.outputSubsampleStep < 1) {
         return DescriptorArrayResult::Invalid;
     }
@@ -367,7 +367,7 @@ sfraw::jni::PublicationDecision attemptJavaPublication(
     context.wrapMs = context.markPhase();
 
     jclass resultClass = context.env->FindClass(
-        "com/spectrafilm/libraw/RawDecoder$NativeResult");
+        "com/argentroom/libraw/RawDecoder$NativeResult");
     jmethodID constructor = resultClass != nullptr
         ? context.env->GetMethodID(
               resultClass, "<init>",
@@ -420,7 +420,7 @@ void abortJavaPublication(void* opaque) noexcept {
     }
 }
 
-jobject toJavaResult(JNIEnv* env, spectrafilm::DecodeResult& result,
+jobject toJavaResult(JNIEnv* env, argentroom::DecodeResult& result,
                      CancellationLease& cancellation) {
     const auto jniStartedAt = std::chrono::steady_clock::now();
     if (!result.ok) {
@@ -431,7 +431,7 @@ jobject toJavaResult(JNIEnv* env, spectrafilm::DecodeResult& result,
     std::size_t byteCount = 0U;
     if (!checkedOutputBytes(result, &byteCount)) {
         throwRawDecodeException(env, "invalid RAW output geometry",
-                                spectrafilm::SFRAW_ERR_FORMAT, 0);
+                                argentroom::SFRAW_ERR_FORMAT, 0);
         return nullptr;
     }
 
@@ -458,36 +458,36 @@ jobject toJavaResult(JNIEnv* env, spectrafilm::DecodeResult& result,
         switch (publicationContext.failure) {
             case JavaPublicationFailure::DirectBuffer:
                 throwRawDecodeException(env, "failed to wrap native RAW output",
-                                        spectrafilm::SFRAW_ERR_NO_MEMORY, 0);
+                                        argentroom::SFRAW_ERR_NO_MEMORY, 0);
                 break;
             case JavaPublicationFailure::ResultAbi:
                 throwRawDecodeException(env, "RAW NativeResult ABI mismatch",
-                                        spectrafilm::SFRAW_ERR_FORMAT, 0);
+                                        argentroom::SFRAW_ERR_FORMAT, 0);
                 break;
             case JavaPublicationFailure::ColorSpace:
                 throwRawDecodeException(
                     env, "failed to create RAW color-space metadata",
-                    spectrafilm::SFRAW_ERR_NO_MEMORY, 0);
+                    argentroom::SFRAW_ERR_NO_MEMORY, 0);
                 break;
             case JavaPublicationFailure::Descriptor:
                 throwRawDecodeException(
                     env, "failed to publish bounded RAW precision descriptor",
-                    spectrafilm::SFRAW_ERR_NO_MEMORY, 0);
+                    argentroom::SFRAW_ERR_NO_MEMORY, 0);
                 break;
             case JavaPublicationFailure::DescriptorValidation:
                 throwRawDecodeException(
                     env, "invalid native RAW precision descriptor",
-                    spectrafilm::SFRAW_ERR_PRECISION_METADATA, 0);
+                    argentroom::SFRAW_ERR_PRECISION_METADATA, 0);
                 break;
             case JavaPublicationFailure::ResultConstructionNoMemory:
                 // Replace VM-specific construction failures (most commonly OOM)
                 // with the stable typed contract used by every JNI failure path.
                 throwRawDecodeException(env, "failed to construct RAW result",
-                                        spectrafilm::SFRAW_ERR_NO_MEMORY, 0);
+                                        argentroom::SFRAW_ERR_NO_MEMORY, 0);
                 break;
             case JavaPublicationFailure::None:
                 throwRawDecodeException(env, "missing native RAW output",
-                                        spectrafilm::SFRAW_ERR_FORMAT, 0);
+                                        argentroom::SFRAW_ERR_FORMAT, 0);
                 break;
         }
         return nullptr;
@@ -510,20 +510,20 @@ bool validateDirectInput(JNIEnv* env, jobject buffer, jint length,
                          void** address) {
     if (buffer == nullptr) {
         throwRawDecodeException(env, "null RAW ByteBuffer",
-                                spectrafilm::SFRAW_ERR_INPUT, 0);
+                                argentroom::SFRAW_ERR_INPUT, 0);
         return false;
     }
     const jlong capacity = env->GetDirectBufferCapacity(buffer);
     void* directAddress = env->GetDirectBufferAddress(buffer);
     if (capacity < 0 || directAddress == nullptr) {
         throwRawDecodeException(env, "expected a direct RAW ByteBuffer",
-                                spectrafilm::SFRAW_ERR_INPUT, 0);
+                                argentroom::SFRAW_ERR_INPUT, 0);
         return false;
     }
     jclass bufferClass = env->GetObjectClass(buffer);
     if (bufferClass == nullptr) {
         throwRawDecodeException(env, "cannot inspect RAW ByteBuffer range",
-                                spectrafilm::SFRAW_ERR_INPUT, 0);
+                                argentroom::SFRAW_ERR_INPUT, 0);
         return false;
     }
     jmethodID positionMethod = env->GetMethodID(bufferClass, "position", "()I");
@@ -531,19 +531,19 @@ bool validateDirectInput(JNIEnv* env, jobject buffer, jint length,
     env->DeleteLocalRef(bufferClass);
     if (positionMethod == nullptr || limitMethod == nullptr) {
         throwRawDecodeException(env, "cannot inspect RAW ByteBuffer range",
-                                spectrafilm::SFRAW_ERR_INPUT, 0);
+                                argentroom::SFRAW_ERR_INPUT, 0);
         return false;
     }
     const jint position = env->CallIntMethod(buffer, positionMethod);
     if (env->ExceptionCheck()) {
         throwRawDecodeException(env, "cannot inspect RAW ByteBuffer position",
-                                spectrafilm::SFRAW_ERR_INPUT, 0);
+                                argentroom::SFRAW_ERR_INPUT, 0);
         return false;
     }
     const jint limit = env->CallIntMethod(buffer, limitMethod);
     if (env->ExceptionCheck()) {
         throwRawDecodeException(env, "cannot inspect RAW ByteBuffer limit",
-                                spectrafilm::SFRAW_ERR_INPUT, 0);
+                                argentroom::SFRAW_ERR_INPUT, 0);
         return false;
     }
     std::uintptr_t resolved = 0U;
@@ -551,7 +551,7 @@ bool validateDirectInput(JNIEnv* env, jobject buffer, jint length,
             capacity, position, limit, length, kMaxEncodedInputBytes,
             reinterpret_cast<std::uintptr_t>(directAddress), &resolved)) {
         throwRawDecodeException(env, "invalid RAW ByteBuffer logical range",
-                                spectrafilm::SFRAW_ERR_INPUT, 0);
+                                argentroom::SFRAW_ERR_INPUT, 0);
         return false;
     }
     *address = reinterpret_cast<void*>(resolved);
@@ -628,13 +628,13 @@ JNI(jobject, nativeDecodeBytes)(JNIEnv* env, jobject, jbyteArray bytes,
     try {
         if (bytes == nullptr) {
             throwRawDecodeException(env, "null RAW byte array",
-                                    spectrafilm::SFRAW_ERR_INPUT, 0);
+                                    argentroom::SFRAW_ERR_INPUT, 0);
             return nullptr;
         }
         const jsize length = env->GetArrayLength(bytes);
         if (length <= 0 || static_cast<jlong>(length) > kMaxEncodedInputBytes) {
             throwRawDecodeException(env, "invalid RAW byte-array length",
-                                    spectrafilm::SFRAW_ERR_INPUT, 0);
+                                    argentroom::SFRAW_ERR_INPUT, 0);
             return nullptr;
         }
         CancellationLease cancellation =
@@ -647,14 +647,14 @@ JNI(jobject, nativeDecodeBytes)(JNIEnv* env, jobject, jbyteArray bytes,
         ByteArrayElements input(env, bytes);
         if (input.get() == nullptr) {
             throwRawDecodeException(env, "failed to pin RAW byte array",
-                                    spectrafilm::SFRAW_ERR_NO_MEMORY, 0);
+                                    argentroom::SFRAW_ERR_NO_MEMORY, 0);
             return nullptr;
         }
         if (isCancelled(cancellation)) {
             throwCancelled(env);
             return nullptr;
         }
-        spectrafilm::DecodeResult result = spectrafilm::decodeFromBuffer(
+        argentroom::DecodeResult result = argentroom::decodeFromBuffer(
             reinterpret_cast<const std::uint8_t*>(input.get()),
             static_cast<std::size_t>(length),
             readOptions(wbMode, temperatureK, tint, halfSize, maxLongEdge,
@@ -690,7 +690,7 @@ JNI(jobject, nativeDecodeBuffer)(JNIEnv* env, jobject, jobject directBuffer,
             throwCancelled(env);
             return nullptr;
         }
-        spectrafilm::DecodeResult result = spectrafilm::decodeFromBuffer(
+        argentroom::DecodeResult result = argentroom::decodeFromBuffer(
             reinterpret_cast<const std::uint8_t*>(address),
             static_cast<std::size_t>(length),
             readOptions(wbMode, temperatureK, tint, halfSize, maxLongEdge,
@@ -728,7 +728,7 @@ JNI(jobject, nativeDecodeFd)(JNIEnv* env, jobject, jint fd, jint wbMode,
                                    hotPixels, chromaNoise, cancellation);
         options.inputScratchFd = scratchFd;
         options.admittedBytes = admittedBytes > 0 ? static_cast<std::uint64_t>(admittedBytes) : 0U;
-        spectrafilm::DecodeResult result = spectrafilm::decodeFromFd(fd, options);
+        argentroom::DecodeResult result = argentroom::decodeFromFd(fd, options);
         if (isCancelled(cancellation) && result.ok) {
             throwCancelled(env);
             return nullptr;
@@ -752,11 +752,11 @@ JNI(jobject, nativeDecodeFd)(JNIEnv* env, jobject, jint fd, jint wbMode,
 JNI(jbyteArray, nativeExtractPreview)(JNIEnv* env, jobject, jint fd,
                                       jint minLongEdge, jintArray outMeta) {
     if (outMeta == nullptr || env->GetArrayLength(outMeta) < 4) return nullptr;
-    spectrafilm::EmbeddedPreview preview =
-        spectrafilm::extractEmbeddedPreview(fd, minLongEdge);
-    if (preview.status == spectrafilm::SFRAW_PREVIEW_OK &&
+    argentroom::EmbeddedPreview preview =
+        argentroom::extractEmbeddedPreview(fd, minLongEdge);
+    if (preview.status == argentroom::SFRAW_PREVIEW_OK &&
         preview.jpeg.size() > static_cast<size_t>(std::numeric_limits<jsize>::max())) {
-        preview.status = spectrafilm::SFRAW_PREVIEW_NO_MEMORY;
+        preview.status = argentroom::SFRAW_PREVIEW_NO_MEMORY;
     }
     const jint meta[4] = {
         preview.status,
@@ -765,7 +765,7 @@ JNI(jbyteArray, nativeExtractPreview)(JNIEnv* env, jobject, jint fd,
         preview.flip,
     };
     env->SetIntArrayRegion(outMeta, 0, 4, meta);
-    if (preview.status != spectrafilm::SFRAW_PREVIEW_OK) return nullptr;
+    if (preview.status != argentroom::SFRAW_PREVIEW_OK) return nullptr;
     const auto length = static_cast<jsize>(preview.jpeg.size());
     jbyteArray array = env->NewByteArray(length);
     if (array == nullptr) return nullptr;

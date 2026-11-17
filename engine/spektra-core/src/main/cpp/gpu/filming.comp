@@ -1,7 +1,7 @@
 #version 450
-// SPDX-FileCopyrightText: 2026 Spektrafilm Android contributors
+// SPDX-FileCopyrightText: 2026 Argentroom Android contributors
 // SPDX-License-Identifier: GPL-3.0-only
-// Spektrafilm for Android - production FILMING pointwise kernel (#148).
+// Argentroom for Android - production FILMING pointwise kernel (#148).
 // Promoted and modified from tools/gpu_probe/filming.comp after the #147 M2
 // connected-device oracle/determinism gate. Modifications: production bindings,
 // explicit non-finite containment, and resident-DAG documentation. No OFX shader

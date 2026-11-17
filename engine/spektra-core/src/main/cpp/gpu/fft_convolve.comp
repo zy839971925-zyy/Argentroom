@@ -1,5 +1,5 @@
 #version 450
-// SPDX-FileCopyrightText: 2026 Spektrafilm Android contributors
+// SPDX-FileCopyrightText: 2026 Argentroom Android contributors
 // SPDX-License-Identifier: GPL-3.0-only
 //
 // f32 FFT convolution on the GPU (#216). The camera diffusion filter is 6.9 s of

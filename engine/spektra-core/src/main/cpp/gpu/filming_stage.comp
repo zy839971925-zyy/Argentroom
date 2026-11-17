@@ -1,5 +1,5 @@
 #version 450
-// SPDX-FileCopyrightText: 2026 Spektrafilm Android contributors
+// SPDX-FileCopyrightText: 2026 Argentroom Android contributors
 // SPDX-License-Identifier: GPL-3.0-only
 //
 // The filming pointwise math as TWO SEPARABLE STAGES (#218), so it can run on

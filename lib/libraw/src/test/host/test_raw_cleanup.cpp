@@ -27,7 +27,7 @@ constexpr float kYr = 0.2880402f, kYg = 0.7118741f, kYb = 0.0000857f;
 float luma(const float* px) { return kYr * px[0] + kYg * px[1] + kYb * px[2]; }
 
 void hotPixels() {
-    using spectrafilm::cleanup::correctHotPixelsBayer;
+    using argentroom::cleanup::correctHotPixelsBayer;
     constexpr int w = 32, h = 24;
     constexpr std::size_t pitch = 40;  // padded rows, like LibRaw's raw_pitch
     const unsigned black = 512, maximum = 16383;
@@ -116,7 +116,7 @@ double chromaVariance(const std::vector<float>& rgb) {
 }
 
 void chroma(int w, int h, const char* label) {
-    using spectrafilm::cleanup::reduceChromaNoise;
+    using argentroom::cleanup::reduceChromaNoise;
     const auto original = noisyImage(w, h);
 
     auto image = original;
@@ -151,9 +151,9 @@ void chroma(int w, int h, const char* label) {
 }  // namespace
 
 void extendedBox() {
-    using spectrafilm::cleanup::boxPassColumns;
-    using spectrafilm::cleanup::boxPassRow;
-    using spectrafilm::cleanup::boxRadiusForSigma;
+    using argentroom::cleanup::boxPassColumns;
+    using argentroom::cleanup::boxPassRow;
+    using argentroom::cleanup::boxRadiusForSigma;
     // Three extended-box passes reach the requested sigma exactly, sub-pixel included.
     bool exact = true;
     for (float sigma : {0.1f, 0.3f, 0.8f, 1.0f, 1.7f, 4.2f, 9.5f}) {
@@ -181,7 +181,7 @@ void extendedBox() {
 }
 
 void banding() {
-    using spectrafilm::cleanup::reduceChromaNoise;
+    using argentroom::cleanup::reduceChromaNoise;
     // Banded processing must equal one whole-image pass: the halo carries every row
     // that can influence a band's interior, and later bands read original pixels.
     constexpr int w = 300, h = 517;
@@ -200,7 +200,7 @@ void banding() {
 }
 
 void scaleConsistency() {
-    using spectrafilm::cleanup::reduceChromaNoise;
+    using argentroom::cleanup::reduceChromaNoise;
     // A low strength is a light touch at any size: no work-size step adds blur.
     constexpr int w = 2000, h = 1300;
     const auto original = noisyImage(w, h);

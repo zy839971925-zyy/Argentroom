@@ -1,9 +1,9 @@
 /*
- * Spektrafilm for Android — black-and-white print gate. GPLv3.
+ * Argentroom for Android — black-and-white print gate. GPLv3.
  * Film modeling powered by spektrafilm.
  *
  * The black-and-white stocks (channel_model "bw": Tri-X 400, T-Max 100, HP5 Plus 400,
- * Neopan Acros 100 II, and the Multigrade IV RC paper) have no oracle golden: spektrafilm's
+ * Neopan Acros 100 II, and the Multigrade IV RC paper) have no oracle golden: argentroom's
  * c1d0e44 tree has no such profiles. So this gates their properties instead, through the
  * public API on the bundled assets:
  *

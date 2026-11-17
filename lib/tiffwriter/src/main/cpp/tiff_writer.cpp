@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — lib:tiffwriter 16-bit baseline TIFF writer.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — lib:tiffwriter 16-bit baseline TIFF writer.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  *
  * Self-contained, dependency-free implementation. See tiff_writer.h for the API
  * and the rationale for hand-rolling rather than reusing LibRaw (LibRaw exposes
@@ -56,7 +56,7 @@
 #include <utility>
 #include <unistd.h>
 
-namespace spectrafilm {
+namespace argentroom {
 namespace {
 
 constexpr uint64_t kClassicTiffMax = 0xffffffffull;
@@ -926,4 +926,4 @@ TiffWriteResult writeTiffFloatToFile(const float* rgbFloat, int width, int heigh
     return publishAtomically(header, path, cancellation, std::move(res), &strip);
 }
 
-}  // namespace spectrafilm
+}  // namespace argentroom

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Spektrafilm for Android — build the #160 FFT-convolution bench for arm64. GPLv3.
+# Argentroom for Android — build the #160 FFT-convolution bench for arm64. GPLv3.
 # Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
 #
 #   tools/perf_lab/build_fft_conv_device_bench.sh [/path/to/ndk] [outdir]

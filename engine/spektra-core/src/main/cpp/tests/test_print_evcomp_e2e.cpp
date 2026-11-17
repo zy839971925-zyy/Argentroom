@@ -1,9 +1,9 @@
 /*
- * Spektrafilm for Android — END-TO-END host parity test for the PRINT-route
+ * Argentroom for Android — END-TO-END host parity test for the PRINT-route
  * EXPOSURE-COMPENSATION midgray balance (camera.exposure_compensation_ev +
  * enlarger.print_exposure_compensation / normalize_print_exposure) run through
  * the WHOLE print->scan pipeline.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * THE BUG THIS GATES: on the PRINT route the midgray exposure factor must follow
@@ -57,7 +57,7 @@
 
 namespace {
 
-const char* kAssetDir = "/home/user/spektrafilm/src/spektrafilm/data";
+const char* kAssetDir = "/home/user/spektrafilm/src/argentroom/data";
 const char* kEvcompGoldenDir =
     "/home/user/Spectrafilmandroid/tools/parity/goldens/print_portra_evcomp";
 const char* kInputF64 =

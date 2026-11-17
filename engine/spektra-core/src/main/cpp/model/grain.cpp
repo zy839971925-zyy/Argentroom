@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: film grain (AgX particle model).
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — native engine: film grain (AgX particle model).
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,7 +8,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Implements model/grain.h. Mirrors grain.py::layer_particle_model
+ * argentroom. Implements model/grain.h. Mirrors grain.py::layer_particle_model
  * (poisson_binomial) + apply_grain_to_density.
  *
  * Verification is statistical (see tests/test_grain.cpp): the model is
@@ -132,7 +132,7 @@ void layer_particle_model(const float* density, int npix, int width, int height,
                 // The oracle draws seeds ~ Poisson(lam), then developed ~ Binomial(seeds, p).
                 // Binomial thinning of a Poisson count is exactly Poisson(lam * p), so one
                 // draw gives the same distribution at about half the cost (idea: Jing Yu,
-                // arigatou1985's spektrafilm fork, 8c1d578). test_grain / test_grain_sublayer
+                // arigatou1985's argentroom fork, 8c1d578). test_grain / test_grain_sublayer
                 // gate the mean and noise std against the oracle, and test_grain's thinning
                 // section the sampler's moments; the stream is not byte-matchable anyway.
                 int64_t dev = fast_thinned_poisson_one(lam, p, rng);

@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android -- GPU contrast-mask gain gate (gpu/contrast_mask.comp).
+ * Argentroom for Android -- GPU contrast-mask gain gate (gpu/contrast_mask.comp).
  * GPLv3. Film modeling powered by spektrafilm.
  *
  * On the GPU print route the contrast mask's per-pixel gain comes from the GPU

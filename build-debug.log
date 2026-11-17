@@ -1,0 +1,858 @@
+Picked up _JAVA_OPTIONS: -Djava.net.preferIPv4Stack=true
+INIT-PROXY-FORCED
+
+> Configure project :app
+WARNING: The option setting 'android.experimental.enableScreenshotTest=true' is experimental.
+The current default is 'false'.
+Add android.sync.suppressAgpWarnings=UNSUPPORTED_PROJECT_OPTION_USE to the gradle.properties file to suppress this warning.
+WARNING: The option setting 'android.experimental.testSuiteSupport=true' is experimental.
+The current default is 'false'.
+Add android.sync.suppressAgpWarnings=UNSUPPORTED_PROJECT_OPTION_USE to the gradle.properties file to suppress this warning.
+
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:extractDebugSupportedLocales UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :engine:spektra-core:preBuild UP-TO-DATE
+> Task :engine:spektra-core:preDebugBuild UP-TO-DATE
+> Task :engine:spektra-core:extractDebugSupportedLocales UP-TO-DATE
+> Task :lib:libraw:preBuild UP-TO-DATE
+> Task :lib:libraw:preDebugBuild UP-TO-DATE
+> Task :lib:libraw:extractDebugSupportedLocales UP-TO-DATE
+> Task :lib:pngwriter:preBuild UP-TO-DATE
+> Task :lib:pngwriter:preDebugBuild UP-TO-DATE
+> Task :lib:pngwriter:extractDebugSupportedLocales UP-TO-DATE
+> Task :lib:tiffwriter:preBuild UP-TO-DATE
+> Task :lib:tiffwriter:preDebugBuild UP-TO-DATE
+> Task :lib:tiffwriter:extractDebugSupportedLocales UP-TO-DATE
+> Task :app:generateDebugLocaleConfig UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :engine:spektra-core:processDebugNavigationResources UP-TO-DATE
+> Task :lib:libraw:processDebugNavigationResources UP-TO-DATE
+> Task :lib:pngwriter:processDebugNavigationResources UP-TO-DATE
+> Task :lib:tiffwriter:processDebugNavigationResources UP-TO-DATE
+> Task :app:processDebugNavigationResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:generateDebugRFile UP-TO-DATE
+> Task :engine:spektra-core:generateDebugResources UP-TO-DATE
+> Task :engine:spektra-core:packageDebugResources UP-TO-DATE
+> Task :engine:spektra-core:parseDebugLocalResources UP-TO-DATE
+> Task :engine:spektra-core:generateDebugRFile UP-TO-DATE
+> Task :engine:spektra-core:compileDebugKotlin UP-TO-DATE
+> Task :engine:spektra-core:javaPreCompileDebug UP-TO-DATE
+> Task :engine:spektra-core:compileDebugJavaWithJavac NO-SOURCE
+> Task :engine:spektra-core:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :lib:libraw:generateDebugResources UP-TO-DATE
+> Task :lib:libraw:packageDebugResources UP-TO-DATE
+> Task :lib:libraw:parseDebugLocalResources UP-TO-DATE
+> Task :lib:libraw:generateDebugRFile UP-TO-DATE
+> Task :lib:libraw:compileDebugKotlin UP-TO-DATE
+> Task :lib:libraw:javaPreCompileDebug UP-TO-DATE
+> Task :lib:libraw:compileDebugJavaWithJavac NO-SOURCE
+> Task :lib:libraw:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :lib:pngwriter:generateDebugResources UP-TO-DATE
+> Task :lib:pngwriter:packageDebugResources UP-TO-DATE
+> Task :lib:pngwriter:parseDebugLocalResources UP-TO-DATE
+> Task :lib:pngwriter:generateDebugRFile UP-TO-DATE
+> Task :lib:pngwriter:compileDebugKotlin UP-TO-DATE
+> Task :lib:pngwriter:javaPreCompileDebug UP-TO-DATE
+> Task :lib:pngwriter:compileDebugJavaWithJavac NO-SOURCE
+> Task :lib:pngwriter:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :lib:tiffwriter:generateDebugResources UP-TO-DATE
+> Task :lib:tiffwriter:packageDebugResources UP-TO-DATE
+> Task :lib:tiffwriter:parseDebugLocalResources UP-TO-DATE
+> Task :lib:tiffwriter:generateDebugRFile UP-TO-DATE
+> Task :lib:tiffwriter:compileDebugKotlin UP-TO-DATE
+> Task :lib:tiffwriter:javaPreCompileDebug UP-TO-DATE
+> Task :lib:tiffwriter:compileDebugJavaWithJavac NO-SOURCE
+> Task :lib:tiffwriter:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :app:compileDebugKotlin UP-TO-DATE
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:compileDebugJavaWithJavac NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :engine:spektra-core:generateDebugAssets UP-TO-DATE
+> Task :engine:spektra-core:mergeDebugAssets UP-TO-DATE
+> Task :lib:libraw:generateDebugAssets UP-TO-DATE
+> Task :lib:libraw:mergeDebugAssets UP-TO-DATE
+> Task :lib:pngwriter:generateDebugAssets UP-TO-DATE
+> Task :lib:pngwriter:mergeDebugAssets UP-TO-DATE
+> Task :lib:tiffwriter:generateDebugAssets UP-TO-DATE
+> Task :lib:tiffwriter:mergeDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets UP-TO-DATE
+> Task :app:compressDebugAssets UP-TO-DATE
+> Task :app:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :app:compressDebugJavaRes UP-TO-DATE
+> Task :engine:spektra-core:compressDebugJavaRes UP-TO-DATE
+> Task :lib:libraw:compressDebugJavaRes UP-TO-DATE
+> Task :lib:pngwriter:compressDebugJavaRes UP-TO-DATE
+> Task :lib:tiffwriter:compressDebugJavaRes UP-TO-DATE
+> Task :app:mergeDebugJavaResource UP-TO-DATE
+> Task :app:checkDebugDuplicateClasses UP-TO-DATE
+> Task :app:desugarDebugFileDependencies UP-TO-DATE
+> Task :app:mergeExtDexDebug UP-TO-DATE
+> Task :engine:spektra-core:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :lib:libraw:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :lib:tiffwriter:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :lib:pngwriter:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :engine:spektra-core:writeDebugAarMetadata UP-TO-DATE
+> Task :lib:libraw:writeDebugAarMetadata UP-TO-DATE
+> Task :app:mergeLibDexDebug UP-TO-DATE
+> Task :lib:pngwriter:writeDebugAarMetadata UP-TO-DATE
+> Task :lib:tiffwriter:writeDebugAarMetadata UP-TO-DATE
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:compileDebugNavigationResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :engine:spektra-core:extractDeepLinksDebug UP-TO-DATE
+> Task :engine:spektra-core:processDebugManifest UP-TO-DATE
+> Task :lib:libraw:extractDeepLinksDebug UP-TO-DATE
+> Task :lib:libraw:processDebugManifest UP-TO-DATE
+> Task :lib:pngwriter:extractDeepLinksDebug UP-TO-DATE
+> Task :lib:pngwriter:processDebugManifest UP-TO-DATE
+> Task :lib:tiffwriter:extractDeepLinksDebug UP-TO-DATE
+> Task :lib:tiffwriter:processDebugManifest UP-TO-DATE
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :engine:spektra-core:mapDebugSourceSetPaths UP-TO-DATE
+> Task :engine:spektra-core:compileDebugLibraryResources UP-TO-DATE
+> Task :lib:libraw:mapDebugSourceSetPaths UP-TO-DATE
+> Task :lib:libraw:compileDebugLibraryResources UP-TO-DATE
+> Task :lib:pngwriter:mapDebugSourceSetPaths UP-TO-DATE
+> Task :lib:pngwriter:compileDebugLibraryResources UP-TO-DATE
+> Task :lib:tiffwriter:mapDebugSourceSetPaths UP-TO-DATE
+> Task :lib:tiffwriter:compileDebugLibraryResources UP-TO-DATE
+> Task :app:processDebugResources UP-TO-DATE
+> Task :app:dexBuilderDebug UP-TO-DATE
+> Task :app:mergeProjectDexDebug UP-TO-DATE
+> Task :app:mergeDebugJniLibFolders UP-TO-DATE
+> Task :engine:spektra-core:configureCMakeDebug[arm64-v8a]
+> Task :engine:spektra-core:buildCMakeDebug[arm64-v8a]
+> Task :engine:spektra-core:configureCMakeDebug[armeabi-v7a]
+> Task :engine:spektra-core:buildCMakeDebug[armeabi-v7a]
+> Task :engine:spektra-core:configureCMakeDebug[x86_64]
+> Task :engine:spektra-core:buildCMakeDebug[x86_64]
+> Task :engine:spektra-core:mergeDebugJniLibFolders UP-TO-DATE
+> Task :engine:spektra-core:mergeDebugNativeLibs UP-TO-DATE
+> Task :engine:spektra-core:copyDebugJniLibsProjectOnly
+
+> Task :lib:libraw:configureCMakeDebug[arm64-v8a]
+C/C++: CMake Error at /home/hatch/workspace/argentroom-ci-fix/lib/libraw/cmake/LibRawVendor.cmake:151 (message):
+C/C++:   sfraw: dated local modification notice verification failed in
+C/C++:   /home/hatch/workspace/argentroom-ci-fix/lib/libraw/.cxx/Debug/2c1o5m67/arm64-v8a/_deps/sfraw_libraw_0_22_2-src/internal/var_defines.h
+C/C++: Call Stack (most recent call first):
+C/C++:   /home/hatch/workspace/argentroom-ci-fix/lib/libraw/cmake/LibRawVendor.cmake:777 (_sfraw_assert_contains)
+C/C++:   CMakeLists.txt:52 (sfraw_resolve_libraw)
+
+> Task :lib:libraw:configureCMakeDebug[arm64-v8a] FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':lib:libraw:configureCMakeDebug[arm64-v8a]' (registered by plugin 'com.android.internal.library').
+> [CXX1429] error when building with cmake using /home/hatch/workspace/argentroom-ci-fix/lib/libraw/src/main/cpp/CMakeLists.txt: -- The CXX compiler identification is Clang 19.0.1
+  -- Detecting CXX compiler ABI info
+  -- Detecting CXX compiler ABI info - done
+  -- Check for working CXX compiler: /home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ - skipped
+  -- Detecting CXX compile features
+  -- Detecting CXX compile features - done
+  -- sfraw: fetching LibRaw 0.22.2 from https://www.libraw.org/data/LibRaw-0.22.2.tar.gz
+  -- Configuring incomplete, errors occurred!
+  See also "/home/hatch/workspace/argentroom-ci-fix/lib/libraw/.cxx/Debug/2c1o5m67/arm64-v8a/CMakeFiles/CMakeOutput.log".
+  
+  C++ build system [configure] failed while executing:
+      #!/bin/sh
+      '/home/hatch/workspace/android-dev/android-sdk/cmake/3.22.1/bin/cmake' \
+        '-H/home/hatch/workspace/argentroom-ci-fix/lib/libraw/src/main/cpp' \
+        '-DCMAKE_SYSTEM_NAME=Android' \
+        '-DCMAKE_EXPORT_COMPILE_COMMANDS=ON' \
+        '-DCMAKE_SYSTEM_VERSION=24' \
+        '-DANDROID_PLATFORM=android-24' \
+        '-DANDROID_ABI=arm64-v8a' \
+        '-DCMAKE_ANDROID_ARCH_ABI=arm64-v8a' \
+        '-DANDROID_NDK=/home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358' \
+        '-DCMAKE_ANDROID_NDK=/home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358' \
+        '-DCMAKE_TOOLCHAIN_FILE=/home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358/build/cmake/android.toolchain.cmake' \
+        '-DCMAKE_MAKE_PROGRAM=/home/hatch/workspace/android-dev/android-sdk/cmake/3.22.1/bin/ninja' \
+        '-DCMAKE_CXX_FLAGS=-std=c++17' \
+        '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/home/hatch/workspace/argentroom-ci-fix/lib/libraw/build/intermediates/cxx/Debug/2c1o5m67/obj/arm64-v8a' \
+        '-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=/home/hatch/workspace/argentroom-ci-fix/lib/libraw/build/intermediates/cxx/Debug/2c1o5m67/obj/arm64-v8a' \
+        '-DCMAKE_BUILD_TYPE=Debug' \
+        '-B/home/hatch/workspace/argentroom-ci-fix/lib/libraw/.cxx/Debug/2c1o5m67/arm64-v8a' \
+        '-GNinja' \
+        '-DANDROID_STL=c++_shared' \
+        '-DSFRAW_ENABLE_OPENMP=OFF' \
+        '-DSFRAW_WITH_ZLIB=ON'
+    from /home/hatch/workspace/argentroom-ci-fix/lib/libraw
+  CMake Error at /home/hatch/workspace/argentroom-ci-fix/lib/libraw/cmake/LibRawVendor.cmake:151 (message):
+    sfraw: dated local modification notice verification failed in
+    /home/hatch/workspace/argentroom-ci-fix/lib/libraw/.cxx/Debug/2c1o5m67/arm64-v8a/_deps/sfraw_libraw_0_22_2-src/internal/var_defines.h
+  Call Stack (most recent call first):
+    /home/hatch/workspace/argentroom-ci-fix/lib/libraw/cmake/LibRawVendor.cmake:777 (_sfraw_assert_contains)
+    CMakeLists.txt:52 (sfraw_resolve_libraw) : com.android.ide.common.process.ProcessException: -- The CXX compiler identification is Clang 19.0.1
+  -- Detecting CXX compiler ABI info
+  -- Detecting CXX compiler ABI info - done
+  -- Check for working CXX compiler: /home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ - skipped
+  -- Detecting CXX compile features
+  -- Detecting CXX compile features - done
+  -- sfraw: fetching LibRaw 0.22.2 from https://www.libraw.org/data/LibRaw-0.22.2.tar.gz
+  -- Configuring incomplete, errors occurred!
+  See also "/home/hatch/workspace/argentroom-ci-fix/lib/libraw/.cxx/Debug/2c1o5m67/arm64-v8a/CMakeFiles/CMakeOutput.log".
+  
+  C++ build system [configure] failed while executing:
+      #!/bin/sh
+      '/home/hatch/workspace/android-dev/android-sdk/cmake/3.22.1/bin/cmake' \
+        '-H/home/hatch/workspace/argentroom-ci-fix/lib/libraw/src/main/cpp' \
+        '-DCMAKE_SYSTEM_NAME=Android' \
+        '-DCMAKE_EXPORT_COMPILE_COMMANDS=ON' \
+        '-DCMAKE_SYSTEM_VERSION=24' \
+        '-DANDROID_PLATFORM=android-24' \
+        '-DANDROID_ABI=arm64-v8a' \
+        '-DCMAKE_ANDROID_ARCH_ABI=arm64-v8a' \
+        '-DANDROID_NDK=/home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358' \
+        '-DCMAKE_ANDROID_NDK=/home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358' \
+        '-DCMAKE_TOOLCHAIN_FILE=/home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358/build/cmake/android.toolchain.cmake' \
+        '-DCMAKE_MAKE_PROGRAM=/home/hatch/workspace/android-dev/android-sdk/cmake/3.22.1/bin/ninja' \
+        '-DCMAKE_CXX_FLAGS=-std=c++17' \
+        '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/home/hatch/workspace/argentroom-ci-fix/lib/libraw/build/intermediates/cxx/Debug/2c1o5m67/obj/arm64-v8a' \
+        '-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=/home/hatch/workspace/argentroom-ci-fix/lib/libraw/build/intermediates/cxx/Debug/2c1o5m67/obj/arm64-v8a' \
+        '-DCMAKE_BUILD_TYPE=Debug' \
+        '-B/home/hatch/workspace/argentroom-ci-fix/lib/libraw/.cxx/Debug/2c1o5m67/arm64-v8a' \
+        '-GNinja' \
+        '-DANDROID_STL=c++_shared' \
+        '-DSFRAW_ENABLE_OPENMP=OFF' \
+        '-DSFRAW_WITH_ZLIB=ON'
+    from /home/hatch/workspace/argentroom-ci-fix/lib/libraw
+  CMake Error at /home/hatch/workspace/argentroom-ci-fix/lib/libraw/cmake/LibRawVendor.cmake:151 (message):
+    sfraw: dated local modification notice verification failed in
+    /home/hatch/workspace/argentroom-ci-fix/lib/libraw/.cxx/Debug/2c1o5m67/arm64-v8a/_deps/sfraw_libraw_0_22_2-src/internal/var_defines.h
+  Call Stack (most recent call first):
+    /home/hatch/workspace/argentroom-ci-fix/lib/libraw/cmake/LibRawVendor.cmake:777 (_sfraw_assert_contains)
+    CMakeLists.txt:52 (sfraw_resolve_libraw)
+  	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.execute(ExecuteProcess.kt:265)
+  	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.executeProcess$lambda$1(ExecuteProcess.kt:95)
+  	at com.android.build.gradle.internal.cxx.timing.TimingEnvironmentKt.time(TimingEnvironment.kt:28)
+  	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.executeProcess(ExecuteProcess.kt:93)
+  	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.executeProcess$default(ExecuteProcess.kt:70)
+  	at com.android.build.gradle.tasks.CmakeQueryMetadataGenerator.executeProcess(CmakeFileApiMetadataGenerator.kt:55)
+  	at com.android.build.gradle.tasks.ExternalNativeJsonGenerator.configureOneAbi$lambda$11$lambda$10$lambda$3(ExternalNativeJsonGenerator.kt:226)
+  	at com.android.build.gradle.internal.cxx.timing.TimingEnvironmentKt.time(TimingEnvironment.kt:28)
+  	at com.android.build.gradle.tasks.ExternalNativeJsonGenerator.configureOneAbi(ExternalNativeJsonGenerator.kt:226)
+  	at com.android.build.gradle.tasks.ExternalNativeJsonGenerator.configure(ExternalNativeJsonGenerator.kt:108)
+  	at com.android.build.gradle.tasks.ExternalNativeBuildJsonTask.doTaskAction(ExternalNativeBuildJsonTask.kt:76)
+  	at com.android.build.gradle.internal.tasks.UnsafeOutputsTask$taskAction$$inlined$recordTaskAction$1.invoke(BaseTask.kt:71)
+  	at com.android.build.gradle.internal.tasks.Blocks.recordSpan(Blocks.java:51)
+  	at com.android.build.gradle.internal.tasks.UnsafeOutputsTask.taskAction(UnsafeOutputsTask.kt:72)
+  	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+  	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+  	at org.gradle.internal.reflect.JavaMethod.invoke(JavaMethod.java:125)
+  	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.doExecute(StandardTaskAction.java:58)
+  	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:51)
+  	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:29)
+  	at org.gradle.api.internal.tasks.execution.TaskExecution$3.run(TaskExecution.java:259)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:30)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:27)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:48)
+  	at org.gradle.api.internal.tasks.execution.TaskExecution.executeAction(TaskExecution.java:244)
+  	at org.gradle.api.internal.tasks.execution.TaskExecution.executeActions(TaskExecution.java:227)
+  	at org.gradle.api.internal.tasks.execution.TaskExecution.executeWithPreviousOutputFiles(TaskExecution.java:210)
+  	at org.gradle.api.internal.tasks.execution.TaskExecution.execute(TaskExecution.java:176)
+  	at org.gradle.internal.execution.steps.ExecuteStep.executeInternal(ExecuteStep.java:167)
+  	at org.gradle.internal.execution.steps.ExecuteStep.access$000(ExecuteStep.java:47)
+  	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:137)
+  	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:134)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+  	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:134)
+  	at org.gradle.internal.execution.steps.ExecuteStep$Mutable.execute(ExecuteStep.java:80)
+  	at org.gradle.internal.execution.steps.CancelExecutionStep.execute(CancelExecutionStep.java:42)
+  	at org.gradle.internal.execution.steps.TimeoutStep.executeWithoutTimeout(TimeoutStep.java:75)
+  	at org.gradle.internal.execution.steps.TimeoutStep.execute(TimeoutStep.java:55)
+  	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:51)
+  	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:29)
+  	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.executeMutable(RemovePreviousOutputsStep.java:67)
+  	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.executeMutable(RemovePreviousOutputsStep.java:39)
+  	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+  	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:42)
+  	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:24)
+  	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:69)
+  	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:46)
+  	at org.gradle.internal.execution.steps.ResolveInputChangesStep.executeMutable(ResolveInputChangesStep.java:39)
+  	at org.gradle.internal.execution.steps.ResolveInputChangesStep.executeMutable(ResolveInputChangesStep.java:28)
+  	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+  	at org.gradle.internal.execution.steps.BuildCacheStep.executeWithoutCache(BuildCacheStep.java:189)
+  	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$execute$1(BuildCacheStep.java:76)
+  	at org.gradle.internal.Either$Right.fold(Either.java:176)
+  	at org.gradle.internal.execution.caching.CachingState.fold(CachingState.java:62)
+  	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:74)
+  	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:49)
+  	at org.gradle.internal.execution.steps.StoreExecutionStateStep.executeMutable(StoreExecutionStateStep.java:46)
+  	at org.gradle.internal.execution.steps.StoreExecutionStateStep.executeMutable(StoreExecutionStateStep.java:35)
+  	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+  	at org.gradle.internal.execution.steps.SkipUpToDateStep.executeBecause(SkipUpToDateStep.java:75)
+  	at org.gradle.internal.execution.steps.SkipUpToDateStep.lambda$execute$2(SkipUpToDateStep.java:53)
+  	at java.base/java.util.Optional.orElseGet(Optional.java:364)
+  	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:53)
+  	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:35)
+  	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:37)
+  	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:27)
+  	at org.gradle.internal.execution.steps.ResolveMutableCachingStateStep.executeDelegate(ResolveMutableCachingStateStep.java:70)
+  	at org.gradle.internal.execution.steps.ResolveMutableCachingStateStep.executeDelegate(ResolveMutableCachingStateStep.java:32)
+  	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:69)
+  	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:37)
+  	at org.gradle.internal.execution.steps.ResolveChangesStep.executeMutable(ResolveChangesStep.java:63)
+  	at org.gradle.internal.execution.steps.ResolveChangesStep.executeMutable(ResolveChangesStep.java:34)
+  	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+  	at org.gradle.internal.execution.steps.ValidateStep$Mutable.executeDelegate(ValidateStep.java:79)
+  	at org.gradle.internal.execution.steps.ValidateStep$Mutable.executeDelegate(ValidateStep.java:65)
+  	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:105)
+  	at org.gradle.internal.execution.steps.ValidateStep$Mutable.execute(ValidateStep.java:65)
+  	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.executeMutable(CaptureMutableStateBeforeExecutionStep.java:86)
+  	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.execute(CaptureMutableStateBeforeExecutionStep.java:65)
+  	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.execute(CaptureMutableStateBeforeExecutionStep.java:45)
+  	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeWithNonEmptySources(SkipEmptyMutableWorkStep.java:210)
+  	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeMutable(SkipEmptyMutableWorkStep.java:85)
+  	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeMutable(SkipEmptyMutableWorkStep.java:53)
+  	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+  	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsStartedStep.execute(MarkSnapshottingInputsStartedStep.java:38)
+  	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.executeMutable(LoadPreviousExecutionStateStep.java:36)
+  	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.executeMutable(LoadPreviousExecutionStateStep.java:23)
+  	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+  	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.executeMutable(HandleStaleOutputsStep.java:77)
+  	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.executeMutable(HandleStaleOutputsStep.java:43)
+  	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+  	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.lambda$executeMutable$0(AssignMutableWorkspaceStep.java:34)
+  	at org.gradle.api.internal.tasks.execution.TaskExecution$4.withWorkspace(TaskExecution.java:305)
+  	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.executeMutable(AssignMutableWorkspaceStep.java:30)
+  	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.executeMutable(AssignMutableWorkspaceStep.java:21)
+  	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+  	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:40)
+  	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:23)
+  	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.lambda$execute$2(ExecuteWorkBuildOperationFiringStep.java:67)
+  	at java.base/java.util.Optional.orElseGet(Optional.java:364)
+  	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:67)
+  	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:39)
+  	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:46)
+  	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:34)
+  	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:56)
+  	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:38)
+  	at org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute(DefaultExecutionEngine.java:68)
+  	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:132)
+  	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:121)
+  	at org.gradle.api.internal.tasks.execution.ProblemsTaskPathTrackingTaskExecuter.execute(ProblemsTaskPathTrackingTaskExecuter.java:41)
+  	at org.gradle.api.internal.tasks.execution.ResolveTaskExecutionModeExecuter.execute(ResolveTaskExecutionModeExecuter.java:51)
+  	at org.gradle.api.internal.tasks.execution.FinalizePropertiesTaskExecuter.execute(FinalizePropertiesTaskExecuter.java:46)
+  	at org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:57)
+  	at org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:74)
+  	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:36)
+  	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.executeTask(EventFiringTaskExecuter.java:77)
+  	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:55)
+  	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:52)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+  	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter.execute(EventFiringTaskExecuter.java:52)
+  	at org.gradle.execution.plan.DefaultNodeExecutor.executeLocalTaskNode(DefaultNodeExecutor.java:55)
+  	at org.gradle.execution.plan.DefaultNodeExecutor.execute(DefaultNodeExecutor.java:34)
+  	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:355)
+  	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:343)
+  	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.lambda$execute$0(DefaultTaskExecutionGraph.java:339)
+  	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:84)
+  	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:339)
+  	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:328)
+  	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:459)
+  	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:376)
+  	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+  	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:47)
+  	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+  	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+  	at java.base/java.lang.Thread.run(Thread.java:1583)
+  Caused by: com.android.ide.common.process.ProcessException: -- The CXX compiler identification is Clang 19.0.1
+  -- Detecting CXX compiler ABI info
+  -- Detecting CXX compiler ABI info - done
+  -- Check for working CXX compiler: /home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ - skipped
+  -- Detecting CXX compile features
+  -- Detecting CXX compile features - done
+  -- sfraw: fetching LibRaw 0.22.2 from https://www.libraw.org/data/LibRaw-0.22.2.tar.gz
+  -- Configuring incomplete, errors occurred!
+  See also "/home/hatch/workspace/argentroom-ci-fix/lib/libraw/.cxx/Debug/2c1o5m67/arm64-v8a/CMakeFiles/CMakeOutput.log".
+  
+  C++ build system [configure] failed while executing:
+      #!/bin/sh
+      '/home/hatch/workspace/android-dev/android-sdk/cmake/3.22.1/bin/cmake' \
+        '-H/home/hatch/workspace/argentroom-ci-fix/lib/libraw/src/main/cpp' \
+        '-DCMAKE_SYSTEM_NAME=Android' \
+        '-DCMAKE_EXPORT_COMPILE_COMMANDS=ON' \
+        '-DCMAKE_SYSTEM_VERSION=24' \
+        '-DANDROID_PLATFORM=android-24' \
+        '-DANDROID_ABI=arm64-v8a' \
+        '-DCMAKE_ANDROID_ARCH_ABI=arm64-v8a' \
+        '-DANDROID_NDK=/home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358' \
+        '-DCMAKE_ANDROID_NDK=/home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358' \
+        '-DCMAKE_TOOLCHAIN_FILE=/home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358/build/cmake/android.toolchain.cmake' \
+        '-DCMAKE_MAKE_PROGRAM=/home/hatch/workspace/android-dev/android-sdk/cmake/3.22.1/bin/ninja' \
+        '-DCMAKE_CXX_FLAGS=-std=c++17' \
+        '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/home/hatch/workspace/argentroom-ci-fix/lib/libraw/build/intermediates/cxx/Debug/2c1o5m67/obj/arm64-v8a' \
+        '-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=/home/hatch/workspace/argentroom-ci-fix/lib/libraw/build/intermediates/cxx/Debug/2c1o5m67/obj/arm64-v8a' \
+        '-DCMAKE_BUILD_TYPE=Debug' \
+        '-B/home/hatch/workspace/argentroom-ci-fix/lib/libraw/.cxx/Debug/2c1o5m67/arm64-v8a' \
+        '-GNinja' \
+        '-DANDROID_STL=c++_shared' \
+        '-DSFRAW_ENABLE_OPENMP=OFF' \
+        '-DSFRAW_WITH_ZLIB=ON'
+    from /home/hatch/workspace/argentroom-ci-fix/lib/libraw
+  CMake Error at /home/hatch/workspace/argentroom-ci-fix/lib/libraw/cmake/LibRawVendor.cmake:151 (message):
+    sfraw: dated local modification notice verification failed in
+    /home/hatch/workspace/argentroom-ci-fix/lib/libraw/.cxx/Debug/2c1o5m67/arm64-v8a/_deps/sfraw_libraw_0_22_2-src/internal/var_defines.h
+  Call Stack (most recent call first):
+    /home/hatch/workspace/argentroom-ci-fix/lib/libraw/cmake/LibRawVendor.cmake:777 (_sfraw_assert_contains)
+    CMakeLists.txt:52 (sfraw_resolve_libraw)
+  	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.execute(ExecuteProcess.kt:246)
+  	... 150 more
+
+
+* Try:
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+* Exception is:
+org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':lib:libraw:configureCMakeDebug[arm64-v8a]' (registered by plugin 'com.android.internal.library').
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.lambda$executeIfValid$1(ExecuteActionsTaskExecuter.java:135)
+	at org.gradle.internal.Try$Failure.ifSuccessfulOrElse(Try.java:288)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:133)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:121)
+	at org.gradle.api.internal.tasks.execution.ProblemsTaskPathTrackingTaskExecuter.execute(ProblemsTaskPathTrackingTaskExecuter.java:41)
+	at org.gradle.api.internal.tasks.execution.ResolveTaskExecutionModeExecuter.execute(ResolveTaskExecutionModeExecuter.java:51)
+	at org.gradle.api.internal.tasks.execution.FinalizePropertiesTaskExecuter.execute(FinalizePropertiesTaskExecuter.java:46)
+	at org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:57)
+	at org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:74)
+	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:36)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.executeTask(EventFiringTaskExecuter.java:77)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:55)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:52)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter.execute(EventFiringTaskExecuter.java:52)
+	at org.gradle.execution.plan.DefaultNodeExecutor.executeLocalTaskNode(DefaultNodeExecutor.java:55)
+	at org.gradle.execution.plan.DefaultNodeExecutor.execute(DefaultNodeExecutor.java:34)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:355)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:343)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.lambda$execute$0(DefaultTaskExecutionGraph.java:339)
+	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:84)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:339)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:328)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:459)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:376)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:47)
+Caused by: com.android.builder.errors.EvalIssueException: [CXX1429] error when building with cmake using /home/hatch/workspace/argentroom-ci-fix/lib/libraw/src/main/cpp/CMakeLists.txt: -- The CXX compiler identification is Clang 19.0.1
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- sfraw: fetching LibRaw 0.22.2 from https://www.libraw.org/data/LibRaw-0.22.2.tar.gz
+-- Configuring incomplete, errors occurred!
+See also "/home/hatch/workspace/argentroom-ci-fix/lib/libraw/.cxx/Debug/2c1o5m67/arm64-v8a/CMakeFiles/CMakeOutput.log".
+
+C++ build system [configure] failed while executing:
+    #!/bin/sh
+    '/home/hatch/workspace/android-dev/android-sdk/cmake/3.22.1/bin/cmake' \
+      '-H/home/hatch/workspace/argentroom-ci-fix/lib/libraw/src/main/cpp' \
+      '-DCMAKE_SYSTEM_NAME=Android' \
+      '-DCMAKE_EXPORT_COMPILE_COMMANDS=ON' \
+      '-DCMAKE_SYSTEM_VERSION=24' \
+      '-DANDROID_PLATFORM=android-24' \
+      '-DANDROID_ABI=arm64-v8a' \
+      '-DCMAKE_ANDROID_ARCH_ABI=arm64-v8a' \
+      '-DANDROID_NDK=/home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358' \
+      '-DCMAKE_ANDROID_NDK=/home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358' \
+      '-DCMAKE_TOOLCHAIN_FILE=/home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358/build/cmake/android.toolchain.cmake' \
+      '-DCMAKE_MAKE_PROGRAM=/home/hatch/workspace/android-dev/android-sdk/cmake/3.22.1/bin/ninja' \
+      '-DCMAKE_CXX_FLAGS=-std=c++17' \
+      '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/home/hatch/workspace/argentroom-ci-fix/lib/libraw/build/intermediates/cxx/Debug/2c1o5m67/obj/arm64-v8a' \
+      '-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=/home/hatch/workspace/argentroom-ci-fix/lib/libraw/build/intermediates/cxx/Debug/2c1o5m67/obj/arm64-v8a' \
+      '-DCMAKE_BUILD_TYPE=Debug' \
+      '-B/home/hatch/workspace/argentroom-ci-fix/lib/libraw/.cxx/Debug/2c1o5m67/arm64-v8a' \
+      '-GNinja' \
+      '-DANDROID_STL=c++_shared' \
+      '-DSFRAW_ENABLE_OPENMP=OFF' \
+      '-DSFRAW_WITH_ZLIB=ON'
+  from /home/hatch/workspace/argentroom-ci-fix/lib/libraw
+CMake Error at /home/hatch/workspace/argentroom-ci-fix/lib/libraw/cmake/LibRawVendor.cmake:151 (message):
+  sfraw: dated local modification notice verification failed in
+  /home/hatch/workspace/argentroom-ci-fix/lib/libraw/.cxx/Debug/2c1o5m67/arm64-v8a/_deps/sfraw_libraw_0_22_2-src/internal/var_defines.h
+Call Stack (most recent call first):
+  /home/hatch/workspace/argentroom-ci-fix/lib/libraw/cmake/LibRawVendor.cmake:777 (_sfraw_assert_contains)
+  CMakeLists.txt:52 (sfraw_resolve_libraw) : com.android.ide.common.process.ProcessException: -- The CXX compiler identification is Clang 19.0.1
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- sfraw: fetching LibRaw 0.22.2 from https://www.libraw.org/data/LibRaw-0.22.2.tar.gz
+-- Configuring incomplete, errors occurred!
+See also "/home/hatch/workspace/argentroom-ci-fix/lib/libraw/.cxx/Debug/2c1o5m67/arm64-v8a/CMakeFiles/CMakeOutput.log".
+
+C++ build system [configure] failed while executing:
+    #!/bin/sh
+    '/home/hatch/workspace/android-dev/android-sdk/cmake/3.22.1/bin/cmake' \
+      '-H/home/hatch/workspace/argentroom-ci-fix/lib/libraw/src/main/cpp' \
+      '-DCMAKE_SYSTEM_NAME=Android' \
+      '-DCMAKE_EXPORT_COMPILE_COMMANDS=ON' \
+      '-DCMAKE_SYSTEM_VERSION=24' \
+      '-DANDROID_PLATFORM=android-24' \
+      '-DANDROID_ABI=arm64-v8a' \
+      '-DCMAKE_ANDROID_ARCH_ABI=arm64-v8a' \
+      '-DANDROID_NDK=/home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358' \
+      '-DCMAKE_ANDROID_NDK=/home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358' \
+      '-DCMAKE_TOOLCHAIN_FILE=/home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358/build/cmake/android.toolchain.cmake' \
+      '-DCMAKE_MAKE_PROGRAM=/home/hatch/workspace/android-dev/android-sdk/cmake/3.22.1/bin/ninja' \
+      '-DCMAKE_CXX_FLAGS=-std=c++17' \
+      '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/home/hatch/workspace/argentroom-ci-fix/lib/libraw/build/intermediates/cxx/Debug/2c1o5m67/obj/arm64-v8a' \
+      '-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=/home/hatch/workspace/argentroom-ci-fix/lib/libraw/build/intermediates/cxx/Debug/2c1o5m67/obj/arm64-v8a' \
+      '-DCMAKE_BUILD_TYPE=Debug' \
+      '-B/home/hatch/workspace/argentroom-ci-fix/lib/libraw/.cxx/Debug/2c1o5m67/arm64-v8a' \
+      '-GNinja' \
+      '-DANDROID_STL=c++_shared' \
+      '-DSFRAW_ENABLE_OPENMP=OFF' \
+      '-DSFRAW_WITH_ZLIB=ON'
+  from /home/hatch/workspace/argentroom-ci-fix/lib/libraw
+CMake Error at /home/hatch/workspace/argentroom-ci-fix/lib/libraw/cmake/LibRawVendor.cmake:151 (message):
+  sfraw: dated local modification notice verification failed in
+  /home/hatch/workspace/argentroom-ci-fix/lib/libraw/.cxx/Debug/2c1o5m67/arm64-v8a/_deps/sfraw_libraw_0_22_2-src/internal/var_defines.h
+Call Stack (most recent call first):
+  /home/hatch/workspace/argentroom-ci-fix/lib/libraw/cmake/LibRawVendor.cmake:777 (_sfraw_assert_contains)
+  CMakeLists.txt:52 (sfraw_resolve_libraw)
+	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.execute(ExecuteProcess.kt:265)
+	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.executeProcess$lambda$1(ExecuteProcess.kt:95)
+	at com.android.build.gradle.internal.cxx.timing.TimingEnvironmentKt.time(TimingEnvironment.kt:28)
+	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.executeProcess(ExecuteProcess.kt:93)
+	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.executeProcess$default(ExecuteProcess.kt:70)
+	at com.android.build.gradle.tasks.CmakeQueryMetadataGenerator.executeProcess(CmakeFileApiMetadataGenerator.kt:55)
+	at com.android.build.gradle.tasks.ExternalNativeJsonGenerator.configureOneAbi$lambda$11$lambda$10$lambda$3(ExternalNativeJsonGenerator.kt:226)
+	at com.android.build.gradle.internal.cxx.timing.TimingEnvironmentKt.time(TimingEnvironment.kt:28)
+	at com.android.build.gradle.tasks.ExternalNativeJsonGenerator.configureOneAbi(ExternalNativeJsonGenerator.kt:226)
+	at com.android.build.gradle.tasks.ExternalNativeJsonGenerator.configure(ExternalNativeJsonGenerator.kt:108)
+	at com.android.build.gradle.tasks.ExternalNativeBuildJsonTask.doTaskAction(ExternalNativeBuildJsonTask.kt:76)
+	at com.android.build.gradle.internal.tasks.UnsafeOutputsTask$taskAction$$inlined$recordTaskAction$1.invoke(BaseTask.kt:71)
+	at com.android.build.gradle.internal.tasks.Blocks.recordSpan(Blocks.java:51)
+	at com.android.build.gradle.internal.tasks.UnsafeOutputsTask.taskAction(UnsafeOutputsTask.kt:72)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.gradle.internal.reflect.JavaMethod.invoke(JavaMethod.java:125)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.doExecute(StandardTaskAction.java:58)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:51)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:29)
+	at org.gradle.api.internal.tasks.execution.TaskExecution$3.run(TaskExecution.java:259)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:30)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:27)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:48)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeAction(TaskExecution.java:244)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeActions(TaskExecution.java:227)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeWithPreviousOutputFiles(TaskExecution.java:210)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.execute(TaskExecution.java:176)
+	at org.gradle.internal.execution.steps.ExecuteStep.executeInternal(ExecuteStep.java:167)
+	at org.gradle.internal.execution.steps.ExecuteStep.access$000(ExecuteStep.java:47)
+	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:137)
+	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:134)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:134)
+	at org.gradle.internal.execution.steps.ExecuteStep$Mutable.execute(ExecuteStep.java:80)
+	at org.gradle.internal.execution.steps.CancelExecutionStep.execute(CancelExecutionStep.java:42)
+	at org.gradle.internal.execution.steps.TimeoutStep.executeWithoutTimeout(TimeoutStep.java:75)
+	at org.gradle.internal.execution.steps.TimeoutStep.execute(TimeoutStep.java:55)
+	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:51)
+	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:29)
+	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.executeMutable(RemovePreviousOutputsStep.java:67)
+	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.executeMutable(RemovePreviousOutputsStep.java:39)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:42)
+	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:24)
+	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:69)
+	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:46)
+	at org.gradle.internal.execution.steps.ResolveInputChangesStep.executeMutable(ResolveInputChangesStep.java:39)
+	at org.gradle.internal.execution.steps.ResolveInputChangesStep.executeMutable(ResolveInputChangesStep.java:28)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.BuildCacheStep.executeWithoutCache(BuildCacheStep.java:189)
+	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$execute$1(BuildCacheStep.java:76)
+	at org.gradle.internal.Either$Right.fold(Either.java:176)
+	at org.gradle.internal.execution.caching.CachingState.fold(CachingState.java:62)
+	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:74)
+	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:49)
+	at org.gradle.internal.execution.steps.StoreExecutionStateStep.executeMutable(StoreExecutionStateStep.java:46)
+	at org.gradle.internal.execution.steps.StoreExecutionStateStep.executeMutable(StoreExecutionStateStep.java:35)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.executeBecause(SkipUpToDateStep.java:75)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.lambda$execute$2(SkipUpToDateStep.java:53)
+	at java.base/java.util.Optional.orElseGet(Optional.java:364)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:53)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:35)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:37)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:27)
+	at org.gradle.internal.execution.steps.ResolveMutableCachingStateStep.executeDelegate(ResolveMutableCachingStateStep.java:70)
+	at org.gradle.internal.execution.steps.ResolveMutableCachingStateStep.executeDelegate(ResolveMutableCachingStateStep.java:32)
+	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:69)
+	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:37)
+	at org.gradle.internal.execution.steps.ResolveChangesStep.executeMutable(ResolveChangesStep.java:63)
+	at org.gradle.internal.execution.steps.ResolveChangesStep.executeMutable(ResolveChangesStep.java:34)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.executeDelegate(ValidateStep.java:79)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.executeDelegate(ValidateStep.java:65)
+	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:105)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.execute(ValidateStep.java:65)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.executeMutable(CaptureMutableStateBeforeExecutionStep.java:86)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.execute(CaptureMutableStateBeforeExecutionStep.java:65)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.execute(CaptureMutableStateBeforeExecutionStep.java:45)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeWithNonEmptySources(SkipEmptyMutableWorkStep.java:210)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeMutable(SkipEmptyMutableWorkStep.java:85)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeMutable(SkipEmptyMutableWorkStep.java:53)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsStartedStep.execute(MarkSnapshottingInputsStartedStep.java:38)
+	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.executeMutable(LoadPreviousExecutionStateStep.java:36)
+	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.executeMutable(LoadPreviousExecutionStateStep.java:23)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.executeMutable(HandleStaleOutputsStep.java:77)
+	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.executeMutable(HandleStaleOutputsStep.java:43)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.lambda$executeMutable$0(AssignMutableWorkspaceStep.java:34)
+	at org.gradle.api.internal.tasks.execution.TaskExecution$4.withWorkspace(TaskExecution.java:305)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.executeMutable(AssignMutableWorkspaceStep.java:30)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.executeMutable(AssignMutableWorkspaceStep.java:21)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:40)
+	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:23)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.lambda$execute$2(ExecuteWorkBuildOperationFiringStep.java:67)
+	at java.base/java.util.Optional.orElseGet(Optional.java:364)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:67)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:39)
+	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:46)
+	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:34)
+	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:56)
+	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:38)
+	at org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute(DefaultExecutionEngine.java:68)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:132)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:121)
+	at org.gradle.api.internal.tasks.execution.ProblemsTaskPathTrackingTaskExecuter.execute(ProblemsTaskPathTrackingTaskExecuter.java:41)
+	at org.gradle.api.internal.tasks.execution.ResolveTaskExecutionModeExecuter.execute(ResolveTaskExecutionModeExecuter.java:51)
+	at org.gradle.api.internal.tasks.execution.FinalizePropertiesTaskExecuter.execute(FinalizePropertiesTaskExecuter.java:46)
+	at org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:57)
+	at org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:74)
+	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:36)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.executeTask(EventFiringTaskExecuter.java:77)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:55)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:52)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter.execute(EventFiringTaskExecuter.java:52)
+	at org.gradle.execution.plan.DefaultNodeExecutor.executeLocalTaskNode(DefaultNodeExecutor.java:55)
+	at org.gradle.execution.plan.DefaultNodeExecutor.execute(DefaultNodeExecutor.java:34)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:355)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:343)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.lambda$execute$0(DefaultTaskExecutionGraph.java:339)
+	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:84)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:339)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:328)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:459)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:376)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:47)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: com.android.ide.common.process.ProcessException: -- The CXX compiler identification is Clang 19.0.1
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- sfraw: fetching LibRaw 0.22.2 from https://www.libraw.org/data/LibRaw-0.22.2.tar.gz
+-- Configuring incomplete, errors occurred!
+See also "/home/hatch/workspace/argentroom-ci-fix/lib/libraw/.cxx/Debug/2c1o5m67/arm64-v8a/CMakeFiles/CMakeOutput.log".
+
+C++ build system [configure] failed while executing:
+    #!/bin/sh
+    '/home/hatch/workspace/android-dev/android-sdk/cmake/3.22.1/bin/cmake' \
+      '-H/home/hatch/workspace/argentroom-ci-fix/lib/libraw/src/main/cpp' \
+      '-DCMAKE_SYSTEM_NAME=Android' \
+      '-DCMAKE_EXPORT_COMPILE_COMMANDS=ON' \
+      '-DCMAKE_SYSTEM_VERSION=24' \
+      '-DANDROID_PLATFORM=android-24' \
+      '-DANDROID_ABI=arm64-v8a' \
+      '-DCMAKE_ANDROID_ARCH_ABI=arm64-v8a' \
+      '-DANDROID_NDK=/home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358' \
+      '-DCMAKE_ANDROID_NDK=/home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358' \
+      '-DCMAKE_TOOLCHAIN_FILE=/home/hatch/workspace/android-dev/android-sdk/ndk/28.2.13676358/build/cmake/android.toolchain.cmake' \
+      '-DCMAKE_MAKE_PROGRAM=/home/hatch/workspace/android-dev/android-sdk/cmake/3.22.1/bin/ninja' \
+      '-DCMAKE_CXX_FLAGS=-std=c++17' \
+      '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/home/hatch/workspace/argentroom-ci-fix/lib/libraw/build/intermediates/cxx/Debug/2c1o5m67/obj/arm64-v8a' \
+      '-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=/home/hatch/workspace/argentroom-ci-fix/lib/libraw/build/intermediates/cxx/Debug/2c1o5m67/obj/arm64-v8a' \
+      '-DCMAKE_BUILD_TYPE=Debug' \
+      '-B/home/hatch/workspace/argentroom-ci-fix/lib/libraw/.cxx/Debug/2c1o5m67/arm64-v8a' \
+      '-GNinja' \
+      '-DANDROID_STL=c++_shared' \
+      '-DSFRAW_ENABLE_OPENMP=OFF' \
+      '-DSFRAW_WITH_ZLIB=ON'
+  from /home/hatch/workspace/argentroom-ci-fix/lib/libraw
+CMake Error at /home/hatch/workspace/argentroom-ci-fix/lib/libraw/cmake/LibRawVendor.cmake:151 (message):
+  sfraw: dated local modification notice verification failed in
+  /home/hatch/workspace/argentroom-ci-fix/lib/libraw/.cxx/Debug/2c1o5m67/arm64-v8a/_deps/sfraw_libraw_0_22_2-src/internal/var_defines.h
+Call Stack (most recent call first):
+  /home/hatch/workspace/argentroom-ci-fix/lib/libraw/cmake/LibRawVendor.cmake:777 (_sfraw_assert_contains)
+  CMakeLists.txt:52 (sfraw_resolve_libraw)
+	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.execute(ExecuteProcess.kt:246)
+	... 150 more
+
+	at com.android.builder.errors.IssueReporter.reportError(IssueReporter.kt:179)
+	at com.android.builder.errors.IssueReporter.reportError$default(IssueReporter.kt:177)
+	at com.android.build.gradle.internal.cxx.logging.IssueReporterLoggingEnvironment.log(IssueReporterLoggingEnvironment.kt:110)
+	at com.android.build.gradle.internal.cxx.logging.ThreadLoggingEnvironment$Companion.reportFormattedErrorToCurrentLogger(LoggingEnvironment.kt:173)
+	at com.android.build.gradle.internal.cxx.logging.LoggingEnvironmentKt.errorln(LoggingEnvironment.kt:55)
+	at com.android.build.gradle.tasks.ExternalNativeJsonGenerator.configure(ExternalNativeJsonGenerator.kt:112)
+	at com.android.build.gradle.tasks.ExternalNativeBuildJsonTask.doTaskAction(ExternalNativeBuildJsonTask.kt:76)
+	at com.android.build.gradle.internal.tasks.UnsafeOutputsTask$taskAction$$inlined$recordTaskAction$1.invoke(BaseTask.kt:71)
+	at com.android.build.gradle.internal.tasks.Blocks.recordSpan(Blocks.java:51)
+	at com.android.build.gradle.internal.tasks.UnsafeOutputsTask.taskAction(UnsafeOutputsTask.kt:72)
+	at org.gradle.internal.reflect.JavaMethod.invoke(JavaMethod.java:125)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.doExecute(StandardTaskAction.java:58)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:51)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:29)
+	at org.gradle.api.internal.tasks.execution.TaskExecution$3.run(TaskExecution.java:259)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:30)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:27)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:48)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeAction(TaskExecution.java:244)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeActions(TaskExecution.java:227)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeWithPreviousOutputFiles(TaskExecution.java:210)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.execute(TaskExecution.java:176)
+	at org.gradle.internal.execution.steps.ExecuteStep.executeInternal(ExecuteStep.java:167)
+	at org.gradle.internal.execution.steps.ExecuteStep.access$000(ExecuteStep.java:47)
+	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:137)
+	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:134)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:134)
+	at org.gradle.internal.execution.steps.ExecuteStep$Mutable.execute(ExecuteStep.java:80)
+	at org.gradle.internal.execution.steps.CancelExecutionStep.execute(CancelExecutionStep.java:42)
+	at org.gradle.internal.execution.steps.TimeoutStep.executeWithoutTimeout(TimeoutStep.java:75)
+	at org.gradle.internal.execution.steps.TimeoutStep.execute(TimeoutStep.java:55)
+	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:51)
+	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:29)
+	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.executeMutable(RemovePreviousOutputsStep.java:67)
+	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.executeMutable(RemovePreviousOutputsStep.java:39)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:42)
+	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:24)
+	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:69)
+	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:46)
+	at org.gradle.internal.execution.steps.ResolveInputChangesStep.executeMutable(ResolveInputChangesStep.java:39)
+	at org.gradle.internal.execution.steps.ResolveInputChangesStep.executeMutable(ResolveInputChangesStep.java:28)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.BuildCacheStep.executeWithoutCache(BuildCacheStep.java:189)
+	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$execute$1(BuildCacheStep.java:76)
+	at org.gradle.internal.Either$Right.fold(Either.java:176)
+	at org.gradle.internal.execution.caching.CachingState.fold(CachingState.java:62)
+	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:74)
+	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:49)
+	at org.gradle.internal.execution.steps.StoreExecutionStateStep.executeMutable(StoreExecutionStateStep.java:46)
+	at org.gradle.internal.execution.steps.StoreExecutionStateStep.executeMutable(StoreExecutionStateStep.java:35)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.executeBecause(SkipUpToDateStep.java:75)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.lambda$execute$2(SkipUpToDateStep.java:53)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:53)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:35)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:37)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:27)
+	at org.gradle.internal.execution.steps.ResolveMutableCachingStateStep.executeDelegate(ResolveMutableCachingStateStep.java:70)
+	at org.gradle.internal.execution.steps.ResolveMutableCachingStateStep.executeDelegate(ResolveMutableCachingStateStep.java:32)
+	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:69)
+	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:37)
+	at org.gradle.internal.execution.steps.ResolveChangesStep.executeMutable(ResolveChangesStep.java:63)
+	at org.gradle.internal.execution.steps.ResolveChangesStep.executeMutable(ResolveChangesStep.java:34)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.executeDelegate(ValidateStep.java:79)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.executeDelegate(ValidateStep.java:65)
+	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:105)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.execute(ValidateStep.java:65)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.executeMutable(CaptureMutableStateBeforeExecutionStep.java:86)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.execute(CaptureMutableStateBeforeExecutionStep.java:65)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.execute(CaptureMutableStateBeforeExecutionStep.java:45)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeWithNonEmptySources(SkipEmptyMutableWorkStep.java:210)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeMutable(SkipEmptyMutableWorkStep.java:85)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeMutable(SkipEmptyMutableWorkStep.java:53)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsStartedStep.execute(MarkSnapshottingInputsStartedStep.java:38)
+	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.executeMutable(LoadPreviousExecutionStateStep.java:36)
+	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.executeMutable(LoadPreviousExecutionStateStep.java:23)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.executeMutable(HandleStaleOutputsStep.java:77)
+	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.executeMutable(HandleStaleOutputsStep.java:43)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.lambda$executeMutable$0(AssignMutableWorkspaceStep.java:34)
+	at org.gradle.api.internal.tasks.execution.TaskExecution$4.withWorkspace(TaskExecution.java:305)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.executeMutable(AssignMutableWorkspaceStep.java:30)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.executeMutable(AssignMutableWorkspaceStep.java:21)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:40)
+	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:23)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.lambda$execute$2(ExecuteWorkBuildOperationFiringStep.java:67)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:67)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:39)
+	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:46)
+	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:34)
+	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:56)
+	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:38)
+	at org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute(DefaultExecutionEngine.java:68)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:132)
+	... 30 more
+
+
+BUILD FAILED in 1m 2s
+109 actionable tasks: 8 executed, 101 up-to-date
+EXIT=1

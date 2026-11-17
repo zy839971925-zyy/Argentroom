@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android — native engine: 1D tone curve implementation. GPLv3.
+ * Argentroom for Android — native engine: 1D tone curve implementation. GPLv3.
  * Film modeling powered by spektrafilm.
  */
 #include "kernels/tonecurve.h"

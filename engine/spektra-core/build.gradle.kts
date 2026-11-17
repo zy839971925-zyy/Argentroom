@@ -1,12 +1,12 @@
-// Spektrafilm for Android — engine:spektra-core. GPLv3.
-// Android library wrapping the native spektrafilm engine (libspektra.so, built via
+// Argentroom for Android — engine:spektra-core. GPLv3.
+// Android library wrapping the native argentroom engine (libspektra.so, built via
 // CMake/NDK) plus the Kotlin facade (SpektraEngine / SpektraParams).
 plugins {
     alias(libs.plugins.android.library)
 }
 
 android {
-    namespace = "com.spectrafilm.engine"
+    namespace = "com.argentroom.engine"
     compileSdk = 36
 
     // NDK r28c (28.2.13676358): 16 KB page-size support is the default (r27 introduced it), so
@@ -17,7 +17,7 @@ android {
 
     defaultConfig {
         minSdk = 24
-        testInstrumentationRunner = "com.spectrafilm.engine.EngineBoundaryInstrumentation"
+        testInstrumentationRunner = "com.argentroom.engine.EngineBoundaryInstrumentation"
         externalNativeBuild {
             cmake {
                 cppFlags += "-std=c++17"

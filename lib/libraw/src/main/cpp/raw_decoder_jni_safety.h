@@ -1,6 +1,6 @@
 /*
- * Spektrafilm Android -- allocation-free JNI input-range safety helper.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom Android -- allocation-free JNI input-range safety helper.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  */
 #ifndef SFRAW_RAW_DECODER_JNI_SAFETY_H
 #define SFRAW_RAW_DECODER_JNI_SAFETY_H

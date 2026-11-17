@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2026 Spektrafilm Android contributors
+// SPDX-FileCopyrightText: 2026 Argentroom Android contributors
 // SPDX-License-Identifier: GPL-3.0-only
 //
 // Gate for the GPU AgX particle grain sampler (#214), run under a Vulkan ICD.

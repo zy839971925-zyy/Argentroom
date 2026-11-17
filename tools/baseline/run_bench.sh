@@ -37,7 +37,7 @@ REPO=$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)
 # path is not a path at all once MSYS conversion is off).
 host_path() { (cd "$(dirname "$1")" && printf "%s/%s" "$(pwd -W 2>/dev/null || pwd)" "$(basename "$1")"); }
 OUT=${SPK_BENCH_OUT:-$REPO/build/ticket177-bench}
-PKG=com.spectrafilm.app
+PKG=com.argentroom.app
 DEVICE_DIR=/sdcard/Android/data/$PKG/files
 # adb on Git Bash mangles device paths unless conversion is disabled -- but the same
 # variables break a Windows python invoked with a /c/... path, so scope them to adb only.

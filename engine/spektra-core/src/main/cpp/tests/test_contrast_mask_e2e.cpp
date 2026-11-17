@@ -1,7 +1,7 @@
 /*
- * Spektrafilm for Android — END-TO-END host gate for the opt-in virtual
+ * Argentroom for Android — END-TO-END host gate for the opt-in virtual
  * CONTRAST MASK at the print (spk_params.contrast_mask_*, model/contrast_mask.h).
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * The contrast mask is NOT an upstream spektrafilm stage (the idea is

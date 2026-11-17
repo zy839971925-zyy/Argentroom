@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Spektrafilm for Android. GPLv3. -->
+<!-- Argentroom for Android. GPLv3. -->
 <!-- Machine-drafted translation (Claude, 2026-11); needs review by a native speaker. -->
 <resources>
     <string name="screen_back">Atrás</string>
@@ -49,10 +49,10 @@
     <string name="screen_about_doc_libraw_lgpl">LGPL 2.1 de LibRaw</string>
     <string name="screen_about_doc_libraw_cddl">CDDL 1.0 de LibRaw</string>
     <string name="screen_about_legal_text_unavailable">No se pudo abrir el texto legal incluido. Consulta %1$s para ver la fuente canónica.</string>
-    <string name="screen_howto_title">Cómo usar Spektrafilm</string>
+    <string name="screen_howto_title">Cómo usar Argentroom</string>
     <string name="screen_howto_step_number">Paso %1$d</string>
-    <string name="screen_howto_s1_title">Qué es Spektrafilm</string>
-    <string name="screen_howto_s1_p1">Spektrafilm es un simulador espectral de película basado en la física. A diferencia de un filtro simple o una tabla de consulta, modela el proceso analógico real: un negativo virtual se expone a la luz de tu foto, se revela en un baño químico, opcionalmente se amplía sobre papel de copia en un cuarto oscuro y se escanea de vuelta a un archivo digital, todo guiado por datos espectrales medidos de películas reales.</string>
+    <string name="screen_howto_s1_title">Qué es Argentroom</string>
+    <string name="screen_howto_s1_p1">Argentroom es un simulador espectral de película basado en la física. A diferencia de un filtro simple o una tabla de consulta, modela el proceso analógico real: un negativo virtual se expone a la luz de tu foto, se revela en un baño químico, opcionalmente se amplía sobre papel de copia en un cuarto oscuro y se escanea de vuelta a un archivo digital, todo guiado por datos espectrales medidos de películas reales.</string>
     <string name="screen_howto_s1_p2">El resultado es una reproducción fiel del color, el grano, la halación y la química de los tintes que coincide con lo que obtendrías en un cuarto oscuro real, no una aproximación.</string>
     <string name="screen_howto_attribution">Film modeling powered by spektrafilm (Andrea Volpato).</string>
     <string name="screen_howto_s2_title">Abrir una foto</string>
@@ -139,7 +139,7 @@
     <string name="screen_howto_s9_step4">La exposición automática mide hacia el gris medio. Si tu sujeto es más claro o más oscuro que el gris medio, quizá quieras retocar después el regulador de exposición a mano.</string>
     <string name="screen_howto_s9_step5">El grano es estocástico (aleatorio). La vista previa puede verse algo distinta en cada renderizado; la exportación es siempre la versión definitiva a resolución completa.</string>
     <string name="screen_howto_s10_title">Créditos</string>
-    <string name="screen_howto_s10_p1">Film modeling powered by spektrafilm (Andrea Volpato). La ciencia, los perfiles de las películas y las LUT espectrales son obra de Andrea; Spektrafilm es un port nativo para Android de ese motor, verificado bit a bit frente al original.</string>
+    <string name="screen_howto_s10_p1">Film modeling powered by spektrafilm (Andrea Volpato). La ciencia, los perfiles de las películas y las LUT espectrales son obra de Andrea; Argentroom es un port nativo para Android de ese motor, verificado bit a bit frente al original.</string>
     <string name="screen_howto_s10_p2">Matemática del color de colour-science. Decodificación RAW con LibRaw. Software libre bajo la GPLv3.</string>
     <string name="screen_settings_title">Ajustes</string>
     <string name="screen_settings_appearance">Apariencia</string>
@@ -190,7 +190,7 @@
     <string name="update_try_again">Reintentar</string>
     <string name="update_open_release_page">Abrir la página de la versión</string>
     <string name="update_downloading">Descargando… %1$d %%</string>
-    <string name="update_verifying">Comprobando que la descarga es una versión auténtica de Spektrafilm…</string>
+    <string name="update_verifying">Comprobando que la descarga es una versión auténtica de Argentroom…</string>
     <string name="update_installing">Confirma la actualización en el instalador de Android.</string>
     <string name="update_failed_download">La descarga no terminó. Comprueba tu conexión y vuelve a intentarlo.</string>
     <string name="update_failed_signer">Esta copia de la app está firmada con una clave distinta de la de la versión publicada (por ejemplo, una copia de depuración o compilada por ti), así que Android no puede actualizarla directamente. Instala la versión desde su página de GitHub.</string>
@@ -255,7 +255,7 @@
     <string name="export_format_scene_linear_tiff">Entrada lineal de escena (TIFF de 32 bits)</string>
     <string name="library_title">Biblioteca</string>
     <string name="library_empty_title">Elige una carpeta para explorar</string>
-    <string name="library_empty_body">Elige una carpeta de archivos RAW o fotos, como la carpeta DCIM de tu cámara o una tarjeta SD. Spektrafilm solo la lee.</string>
+    <string name="library_empty_body">Elige una carpeta de archivos RAW o fotos, como la carpeta DCIM de tu cámara o una tarjeta SD. Argentroom solo la lee.</string>
     <string name="library_choose_folder">Elegir carpeta</string>
     <string name="library_change_folder">Cambiar carpeta</string>
     <string name="library_refresh">Actualizar</string>
@@ -268,7 +268,7 @@
     <string name="library_badge_edited">Editada</string>
     <string name="library_cell_edited_desc">%1$s, editada</string>
     <string name="library_save_sidecars">Guardar ediciones junto a las fotos</string>
-    <string name="library_sidecars_need_access">Para guardar archivos de edición en esta carpeta, vuelve a elegirla y permite que Spektrafilm la modifique. Tus fotos nunca se modifican.</string>
+    <string name="library_sidecars_need_access">Para guardar archivos de edición en esta carpeta, vuelve a elegirla y permite que Argentroom la modifique. Tus fotos nunca se modifican.</string>
     <string name="library_sidecars_none">No hay fotos editadas que guardar.</string>
     <plurals name="library_sidecars_saved">
         <item quantity="one">Se guardó %1$d archivo de edición junto a su foto.</item>

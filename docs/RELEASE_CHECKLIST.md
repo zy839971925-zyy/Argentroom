@@ -164,7 +164,7 @@ job rejects a receipt from any earlier attempt. After any failed release job, us
 - [ ] Update `CHANGELOG.md` for the new version.
 - [ ] Note: the release build now runs **R8** (`isMinifyEnabled = true`, `app/build.gradle.kts:64`).
   This is **Stage 1 — shrink only, `-dontobfuscate`** (`app/proguard-rules.pro:2`), with explicit
-  keep-rules for the four name-based JNI boundaries (`com.spectrafilm.engine.**`, `RawDecoder`,
+  keep-rules for the four name-based JNI boundaries (`com.argentroom.engine.**`, `RawDecoder`,
   `TiffWriter`, `PngWriter`, `native <methods>`) and enum value/`valueOf` persistence. Because the
   JNI symbols resolve classes/methods by literal string from C++, a missing keep-rule surfaces only
   at runtime — sanity-check that a release build still loads native libs and exports/decodes before

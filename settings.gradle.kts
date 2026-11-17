@@ -19,7 +19,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Spektrafilm"
+rootProject.name = "Argentroom"
 include(":app")
 include(":engine:spektra-core")
 include(":lib:libraw")

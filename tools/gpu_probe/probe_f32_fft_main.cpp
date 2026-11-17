@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2026 Spektrafilm Android contributors
+// SPDX-FileCopyrightText: 2026 Argentroom Android contributors
 // SPDX-License-Identifier: GPL-3.0-only
 //
 // f32 vs f64 FFT convolution, on device. Owner request (2026-09-10):

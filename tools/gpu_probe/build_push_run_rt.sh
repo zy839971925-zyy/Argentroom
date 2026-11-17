@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Spektrafilm for Android — realtime falsifier probe (#208): build + push + run. GPLv3.
+# Argentroom for Android — realtime falsifier probe (#208): build + push + run. GPLv3.
 # Film modeling powered by spektrafilm.
 #
 # Builds tools/gpu_probe/probe_rt_main.cpp against the UNMODIFIED engine Vulkan

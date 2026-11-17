@@ -100,7 +100,7 @@
     <string name="sp_help_grain_softness">平滑颗粒密度图像，与颗粒尺寸分开调节。1× 保持原有柔化，0× 关闭这一平滑；画面细微纹理也可能随之变柔。</string>
     <string name="sp_help_halation">片基把光反射回乳剂层，形成高光周围的光晕。“跟随胶片”使用所选胶片自身的抗光晕层；“高 / 中 / 低”设定透过光晕多少不同的抗光晕层；关闭则不计算此阶段。</string>
     <string name="sp_help_halation_strength">所选光晕设置的倍数：1× 保持原样，最高 4× 放大反射。</string>
-    <string name="sp_help_headroom">在胶片曝光前估计数码高光裁切损失的光量。0 EV 使用原始光量；仅用于 CineStill 默认回反射模型。银间对提亮区边缘做了羽化（非上游行为），避免手机 JPEG 高光硬裁切产生断层。</string>
+    <string name="sp_help_headroom">在胶片曝光前估计数码高光裁切损失的光量。0 EV 使用原始光量；仅用于 CineStill 默认回反射模型。Argentroom 对提亮区边缘做了羽化（非上游行为），避免手机 JPEG 高光硬裁切产生断层。</string>
     <string name="sp_help_highlight_expansion">按相纸实测的影调映射，展开相纸成像中压缩的高光层次。绕过相纸或使用黑白相纸时不可用。</string>
     <string name="sp_help_hint">长按名称或点 ⓘ 查看说明</string>
     <string name="sp_help_lens_diffusion">模拟拍摄镜头前的柔光镜，作用于胶片曝光之前；与胶片光晕不同。</string>

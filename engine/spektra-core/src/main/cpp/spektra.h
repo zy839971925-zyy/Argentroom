@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine C API.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — native engine C API.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -11,7 +11,7 @@
  *
  * --------------------------------------------------------------------------------
  * This header is the stable contract between the JVM/JNI layer and the native
- * engine. It mirrors spektrafilm's public surface: simulate(image, params) and the
+ * engine. It mirrors argentroom's public surface: simulate(image, params) and the
  * RuntimePhotoParams tree. The engine behind it is fully implemented and
  * parity-gated (39 host gates, .github/workflows/ci.yml `engine-parity`).
  * --------------------------------------------------------------------------------
@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-/* Spectral working shape, matching spektrafilm/config.py exactly:
+/* Spectral working shape, matching argentroom/config.py exactly:
  * SpectralShape(380, 780, 5) -> 81 samples at 5 nm. */
 #define SPK_SPECTRAL_MIN_NM 380
 #define SPK_SPECTRAL_MAX_NM 780
@@ -98,7 +98,7 @@ typedef enum {
 
 /*
  * Flat parameter struct mirroring RuntimePhotoParams (see SpektraParams.kt and
- * spektrafilm/runtime/params_schema.py). Kept flat (no nested allocations) so it
+ * argentroom/runtime/params_schema.py). Kept flat (no nested allocations) so it
  * marshals trivially across JNI. This is the full honoured surface — every field
  * below is consumed by the engine unless its own doc says otherwise. Profiles are
  * passed by name and resolved from bundled assets.

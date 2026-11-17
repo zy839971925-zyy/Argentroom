@@ -1,8 +1,8 @@
 /*
- * Spektrafilm for Android — END-TO-END host parity test for the ENLARGER PREFLASH
+ * Argentroom for Android — END-TO-END host parity test for the ENLARGER PREFLASH
  * (enlarger.preflash_exposure / preflash_y_filter_shift / preflash_m_filter_shift)
  * run through the WHOLE print->scan pipeline.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * The preflash is a uniform pre-exposure flash of the print paper before the image
@@ -49,7 +49,7 @@
 
 namespace {
 
-const char* kAssetDir = "/home/user/spektrafilm/src/spektrafilm/data";
+const char* kAssetDir = "/home/user/spektrafilm/src/argentroom/data";
 const char* kPreflashGoldenDir =
     "/home/user/Spectrafilmandroid/tools/parity/goldens/print_portra_preflash";
 const char* kInputF64 =

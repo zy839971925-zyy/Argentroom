@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Spektrafilm for Android — f32-vs-f64 FFT convolution probe. GPLv3.
+# Argentroom for Android — f32-vs-f64 FFT convolution probe. GPLv3.
 # Film modeling powered by spektrafilm.
 #
 # Builds tools/gpu_probe/probe_f32_fft_main.cpp against the UNMODIFIED engine,

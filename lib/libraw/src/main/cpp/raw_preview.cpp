@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2026 Spektrafilm Android contributors
+// SPDX-FileCopyrightText: 2026 Argentroom Android contributors
 // SPDX-License-Identifier: GPL-3.0-only
 //
 // Embedded camera-JPEG extraction. See raw_preview.h for the contract.
@@ -15,7 +15,7 @@
 #  endif
 #endif
 
-namespace spectrafilm {
+namespace argentroom {
 
 namespace {
 
@@ -139,4 +139,4 @@ EmbeddedPreview extractEmbeddedPreview(int, int) {
 
 #endif
 
-}  // namespace spectrafilm
+}  // namespace argentroom

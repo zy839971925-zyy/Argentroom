@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2026 Spektrafilm Android contributors
+// SPDX-FileCopyrightText: 2026 Argentroom Android contributors
 // SPDX-License-Identifier: GPL-3.0-only
 // Bounded, caller-supplied scratch snapshot for LibRaw's open_buffer path.
 #ifndef SPECTRAFILM_RAW_INPUT_SNAPSHOT_H
@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <vector>
 
-namespace spectrafilm {
+namespace argentroom {
 
 class ScopedFd final {
  public:
@@ -149,6 +149,6 @@ class RawInputSnapshot final {
     size_t length_ = 0;
 };
 
-}  // namespace spectrafilm
+}  // namespace argentroom
 
 #endif  // SPECTRAFILM_RAW_INPUT_SNAPSHOT_H

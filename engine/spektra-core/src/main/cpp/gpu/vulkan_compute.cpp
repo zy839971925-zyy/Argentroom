@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android — GPU (Vulkan compute) fast-path implementation. GPLv3.
+ * Argentroom for Android — GPU (Vulkan compute) fast-path implementation. GPLv3.
  * Film modeling powered by spektrafilm.
  *
  * Compiled only when SPK_ENABLE_VULKAN is defined (see gpu/vulkan_compute.h and
@@ -220,10 +220,10 @@ struct Buf {
     spk::memory::MemoryReservation reservation;
 };
 
-// SPDX-FileCopyrightText: 2026 Spektrafilm Android contributors
+// SPDX-FileCopyrightText: 2026 Argentroom Android contributors
 // SPDX-License-Identifier: GPL-3.0-only
 // Resource lifetime, private scratch, keyed static uploads and single-command
-// DAG/barrier concepts adapted from chaert-s/spektrafilm-ofx
+// DAG/barrier concepts adapted from chaert-s/argentroom-ofx
 // src/SpektraVulkanRenderer.cpp at
 // 86476afc5b077de77e2278e3658d1ba9309892a1. This Android implementation is a
 // new bounded three-stage API: one mapped bidirectional staging buffer, two
@@ -3898,8 +3898,8 @@ bool fft_convolve(const FftConvolveRequest& r, double* out,
 // ---------------------------------------------------------------------------
 // In-emulsion scatter + back-reflection halation (issue #206).
 //
-// Shader: gpu/halation_scatter.comp, adapted from spektrafilm OFX (see the file
-// header and docs/research/spektrafilm-ofx-port.md). The dispatch sequence
+// Shader: gpu/halation_scatter.comp, adapted from argentroom OFX (see the file
+// header and docs/research/argentroom-ofx-port.md). The dispatch sequence
 // follows upstream's SpektraVulkanRenderer.cpp halation pass; the single
 // weighted sum buffer, the whole-frame residency, the f64 staging and the
 // parameter plumbing are Android additions.

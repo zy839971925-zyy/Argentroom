@@ -1,6 +1,6 @@
 /*
  * Host unit test for the lib:libraw DNG compression sniffer and unpack-failure
- * classifier (raw_decoder.cpp :: spectrafilm::dngsniff).
+ * classifier (raw_decoder.cpp :: argentroom::dngsniff).
  *
  * This compiles raw_decoder.cpp on the host WITHOUT LibRaw: the decoder guards
  * the LibRaw include with __has_include(<libraw/libraw.h>), so when LibRaw is
@@ -30,19 +30,19 @@
 #include <cstring>
 #include <vector>
 
-// raw_decoder.cpp is -include'd ahead of this TU, so spectrafilm::dngsniff and
+// raw_decoder.cpp is -include'd ahead of this TU, so argentroom::dngsniff and
 // dngCompressionName are already defined. We just reference them.
-namespace spectrafilm {
+namespace argentroom {
 namespace dngsniff {
 int compressionOf(const uint8_t* data, size_t len, bool* isDng);
 int classifyUnpackFailure(const uint8_t* data, size_t len);
 }  // namespace dngsniff
-}  // namespace spectrafilm
+}  // namespace argentroom
 
-using spectrafilm::dngsniff::classifyUnpackFailure;
-using spectrafilm::dngsniff::compressionOf;
-// The SFRAW_ERR_* DecodeStatus constants live inside namespace spectrafilm.
-using namespace spectrafilm;
+using argentroom::dngsniff::classifyUnpackFailure;
+using argentroom::dngsniff::compressionOf;
+// The SFRAW_ERR_* DecodeStatus constants live inside namespace argentroom.
+using namespace argentroom;
 
 namespace {
 
@@ -330,7 +330,7 @@ int main() {
     // --- primaryImageInfoOf: a SubIFD LinearRaw image (Lightroom merged
     // panorama) takes the DNG colour tags from IFD0, and its transparency mask
     // is not a second RAW candidate ---
-    using spectrafilm::dngsniff::primaryImageInfoOf;
+    using argentroom::dngsniff::primaryImageInfoOf;
     { auto b = buildPanorama(true, false, 4);
       const auto info = primaryImageInfoOf(b.data(), b.size());
       check("panorama/preflight safe", info.unsafeForLibRawOpen ? 1 : 0, 0);

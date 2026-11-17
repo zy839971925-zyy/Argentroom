@@ -1,4 +1,4 @@
-// Spektrafilm for Android — device-aware RAW decode admission. GPLv3.
+// Argentroom for Android — device-aware RAW decode admission. GPLv3.
 #ifndef SPECTRAFILM_RAW_DECODE_BUDGET_H
 #define SPECTRAFILM_RAW_DECODE_BUDGET_H
 
@@ -6,7 +6,7 @@
 #include <cmath>
 #include <limits>
 
-namespace spectrafilm {
+namespace argentroom {
 
 // Peak decode memory includes LibRaw's unpacked image, processed bitmap,
 // make_mem_image() copy, and the returned float RGB buffer. The raw-store
@@ -151,6 +151,6 @@ inline bool qualifiedLargeBayerHalfGeometry(
                         static_cast<std::uint64_t>(projectedH), outputLimit);
 }
 
-}  // namespace spectrafilm
+}  // namespace argentroom
 
 #endif

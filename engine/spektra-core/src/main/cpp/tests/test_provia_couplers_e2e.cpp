@@ -1,7 +1,7 @@
 /*
- * Spektrafilm for Android — END-TO-END host parity test for the POSITIVE-film
+ * Argentroom for Android — END-TO-END host parity test for the POSITIVE-film
  * DIR-coupler develop path (scan_film route on fujifilm_provia_100f).
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * Every other engine golden runs the NEGATIVE-film coupler branch. This case
@@ -41,7 +41,7 @@
 
 namespace {
 
-const char* kAssetDir = "/home/user/spektrafilm/src/spektrafilm/data";
+const char* kAssetDir = "/home/user/spektrafilm/src/argentroom/data";
 const char* kGoldenDir =
     "/home/user/Spectrafilmandroid/tools/parity/goldens/scan_provia_couplers";
 const char* kInputF64 =

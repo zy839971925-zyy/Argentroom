@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android — GPU (Vulkan compute) fast-path. GPLv3.
+ * Argentroom for Android — GPU (Vulkan compute) fast-path. GPLv3.
  * Film modeling powered by spektrafilm.
  *
  * OPT-IN, OFF BY DEFAULT (CMake `SPK_ENABLE_VULKAN`, default OFF). This is the
@@ -22,10 +22,10 @@
 
 namespace spk::gpu {
 
-// SPDX-FileCopyrightText: 2026 Spektrafilm Android contributors
+// SPDX-FileCopyrightText: 2026 Argentroom Android contributors
 // SPDX-License-Identifier: GPL-3.0-only
 // Resident resource/DAG interface concepts adapted from
-// chaert-s/spektrafilm-ofx src/SpektraVulkanRenderer.{h,cpp}, pinned at
+// chaert-s/argentroom-ofx src/SpektraVulkanRenderer.{h,cpp}, pinned at
 // 86476afc5b077de77e2278e3658d1ba9309892a1. Android modifications replace
 // OpenFX/desktop types with a bounded pointwise-only request and fail-closed
 // diagnostics; no OFX shader math or binary resources cross this interface.
@@ -695,7 +695,7 @@ bool fft_convolve(const FftConvolveRequest& request, double* out,
                   FftConvolveDiagnostics* diagnostics);
 
 // In-emulsion scatter + back-reflection halation on the GPU (issue #206; shader
-// gpu/halation_scatter.comp, adapted from spektrafilm OFX). Same model and
+// gpu/halation_scatter.comp, adapted from argentroom OFX). Same model and
 // parameters as model/diffusion.cpp::apply_halation_um, computed in f32 on the
 // device over the whole frame, so the IIR sweeps see the complete image as the
 // CPU does. Fast GPU output: tolerance-bounded against the f64 CPU pass,

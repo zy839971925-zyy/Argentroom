@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android -- the back-reflection halo of a film with no
+ * Argentroom for Android -- the back-reflection halo of a film with no
  * anti-halation layer (CineStill 800T), as a fixed Gaussian mixture per
  * sensitive layer in units of the base thickness. GPLv3.
  *
@@ -41,7 +41,7 @@ constexpr double kBackReflectionWeight[kBackReflectionComponents][3] = {
 // The halo's total, per layer, as a fraction of the layer's own exposure (the
 // kernels above are unit mass, so the slant-path loss of green and blue lives
 // here). Silverphase apply_halation_preset uses these for a film whose OWN tag
-// is antihalation "no"; an override to "none" keeps spektrafilm's no-backing
+// is antihalation "no"; an override to "none" keeps argentroom's no-backing
 // preset (0.30, 0.10, 0.015) and its Gaussian bounces.
 constexpr double kBackReflectionStrength[3] = {0.30, 0.03, 0.003};
 

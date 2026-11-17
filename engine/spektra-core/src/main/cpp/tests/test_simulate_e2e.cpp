@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — end-to-end host parity test for spk_simulate.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — end-to-end host parity test for spk_simulate.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * Constructs an spk_params for the scan_portra case + an spk_image from the
@@ -60,7 +60,7 @@ extern uint64_t spk_test_print_density_cache_misses(spk_engine* eng);
 
 namespace {
 
-const char* kAssetDir   = "/home/user/spektrafilm/src/spektrafilm/data";
+const char* kAssetDir   = "/home/user/spektrafilm/src/argentroom/data";
 const char* kGoldenDir  =
     "/home/user/Spectrafilmandroid/tools/parity/goldens/scan_portra";
 const char* kPrintGoldenDir =

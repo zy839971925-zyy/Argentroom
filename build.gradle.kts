@@ -1,4 +1,4 @@
-// Spektrafilm for Android — root build. GPLv3.
+// Argentroom for Android — root build. GPLv3.
 import org.gradle.api.artifacts.dsl.LockMode
 
 plugins {

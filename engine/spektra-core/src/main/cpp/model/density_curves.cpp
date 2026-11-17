@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: density characteristic curves.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — native engine: density characteristic curves.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,8 +8,8 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Ports spektrafilm/model/density_curves.py and the curve
- * normalisation in spektrafilm/model/emulsion.py::develop.
+ * argentroom. Ports argentroom/model/density_curves.py and the curve
+ * normalisation in argentroom/model/emulsion.py::develop.
  */
 #include "density_curves.h"
 

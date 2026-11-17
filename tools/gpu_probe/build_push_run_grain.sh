@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Spektrafilm for Android — AgX particle grain CPU-vs-GPU probe (#214). GPLv3.
+# Argentroom for Android — AgX particle grain CPU-vs-GPU probe (#214). GPLv3.
 # Film modeling powered by spektrafilm.
 #
 # Builds tools/gpu_probe/probe_grain_main.cpp against the UNMODIFIED engine,

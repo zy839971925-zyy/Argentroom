@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — lib:pngwriter build.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — lib:pngwriter build.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  *
  * Android library wrapping the native 16-bit PNG writer (libsfpng.so, built via
  * CMake/NDK using zlib for deflate + CRC32) plus the Kotlin PngWriter facade.
@@ -20,7 +20,7 @@ plugins {
 }
 
 android {
-    namespace = "com.spectrafilm.pngwriter"
+    namespace = "com.argentroom.pngwriter"
     compileSdk = 36
 
     // NDK r28c (28.2.13676358): 16 KB page-size support is the default (r27 introduced it), so

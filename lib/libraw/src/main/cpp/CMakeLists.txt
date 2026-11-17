@@ -1,5 +1,5 @@
-# Spektrafilm for Android — lib:libraw native build.
-# Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+# Argentroom for Android — lib:libraw native build.
+# Copyright (C) 2026 Argentroom Android contributors. GPLv3.
 # This module statically uses dual-offered LibRaw; the distribution route is a
 # fail-closed release decision tracked by the compliance tooling and ticket #166.
 #

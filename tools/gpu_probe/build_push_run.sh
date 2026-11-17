@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Spektrafilm for Android — GPU device probe: build + push + run. GPLv3.
+# Argentroom for Android — GPU device probe: build + push + run. GPLv3.
 # Film modeling powered by spektrafilm.
 #
 # Cross-compiles the standalone probe (tools/gpu_probe/) for arm64 with the NDK,

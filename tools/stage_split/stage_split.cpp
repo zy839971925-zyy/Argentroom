@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android — host per-stage split of the engine. GPLv3.
+ * Argentroom for Android — host per-stage split of the engine. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * PURE LOCAL TOOL. Not a parity gate, not in CI.

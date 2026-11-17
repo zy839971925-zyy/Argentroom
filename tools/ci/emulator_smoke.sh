@@ -22,7 +22,7 @@ test -f "$ENGINE_TEST_APK"
 adb install -r "$ENGINE_TEST_APK"
 set +e
 adb shell am instrument -w -r \
-  com.spectrafilm.engine.test/com.spectrafilm.engine.EngineBoundaryInstrumentation \
+  com.argentroom.engine.test/com.argentroom.engine.EngineBoundaryInstrumentation \
   | tee emulator-artifacts/engine-boundary-instrumentation.txt
 ENGINE_INSTRUMENT_STATUS=${PIPESTATUS[0]}
 set -e
@@ -44,7 +44,7 @@ printf 'PASS\n' > emulator-artifacts/engine-boundary-instrumentation-api35.txt
 echo "--- Launching MainActivity ---"
 # -W waits until onResume; captures ShortMsg/LongMsg on crash.
 adb shell am start -W \
-  -n "com.spectrafilm.app/.MainActivity" \
+  -n "com.argentroom.app/.MainActivity" \
   -a android.intent.action.MAIN \
   -c android.intent.category.LAUNCHER
 
@@ -66,8 +66,8 @@ sleep 4
 adb shell cmd uimode night no
 sleep 4
 adb logcat -b events -d > emulator-artifacts/events-uimode.txt || true
-if ! grep -i "relaunch" emulator-artifacts/events-uimode.txt | grep -q "com.spectrafilm.app"; then
-  echo "SMOKE TEST FAILED: the uiMode toggle left no wm_relaunch event for com.spectrafilm.app,"
+if ! grep -i "relaunch" emulator-artifacts/events-uimode.txt | grep -q "com.argentroom.app"; then
+  echo "SMOKE TEST FAILED: the uiMode toggle left no wm_relaunch event for com.argentroom.app,"
   echo "so the no-relaunch check below would pass vacuously on this image."
   grep -i "relaunch" emulator-artifacts/events-uimode.txt || true
   exit 1
@@ -89,7 +89,7 @@ sleep 2
 adb shell wm size reset
 sleep 3
 adb logcat -b events -d > emulator-artifacts/events-large-screen.txt || true
-if grep -i "relaunch" emulator-artifacts/events-large-screen.txt | grep -q "com.spectrafilm.app"; then
+if grep -i "relaunch" emulator-artifacts/events-large-screen.txt | grep -q "com.argentroom.app"; then
   echo "SMOKE TEST FAILED: MainActivity was relaunched by a resize/rotation (see configChanges)."
   grep -i "relaunch" emulator-artifacts/events-large-screen.txt || true
   exit 1
@@ -101,25 +101,25 @@ adb exec-out screencap -p > emulator-artifacts/screenshot.png || true
 echo "--- Dumping logcat ---"
 adb logcat -d > emulator-artifacts/logcat.txt || true
 
-echo "--- Asserting no FATAL EXCEPTION in com.spectrafilm.app ---"
-# Android prints "FATAL EXCEPTION: main" and "Process: com.spectrafilm.app"
+echo "--- Asserting no FATAL EXCEPTION in com.argentroom.app ---"
+# Android prints "FATAL EXCEPTION: main" and "Process: com.argentroom.app"
 # on separate lines, so scan the lines *following* each fatal marker for
 # our package. UnsatisfiedLinkError lines name our .so directly.
 if grep -A4 -E "FATAL EXCEPTION" emulator-artifacts/logcat.txt \
-     | grep -q "com.spectrafilm.app" \
+     | grep -q "com.argentroom.app" \
    || grep -E "UnsatisfiedLinkError" emulator-artifacts/logcat.txt \
-     | grep -q -E "libspektra|libsfraw|libsftiff|com.spectrafilm.app"; then
-  echo "SMOKE TEST FAILED: fatal crash or UnsatisfiedLinkError detected in com.spectrafilm.app"
+     | grep -q -E "libspektra|libsfraw|libsftiff|com.argentroom.app"; then
+  echo "SMOKE TEST FAILED: fatal crash or UnsatisfiedLinkError detected in com.argentroom.app"
   grep -A6 -E "FATAL EXCEPTION|UnsatisfiedLinkError" emulator-artifacts/logcat.txt || true
   exit 1
 fi
 
 echo "--- Asserting MainActivity is the resumed/focused activity ---"
 ACTIVITIES=$(adb shell dumpsys activity activities 2>/dev/null || true)
-if echo "$ACTIVITIES" | grep -q "com.spectrafilm.app/.MainActivity"; then
+if echo "$ACTIVITIES" | grep -q "com.argentroom.app/.MainActivity"; then
   echo "SMOKE TEST PASSED: MainActivity is present in the activity stack."
 else
-  echo "SMOKE TEST FAILED: com.spectrafilm.app/.MainActivity not found in activity stack."
+  echo "SMOKE TEST FAILED: com.argentroom.app/.MainActivity not found in activity stack."
   echo "$ACTIVITIES" | grep -E "mResumedActivity|mFocusedActivity|TopResumedActivity" || true
   exit 1
 fi

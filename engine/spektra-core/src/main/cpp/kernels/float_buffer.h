@@ -1,4 +1,4 @@
-// Spektrafilm for Android -- uninitialised float buffers. GPLv3.
+// Argentroom for Android -- uninitialised float buffers. GPLv3.
 // Film modeling powered by spektrafilm.
 #pragma once
 

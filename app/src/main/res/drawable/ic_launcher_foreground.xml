@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Spektrafilm for Android. GPLv3.
+  Argentroom for Android. GPLv3.
   Adaptive-icon foreground, "Frame": a strip of 35mm film in the brand amber (#C8892B,
   the seed of the M3 scheme in Theme.kt) with the spectrum showing through the exposed
   frame. Everything sits inside the 66dp safe zone (a circle of radius 33 around 54,54):

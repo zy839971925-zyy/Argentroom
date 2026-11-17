@@ -1,9 +1,9 @@
 /*
- * Spektrafilm for Android — END-TO-END host parity test for the Hanatos2025
+ * Argentroom for Android — END-TO-END host parity test for the Hanatos2025
  * sensitivity-adaptation WINDOW / SURFACE toggles
  * (settings.apply_hanatos2025_adaptation_window / _surface) run through the WHOLE
  * scan_film pipeline.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * The surface is the apply_surface branch of compute_hanatos2025_tc_lut: after the
@@ -51,7 +51,7 @@
 
 namespace {
 
-const char* kAssetDir = "/home/user/spektrafilm/src/spektrafilm/data";
+const char* kAssetDir = "/home/user/spektrafilm/src/argentroom/data";
 const char* kSurfaceGoldenDir =
     "/home/user/Spectrafilmandroid/tools/parity/goldens/scan_portra_surface";
 const char* kInputF64 =

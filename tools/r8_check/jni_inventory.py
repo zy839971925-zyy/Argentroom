@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-# Spektrafilm for Android — inventory every app-owned class/member that native code
+# Argentroom for Android — inventory every app-owned class/member that native code
 # resolves BY NAME, generated from the JNI sources so the list cannot drift (#463).
 # Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
 #
 # WHY: R8 cannot see a JNI call edge. A member reached only from C++ by literal string
-# survives today because proguard-rules.pro keeps com.spectrafilm.** wholesale; narrow
+# survives today because proguard-rules.pro keeps com.argentroom.** wholesale; narrow
 # that rule and the member disappears with every gate still green (the kotlin.Triple
 # defect fixed before 1.0; see docs/MAINTAINERS.md). check_release_dex.sh asserts every line printed here exists in
 # the minified dex, so a removed member fails the release instead of rendering 0.0.
@@ -31,8 +31,8 @@ JNI_SOURCES = [
     "lib/tiffwriter/src/main/cpp/tiff_writer_jni.cpp",
 ]
 # Kotlin whose properties the engine's getter-by-name helpers read.
-ENGINE_KOTLIN = ["engine/spektra-core/src/main/kotlin/com/spectrafilm/engine"]
-ENGINE_PACKAGE = "com/spectrafilm/engine"
+ENGINE_KOTLIN = ["engine/spektra-core/src/main/kotlin/com/argentroom/engine"]
+ENGINE_PACKAGE = "com/argentroom/engine"
 
 # Helpers in spektra_jni.cpp that call a no-arg getter named by their 3rd argument on
 # an object of dynamic class. Value = JNI return descriptor (None: the 4th arg is it).
@@ -56,7 +56,7 @@ DYNAMIC_RECEIVER_LITERALS = {
     ("floatValue", "()F"): None,                    # java.lang.Float
     ("ordinal", "()I"): None,                       # java.lang.Enum
     ("get", "()Z"): None,                           # AtomicBoolean cancellation signal
-    ("isCancellationRequested", "()Z"): "Lcom/spectrafilm/engine/RenderCancellation;",
+    ("isCancellationRequested", "()Z"): "Lcom/argentroom/engine/RenderCancellation;",
 }
 # The tuple reader: getter first, backing field as the fallback (spektra_jni.cpp).
 TUPLE_MEMBERS = [
@@ -78,7 +78,7 @@ out: set[tuple[str, ...]] = set()
 
 
 def is_app(desc: str) -> bool:
-    return desc.startswith("Lcom/spectrafilm/") or desc.startswith("Lkotlin/")
+    return desc.startswith("Lcom/argentroom/") or desc.startswith("Lkotlin/")
 
 
 def add(*row: str) -> None:
@@ -157,7 +157,7 @@ getobjectclass = re.compile(r"(\w+)\s*(?:=|\()\s*(?:\w+(?:->|\.))?\s*GetObjectCl
 findclass_any = re.compile(r"FindClass\s*\(\s*\"([^\"]+)\"")
 getter_call = re.compile(r"\b(" + "|".join(GETTER_HELPERS) + r")\s*\(\s*env\s*,\s*[^,()]+,\s*\"(\w+)\"(?:\s*,\s*\"([^\"]+)\")?")
 macro_def = re.compile(r"#define\s+(\w+)\(([^)]*)\)[^\n]*(?:\\\n[^\n]*)*?Java_(\w+?)_##(\w+)")
-explicit_native = re.compile(r"\bJava_(com_spectrafilm_\w+)\s*\(")
+explicit_native = re.compile(r"\bJava_(com_argentroom_\w+)\s*\(")
 
 for rel in JNI_SOURCES:
     path = ROOT / rel
@@ -229,7 +229,7 @@ for rel in JNI_SOURCES:
                 add(owner, "method", args[idx].replace("_1", "_"), "")
     for m in explicit_native.finditer(src):
         parts = m.group(1).split("_")
-        # com_spectrafilm_<pkg>_<Class>_<method...>: class segments start upper-case.
+        # com_argentroom_<pkg>_<Class>_<method...>: class segments start upper-case.
         cls_end = next(i for i, p in enumerate(parts) if p[:1].isupper())
         owner = "L" + "/".join(parts[:cls_end + 1]) + ";"
         add(owner, "method", "_".join(parts[cls_end + 1:]), "")

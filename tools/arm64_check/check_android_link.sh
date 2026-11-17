@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Spektrafilm for Android — link the engine the way the ANDROID build does. GPLv3.
+# Argentroom for Android — link the engine the way the ANDROID build does. GPLv3.
 # Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
 #
 # WHY THIS EXISTS

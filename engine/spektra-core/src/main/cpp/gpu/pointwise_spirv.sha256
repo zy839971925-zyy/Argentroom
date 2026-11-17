@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2026 Spektrafilm Android contributors
+# SPDX-FileCopyrightText: 2026 Argentroom Android contributors
 # SPDX-License-Identifier: GPL-3.0-only
 # Generators (glslc.exe from shader-tools/windows-x86_64 of the named NDK):
 #   filming, printing, scan_spectral_chain: Android NDK 27.0.12077973

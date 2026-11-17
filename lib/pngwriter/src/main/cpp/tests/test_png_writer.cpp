@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — host unit test for the 16-bit PNG writer.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — host unit test for the 16-bit PNG writer.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  *
  * Pure host test (no Android / no Gradle). Writes a small known 16-bit RGB
  * buffer to /tmp with an embedded iCCP blob + tEXt Software tag, then parses
@@ -54,7 +54,7 @@
 #include <zlib.h>
 #include <dirent.h>
 
-using namespace spectrafilm;
+using namespace argentroom;
 
 namespace {
 
@@ -468,11 +468,11 @@ void runSafetyCases() {
 }
 
 void runExceptionTranslationCases() {
-    using spectrafilm::pngjni::NativeExceptionKind;
-    using spectrafilm::pngjni::BufferWindow;
-    using spectrafilm::pngjni::BufferWindowError;
-    using spectrafilm::pngjni::containNativeExceptions;
-    using spectrafilm::pngjni::stableMessage;
+    using argentroom::pngjni::NativeExceptionKind;
+    using argentroom::pngjni::BufferWindow;
+    using argentroom::pngjni::BufferWindowError;
+    using argentroom::pngjni::containNativeExceptions;
+    using argentroom::pngjni::stableMessage;
 
     std::printf("[jni-exception-translation]\n");
     NativeExceptionKind kind = NativeExceptionKind::None;
@@ -495,15 +495,15 @@ void runExceptionTranslationCases() {
           "unknown exception maps to a stable Kotlin error message");
 
     BufferWindow window;
-    auto windowError = spectrafilm::pngjni::validateBufferWindow(
+    auto windowError = argentroom::pngjni::validateBufferWindow(
         4, 16, 20, 20, 12, window);
     CHECK(windowError == BufferWindowError::None && window.offset == 4 && window.length == 12,
           "direct-buffer validation honours the logical position and limit");
-    windowError = spectrafilm::pngjni::validateBufferWindow(
+    windowError = argentroom::pngjni::validateBufferWindow(
         4, 15, 20, 20, 12, window);
     CHECK(windowError == BufferWindowError::TooSmall,
           "direct-buffer validation rejects a short logical window");
-    windowError = spectrafilm::pngjni::validateBufferWindow(
+    windowError = argentroom::pngjni::validateBufferWindow(
         4, 16, 20, 19, 12, window);
     CHECK(windowError == BufferWindowError::Malformed,
           "direct-buffer validation rejects inconsistent capacities");
@@ -535,7 +535,7 @@ static void runStreamingIdentityCases() {
     }
 
     PngMetadata meta;
-    meta.software = "Spektrafilm-test";
+    meta.software = "Argentroom-test";
     std::vector<uint8_t> file;
     const PngWriteResult res =
         writePng16ToMemory(pixels.data(), W, H, meta, file, nullptr);
@@ -647,7 +647,7 @@ int main() {
     // Case 1: full metadata (ICC + software tag).
     {
         PngMetadata meta;
-        meta.software  = "Spektrafilm-test";
+        meta.software  = "Argentroom-test";
         meta.iccProfile = icc;
         runCase("rgb16", pixels, W, H, meta);
     }
@@ -655,7 +655,7 @@ int main() {
     // Case 2: no ICC (no iCCP chunk expected).
     {
         PngMetadata meta;
-        meta.software = "Spektrafilm-test";
+        meta.software = "Argentroom-test";
         // meta.iccProfile is empty by default
         runCase("no_icc", pixels, W, H, meta);
     }

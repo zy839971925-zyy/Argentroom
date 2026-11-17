@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Spektrafilm for Android - generate a statistical reference for the film-grain
+# Argentroom for Android - generate a statistical reference for the film-grain
 # particle model (model/grain.py::apply_grain_to_density, the non-sublayer path).
 #
 # Grain is stochastic: even with a fixed seed the Python (numpy/Numba) RNG stream
@@ -31,10 +31,10 @@ HERE = os.path.dirname(__file__)
 sys.path.insert(0, os.path.join(HERE, "..", "..", "..", "..", "..", "..",
                                 "tools", "parity"))
 import spkvec  # noqa: E402
-from gen_goldens import _import_spektrafilm, build_bundled_params  # noqa: E402
+from gen_goldens import _import_argentroom, build_bundled_params  # noqa: E402
 
-from spektrafilm.runtime.params_builder import digest_params  # noqa: E402
-from spektrafilm.model.grain import apply_grain_to_density  # noqa: E402
+from argentroom.runtime.params_builder import digest_params  # noqa: E402
+from argentroom.model.grain import apply_grain_to_density  # noqa: E402
 
 GOLDEN = os.path.join(HERE, "..", "..", "..", "..", "..", "..", "tools", "parity",
                       "goldens", "scan_portra", "film_density_cmy.spkvec")
@@ -47,7 +47,7 @@ GRAIN_PARAMS_COMMIT = "8a6d8dd606e617b7d9c6a02c06364d9eea34c265"
 
 def digested_grain_params(sublayers):
     """Keep the pinned sampler and use the C06 profiles and grain settings."""
-    _, oracle = _import_spektrafilm()
+    _, oracle = _import_argentroom()
     p, assets = build_bundled_params("kodak_portra_400", "kodak_portra_endura")
     p.io.scan_film = True
     p.debug.deactivate_stochastic_effects = False

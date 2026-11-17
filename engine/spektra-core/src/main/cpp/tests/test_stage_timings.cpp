@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — host test for per-stage render timings (#146/#152).
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — host test for per-stage render timings (#146/#152).
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Film modeling powered by spektrafilm.
  *
  * Proves the diagnostic timing facility (a) populates a non-empty breakdown for

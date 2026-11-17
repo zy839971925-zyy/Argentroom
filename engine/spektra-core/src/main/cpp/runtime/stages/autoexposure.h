@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: auto-exposure metering stage.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — native engine: auto-exposure metering stage.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,9 +8,9 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Ports spektrafilm/utils/autoexposure.py::measure_autoexposure_ev
+ * argentroom. Ports spektrafilm/utils/autoexposure.py::measure_autoexposure_ev
  * and the small_preview downscale it meters on
- * (spektrafilm/runtime/services/resize.py::ResizingService.small_preview), as
+ * (argentroom/runtime/services/resize.py::ResizingService.small_preview), as
  * invoked by FilmingStage.auto_exposure inside pipeline._preprocess BEFORE
  * crop_and_rescale:
  *
@@ -50,7 +50,7 @@ namespace spk {
 // Input color spaces for the auto-exposure luminance transform. Only the values
 // the engine actually feeds (io.input_color_space) are modelled; the luminance
 // row of colour.RGB_to_XYZ(cs, apply_cctf_decoding=False) is baked per space.
-// ProPhoto RGB is the spektrafilm default input space.
+// ProPhoto RGB is the argentroom default input space.
 enum class AeColorSpace {
     kProPhotoRGB,
     kSRGB,
@@ -69,7 +69,7 @@ enum class AeMethod {
     // Silverphase RFC-015 intents (pipeline.cpp exposure_evs_from). Exact
     // statistics; metered on Silverphase's own 1600 px meter frame (a Gaussian
     // anti-alias prefilter + mirrored bilinear zoom, engine.cpp downscale)
-    // instead of the 256 px spektrafilm small_preview.
+    // instead of the 256 px argentroom small_preview.
     kBalanced,           // "balanced": trimmed (P1..P99) log mean
     kCenter,             // "center": the same, centre-weighted (sigma 0.2)
     kProtectHighlights,  // "protect_highlights": balanced, bounded by P99.5

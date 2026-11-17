@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Spektrafilm for Android. GPLv3. -->
+<!-- Argentroom for Android. GPLv3. -->
 <resources>
 
     <!-- Adjustment categories (bottom bar / panel titles) -->
@@ -411,7 +411,7 @@
     <string name="editor_sim_print_diffusion">Print diffusion filter</string>
     <string name="editor_sim_scan_lens_blur">Scan lens blur px</string>
     <string name="editor_sim_scan_lens_blur_tooltip">Sigma of gaussian filter in pixel for the scanner lens blur. Spatial effect — applied only when Halation is enabled (the spatial branch).</string>
-    <string name="editor_sim_scan_correction_noop">Scan white/black correction has no effect in Slide mode on a negative stock — it applies only to a slide/positive film, or in print mode. Matches the spektrafilm engine.</string>
+    <string name="editor_sim_scan_correction_noop">Scan white/black correction has no effect in Slide mode on a negative stock — it applies only to a slide/positive film, or in print mode. Matches the argentroom engine.</string>
     <string name="editor_sim_scan_white_correction">Scan white correction</string>
     <string name="editor_sim_scan_white_correction_tooltip">Pin the scan\'s white point to the target white level below. Subtle at the default 0.98 — lower the white level to see it pull the highlights down.</string>
     <string name="editor_sim_scan_white_level">Scan white level</string>

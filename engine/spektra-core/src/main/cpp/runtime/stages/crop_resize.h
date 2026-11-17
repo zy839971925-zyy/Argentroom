@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: crop / resize geometry stage.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — native engine: crop / resize geometry stage.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,8 +8,8 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Ports the geometry preprocessing performed by
- * spektrafilm/runtime/services/resize.py::ResizingService.crop_and_rescale,
+ * argentroom. Ports the geometry preprocessing performed by
+ * argentroom/runtime/services/resize.py::ResizingService.crop_and_rescale,
  * which runs inside pipeline._preprocess BEFORE the filming stage:
  *
  *   pixel_size_um = film_format_mm * 1000 / max(H, W)

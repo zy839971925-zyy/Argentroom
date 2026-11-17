@@ -217,7 +217,7 @@ class AppSpdxCliTest(unittest.TestCase):
             )
 
         packages = {item["SPDXID"]: item for item in document["packages"]}
-        app = packages["SPDXRef-Package-Spektrafilm-Android"]
+        app = packages["SPDXRef-Package-Argentroom-Android"]
         self.assertEqual("GPL-3.0-only", app["licenseDeclared"])
         self.assertEqual("GPL-3.0-only", app["licenseConcluded"])
         maven_packages = [
@@ -321,7 +321,7 @@ class AppSpdxCliTest(unittest.TestCase):
         )
         self.assertIn(
             {
-                "spdxElementId": "SPDXRef-Package-Spektrafilm-Android",
+                "spdxElementId": "SPDXRef-Package-Argentroom-Android",
                 "relationshipType": "DEPENDS_ON",
                 "relatedSpdxElement": (
                     "DocumentRef-LibRaw:SPDXRef-Package-sfraw-wrapper"

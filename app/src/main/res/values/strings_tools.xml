@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Spektrafilm for Android. GPLv3. -->
+<!-- Argentroom for Android. GPLv3. -->
 <resources>
     <!-- Shared by the export sheet, the crop / mask / eyedropper overlays and the export notification -->
     <string name="tool_cancel">Cancel</string>

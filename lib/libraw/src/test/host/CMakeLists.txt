@@ -20,7 +20,7 @@ option(SFRAW_HOST_BUILD_FUZZER
        "Link the LibRaw public-seam harness with Clang libFuzzer" OFF)
 
 # This is the same resolver used by the Android target. It verifies the release
-# archive, exact 0.22.2 headers, and Spektrafilm's reviewed local patches before
+# archive, exact 0.22.2 headers, and Argentroom's reviewed local patches before
 # returning a source directory. A stale 0.21.x FetchContent tree therefore cannot
 # satisfy this host test by accident.
 include("${CMAKE_CURRENT_LIST_DIR}/../../../cmake/LibRawVendor.cmake")

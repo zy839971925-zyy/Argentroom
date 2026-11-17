@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — lib:pngwriter JNI bridge.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — lib:pngwriter JNI bridge.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  */
 #include <jni.h>
 
@@ -13,7 +13,7 @@
 #include "png_writer_jni_boundary.h"
 
 #define JNI_PNG(ret, name) extern "C" JNIEXPORT ret JNICALL \
-    Java_com_spectrafilm_pngwriter_PngWriter_##name
+    Java_com_argentroom_pngwriter_PngWriter_##name
 
 namespace {
 
@@ -84,11 +84,11 @@ void throwCancelled(JNIEnv* env) noexcept {
 
 template <typename Function>
 jlong jniBoundary(JNIEnv* env, Function&& function) noexcept {
-    spectrafilm::pngjni::NativeExceptionKind kind;
-    const jlong result = spectrafilm::pngjni::containNativeExceptions<jlong>(
+    argentroom::pngjni::NativeExceptionKind kind;
+    const jlong result = argentroom::pngjni::containNativeExceptions<jlong>(
         function, kind);
-    if (kind != spectrafilm::pngjni::NativeExceptionKind::None)
-        throwIse(env, spectrafilm::pngjni::stableMessage(kind));
+    if (kind != argentroom::pngjni::NativeExceptionKind::None)
+        throwIse(env, argentroom::pngjni::stableMessage(kind));
     return result;
 }
 
@@ -120,7 +120,7 @@ bool stringValue(JNIEnv* env, jstring value, std::string& out) {
     return !env->ExceptionCheck();
 }
 
-bool readIcc(JNIEnv* env, jbyteArray icc, spectrafilm::PngMetadata& meta) {
+bool readIcc(JNIEnv* env, jbyteArray icc, argentroom::PngMetadata& meta) {
     if (icc == nullptr) return true;
     const jsize length = env->GetArrayLength(icc);
     if (env->ExceptionCheck()) return false;
@@ -132,7 +132,7 @@ bool readIcc(JNIEnv* env, jbyteArray icc, spectrafilm::PngMetadata& meta) {
 }
 
 bool buildMeta(JNIEnv* env, jstring software, jbyteArray icc,
-               spectrafilm::PngMetadata& meta) {
+               argentroom::PngMetadata& meta) {
     if (software != nullptr && !stringValue(env, software, meta.software)) return false;
     return readIcc(env, icc, meta);
 }
@@ -206,11 +206,11 @@ bool validateDirectBuffer(JNIEnv* env, jobject buffer, jint width, jint height,
     const jint javaCapacity = env->CallIntMethod(buffer, capacityMethod);
     if (env->ExceptionCheck()) return false;
 
-    spectrafilm::pngjni::BufferWindow window;
-    const auto windowError = spectrafilm::pngjni::validateBufferWindow(
+    argentroom::pngjni::BufferWindow window;
+    const auto windowError = argentroom::pngjni::validateBufferWindow(
         position, limit, javaCapacity, nativeCapacity, needed, window);
-    if (windowError != spectrafilm::pngjni::BufferWindowError::None) {
-        throwIae(env, spectrafilm::pngjni::stableMessage(windowError));
+    if (windowError != argentroom::pngjni::BufferWindowError::None) {
+        throwIae(env, argentroom::pngjni::stableMessage(windowError));
         return false;
     }
 
@@ -245,7 +245,7 @@ bool outputPathValue(JNIEnv* env, jstring value, std::string& path) {
     return true;
 }
 
-void throwResult(JNIEnv* env, const spectrafilm::PngWriteResult& result) {
+void throwResult(JNIEnv* env, const argentroom::PngWriteResult& result) {
     if (result.cancelled) {
         throwCancelled(env);
         return;
@@ -267,7 +267,7 @@ JNI_PNG(jlong, nativeWriteBuffer)(JNIEnv* env, jobject /*thiz*/, jobject directB
         if (!validateDirectBuffer(env, directBuffer, width, height, 2u,
                                   alignof(uint16_t), address)) return 0;
 
-        spectrafilm::PngMetadata meta;
+        argentroom::PngMetadata meta;
         std::string path;
         if (!outputPathValue(env, outPath, path)) return 0;
 
@@ -278,10 +278,10 @@ JNI_PNG(jlong, nativeWriteBuffer)(JNIEnv* env, jobject /*thiz*/, jobject directB
             return 0;
         }
         if (!buildMeta(env, software, iccBytes, meta)) return 0;
-        spectrafilm::PngCancellation cancellation{&javaCancellation, JavaCancellation::poll};
-        const spectrafilm::PngCancellation* cancellationPtr =
+        argentroom::PngCancellation cancellation{&javaCancellation, JavaCancellation::poll};
+        const argentroom::PngCancellation* cancellationPtr =
             javaCancellation.present() ? &cancellation : nullptr;
-        const spectrafilm::PngWriteResult result = spectrafilm::writePng16ToFile(
+        const argentroom::PngWriteResult result = argentroom::writePng16ToFile(
             static_cast<const uint16_t*>(address), width, height, meta, path,
             cancellationPtr);
         if (javaCancellation.callbackFailed() || env->ExceptionCheck()) return 0;
@@ -304,7 +304,7 @@ JNI_PNG(jlong, nativeWriteFloatBuffer)(JNIEnv* env, jobject /*thiz*/, jobject di
         if (!validateDirectBuffer(env, directBuffer, width, height, 4u,
                                   alignof(float), address)) return 0;
 
-        spectrafilm::PngMetadata meta;
+        argentroom::PngMetadata meta;
         std::string path;
         if (!outputPathValue(env, outPath, path)) return 0;
 
@@ -315,10 +315,10 @@ JNI_PNG(jlong, nativeWriteFloatBuffer)(JNIEnv* env, jobject /*thiz*/, jobject di
             return 0;
         }
         if (!buildMeta(env, software, iccBytes, meta)) return 0;
-        spectrafilm::PngCancellation cancellation{&javaCancellation, JavaCancellation::poll};
-        const spectrafilm::PngCancellation* cancellationPtr =
+        argentroom::PngCancellation cancellation{&javaCancellation, JavaCancellation::poll};
+        const argentroom::PngCancellation* cancellationPtr =
             javaCancellation.present() ? &cancellation : nullptr;
-        const spectrafilm::PngWriteResult result = spectrafilm::writePngFloatToFile(
+        const argentroom::PngWriteResult result = argentroom::writePngFloatToFile(
             static_cast<const float*>(address), width, height, meta, path,
             cancellationPtr);
         if (javaCancellation.callbackFailed() || env->ExceptionCheck()) return 0;
@@ -345,7 +345,7 @@ JNI_PNG(jlong, nativeWriteShorts)(JNIEnv* env, jobject /*thiz*/, jshortArray rgb
             throwIae(env, "pixel short array is too small for packed RGB pixels");
             return 0;
         }
-        spectrafilm::PngMetadata meta;
+        argentroom::PngMetadata meta;
         std::string path;
         if (!outputPathValue(env, outPath, path)) return 0;
 
@@ -362,10 +362,10 @@ JNI_PNG(jlong, nativeWriteShorts)(JNIEnv* env, jobject /*thiz*/, jshortArray rgb
             if (!env->ExceptionCheck()) throwIse(env, "PNG write failed: cannot access pixels");
             return 0;
         }
-        spectrafilm::PngCancellation cancellation{&javaCancellation, JavaCancellation::poll};
-        const spectrafilm::PngCancellation* cancellationPtr =
+        argentroom::PngCancellation cancellation{&javaCancellation, JavaCancellation::poll};
+        const argentroom::PngCancellation* cancellationPtr =
             javaCancellation.present() ? &cancellation : nullptr;
-        const spectrafilm::PngWriteResult result = spectrafilm::writePng16ToFile(
+        const argentroom::PngWriteResult result = argentroom::writePng16ToFile(
             reinterpret_cast<const uint16_t*>(pixels.get()), width, height,
             meta, path, cancellationPtr);
         if (javaCancellation.callbackFailed() || env->ExceptionCheck()) return 0;

@@ -1,10 +1,10 @@
 /*
- * Spektrafilm Android -- LibRaw public-seam libFuzzer target (GPLv3).
+ * Argentroom Android -- LibRaw public-seam libFuzzer target (GPLv3).
  *
  * Adapted from google/oss-fuzz's official LibRaw harness:
  *   https://github.com/google/oss-fuzz/tree/master/projects/libraw
  * That harness establishes the important public seam and memory cap. This
- * variant keeps Spektrafilm's production order (open_buffer -> unpack ->
+ * variant keeps Argentroom's production order (open_buffer -> unpack ->
  * dcraw_process -> dcraw_make_mem_image) and adds explicit input/pixel limits.
  * The separate full-size CTest positive owns deterministic OpenMP-wavelet
  * coverage.

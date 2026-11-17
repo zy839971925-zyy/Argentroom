@@ -5,7 +5,7 @@
 #include <exception>
 #include <new>
 
-namespace spectrafilm::pngjni {
+namespace argentroom::pngjni {
 
 enum class NativeExceptionKind {
     None,
@@ -84,6 +84,6 @@ Result containNativeExceptions(Function&& function,
     return Result{};
 }
 
-}  // namespace spectrafilm::pngjni
+}  // namespace argentroom::pngjni
 
 #endif  // SPECTRAFILM_PNG_WRITER_JNI_BOUNDARY_H

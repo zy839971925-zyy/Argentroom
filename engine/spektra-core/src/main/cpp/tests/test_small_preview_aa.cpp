@@ -1,7 +1,7 @@
 /*
- * Spektrafilm for Android — host parity test for the small_preview (auto-exposure
+ * Argentroom for Android — host parity test for the small_preview (auto-exposure
  * metering downscale) anti-aliasing prefilter.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * ResizingService.small_preview(image, max_size=256) downscales the image the
@@ -26,7 +26,7 @@
  *      rms <= 1e-5).
  *
  * The golden is STAGE-LOCAL (skimage only), so it is independent of the
- * spektrafilm pipeline oracle SHA. Regenerate: tools/parity/gen_small_preview_golden.py.
+ * argentroom pipeline oracle SHA. Regenerate: tools/parity/gen_small_preview_golden.py.
  *
  * Build (host): full source set per tests/README, e.g.
  *   g++ -std=c++17 -O2 -pthread -I <cpp_root> -I <tools/parity> \

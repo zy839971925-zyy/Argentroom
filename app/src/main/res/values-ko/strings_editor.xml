@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Spektrafilm for Android. GPLv3. -->
+<!-- Argentroom for Android. GPLv3. -->
 <!-- Machine-drafted translation (Claude, 2026-11); needs review by a native speaker. -->
 <resources>
     <string name="stock_browser_change">변경</string>
@@ -289,7 +289,7 @@
     <string name="editor_sim_camera_lens_blur">카메라 렌즈 흐림 um</string>
     <string name="editor_sim_camera_lens_blur_tooltip">카메라 렌즈 흐림의 가우스 필터 시그마(um). 공간 효과 — 할레이션이 켜져 있을 때(공간 처리 경로)만 적용됩니다.</string>
     <string name="editor_sim_scene_latitude">장면 관용도</string>
-    <string name="editor_sim_scene_latitude_tooltip">필름보다 넓은 장면을 노광 전에 필름에 맞춥니다. 니를 넘는 하이라이트와 섀도는 부드럽게 압축되고 중간 톤은 그대로입니다. 대비가 높은 휴대폰 DNG에 유용합니다. 원본 spektrafilm에는 없는 기능으로, SpektraLab의 아이디어입니다.</string>
+    <string name="editor_sim_scene_latitude_tooltip">필름보다 넓은 장면을 노광 전에 필름에 맞춥니다. 니를 넘는 하이라이트와 섀도는 부드럽게 압축되고 중간 톤은 그대로입니다. 대비가 높은 휴대폰 DNG에 유용합니다. 원본 argentroom에는 없는 기능으로, SpektraLab의 아이디어입니다.</string>
     <string name="editor_sim_scene_latitude_highlight_knee">하이라이트 니(스톱)</string>
     <string name="editor_sim_scene_latitude_highlight_knee_tooltip">측광한 중간 회색보다 몇 스톱 위에서 하이라이트 압축이 시작되는지. 그 아래는 바뀌지 않습니다.</string>
     <string name="editor_sim_scene_latitude_highlight_room">하이라이트 여유(스톱)</string>
@@ -303,7 +303,7 @@
     <string name="editor_sim_scene_latitude_max_lift">최대 섀도 올림(스톱)</string>
     <string name="editor_sim_scene_latitude_max_lift_tooltip">니보다 얼마나 아래에 있든 가장 깊은 섀도를 밝게 하는 양의 상한. 낮추면 검정이 검정으로 유지됩니다.</string>
     <string name="editor_sim_date_stamp">날짜 각인</string>
-    <string name="editor_sim_date_stamp_tooltip">카메라 데이트백 각인을 네거티브에 노광하여, LED 숫자가 위에 덧붙는 것이 아니라 사진과 함께 현상되고 번지고 그레인이 생깁니다. 원본 spektrafilm에는 없는 기능으로, SpektraLab의 아이디어입니다.</string>
+    <string name="editor_sim_date_stamp_tooltip">카메라 데이트백 각인을 네거티브에 노광하여, LED 숫자가 위에 덧붙는 것이 아니라 사진과 함께 현상되고 번지고 그레인이 생깁니다. 원본 argentroom에는 없는 기능으로, SpektraLab의 아이디어입니다.</string>
     <string name="editor_sim_date_stamp_text">각인 내용</string>
     <string name="editor_sim_date_stamp_text_help">숫자, 공백, \' - . : / 만 가능</string>
     <string name="editor_sim_date_stamp_photo_date">촬영 날짜</string>
@@ -343,7 +343,7 @@
     <string name="editor_sim_print_diffusion">인화 확산 필터</string>
     <string name="editor_sim_scan_lens_blur">스캔 렌즈 흐림 px</string>
     <string name="editor_sim_scan_lens_blur_tooltip">스캐너 렌즈 흐림의 가우스 필터 시그마(픽셀). 공간 효과 — 할레이션이 켜져 있을 때(공간 처리 경로)만 적용됩니다.</string>
-    <string name="editor_sim_scan_correction_noop">스캔 흰색/검은색 보정은 네거티브 필름의 슬라이드 모드에서는 효과가 없습니다 — 슬라이드/포지티브 필름이나 인화 모드에서만 적용됩니다. spektrafilm 엔진과 같습니다.</string>
+    <string name="editor_sim_scan_correction_noop">스캔 흰색/검은색 보정은 네거티브 필름의 슬라이드 모드에서는 효과가 없습니다 — 슬라이드/포지티브 필름이나 인화 모드에서만 적용됩니다. argentroom 엔진과 같습니다.</string>
     <string name="editor_sim_scan_white_correction">스캔 흰색 보정</string>
     <string name="editor_sim_scan_white_correction_tooltip">스캔의 흰색 점을 아래의 목표 흰색 레벨에 고정합니다. 기본값 0.98에서는 미묘하며, 흰색 레벨을 낮추면 하이라이트가 내려가는 것을 볼 수 있습니다.</string>
     <string name="editor_sim_scan_white_level">스캔 흰색 레벨</string>

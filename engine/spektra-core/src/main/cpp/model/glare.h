@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: lognormal viewing glare.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — native engine: lognormal viewing glare.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,7 +8,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Ports spektrafilm/model/glare.py (add_glare,
+ * argentroom. Ports argentroom/model/glare.py (add_glare,
  * compute_random_glare_amount) and the lognormal sampler from
  * spektrafilm/utils/fast_stats.py (fast_lognormal_from_mean_std / fast_lognormal).
  */

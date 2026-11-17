@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — lib:pngwriter 16-bit PNG writer implementation.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — lib:pngwriter 16-bit PNG writer implementation.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  *
  * Writes a valid 16-bit-per-channel RGB PNG stream. Format details:
  *
@@ -76,7 +76,7 @@
 #include <unistd.h>
 #include <zlib.h>
 
-namespace spectrafilm {
+namespace argentroom {
 namespace {
 
 constexpr uint64_t kPngMaxChunkLength = 0x7fffffffull;
@@ -1069,4 +1069,4 @@ PngWriteResult writePngFloatToFile(const float* rgbFloat, int width, int height,
     return writePngRowsToFile(rows, width, height, meta, path, cancellation);
 }
 
-}  // namespace spectrafilm
+}  // namespace argentroom

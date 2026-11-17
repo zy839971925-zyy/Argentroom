@@ -3,7 +3,7 @@
 
 The numeric authority remains the float32 ``.spkvec`` fixtures. These PNGs make
 the same result reviewable by eye and include a deliberately wrong D50 scan plus
-a fixed-scale absolute-difference heatmap. Run only from the pinned spektrafilm
+a fixed-scale absolute-difference heatmap. Run only from the pinned argentroom
 c1d0e44 environment documented in ``tools/parity/README.md``.
 """
 
@@ -52,10 +52,10 @@ def _scan(
     profile: dict, density_cmy: np.ndarray, viewing: str,
     output_space: str = "sRGB", cctf: bool = True,
 ) -> np.ndarray:
-    from spektrafilm.config import STANDARD_OBSERVER_CMFS
-    from spektrafilm.model.emulsion import compute_density_spectral
-    from spektrafilm.model.illuminants import standard_illuminant
-    from spektrafilm.utils.conversions import density_to_light
+    from argentroom.config import STANDARD_OBSERVER_CMFS
+    from argentroom.model.emulsion import compute_density_spectral
+    from argentroom.model.illuminants import standard_illuminant
+    from argentroom.utils.conversions import density_to_light
 
     channel_density = np.asarray(profile["data"]["channel_density"], dtype=np.float64)
     base_density = np.asarray(profile["data"]["base_density"], dtype=np.float64)
@@ -129,42 +129,42 @@ def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def _load_verified_spektrafilm(
+def _load_verified_argentroom(
     checkout_path: Path,
 ) -> tuple[Path, OracleProvenance]:
-    """Load spektrafilm only from the exact clean checkout that was verified."""
+    """Load argentroom only from the exact clean checkout that was verified."""
     provenance = verify_oracle_provenance(checkout_path, ORACLE_COMMIT)
     repository_root = provenance.repository_root
-    package_init = repository_root / "src" / "spektrafilm" / "__init__.py"
+    package_init = repository_root / "src" / "argentroom" / "__init__.py"
     if not package_init.is_file():
         raise OracleProvenanceError(
-            f"verified checkout has no src/spektrafilm package: {repository_root}"
+            f"verified checkout has no src/argentroom package: {repository_root}"
         )
 
     sys.path.insert(0, str(repository_root / "src"))
     previous_dont_write_bytecode = sys.dont_write_bytecode
     sys.dont_write_bytecode = True
     try:
-        import spektrafilm
+        import argentroom
     except Exception as exc:
         raise OracleProvenanceError(
-            f"could not import spektrafilm from {repository_root}: "
+            f"could not import argentroom from {repository_root}: "
             f"{type(exc).__name__}: {exc}"
         ) from exc
     finally:
         sys.dont_write_bytecode = previous_dont_write_bytecode
 
-    imported_file = getattr(spektrafilm, "__file__", None)
+    imported_file = getattr(argentroom, "__file__", None)
     if imported_file is None:
         raise OracleProvenanceError(
-            "imported spektrafilm has no concrete source file"
+            "imported argentroom has no concrete source file"
         )
     imported_provenance = verify_oracle_provenance(
         Path(imported_file), ORACLE_COMMIT
     )
     if imported_provenance.repository_root != repository_root:
         raise OracleProvenanceError(
-            "spektrafilm import resolved from a different checkout: "
+            "argentroom import resolved from a different checkout: "
             f"verified {repository_root}; imported "
             f"{imported_provenance.repository_root}"
         )
@@ -174,17 +174,17 @@ def _load_verified_spektrafilm(
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--spektrafilm-src", type=Path, required=True,
-        help="pinned spektrafilm checkout root (must be c1d0e44)",
+        "--argentroom-src", type=Path, required=True,
+        help="pinned argentroom checkout root (must be c1d0e44)",
     )
     args = parser.parse_args(argv)
     try:
-        _, oracle_provenance = _load_verified_spektrafilm(
-            args.spektrafilm_src
+        _, oracle_provenance = _load_verified_argentroom(
+            args.argentroom_src
         )
     except OracleProvenanceError as exc:
         sys.stderr.write(
-            "ERROR: refusing unverified spektrafilm oracle checkout.\n"
+            "ERROR: refusing unverified argentroom oracle checkout.\n"
             f"  {exc}\n"
         )
         return 2

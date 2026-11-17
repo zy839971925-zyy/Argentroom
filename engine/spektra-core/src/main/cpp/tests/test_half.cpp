@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android — host test for fp16 conversion (kernels/half). GPLv3.
+ * Argentroom for Android — host test for fp16 conversion (kernels/half). GPLv3.
  * Film modeling powered by spektrafilm.
  *
  * Validates the scalar IEEE-754 binary16 round-trip (exact for representable values,

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Spektrafilm for Android - generate a statistical reference for the SUBLAYER
+# Argentroom for Android - generate a statistical reference for the SUBLAYER
 # film-grain particle model (model/grain.py::apply_grain_to_density_layers +
 # add_micro_structure), exercised through apply_grain with sublayers_active=True
 # (the real GrainParams default).
@@ -35,7 +35,7 @@ sys.path.insert(0, os.path.join(HERE, "..", "..", "..", "..", "..", "..",
 import spkvec  # noqa: E402
 
 from gen_grain_ref import digested_grain_params  # noqa: E402
-from spektrafilm.model.grain import apply_grain  # noqa: E402
+from argentroom.model.grain import apply_grain  # noqa: E402
 
 # Realistic full-resolution pixel size (µm/px). At the 64px parity image's huge
 # pixel_size_um (~547µm) the dye-cloud and micro-structure blurs are sub-pixel and

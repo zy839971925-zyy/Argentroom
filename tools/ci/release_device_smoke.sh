@@ -30,7 +30,7 @@ adb install --no-streaming -r candidate/engine-boundary-debug-androidTest.apk
 
 set +e
 adb shell am instrument -w -r \
-  com.spectrafilm.engine.test/com.spectrafilm.engine.EngineBoundaryInstrumentation \
+  com.argentroom.engine.test/com.argentroom.engine.EngineBoundaryInstrumentation \
   | tee build/device-smoke/engine-boundary-instrumentation.txt
 ENGINE_INSTRUMENT_STATUS=${PIPESTATUS[0]}
 set -e
@@ -51,7 +51,7 @@ printf 'PASS\n' \
   > build/device-smoke/engine-boundary-instrumentation-api35.txt
 
 mapfile -t INSTALLED_PATHS < <(
-  adb shell pm path com.spectrafilm.app \
+  adb shell pm path com.argentroom.app \
     | tr -d '\r' | sed 's/^package://'
 )
 mapfile -t BASE_PATHS < <(
@@ -69,7 +69,7 @@ sha256sum signed/app-release.apk \
 
 set +e
 adb shell am instrument -w -r \
-  com.spectrafilm.app.test/com.spectrafilm.app.ReleaseCandidateSmokeInstrumentation \
+  com.argentroom.app.test/com.argentroom.app.ReleaseCandidateSmokeInstrumentation \
   | tee build/device-smoke/instrumentation.txt
 INSTRUMENT_STATUS=${PIPESTATUS[0]}
 set -e
@@ -87,17 +87,17 @@ if grep -Fq 'RELEASE_CANDIDATE_INSTRUMENTATION: FAIL' \
   exit 1
 fi
 
-adb shell am force-stop com.spectrafilm.app
+adb shell am force-stop com.argentroom.app
 adb shell am start -W -S \
-  -n com.spectrafilm.app/.MainActivity \
+  -n com.argentroom.app/.MainActivity \
   | tee build/device-smoke/activity-start.txt
 grep -F 'Status: ok' build/device-smoke/activity-start.txt
 adb shell dumpsys activity activities \
   > build/device-smoke/dumpsys-activities.txt
 grep -E 'topResumedActivity=|ResumedActivity:' \
   build/device-smoke/dumpsys-activities.txt \
-  | grep -F 'com.spectrafilm.app/.MainActivity'
-APP_PID="$(adb shell pidof -s com.spectrafilm.app | tr -d '\r')"
+  | grep -F 'com.argentroom.app/.MainActivity'
+APP_PID="$(adb shell pidof -s com.argentroom.app | tr -d '\r')"
 if [[ ! "$APP_PID" =~ ^[0-9]+$ ]]; then
   echo "::error::Exact candidate process is not alive after cold launch"
   exit 1

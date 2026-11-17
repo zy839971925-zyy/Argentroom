@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android -- native RAW result ownership registry.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android -- native RAW result ownership registry.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  */
 #ifndef SFRAW_NATIVE_ALLOCATION_REGISTRY_H
 #define SFRAW_NATIVE_ALLOCATION_REGISTRY_H

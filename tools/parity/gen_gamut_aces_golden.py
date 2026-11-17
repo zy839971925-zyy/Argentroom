@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-# Spektrafilm for Android — generate the ACES RGC v1.3 output-gamut-compression
+# Argentroom for Android — generate the ACES RGC v1.3 output-gamut-compression
 # parity golden (model/gamut_compression.cpp::compress_rgb_aces_rgc / reinhard_knee)
 # from the upstream oracle utils/gamut_compression.py. GPLv3. Film modeling powered
-# by spektrafilm.
+# by argentroom.
 #
 # The oracle's per-channel ACES Reference Gamut Compression v1.3 IS the spec for the
 # native port. These cases pin compress_rgb_aces_rgc over a spread of in/out-of-gamut

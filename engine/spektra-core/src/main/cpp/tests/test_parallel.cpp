@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — thread-count invariance (determinism) test.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — thread-count invariance (determinism) test.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * The per-pixel engine stages (expose / scan / print_expose) are parallelized
@@ -39,7 +39,7 @@
 
 namespace {
 
-const char* kAssetDir = "/home/user/spektrafilm/src/spektrafilm/data";
+const char* kAssetDir = "/home/user/spektrafilm/src/argentroom/data";
 const char* kInputF64 =
     "/home/user/Spectrafilmandroid/engine/spektra-core/src/main/cpp/tests/"
     "scan_portra_input_rgb.f64";

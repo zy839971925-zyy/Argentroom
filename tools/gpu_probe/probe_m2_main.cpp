@@ -1,7 +1,7 @@
 /*
- * Spektrafilm for Android — on-device GPU numeric probe M2 (#147, filming +
+ * Argentroom for Android — on-device GPU numeric probe M2 (#147, filming +
  * printing integrals; extends the #135 E3 scan measurement). GPLv3.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software

@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — host test: FFT convolution == the direct PSF loop.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — host test: FFT convolution == the direct PSF loop.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * Gates kernels/fft_convolve.cpp against a reference transcribed VERBATIM from

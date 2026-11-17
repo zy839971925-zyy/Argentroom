@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Hand-written Silverphase phone-editor strings (chrome, materials, help) and the XML writer.
 Help texts: source noted per entry. iOS = Silverphase v1.2.5 modern_UI .help()/Strings.swift;
-SF = Spektrafilm-for-Android tooltip of the same engine parameter (values/strings_*.xml).
+SF = Argentroom-for-Android tooltip of the same engine parameter (values/strings_*.xml).
 Where the Silverphase row rescales a parameter, the text is reworded for the row's scale and
 kept conservative (no physical claim beyond the source)."""
 import json, sys
@@ -34,7 +34,7 @@ EXTRA = {
  'sp_settings': ('设置', 'Settings'),
  'sp_about': ('关于', 'About'),
  'sp_more_tools_title': ('更多工具', 'More Tools'),
- 'sp_more_tools_caption': ('Spektrafilm for Android 原有的工具，Silverphase iOS 没有对应界面；参数与上方七项工艺共用同一配方。', 'Tools from Spektrafilm for Android that Silverphase iOS has no screen for; they edit the same recipe as the seven stages.'),
+ 'sp_more_tools_caption': ('Argentroom for Android 原有的工具，Silverphase iOS 没有对应界面；参数与上方七项工艺共用同一配方。', 'Tools from Argentroom for Android that Silverphase iOS has no screen for; they edit the same recipe as the seven stages.'),
  'sp_back': ('返回', 'Back'),
  'sp_state_original': ('原图', 'Original'),
  'sp_state_exporting': ('正在导出', 'Exporting'),

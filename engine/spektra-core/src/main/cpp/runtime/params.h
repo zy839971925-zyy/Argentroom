@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: minimal digested filming params.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — native engine: minimal digested filming params.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,7 +8,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. A tiny subset of spektrafilm/runtime/params_builder.py
+ * argentroom. A tiny subset of argentroom/runtime/params_builder.py
  * (init_params + digest_params) sufficient for the filming stage under the
  * parity goldens' toggles (auto-exposure off, spatial+stochastic effects off).
  *
@@ -37,7 +37,7 @@ class Lut3DCache;
 // to a baked RGB->XYZ matrix (apply_cctf_decoding=False, CAT02 to the film's
 // reference illuminant) inside the filming stage.
 enum class InputColorSpace {
-    kProPhotoRGB,   // "ProPhoto RGB" (linear) — the spektrafilm default input.
+    kProPhotoRGB,   // "ProPhoto RGB" (linear) — the argentroom default input.
 };
 
 // Camera tone (Silverphase pipeline/scene_latitude.cpp node_camera_tone +
@@ -153,7 +153,7 @@ struct FilmingParams {
     // filter), not the fit; an attempt that only adds components is already answered.
     //
     // Kept wired rather than deleted because the pass, the fit and the probe are the
-    // evidence for the next attempt; see docs/research/spektrafilm-ofx-port.md.
+    // evidence for the next attempt; see docs/research/argentroom-ofx-port.md.
     // The two POINTWISE filming halves on the GPU (#218): expose and the
     // density-curve develop. Separate from the spatial latches above because
     // they are a different kind of pass -- no neighbourhood, no scratch, and no

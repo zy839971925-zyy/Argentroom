@@ -3,7 +3,7 @@
 The output-colour-space ICC profiles the app embeds on 16-bit TIFF and PNG export
 (`lib:tiffwriter`, `lib:pngwriter`) so that ICC-aware viewers display the pixels with the
 correct colour interpretation. The mapping from output space to file is
-`app/src/main/java/com/spectrafilm/app/OutputDescriptor.kt`; only the six files below ship.
+`app/src/main/java/com/argentroom/app/OutputDescriptor.kt`; only the six files below ship.
 
 Files are kept under their **original upstream names** so they stay traceable to the source
 repositories.

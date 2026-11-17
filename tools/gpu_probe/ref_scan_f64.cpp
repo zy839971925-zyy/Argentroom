@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — GPU device probe: f64 CPU reference. GPLv3.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — GPU device probe: f64 CPU reference. GPLv3.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software

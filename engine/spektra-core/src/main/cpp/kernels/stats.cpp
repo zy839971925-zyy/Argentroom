@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: Poisson + Binomial samplers.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — native engine: Poisson + Binomial samplers.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,7 +8,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Implements kernels/stats.h, mirroring fast_stats.py's
+ * argentroom. Implements kernels/stats.h, mirroring fast_stats.py's
  * fast_poisson / fast_binomial per-element branch structure.
  */
 #include "kernels/stats.h"

@@ -90,7 +90,7 @@ def expected_payload(
     _regular_file(instrumentation_apk, "instrumentation APK")
     _regular_file(engine_instrumentation_apk, "engine boundary instrumentation APK")
     lines = [
-        "schema=spektrafilm-release-gates-v1",
+        "schema=argentroom-release-gates-v1",
         f"version={version}",
         f"release_sha={source_sha}",
         f"run_id={run_id}",

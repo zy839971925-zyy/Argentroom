@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Spektrafilm for Android. GPLv3. -->
+<!-- Argentroom for Android. GPLv3. -->
 <!-- Machine-drafted translation (Claude, 2026-11); needs review by a native speaker. -->
 <resources>
     <string name="screen_back">Voltar</string>
@@ -49,10 +49,10 @@
     <string name="screen_about_doc_libraw_lgpl">LGPL 2.1 do LibRaw</string>
     <string name="screen_about_doc_libraw_cddl">CDDL 1.0 do LibRaw</string>
     <string name="screen_about_legal_text_unavailable">Não foi possível abrir o texto legal incluído. Consulte %1$s para a fonte oficial.</string>
-    <string name="screen_howto_title">Como usar o Spektrafilm</string>
+    <string name="screen_howto_title">Como usar o Argentroom</string>
     <string name="screen_howto_step_number">Passo %1$d</string>
-    <string name="screen_howto_s1_title">O que é o Spektrafilm</string>
-    <string name="screen_howto_s1_p1">O Spektrafilm é um simulador espectral de filme baseado em física. Diferente de um filtro simples ou de uma tabela de consulta, ele modela o processo analógico real: um negativo virtual é exposto à luz da sua foto, revelado em um banho químico, opcionalmente ampliado em papel de cópia em um laboratório e digitalizado de volta em um arquivo digital, tudo guiado por dados espectrais medidos de filmes reais.</string>
+    <string name="screen_howto_s1_title">O que é o Argentroom</string>
+    <string name="screen_howto_s1_p1">O Argentroom é um simulador espectral de filme baseado em física. Diferente de um filtro simples ou de uma tabela de consulta, ele modela o processo analógico real: um negativo virtual é exposto à luz da sua foto, revelado em um banho químico, opcionalmente ampliado em papel de cópia em um laboratório e digitalizado de volta em um arquivo digital, tudo guiado por dados espectrais medidos de filmes reais.</string>
     <string name="screen_howto_s1_p2">O resultado é uma reprodução fiel de cor, grão, halação e química dos corantes que corresponde ao que você teria em um laboratório real, não uma aproximação.</string>
     <string name="screen_howto_attribution">Film modeling powered by spektrafilm (Andrea Volpato).</string>
     <string name="screen_howto_s2_title">Abrindo uma foto</string>
@@ -139,7 +139,7 @@
     <string name="screen_howto_s9_step4">A exposição automática mede para o cinza médio. Se o assunto for mais claro ou mais escuro que o cinza médio, talvez você queira mexer no controle de exposição manualmente depois.</string>
     <string name="screen_howto_s9_step5">O grão é estocástico (aleatório). A prévia pode parecer um pouco diferente a cada renderização; a exportação é sempre a versão definitiva em resolução total.</string>
     <string name="screen_howto_s10_title">Créditos</string>
-    <string name="screen_howto_s10_p1">Film modeling powered by spektrafilm (Andrea Volpato). A ciência, os perfis dos filmes e as LUTs espectrais são obra de Andrea; o Spektrafilm é uma portabilidade nativa para Android desse motor, verificada bit a bit contra o original.</string>
+    <string name="screen_howto_s10_p1">Film modeling powered by spektrafilm (Andrea Volpato). A ciência, os perfis dos filmes e as LUTs espectrais são obra de Andrea; o Argentroom é uma portabilidade nativa para Android desse motor, verificada bit a bit contra o original.</string>
     <string name="screen_howto_s10_p2">Matemática de cor do colour-science. Decodificação RAW pelo LibRaw. Software livre sob a GPLv3.</string>
     <string name="screen_settings_title">Configurações</string>
     <string name="screen_settings_appearance">Aparência</string>
@@ -190,7 +190,7 @@
     <string name="update_try_again">Tentar de novo</string>
     <string name="update_open_release_page">Abrir página da versão</string>
     <string name="update_downloading">Baixando… %1$d%%</string>
-    <string name="update_verifying">Verificando se o download é uma versão autêntica do Spektrafilm…</string>
+    <string name="update_verifying">Verificando se o download é uma versão autêntica do Argentroom…</string>
     <string name="update_installing">Confirme a atualização no instalador do Android.</string>
     <string name="update_failed_download">O download não terminou. Verifique sua conexão e tente de novo.</string>
     <string name="update_failed_signer">Esta cópia do app foi assinada com uma chave diferente da versão publicada (por exemplo, uma cópia de depuração ou compilada por você), então o Android não consegue atualizá-la direto. Instale a versão pela página do GitHub.</string>
@@ -255,7 +255,7 @@
     <string name="export_format_scene_linear_tiff">Entrada linear de cena (TIFF de 32 bits)</string>
     <string name="library_title">Biblioteca</string>
     <string name="library_empty_title">Escolha uma pasta para navegar</string>
-    <string name="library_empty_body">Escolha uma pasta de arquivos RAW ou fotos, como a pasta DCIM da câmera ou um cartão SD. O Spektrafilm só lê a pasta.</string>
+    <string name="library_empty_body">Escolha uma pasta de arquivos RAW ou fotos, como a pasta DCIM da câmera ou um cartão SD. O Argentroom só lê a pasta.</string>
     <string name="library_choose_folder">Escolher pasta</string>
     <string name="library_change_folder">Trocar pasta</string>
     <string name="library_refresh">Atualizar</string>
@@ -268,7 +268,7 @@
     <string name="library_badge_edited">Editada</string>
     <string name="library_cell_edited_desc">%1$s, editada</string>
     <string name="library_save_sidecars">Salvar edições ao lado das fotos</string>
-    <string name="library_sidecars_need_access">Para salvar arquivos de edição nesta pasta, escolha-a novamente e permita que o Spektrafilm a altere. Suas fotos nunca são alteradas.</string>
+    <string name="library_sidecars_need_access">Para salvar arquivos de edição nesta pasta, escolha-a novamente e permita que o Argentroom a altere. Suas fotos nunca são alteradas.</string>
     <string name="library_sidecars_none">Não há fotos editadas para salvar.</string>
     <plurals name="library_sidecars_saved">
         <item quantity="one">%1$d arquivo de edição salvo ao lado da foto.</item>

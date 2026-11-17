@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: enlarger dichroic color filters.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — native engine: enlarger dichroic color filters.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,7 +8,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Ports the subset of spektrafilm/model/color_filters.py the print
+ * argentroom. Ports the subset of argentroom/model/color_filters.py the print
  * (enlarger) route uses:
  *   - the "custom" dichroic C/M/Y filter spectra (DichroicFilters(brand='custom')),
  *   - DichroicFilters.apply_cc / color_enlarger: dim each dichroic filter by the

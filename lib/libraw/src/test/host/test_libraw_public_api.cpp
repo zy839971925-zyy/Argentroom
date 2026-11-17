@@ -1,6 +1,6 @@
 /*
- * Spektrafilm Android -- LibRaw 0.22.2 hostile-input public-seam regressions.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom Android -- LibRaw 0.22.2 hostile-input public-seam regressions.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  */
 #include "public_api_test_support.h"
 

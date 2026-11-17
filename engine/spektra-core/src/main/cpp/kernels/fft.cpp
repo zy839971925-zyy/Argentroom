@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: deterministic radix-2 complex FFT.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3 (see fft.h).
+ * Argentroom for Android — native engine: deterministic radix-2 complex FFT.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3 (see fft.h).
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * Iterative Cooley-Tukey, decimation-in-time, in-place after a bit-reversal

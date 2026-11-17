@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Spektrafilm for Android. GPLv3. -->
+<!-- Argentroom for Android. GPLv3. -->
 <!-- Machine-drafted translation (Claude, 2026-11); needs review by a native speaker. -->
 <resources>
     <string name="stock_browser_change">Ändern</string>
@@ -291,7 +291,7 @@
     <string name="editor_sim_camera_lens_blur">Objektivunschärfe der Kamera (µm)</string>
     <string name="editor_sim_camera_lens_blur_tooltip">Sigma des Gauß-Filters in µm für die Objektivunschärfe der Kamera. Räumlicher Effekt: wird nur angewendet, wenn Lichthof aktiviert ist (der räumliche Zweig).</string>
     <string name="editor_sim_scene_latitude">Szenenspielraum</string>
-    <string name="editor_sim_scene_latitude_tooltip">Passt eine Szene, die breiter als der Film ist, vor der Belichtung in ihn ein: Lichter und Tiefen jenseits der Knie werden sanft komprimiert, Mitteltöne bleiben unberührt. Nützlich für kontrastreiche Smartphone-DNGs. Nicht Teil des ursprünglichen spektrafilm; Idee von SpektraLab.</string>
+    <string name="editor_sim_scene_latitude_tooltip">Passt eine Szene, die breiter als der Film ist, vor der Belichtung in ihn ein: Lichter und Tiefen jenseits der Knie werden sanft komprimiert, Mitteltöne bleiben unberührt. Nützlich für kontrastreiche Smartphone-DNGs. Nicht Teil des ursprünglichen argentroom; Idee von SpektraLab.</string>
     <string name="editor_sim_scene_latitude_highlight_knee">Lichter-Knie (Blenden)</string>
     <string name="editor_sim_scene_latitude_highlight_knee_tooltip">Blenden über dem gemessenen Mittelgrau, ab denen die Lichterkompression beginnt. Darunter ändert sich nichts.</string>
     <string name="editor_sim_scene_latitude_highlight_room">Lichter-Spielraum (Blenden)</string>
@@ -305,7 +305,7 @@
     <string name="editor_sim_scene_latitude_max_lift">Max. Tiefenanhebung (Blenden)</string>
     <string name="editor_sim_scene_latitude_max_lift_tooltip">Obergrenze dafür, wie weit die tiefsten Schatten aufgehellt werden, egal wie weit unter dem Knie sie liegen. Niedriger hält Schwarz schwarz.</string>
     <string name="editor_sim_date_stamp">Datumsrückwand</string>
-    <string name="editor_sim_date_stamp_tooltip">Belichtet den Aufdruck einer Kamera-Datumsrückwand auf das Negativ, sodass die LED-Ziffern mit dem Bild entwickelt werden, leuchten und Korn bekommen, statt obendrauf geklebt zu sein. Nicht Teil des ursprünglichen spektrafilm; Idee von SpektraLab.</string>
+    <string name="editor_sim_date_stamp_tooltip">Belichtet den Aufdruck einer Kamera-Datumsrückwand auf das Negativ, sodass die LED-Ziffern mit dem Bild entwickelt werden, leuchten und Korn bekommen, statt obendrauf geklebt zu sein. Nicht Teil des ursprünglichen argentroom; Idee von SpektraLab.</string>
     <string name="editor_sim_date_stamp_text">Aufdruck</string>
     <string name="editor_sim_date_stamp_text_help">Nur Ziffern, Leerzeichen und \' - . : /</string>
     <string name="editor_sim_date_stamp_photo_date">Fotodatum</string>
@@ -345,7 +345,7 @@
     <string name="editor_sim_print_diffusion">Diffusionsfilter beim Abzug</string>
     <string name="editor_sim_scan_lens_blur">Objektivunschärfe des Scanners (px)</string>
     <string name="editor_sim_scan_lens_blur_tooltip">Sigma des Gauß-Filters in Pixeln für die Objektivunschärfe des Scanners. Räumlicher Effekt: wird nur angewendet, wenn Lichthof aktiviert ist (der räumliche Zweig).</string>
-    <string name="editor_sim_scan_correction_noop">Die Weiß-/Schwarzkorrektur des Scans wirkt im Diamodus auf einem Negativfilm nicht: Sie gilt nur für Dia-/Positivfilm oder im Abzugsmodus. Entspricht der spektrafilm-Engine.</string>
+    <string name="editor_sim_scan_correction_noop">Die Weiß-/Schwarzkorrektur des Scans wirkt im Diamodus auf einem Negativfilm nicht: Sie gilt nur für Dia-/Positivfilm oder im Abzugsmodus. Entspricht der argentroom-Engine.</string>
     <string name="editor_sim_scan_white_correction">Weißkorrektur des Scans</string>
     <string name="editor_sim_scan_white_correction_tooltip">Setzt den Weißpunkt des Scans auf das Ziel-Weißniveau unten. Beim Standard 0,98 dezent: Senke das Weißniveau, um zu sehen, wie es die Lichter herunterzieht.</string>
     <string name="editor_sim_scan_white_level">Weißniveau des Scans</string>

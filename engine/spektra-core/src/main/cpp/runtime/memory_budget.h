@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — process-wide native memory admission and diagnostics.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — process-wide native memory admission and diagnostics.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  */
 #ifndef SPK_RUNTIME_MEMORY_BUDGET_H
 #define SPK_RUNTIME_MEMORY_BUDGET_H

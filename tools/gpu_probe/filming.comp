@@ -1,5 +1,5 @@
 #version 450
-// Spektrafilm for Android — GPU device probe: FILMING per-pixel kernel (#147 M2). GPLv3.
+// Argentroom for Android — GPU device probe: FILMING per-pixel kernel (#147 M2). GPLv3.
 // Film modeling powered by spektrafilm.
 //
 // PROBE-ONLY shader (lives under tools/, not engine/): fp32 port of the filming

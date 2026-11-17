@@ -13,7 +13,7 @@ from pathlib import Path
 from unittest import mock
 
 SCRIPT = Path(__file__).resolve().parents[1] / "libraw_bundle.py"
-SPEC = importlib.util.spec_from_file_location("spektrafilm_libraw_bundle", SCRIPT)
+SPEC = importlib.util.spec_from_file_location("argentroom_libraw_bundle", SCRIPT)
 if SPEC is None or SPEC.loader is None:
     raise RuntimeError(f"cannot load compliance tool: {SCRIPT}")
 BUNDLE_TOOL = importlib.util.module_from_spec(SPEC)
@@ -163,7 +163,7 @@ class FixtureRepository:
             " old reviewed line\n"
         ).encode()
         notice = (
-            "// Modified by Spektrafilm Android contributors, 2026-08-30; see the\n"
+            "// Modified by Argentroom Android contributors, 2026-08-30; see the\n"
             "// corresponding source distribution's bundled patch manifest.\n"
         )
         patch_parts: list[str] = []
@@ -177,7 +177,7 @@ class FixtureRepository:
                     f"+++ b/{relative}\n",
                     "@@ -1 +1,3 @@\n",
                     f"-{old}\n",
-                    "+// Modified by Spektrafilm Android contributors, 2026-08-30; see the\n",
+                    "+// Modified by Argentroom Android contributors, 2026-08-30; see the\n",
                     "+// corresponding source distribution's bundled patch manifest.\n",
                     f"+{new}\n",
                 )
@@ -296,7 +296,7 @@ endfunction()
             ),
             "recorded_at": "2026-08-30T00:00:00Z",
             "route": route,
-            "schema": "spektrafilm.libraw-license-decision/v1",
+            "schema": "argentroom.libraw-license-decision/v1",
         }
         self.decision_path = compliance_dir / "license-decision.json"
         self.decision_path.write_bytes(_canonical_json(decision))
@@ -359,23 +359,23 @@ endfunction()
             f"{markdown_marker}\nfixture dependency record\n{route_prose}",
             encoding="utf-8",
         )
-        legal_assets = root / "app/src/main/assets/legal/spektrafilm"
+        legal_assets = root / "app/src/main/assets/legal/argentroom"
         legal_assets.mkdir(parents=True)
         (legal_assets / "NOTICE.md").write_bytes((root / "NOTICE.md").read_bytes())
         (legal_assets / "LICENSE.GPL-3.0").write_bytes((root / "LICENSE").read_bytes())
-        about = root / "app/src/main/java/com/spectrafilm/app"
+        about = root / "app/src/main/java/com/argentroom/app"
         about.mkdir(parents=True)
         (about / "AboutScreen.kt").write_text(
             f'internal const val LIBRAW_DISTRIBUTION_ROUTE = "{route}"\n{route_prose}',
             encoding="utf-8",
         )
-        about_test = root / "app/src/test/java/com/spectrafilm/app"
+        about_test = root / "app/src/test/java/com/argentroom/app"
         about_test.mkdir(parents=True)
         (about_test / "AboutLegalNoticeTest.kt").write_text(
             f'assertEquals("{route}", LIBRAW_DISTRIBUTION_ROUTE)\n{route_prose}',
             encoding="utf-8",
         )
-        kotlin_source = root / "lib/libraw/src/main/kotlin/com/spectrafilm/libraw"
+        kotlin_source = root / "lib/libraw/src/main/kotlin/com/argentroom/libraw"
         kotlin_source.mkdir(parents=True)
         for name in ("RawDecoder.kt", "RawCoilDecoder.kt"):
             (kotlin_source / name).write_text(f"fixture {name}\n", encoding="utf-8")
@@ -424,7 +424,7 @@ class LibRawBundleCliTest(unittest.TestCase):
                 self.assertEqual(
                     (
                         b"prior hardening line\n"
-                        b"// Modified by Spektrafilm Android contributors, 2026-08-30; see the\n"
+                        b"// Modified by Argentroom Android contributors, 2026-08-30; see the\n"
                         b"// corresponding source distribution's bundled patch manifest.\n"
                         b"new reviewed line\n"
                     ),
@@ -646,11 +646,11 @@ class LibRawBundleCliTest(unittest.TestCase):
     def test_route_audit_rejects_offline_legal_asset_drift(self) -> None:
         cases = (
             (
-                "app/src/main/assets/legal/spektrafilm/NOTICE.md",
+                "app/src/main/assets/legal/argentroom/NOTICE.md",
                 "offline app NOTICE asset differs",
             ),
             (
-                "app/src/main/assets/legal/spektrafilm/LICENSE.GPL-3.0",
+                "app/src/main/assets/legal/argentroom/LICENSE.GPL-3.0",
                 "offline app GPL asset differs",
             ),
         )
@@ -1141,7 +1141,7 @@ class LibRawBundleCliTest(unittest.TestCase):
 
             self.assertIn(f"Modification date: `{BUNDLE_TOOL.MODIFICATION_DATE}`", modifications)
             self.assertIn(
-                "Contributor: `Spektrafilm Android contributors`", modifications
+                "Contributor: `Argentroom Android contributors`", modifications
             )
             self.assertIn(f"## Modified upstream files ({BUNDLE_TOOL.MODIFIED_FILE_COUNT})", modifications)
             modified_lines = [

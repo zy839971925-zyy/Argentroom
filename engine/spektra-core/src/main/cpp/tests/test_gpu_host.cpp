@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — host test for the GPU preview fast-path (GPU M1, #146).
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — host test for the GPU preview fast-path (GPU M1, #146).
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * Separate GPU gate (not in the 39-test engine-parity table): exercising the real Vulkan branch

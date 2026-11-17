@@ -1,8 +1,8 @@
 /*
- * Spektrafilm for Android — host parity test for the INPUT gamut compression
+ * Argentroom for Android — host parity test for the INPUT gamut compression
  * (model/gamut_compression.cpp::spectral_locus_xy / compress_pixel_xy and
  * kernels/spectral_upsampling.cpp::remap_tc_lut_for_compression).
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * The oracle's radial xy gamut compression toward the visible spectral locus

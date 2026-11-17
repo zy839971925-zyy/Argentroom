@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — bounded memo for filming transfer-characteristic LUTs.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — bounded memo for filming transfer-characteristic LUTs.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  */
 #ifndef SPK_RUNTIME_TC_LUT_CACHE_H
 #define SPK_RUNTIME_TC_LUT_CACHE_H

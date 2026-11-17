@@ -1,4 +1,4 @@
-/* Spektrafilm for Android -- hostile-input regression tests for the NPY LUT loader. */
+/* Argentroom for Android -- hostile-input regression tests for the NPY LUT loader. */
 #include "io/npy_lut.h"
 
 #include <cstdint>

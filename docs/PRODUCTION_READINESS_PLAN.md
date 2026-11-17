@@ -163,7 +163,7 @@ Primary files:
 
 - `engine/spektra-core/src/main/cpp/runtime/stage_timer.h`
 - render entry points in `engine/spektra-core/src/main/cpp/spektra.cpp`
-- preview/export orchestration in `app/src/main/java/com/spectrafilm/app/MainActivity.kt`
+- preview/export orchestration in `app/src/main/java/com/argentroom/app/MainActivity.kt`
 
 Give every render a context ID and local nested spans. Emit completion status, wall time and stable
 stage identifiers into JSON and Perfetto. Add an overlap test where preview and export run together;

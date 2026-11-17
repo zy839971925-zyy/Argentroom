@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-# Spektrafilm for Android — generate the print-curve morph (s023) parity golden.
-# Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+# Argentroom for Android — generate the print-curve morph (s023) parity golden.
+# Copyright (C) 2026 Argentroom Android contributors. GPLv3.
 # Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
 #
 # Loads the REAL upstream utils/morph_curves.py::apply_print_curves_morph (identical
@@ -11,8 +11,8 @@
 # apply_print_curves_morph (model/morph_curves.cpp) must reproduce.
 #
 # Stage-local: depends only on morph_curves.py + numpy/scipy, not the full pipeline,
-# so it does not require the heavy spektrafilm package import (lensfunpy etc.).
-# Regenerate: python3 gen_print_curves_morph_golden.py <spektrafilm-checkout>
+# so it does not require the heavy argentroom package import (lensfunpy etc.).
+# Regenerate: python3 gen_print_curves_morph_golden.py <argentroom-checkout>
 import argparse
 import hashlib
 import importlib.util
@@ -48,7 +48,7 @@ MORPH = dict(
 
 @dataclass
 class DensityCurvesModel:
-    """Minimal stand-in for spektrafilm.profiles.io.DensityCurvesModel."""
+    """Minimal stand-in for argentroom.profiles.io.DensityCurvesModel."""
     model_type: str = "cdfs"
     centers: np.ndarray = field(default_factory=lambda: np.empty((0, 0)))
     amplitudes: np.ndarray = field(default_factory=lambda: np.empty((0, 0)))
@@ -70,15 +70,15 @@ class DensityCurvesModel:
 
 def _load_oracle_morph(path):
     # Inject stub package modules so morph_curves.py's
-    # `from spektrafilm.profiles.io import DensityCurvesModel` resolves to our stub
-    # without triggering the heavy real spektrafilm package __init__.
-    pkg = types.ModuleType("spektrafilm"); pkg.__path__ = []
-    prof = types.ModuleType("spektrafilm.profiles"); prof.__path__ = []
-    io = types.ModuleType("spektrafilm.profiles.io")
+    # `from argentroom.profiles.io import DensityCurvesModel` resolves to our stub
+    # without triggering the heavy real argentroom package __init__.
+    pkg = types.ModuleType("argentroom"); pkg.__path__ = []
+    prof = types.ModuleType("argentroom.profiles"); prof.__path__ = []
+    io = types.ModuleType("argentroom.profiles.io")
     io.DensityCurvesModel = DensityCurvesModel
-    sys.modules.setdefault("spektrafilm", pkg)
-    sys.modules.setdefault("spektrafilm.profiles", prof)
-    sys.modules.setdefault("spektrafilm.profiles.io", io)
+    sys.modules.setdefault("argentroom", pkg)
+    sys.modules.setdefault("argentroom.profiles", prof)
+    sys.modules.setdefault("argentroom.profiles.io", io)
     spec = importlib.util.spec_from_file_location("oracle_morph_curves", path)
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
@@ -87,9 +87,9 @@ def _load_oracle_morph(path):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("spektrafilm_checkout", type=pathlib.Path,
-                        help=f"clean spektrafilm checkout at {MORPH_COMMIT}")
-    source = parser.parse_args().spektrafilm_checkout / ORACLE_MORPH
+    parser.add_argument("argentroom_checkout", type=pathlib.Path,
+                        help=f"clean argentroom checkout at {MORPH_COMMIT}")
+    source = parser.parse_args().argentroom_checkout / ORACLE_MORPH
     provenance = verify_oracle_provenance(source, MORPH_COMMIT)
     mc = _load_oracle_morph(source)
     profile_bytes = PROFILE.read_bytes()

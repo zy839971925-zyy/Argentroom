@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: minimal dependency-free JSON parser.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — native engine: minimal dependency-free JSON parser.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,11 +8,11 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm.
+ * argentroom.
  *
  * --------------------------------------------------------------------------------
  * A tiny, header-only, NDK-friendly recursive-descent JSON parser. It supports
- * the subset spektrafilm profile JSON uses: objects, arrays, strings, numbers,
+ * the subset argentroom profile JSON uses: objects, arrays, strings, numbers,
  * booleans, and `null` (decoded as NaN for numeric leaves). No external
  * dependencies; standard library only.
  * --------------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android -- banded vs WHOLE-frame seam sweep. GPLv3.
+ * Argentroom for Android -- banded vs WHOLE-frame seam sweep. GPLv3.
  * Film modeling powered by spektrafilm.
  *
  * A banded export must match the whole-frame render of the same frame. #604

@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: opt-in 3D LUT acceleration.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — native engine: opt-in 3D LUT acceleration.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,7 +8,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Implements kernels/lut3d.h — a faithful port of the oracle's
+ * argentroom. Implements kernels/lut3d.h — a faithful port of the oracle's
  * PCHIP 3D LUT path (spektrafilm/utils/fast_interp_lut.py: prepare_lut_pchip_3d
  * + _apply_lut_pchip_3d_prepared, the apply_lut_3d default method='pchip') and
  * the LUT build (spektrafilm/utils/lut.py: _create_lut_3d / compute_with_lut).

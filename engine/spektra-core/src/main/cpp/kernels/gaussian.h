@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: separable 2D Gaussian blur kernel.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — native engine: separable 2D Gaussian blur kernel.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,7 +8,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Ports spektrafilm/utils/fast_gaussian_filter.py.
+ * argentroom. Ports spektrafilm/utils/fast_gaussian_filter.py.
  */
 #ifndef SPK_KERNELS_GAUSSIAN_H
 #define SPK_KERNELS_GAUSSIAN_H
@@ -42,7 +42,7 @@ void gaussian_blur_per_channel(float* img, int w, int h, int channels,
                                float truncate = kGaussianTruncate);
 
 // Convert a spatial blur expressed in micrometres to a sigma in pixels.
-// Spatial effects in spektrafilm are parameterised in physical microns and
+// Spatial effects in argentroom are parameterised in physical microns and
 // converted via the per-pixel size (pixel_size_um); sigma_px = um / pixel_size_um.
 inline float um_to_pixels(float um, float pixel_size_um) {
     return (pixel_size_um > 0.0f) ? (um / pixel_size_um) : 0.0f;

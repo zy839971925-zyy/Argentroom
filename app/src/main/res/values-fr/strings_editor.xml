@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Spektrafilm for Android. GPLv3. -->
+<!-- Argentroom for Android. GPLv3. -->
 <!-- Machine-drafted translation (Claude, 2026-11); needs review by a native speaker. -->
 <resources>
     <string name="stock_browser_change">Changer</string>
@@ -293,7 +293,7 @@
     <string name="editor_sim_camera_lens_blur">Flou d’objectif de l’appareil (µm)</string>
     <string name="editor_sim_camera_lens_blur_tooltip">Sigma du filtre gaussien en µm pour le flou d’objectif de l’appareil. Effet spatial : appliqué seulement quand l’halation est activée (la branche spatiale).</string>
     <string name="editor_sim_scene_latitude">Latitude de scène</string>
-    <string name="editor_sim_scene_latitude_tooltip">Fait tenir sur le film une scène plus étendue que lui avant l’exposition : les hautes lumières et les ombres au-delà des coudes sont compressées en douceur, les tons moyens restent intacts. Utile pour les DNG de smartphone très contrastés. Ne fait pas partie de spektrafilm d’origine ; idée de SpektraLab.</string>
+    <string name="editor_sim_scene_latitude_tooltip">Fait tenir sur le film une scène plus étendue que lui avant l’exposition : les hautes lumières et les ombres au-delà des coudes sont compressées en douceur, les tons moyens restent intacts. Utile pour les DNG de smartphone très contrastés. Ne fait pas partie de argentroom d’origine ; idée de SpektraLab.</string>
     <string name="editor_sim_scene_latitude_highlight_knee">Coude des hautes lumières (IL)</string>
     <string name="editor_sim_scene_latitude_highlight_knee_tooltip">Nombre d’IL au-dessus du gris moyen mesuré où commence la compression des hautes lumières. En dessous, rien ne change.</string>
     <string name="editor_sim_scene_latitude_highlight_room">Marge des hautes lumières (IL)</string>
@@ -307,7 +307,7 @@
     <string name="editor_sim_scene_latitude_max_lift">Relèvement max. des ombres (IL)</string>
     <string name="editor_sim_scene_latitude_max_lift_tooltip">Limite haute de l’éclaircissement des ombres les plus profondes, quelle que soit leur distance sous le coude. Plus bas garde les noirs bien noirs.</string>
     <string name="editor_sim_date_stamp">Dos dateur</string>
-    <string name="editor_sim_date_stamp_tooltip">Expose sur le négatif l’impression d’un dos dateur, pour que les chiffres LED se développent, brillent et prennent du grain avec l’image au lieu d’être collés par-dessus. Ne fait pas partie de spektrafilm d’origine ; idée de SpektraLab.</string>
+    <string name="editor_sim_date_stamp_tooltip">Expose sur le négatif l’impression d’un dos dateur, pour que les chiffres LED se développent, brillent et prennent du grain avec l’image au lieu d’être collés par-dessus. Ne fait pas partie de argentroom d’origine ; idée de SpektraLab.</string>
     <string name="editor_sim_date_stamp_text">Impression</string>
     <string name="editor_sim_date_stamp_text_help">Chiffres, espaces et \' - . : / uniquement</string>
     <string name="editor_sim_date_stamp_photo_date">Date de la photo</string>
@@ -347,7 +347,7 @@
     <string name="editor_sim_print_diffusion">Filtre de diffusion au tirage</string>
     <string name="editor_sim_scan_lens_blur">Flou d’objectif du scanner (px)</string>
     <string name="editor_sim_scan_lens_blur_tooltip">Sigma du filtre gaussien en pixels pour le flou d’objectif du scanner. Effet spatial : appliqué seulement quand l’halation est activée (la branche spatiale).</string>
-    <string name="editor_sim_scan_correction_noop">La correction blanc/noir de la numérisation n’a aucun effet en mode diapositive sur un film négatif : elle ne s’applique qu’à un film inversible/positif ou en mode tirage. Conforme au moteur spektrafilm.</string>
+    <string name="editor_sim_scan_correction_noop">La correction blanc/noir de la numérisation n’a aucun effet en mode diapositive sur un film négatif : elle ne s’applique qu’à un film inversible/positif ou en mode tirage. Conforme au moteur argentroom.</string>
     <string name="editor_sim_scan_white_correction">Correction du blanc de la numérisation</string>
     <string name="editor_sim_scan_white_correction_tooltip">Fixe le point blanc de la numérisation au niveau de blanc cible ci-dessous. Subtil avec la valeur par défaut 0,98 : baissez le niveau de blanc pour le voir abaisser les hautes lumières.</string>
     <string name="editor_sim_scan_white_level">Niveau de blanc de la numérisation</string>

@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android — display pack: float RGB -> 8-bit RGBA. GPLv3.
+ * Argentroom for Android — display pack: float RGB -> 8-bit RGBA. GPLv3.
  * Film modeling powered by spektrafilm.
  *
  * The last step of every preview frame and every 8-bit export: the engine's

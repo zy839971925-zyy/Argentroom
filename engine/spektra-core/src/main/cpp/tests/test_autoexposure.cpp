@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — host parity test for the auto-exposure stage.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — host parity test for the auto-exposure stage.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * Exercises a NON-default auto-exposure setting (camera.auto_exposure = ON,
@@ -44,7 +44,7 @@
 
 namespace {
 
-const char* kAssetDir = "/home/user/spektrafilm/src/spektrafilm/data";
+const char* kAssetDir = "/home/user/spektrafilm/src/argentroom/data";
 const char* kAutoexpGoldenDir =
     "/home/user/Spectrafilmandroid/tools/parity/goldens/scan_portra_autoexp";
 const char* kAutoexpMatrixGoldenDir =

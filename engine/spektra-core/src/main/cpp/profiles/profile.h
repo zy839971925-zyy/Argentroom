@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: film/print Profile struct + loader.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — native engine: film/print Profile struct + loader.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,7 +8,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Ports the parts of spektrafilm/profiles/io.py the scanning stage
+ * argentroom. Ports the parts of argentroom/profiles/io.py the scanning stage
  * consumes: info.type / info.viewing_illuminant and data.{wavelengths,
  * channel_density, base_density, density_curves}. Other fields parsed by the
  * full pipeline (log_sensitivity, log_exposure, ...) are loaded lazily as the
@@ -38,7 +38,7 @@ struct EdrToneMap {
     bool available() const { return version == 1 && target_log2_y.size() >= 2; }
 };
 
-// Mirrors the spektrafilm Profile fields used downstream. Spectral arrays are
+// Mirrors the argentroom Profile fields used downstream. Spectral arrays are
 // stored on the profile's own wavelength grid (the bundled profiles already use
 // the 380..780 @5nm / 81-sample working shape, matching spektra.h). NaN entries
 // in the JSON (`null`) are preserved as NaN so density_to_light zeroes them,
@@ -114,7 +114,7 @@ struct Profile {
     bool is_monochrome() const { return channel_model == "bw"; }
 };
 
-// Load a profile from a JSON file path (the bundled spektrafilm profile format).
+// Load a profile from a JSON file path (the bundled argentroom profile format).
 // Throws std::runtime_error on parse/validation failure.
 Profile load_profile_file(const std::string& json_path);
 

@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — host parity test for the crop/resize geometry stage.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — host parity test for the crop/resize geometry stage.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * Exercises the NON-default crop + cubic-upscale preprocess (the scan_portra_crop
@@ -35,7 +35,7 @@
 
 namespace {
 
-const char* kAssetDir  = "/home/user/spektrafilm/src/spektrafilm/data";
+const char* kAssetDir  = "/home/user/spektrafilm/src/argentroom/data";
 const char* kGoldenDir =
     "/home/user/Spectrafilmandroid/tools/parity/goldens/scan_portra_crop";
 const char* kInputF64  =

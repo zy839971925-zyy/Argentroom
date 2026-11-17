@@ -25,7 +25,7 @@ class OracleRepository:
 
     def __init__(self, root: Path) -> None:
         self.root = root
-        self.package = root / "src" / "spektrafilm"
+        self.package = root / "src" / "argentroom"
         self.package.mkdir(parents=True)
         self.module = self.package / "__init__.py"
         self.module.write_text("fixture = True\n", encoding="utf-8")
@@ -109,7 +109,7 @@ class OracleProvenanceTest(unittest.TestCase):
         )
 
         provenance = GEN_GOLDENS.verify_oracle_provenance(
-            worktree / "src" / "spektrafilm", self.checkout.head
+            worktree / "src" / "argentroom", self.checkout.head
         )
 
         self.assertTrue((worktree / ".git").is_file())
@@ -130,7 +130,7 @@ class OracleProvenanceTest(unittest.TestCase):
         self.checkout.module.write_text("fixture = False\n", encoding="utf-8")
         with self.assertRaisesRegex(
             GEN_GOLDENS.OracleProvenanceError,
-            r"dirty.*src/spektrafilm/__init__\.py",
+            r"dirty.*src/argentroom/__init__\.py",
         ):
             GEN_GOLDENS.verify_oracle_provenance(
                 self.checkout.package, self.checkout.head

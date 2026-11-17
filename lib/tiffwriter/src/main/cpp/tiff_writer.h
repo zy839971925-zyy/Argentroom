@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — lib:tiffwriter native 16-bit TIFF writer.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — lib:tiffwriter native 16-bit TIFF writer.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  *
  * A self-contained, dependency-free baseline TIFF writer for the M2 export path:
  * writes an RGB, 16-bit-per-sample, single-IFD baseline TIFF (little-endian, "II")
@@ -28,7 +28,7 @@
 #include <string>
 #include <vector>
 
-namespace spectrafilm {
+namespace argentroom {
 
 // TIFF compression schemes we support.
 enum class TiffCompression {
@@ -38,7 +38,7 @@ enum class TiffCompression {
 
 // Metadata embedded into the TIFF. All string fields are optional ("" => skipped).
 struct TiffMetadata {
-    std::string software = "Spektrafilm";  // tag 305
+    std::string software = "Argentroom";  // tag 305
     std::string imageDescription;          // tag 270
     std::string artist;                    // tag 315
     std::string copyright;                 // tag 33432
@@ -123,6 +123,6 @@ TiffWriteResult writeTiffFloatToFile(const float* rgbFloat, int width, int heigh
                                      const std::string& path,
                                      const TiffCancellation* cancellation = nullptr);
 
-}  // namespace spectrafilm
+}  // namespace argentroom
 
 #endif  // SPECTRAFILM_TIFF_WRITER_H

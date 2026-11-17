@@ -98,7 +98,7 @@ lib/libraw/
     │   ├── raw_preview.h/.cpp       # embedded camera-JPEG extraction (thumbnails only)
     │   └── pread_datastream.h       # lazy pread() LibRaw datastream for raw_preview
     │       # (LibRaw sources are fetched at configure time, not committed)
-    └── kotlin/com/spectrafilm/libraw/
+    └── kotlin/com/argentroom/libraw/
         ├── RawDecoder.kt            # facade: decodeToLinear(bytes/buffer/fd/stream)
         ├── RawFormats.kt            # the one list of RAW extensions/MIME types we offer
         ├── EmbeddedRawPreview.kt    # camera JPEG from RawDecoder.extractEmbeddedPreview

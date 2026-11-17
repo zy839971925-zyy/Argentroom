@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: spectral constants + CIE CMFs.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — native engine: spectral constants + CIE CMFs.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,7 +8,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Mirrors spektrafilm/config.py (SPECTRAL_SHAPE + the CIE 1931 2deg
+ * argentroom. Mirrors argentroom/config.py (SPECTRAL_SHAPE + the CIE 1931 2deg
  * CMFs) onto the C API's spectral working shape declared in spektra.h.
  */
 #ifndef SPK_MODEL_SPECTRAL_H
@@ -17,7 +17,7 @@
 namespace spk {
 
 // --- Spectral working shape ---------------------------------------------------
-// Mirrors spektrafilm/config.py exactly: SPECTRAL_SHAPE = SpectralShape(380,780,5),
+// Mirrors argentroom/config.py exactly: SPECTRAL_SHAPE = SpectralShape(380,780,5),
 // i.e. 380..780 nm @ 5 nm -> 81 samples. Equals the macros in spektra.h
 // (SPK_SPECTRAL_MIN_NM=380, STEP=5, SAMPLES=81). This governs every spectral
 // buffer's layout across JNI.
@@ -35,7 +35,7 @@ inline int spectral_wavelength_nm(int i) {
 // Row-major [kSpectralSamples][3] = {xbar, ybar, zbar}, aligned to the spectral
 // shape above. Source: colour-science,
 // MSDS_CMFS["CIE 1931 2 Degree Standard Observer"], aligned to
-// SpectralShape(380, 780, 5). These are the exact values used by spektrafilm.
+// SpectralShape(380, 780, 5). These are the exact values used by argentroom.
 extern const float kCieCmf1931[kSpectralSamples][3];
 
 // --- XYZ from a radiance spectrum --------------------------------------------

@@ -1,7 +1,7 @@
 /*
- * Spektrafilm for Android — native engine: print-route digest (neutral CC +
+ * Argentroom for Android — native engine: print-route digest (neutral CC +
  * midgray exposure factor) computed natively for ANY (film, paper) pair.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -9,7 +9,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Replaces the baked per-pair PrintDigest table with a native
+ * argentroom. Replaces the baked per-pair PrintDigest table with a native
  * reproduction of the two inputs the printing stage needs:
  *
  *   1) The neutral dichroic CC values — resolved from

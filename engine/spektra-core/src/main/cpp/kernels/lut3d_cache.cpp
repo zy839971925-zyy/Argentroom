@@ -1,8 +1,8 @@
 /*
- * Spektrafilm for Android — native engine: memo for built 3D LUTs.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3 — see lut3d_cache.h.
+ * Argentroom for Android — native engine: memo for built 3D LUTs.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3 — see lut3d_cache.h.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm.
+ * argentroom.
  */
 #include "kernels/lut3d_cache.h"
 

@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — lib:libraw native decoder (implementation).
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — lib:libraw native decoder (implementation).
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Uses statically included, dual-offered LibRaw; distribution is governed by the
  * bundled decision record and fail-closed release audit.
  *
@@ -104,7 +104,7 @@ static_assert(LIBRAW_VERSION == LIBRAW_MAKE_VERSION(0, 22, 2),
               "sfraw must compile against the audited LibRaw 0.22.2 source");
 #endif
 
-namespace spectrafilm {
+namespace argentroom {
 
 // ---------------------------------------------------------------------------
 // Minimal in-memory TIFF/DNG sniffer.
@@ -2236,7 +2236,7 @@ constexpr double kCat02[9] = {
 //   colour.RGB_to_RGB(rgb, ACES2065-1, ProPhoto RGB,
 //                     apply_cctf_decoding=False, apply_cctf_encoding=False)
 // i.e. a pure 3x3 with the default CAT02 chromatic adaptation (ACES white -> D50)
-// baked in — NO transfer function. The spektrafilm engine's input space is linear
+// baked in — NO transfer function. The argentroom engine's input space is linear
 // ProPhoto RGB, so the decoder emits ProPhoto directly instead of leaving ACES
 // pixels to be mis-read as ProPhoto by the engine.
 //
@@ -2545,7 +2545,7 @@ void applyParityParams(LibRaw& raw, const DecodeOptions& options) {
     p.no_auto_bright = 1;
     p.gamm[0]        = 1.0;   // gamma (1,1) -> linear
     p.gamm[1]        = 1.0;
-    // Built-in wavelet denoise is outside Spektrafilm's parity contract. Pinning
+    // Built-in wavelet denoise is outside Argentroom's parity contract. Pinning
     // zero makes the default explicit and keeps that postprocess path unreachable.
     p.threshold      = 0.0f;
 
@@ -3192,4 +3192,4 @@ DecodeResult decodeFromFd(int, const DecodeOptions& options) {
 
 #endif  // SFRAW_HAVE_LIBRAW
 
-}  // namespace spectrafilm
+}  // namespace argentroom

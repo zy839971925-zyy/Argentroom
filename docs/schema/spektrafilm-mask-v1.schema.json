@@ -1,12 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Spektrafilm mask-set v1",
-  "description": "Canonical JSON emitted for an ordered Spektrafilm local-adjustment mask set.",
+  "title": "Argentroom mask-set v1",
+  "description": "Canonical JSON emitted for an ordered Argentroom local-adjustment mask set.",
   "type": "object",
   "required": ["schema", "version", "adjustments"],
   "properties": {
     "schema": {
-      "const": "org.spektrafilm.mask-set"
+      "const": "org.argentroom.mask-set"
     },
     "version": {
       "const": 1

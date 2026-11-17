@@ -22,9 +22,9 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-$TargetPackage = 'com.spectrafilm.app'
-$TestPackage = 'com.spectrafilm.app.test'
-$Runner = 'com.spectrafilm.app.test/com.spectrafilm.app.ReleaseCandidateSmokeInstrumentation'
+$TargetPackage = 'com.argentroom.app'
+$TestPackage = 'com.argentroom.app.test'
+$Runner = 'com.argentroom.app.test/com.argentroom.app.ReleaseCandidateSmokeInstrumentation'
 $script:AdbPath = $null
 $script:SelectedDevice = $null
 $script:Utf8NoBom = New-Object System.Text.UTF8Encoding($false)

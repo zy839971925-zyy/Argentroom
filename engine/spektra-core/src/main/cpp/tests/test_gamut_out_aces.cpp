@@ -1,7 +1,7 @@
 /*
- * Spektrafilm for Android — host parity test for the ACES RGC v1.3 output gamut
+ * Argentroom for Android — host parity test for the ACES RGC v1.3 output gamut
  * compression (model/gamut_compression.cpp::compress_rgb_aces_rgc / reinhard_knee).
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * The oracle's per-channel ACES Reference Gamut Compression v1.3

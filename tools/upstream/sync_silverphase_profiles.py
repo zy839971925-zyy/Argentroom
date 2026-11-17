@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Rebaseline the bundled spektrafilm profiles + neutral print filters to Silverphase v1.2.5.
+"""Rebaseline the bundled argentroom profiles + neutral print filters to Silverphase v1.2.5.
 
-Spektrafilm for Android, GPLv3. Film modeling powered by spektrafilm.
+Argentroom for Android, GPLv3. Film modeling powered by spektrafilm.
 
 Silverphase v1.2.5 (commit 061fc495, engine/resources/) ships upstream spektrafilm's refit
 profiles and neutral print filter database (andreavolpato/spektrafilm ad5c8d2 "chore: refit

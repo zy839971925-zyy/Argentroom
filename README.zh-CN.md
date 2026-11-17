@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="docs/brand/argentroom-icon.png" width="112" alt="银间 Argentroom 应用图标">
+<img src="docs/brand/argentroom-icon.png" width="112" alt="Argentroom 应用图标">
 
-# 银间 · Argentroom
+# Argentroom
 
 **装进口袋的暗房。用数码拍，用胶片冲。**
 
@@ -22,13 +22,13 @@
 
 ---
 
-## 为什么是银间
+## 为什么是 Argentroom
 
-多数胶片滤镜只是一张颜色 LUT，把像素往某种氛围上推。银间做的是暗房本身：每个像素先变成一段光谱，
+多数胶片滤镜只是一张颜色 LUT，把像素往某种氛围上推。Argentroom 做的是暗房本身：每个像素先变成一段光谱，
 曝光到实测的胶片上，再经放大机投射到实测的相纸上，最后扫描输出。于是 LUT 做不到的东西都留了下来：
 胶片高光怎样柔和地滚降，路灯周围怎样泛起红色光晕，颗粒怎样落在暗部。
 
-「银间」取意银盐之间，也就是成像的那间暗房。
+「Argentroom」由 argent（银）与 room（房间）组成，意思就是成像的那间暗房。
 
 ## 亮点
 
@@ -78,7 +78,7 @@
 （高通 Adreno 与 Arm Mali / Immortalis 均已适配）。
 
 > [!IMPORTANT]
-> 正式版使用银间自己的发布密钥签名。如果你装过**预览版 / 测试版**，请先卸载：Android 不允许跨签名覆盖安装。
+> 正式版使用 Argentroom 自己的发布密钥签名。如果你装过**预览版 / 测试版**，请先卸载：Android 不允许跨签名覆盖安装。
 > 卸载会清除该测试版里的本地编辑记录。
 
 可用每个 Release 附带的 `SHA256SUMS.txt` 校验下载：
@@ -101,14 +101,14 @@ CPU 引擎作为参照。
 
 ## 还原度说明
 
-银间以 spektrafilm 与 Silverphase v1.2.5 为基准，凡有偏离都会写明：
+Argentroom 以 spektrafilm 与 Silverphase v1.2.5 为基准，凡有偏离都会写明：
 
 | 项目 | 行为 | 来源 |
 |---|---|---|
 | 胶片与相纸档案 | 34 份档案，原样再分发 | spektrafilm / Silverphase |
 | 颗粒 | Silverphase v1.2.5 `GrainParams` | Silverphase |
 | 光晕高光余量 | 静态照片默认 4 EV | Silverphase |
-| 余量边缘羽化 | **银间独有。** 对余量增益的边缘做羽化，亮区自然泛光，不再出现断层。应用内帮助已标注。 | 银间 |
+| 余量边缘羽化 | **Argentroom 独有。** 对余量增益的边缘做羽化，亮区自然泛光，不再出现断层。应用内帮助已标注。 | Argentroom |
 
 ## 从源码构建
 
@@ -138,10 +138,10 @@ keyPassword=…
 
 ## 致谢
 
-银间建立在许多人的工作之上，请也去给他们点个 Star。
+Argentroom 建立在许多人的工作之上，请也去给他们点个 Star。
 
 - **[spektrafilm](https://github.com/andreavolpato/spektrafilm)**，作者 **Andrea Volpato**：光谱胶片科学、档案与 LUT。
-- **[Spektrafilm for Android](https://github.com/thetechgeekko/Spektrafilm-android)**，作者 **Akshay Sharma**：银间所基于的安卓应用与 C++/Vulkan 引擎。
+- **[Spektrafilm for Android](https://github.com/thetechgeekko/Spektrafilm-android)**，作者 **Akshay Sharma**：Argentroom 所基于的安卓应用与 C++/Vulkan 引擎。
 - **[Silverphase](https://github.com/akinal5765-byte/Silverphase)** 及其贡献者（akinal5765-byte）：暗房界面、片边、颗粒与光晕行为，以及胶片封面（CC BY-SA 4.0）。
 - **[SpektraLab](https://github.com/JamesQiu2005/SpektraLab)** 与 **[SpektraLab-Android](https://github.com/SAINTTaiYi/SpektraLab-Android)**：Vulkan 参考实现。
 - **[colour-science](https://www.colour-science.org/)**、**[LibRaw](https://www.libraw.org/)**、Google **Material Symbols**，以及 **[pixls.us](https://pixls.us)** 社区。
@@ -153,7 +153,7 @@ keyPassword=…
 代码：**GPL-3.0-or-later**（[LICENSE](LICENSE)）。spektrafilm 档案数据与 LUT、Silverphase 封面：**CC BY-SA 4.0**。
 内置字体：SIL OFL。详见 [NOTICE.md](NOTICE.md)。
 
-银间是**非官方衍生版**，与 spektrafilm、Spektrafilm for Android、Silverphase 的作者无隶属或背书关系。
+Argentroom 是**非官方衍生版**，与 spektrafilm、Spektrafilm for Android、Silverphase 的作者无隶属或背书关系。
 胶片名称为其各自所有者的商标，仅用于说明模拟对象。
 
 依据 GPLv3 §7(b)，任何基于本项目的作品都须保留以下署名：

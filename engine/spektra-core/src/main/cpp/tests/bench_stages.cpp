@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — LOCAL host micro-benchmark for the simulate routes.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — LOCAL host micro-benchmark for the simulate routes.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * PURE LOCAL TOOL. This is NOT a parity gate and is deliberately NOT wired into
@@ -208,7 +208,7 @@ int main(int argc, char** argv) {
         spk_engine_destroy(probe);
     }
 
-    std::printf("bench_stages — Spektrafilm engine route micro-benchmark (LOCAL)\n");
+    std::printf("bench_stages — Argentroom engine route micro-benchmark (LOCAL)\n");
     std::printf("image:   %dx%dx3 synthetic gradient (linear ProPhoto)\n", W, H);
     std::printf("threads: %d (SPK_NUM_THREADS=%s)\n", threads,
                 thr_env ? thr_env : "unset");

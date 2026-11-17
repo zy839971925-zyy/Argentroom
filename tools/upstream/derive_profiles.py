@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Derive the bundled stocks that are an existing profile with different info tags.
 
-Spektrafilm for Android, GPLv3. Film modeling powered by spektrafilm.
+Argentroom for Android, GPLv3. Film modeling powered by spektrafilm.
 
 A derived stock carries no measured data of its own: its spectral arrays and curves are
 a byte-for-byte copy of a bundled base profile, and only a few
 ``info`` tags change. The one case today is CineStill 800T, which is Kodak Vision3 500T
 (5219) with its rem-jet anti-halation backing removed and sold for still cameras. The
-missing backing is the stock's only physical difference, and spektrafilm already models
+missing backing is the stock's only physical difference, and argentroom already models
 it: ``info.antihalation = "no"`` selects the strongest halation preset upstream defines.
 The idea comes from the SpektraLab macOS port (alias profiles, GPLv3, by Hanze Qiu); this
 script builds it our way, as plain profile files the engine and app read unchanged.

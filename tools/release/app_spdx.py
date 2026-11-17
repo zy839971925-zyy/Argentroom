@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate Spektrafilm's deterministic SPDX 2.3 application SBOM.
+"""Generate Argentroom's deterministic SPDX 2.3 application SBOM.
 
 SPDX-License-Identifier: GPL-3.0-only
 
@@ -25,7 +25,7 @@ import tempfile
 import urllib.parse
 from collections.abc import Iterable, Sequence
 
-APP_SPDX_ID = "SPDXRef-Package-Spektrafilm-Android"
+APP_SPDX_ID = "SPDXRef-Package-Argentroom-Android"
 LIBRAW_DOCUMENT_ID = "DocumentRef-LibRaw"
 LIBRAW_WRAPPER_ID = "SPDXRef-Package-sfraw-wrapper"
 EXPECTED_LOCKFILES = (
@@ -744,7 +744,7 @@ def _build_document(
 
     application: dict[str, object] = {
         "SPDXID": APP_SPDX_ID,
-        "name": "Spektrafilm Android",
+        "name": "Argentroom Android",
         "versionInfo": version.removeprefix("v"),
         "downloadLocation": (
             "https://github.com/thetechgeekko/Spektrafilm-android/tree/" + source_sha
@@ -830,11 +830,11 @@ def _build_document(
         "spdxVersion": "SPDX-2.3",
         "dataLicense": "CC0-1.0",
         "SPDXID": "SPDXRef-DOCUMENT",
-        "name": f"Spektrafilm Android {version} application SBOM",
+        "name": f"Argentroom Android {version} application SBOM",
         "documentNamespace": namespace,
         "creationInfo": {
             "created": created,
-            "creators": ["Tool: spektrafilm-app-spdx-v1"],
+            "creators": ["Tool: argentroom-app-spdx-v1"],
         },
         "comment": f"Exact release source Git object: {source_sha}",
         "externalDocumentRefs": [

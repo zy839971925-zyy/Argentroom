@@ -14,22 +14,22 @@ $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $target = (Resolve-Path $TargetApk).Path
 $test = (Resolve-Path $TestApk).Path
 $sourceInputs = @(
-    "app/src/main/java/com/spectrafilm/app/masks/Mask.kt"
-    "app/src/main/java/com/spectrafilm/app/masks/MaskCompositor.kt"
-    "app/src/main/java/com/spectrafilm/app/masks/MaskRaster.kt"
-    "app/src/main/java/com/spectrafilm/app/masks/MaskSpatial.kt"
-    "app/src/main/java/com/spectrafilm/app/masks/MaskTileScratch.kt"
-    "app/src/main/java/com/spectrafilm/app/EngineHelpers.kt"
-    "app/src/main/java/com/spectrafilm/app/AppMemoryBudget.kt"
-    "app/src/test/java/com/spectrafilm/app/masks/MaskTiledCompositorTest.kt"
-    "app/src/androidTest/java/com/spectrafilm/app/Ticket141MaskMemoryChecks.kt"
-    "app/src/androidTest/java/com/spectrafilm/app/ReleaseCandidateSmokeInstrumentation.java"
+    "app/src/main/java/com/argentroom/app/masks/Mask.kt"
+    "app/src/main/java/com/argentroom/app/masks/MaskCompositor.kt"
+    "app/src/main/java/com/argentroom/app/masks/MaskRaster.kt"
+    "app/src/main/java/com/argentroom/app/masks/MaskSpatial.kt"
+    "app/src/main/java/com/argentroom/app/masks/MaskTileScratch.kt"
+    "app/src/main/java/com/argentroom/app/EngineHelpers.kt"
+    "app/src/main/java/com/argentroom/app/AppMemoryBudget.kt"
+    "app/src/test/java/com/argentroom/app/masks/MaskTiledCompositorTest.kt"
+    "app/src/androidTest/java/com/argentroom/app/Ticket141MaskMemoryChecks.kt"
+    "app/src/androidTest/java/com/argentroom/app/ReleaseCandidateSmokeInstrumentation.java"
     "app/src/main/AndroidManifest.xml"
     "app/src/androidTest/AndroidManifest.xml"
     "app/build.gradle.kts"
     "app/proguard-rules.pro"
     "app/gradle.lockfile"
-    "engine/spektra-core/src/main/kotlin/com/spectrafilm/engine/SpektraEngine.kt"
+    "engine/spektra-core/src/main/kotlin/com/argentroom/engine/SpektraEngine.kt"
     "engine/spektra-core/build.gradle.kts"
     "engine/spektra-core/gradle.lockfile"
     "build.gradle.kts"
@@ -75,7 +75,7 @@ Write-EvidenceText "qualification_status.txt" @(
     "reason=device workflow has not completed and source stability has not been rechecked"
 )
 
-$runnerSource = Join-Path $repoRoot "app/src/androidTest/java/com/spectrafilm/app/ReleaseCandidateSmokeInstrumentation.java"
+$runnerSource = Join-Path $repoRoot "app/src/androidTest/java/com/argentroom/app/ReleaseCandidateSmokeInstrumentation.java"
 $runnerText = Get-Content -LiteralPath $runnerSource -Raw
 if (-not $runnerText.Contains("ticket141_width")) {
     throw "Ticket #141 runner integration is not present. Root must wire Ticket141MaskMemoryChecks after the shared #139 runner edit lands."
@@ -136,8 +136,8 @@ if ($LASTEXITCODE -ne 0) { throw "failed to install the exact target APK" }
 if ($LASTEXITCODE -ne 0) { throw "failed to install the exact test APK" }
 
 $installedPackages = @(
-    @{ Name = "target"; Package = "com.spectrafilm.app"; Hash = $targetHash },
-    @{ Name = "test"; Package = "com.spectrafilm.app.test"; Hash = $testHash }
+    @{ Name = "target"; Package = "com.argentroom.app"; Hash = $targetHash },
+    @{ Name = "test"; Package = "com.argentroom.app.test"; Hash = $testHash }
 )
 foreach ($installed in $installedPackages) {
     $remotePaths = @(
@@ -158,7 +158,7 @@ foreach ($installed in $installedPackages) {
     }
 }
 
-$runner = "com.spectrafilm.app.test/com.spectrafilm.app.ReleaseCandidateSmokeInstrumentation"
+$runner = "com.argentroom.app.test/com.argentroom.app.ReleaseCandidateSmokeInstrumentation"
 $cells = @(
     @{ Name = "12_5mp"; Width = 4096; Height = 3052 },
     @{ Name = "50mp"; Width = 8192; Height = 6104 }

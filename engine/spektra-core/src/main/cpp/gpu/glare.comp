@@ -1,5 +1,5 @@
 #version 450
-// SPDX-FileCopyrightText: 2026 Spektrafilm Android contributors
+// SPDX-FileCopyrightText: 2026 Argentroom Android contributors
 // SPDX-License-Identifier: GPL-3.0-only
 //
 // Viewing-glare field (#215). Ports model/glare.cpp::compute_random_glare_amount:

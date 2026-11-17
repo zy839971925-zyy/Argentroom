@@ -1,4 +1,4 @@
-// Spektrafilm for Android -- opt-in RAW clean-up: hot pixels and chroma noise (#259). GPLv3.
+// Argentroom for Android -- opt-in RAW clean-up: hot pixels and chroma noise (#259). GPLv3.
 //
 // Both steps are off by default and, when off, leave every decoded byte unchanged.
 // Hot-pixel correction works on the Bayer mosaic before demosaic, where a stuck photosite
@@ -16,7 +16,7 @@
 #include <utility>
 #include <vector>
 
-namespace spectrafilm {
+namespace argentroom {
 namespace cleanup {
 
 inline bool cancelled(const std::atomic<bool>* flag) {
@@ -263,6 +263,6 @@ inline bool reduceChromaNoise(float* rgb, int width, int height, float strength,
 }
 
 }  // namespace cleanup
-}  // namespace spectrafilm
+}  // namespace argentroom
 
 #endif

@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: printing (enlarger) stage.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — native engine: printing (enlarger) stage.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,7 +8,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Ports spektrafilm/runtime/stages/printing.py's expose + develop
+ * argentroom. Ports argentroom/runtime/stages/printing.py's expose + develop
  * for the print_portra parity toggles (auto-exposure off, spatial + stochastic
  * off, preflash off, use_enlarger_lut=False so the exact non-LUT spectral path
  * is the gate):

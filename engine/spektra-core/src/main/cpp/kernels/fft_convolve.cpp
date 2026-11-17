@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: FFT convolution for the diffusion PSF.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3 (see fft_convolve.h).
+ * Argentroom for Android — native engine: FFT convolution for the diffusion PSF.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3 (see fft_convolve.h).
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * ---------------------------------------------------------------------------

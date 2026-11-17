@@ -1,5 +1,5 @@
 #version 450
-// SPDX-FileCopyrightText: 2026 Spektrafilm Android contributors
+// SPDX-FileCopyrightText: 2026 Argentroom Android contributors
 // SPDX-License-Identifier: GPL-3.0-only
 // Resident-chain variant of gpu/scan_spectral.comp. Its spectral and color math
 // is intentionally unchanged; only the invocation index is flattened over a 2D

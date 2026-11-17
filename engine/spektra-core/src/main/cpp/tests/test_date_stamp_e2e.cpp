@@ -1,7 +1,7 @@
 /*
- * Spektrafilm for Android — END-TO-END host gate for the opt-in DATE-BACK
+ * Argentroom for Android — END-TO-END host gate for the opt-in DATE-BACK
  * imprint (spk_params.date_stamp_*, model/date_stamp.h).
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * The date back is NOT an upstream spektrafilm stage (the idea is SpektraLab's

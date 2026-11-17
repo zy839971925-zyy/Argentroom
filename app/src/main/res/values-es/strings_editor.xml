@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Spektrafilm for Android. GPLv3. -->
+<!-- Argentroom for Android. GPLv3. -->
 <!-- Machine-drafted translation (Claude, 2026-11); needs review by a native speaker. -->
 <resources>
     <string name="stock_browser_change">Cambiar</string>
@@ -293,7 +293,7 @@
     <string name="editor_sim_camera_lens_blur">Desenfoque del objetivo de la cámara (µm)</string>
     <string name="editor_sim_camera_lens_blur_tooltip">Sigma del filtro gaussiano en µm para el desenfoque del objetivo de la cámara. Efecto espacial: solo se aplica cuando la halación está activada (la rama espacial).</string>
     <string name="editor_sim_scene_latitude">Latitud de escena</string>
-    <string name="editor_sim_scene_latitude_tooltip">Encaja en la película una escena más amplia que ella antes de la exposición: las luces y sombras más allá de los codos se comprimen suavemente y los medios tonos no se tocan. Útil para DNG de móvil muy contrastados. No forma parte de spektrafilm original; idea de SpektraLab.</string>
+    <string name="editor_sim_scene_latitude_tooltip">Encaja en la película una escena más amplia que ella antes de la exposición: las luces y sombras más allá de los codos se comprimen suavemente y los medios tonos no se tocan. Útil para DNG de móvil muy contrastados. No forma parte de argentroom original; idea de SpektraLab.</string>
     <string name="editor_sim_scene_latitude_highlight_knee">Codo de luces (pasos)</string>
     <string name="editor_sim_scene_latitude_highlight_knee_tooltip">Pasos por encima del gris medio medido donde empieza la compresión de luces. Por debajo no cambia nada.</string>
     <string name="editor_sim_scene_latitude_highlight_room">Margen de luces (pasos)</string>
@@ -307,7 +307,7 @@
     <string name="editor_sim_scene_latitude_max_lift">Elevación máxima de sombras (pasos)</string>
     <string name="editor_sim_scene_latitude_max_lift_tooltip">Límite superior de cuánto se aclaran las sombras más profundas, por muy por debajo del codo que estén. Más bajo mantiene los negros negros.</string>
     <string name="editor_sim_date_stamp">Respaldo de fecha</string>
-    <string name="editor_sim_date_stamp_tooltip">Expone en el negativo la impresión del respaldo de fecha de una cámara, para que los dígitos LED se revelen, brillen y tengan grano con la imagen en lugar de pegarse encima. No forma parte de spektrafilm original; idea de SpektraLab.</string>
+    <string name="editor_sim_date_stamp_tooltip">Expone en el negativo la impresión del respaldo de fecha de una cámara, para que los dígitos LED se revelen, brillen y tengan grano con la imagen en lugar de pegarse encima. No forma parte de argentroom original; idea de SpektraLab.</string>
     <string name="editor_sim_date_stamp_text">Impresión</string>
     <string name="editor_sim_date_stamp_text_help">Solo dígitos, espacios y \' - . : /</string>
     <string name="editor_sim_date_stamp_photo_date">Fecha de la foto</string>
@@ -347,7 +347,7 @@
     <string name="editor_sim_print_diffusion">Filtro de difusión de copia</string>
     <string name="editor_sim_scan_lens_blur">Desenfoque del objetivo del escáner (px)</string>
     <string name="editor_sim_scan_lens_blur_tooltip">Sigma del filtro gaussiano en píxeles para el desenfoque del objetivo del escáner. Efecto espacial: solo se aplica cuando la halación está activada (la rama espacial).</string>
-    <string name="editor_sim_scan_correction_noop">La corrección de blancos/negros del escaneo no tiene efecto en modo diapositiva con una película negativa: solo se aplica a una película de diapositiva/positiva o en modo copia. Coincide con el motor spektrafilm.</string>
+    <string name="editor_sim_scan_correction_noop">La corrección de blancos/negros del escaneo no tiene efecto en modo diapositiva con una película negativa: solo se aplica a una película de diapositiva/positiva o en modo copia. Coincide con el motor argentroom.</string>
     <string name="editor_sim_scan_white_correction">Corrección de blancos del escaneo</string>
     <string name="editor_sim_scan_white_correction_tooltip">Fija el punto blanco del escaneo al nivel de blanco objetivo de abajo. Sutil con el 0,98 predeterminado: baja el nivel de blanco para ver cómo baja las luces.</string>
     <string name="editor_sim_scan_white_level">Nivel de blanco del escaneo</string>

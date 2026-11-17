@@ -1,7 +1,7 @@
 /*
- * Spektrafilm for Android — host STATISTICAL test for the SUBLAYER film-grain
+ * Argentroom for Android — host STATISTICAL test for the SUBLAYER film-grain
  * model (model/grain.cpp::apply_grain_to_density_layers + add_micro_structure).
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -9,7 +9,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm.
+ * argentroom.
  *
  * Why statistical (not element-wise): the AgX particle grain draws Poisson +
  * Binomial variates per pixel, and the sublayer path additionally draws a
@@ -43,7 +43,7 @@
  *   - smooth (no-grain) density:  goldens/scan_portra/film_density_cmy.spkvec
  *   - oracle grainy realisations: tests/grain_sublayer_ref_density.spkvec (S,npix,3)
  *     (produced by tests/gen_grain_sublayer_ref.py)
- *   - film profile (density_curves + density_curves_layers): the spektrafilm
+ *   - film profile (density_curves + density_curves_layers): the argentroom
  *     bundled kodak_portra_400.json.
  *
  * Build (host):

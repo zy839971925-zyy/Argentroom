@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android — hostile JSON/profile loader regression tests.
+ * Argentroom for Android — hostile JSON/profile loader regression tests.
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 

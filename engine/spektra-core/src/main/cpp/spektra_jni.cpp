@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — JNI bridge.
- * GPLv3. Bridges com.spectrafilm.engine.SpektraEngine (Kotlin) to the spektra C API.
+ * Argentroom for Android — JNI bridge.
+ * GPLv3. Bridges com.argentroom.engine.SpektraEngine (Kotlin) to the spektra C API.
  *
  * Design notes:
  *  - Image buffers cross the boundary as direct java.nio.ByteBuffer (float32 RGB) to
@@ -9,7 +9,7 @@
  *  - SpektraParams (a nested Kotlin data class tree) is marshalled into the flat
  *    spk_params struct by reading the high-traffic fields the scan_film route needs.
  *    Field/method IDs are cached on first use.
- *  - The output is wrapped into a com.spectrafilm.engine.SimResult holding a direct
+ *  - The output is wrapped into a com.argentroom.engine.SimResult holding a direct
  *    float ByteBuffer plus width/height/ColorSpace.
  */
 #include <jni.h>
@@ -43,7 +43,7 @@
 #include "gpu/vulkan_compute.h"
 
 #define JNI(ret, name) extern "C" JNIEXPORT ret JNICALL \
-    Java_com_spectrafilm_engine_SpektraEngine_##name
+    Java_com_argentroom_engine_SpektraEngine_##name
 
 namespace {
 
@@ -433,7 +433,7 @@ float unbox_float(JNIEnv* env, jobject boxed) {
 //
 // THE BUG THIS EXISTS FOR. R8 REMOVES kotlin.Triple.getFirst/getSecond/getThird
 // and kotlin.Pair.getFirst/getSecond from the release dex. proguard-rules.pro
-// keeps com.spectrafilm.engine.** so GrainParams.getAgxParticleScale() survives
+// keeps com.argentroom.engine.** so GrainParams.getAgxParticleScale() survives
 // and returns a real Triple -- but `kotlin.**` was not kept, and NO BYTECODE
 // anywhere calls Triple.getFirst. The only caller is this file, by literal
 // string, which R8 cannot see. So it shrank them as unreachable.
@@ -522,7 +522,7 @@ void read_pair_f(JNIEnv* env, jobject obj, const char* getter, float out[2]) {
     env->DeleteLocalRef(t);
 }
 
-// Map a Kotlin ColorSpace enum (com.spectrafilm.engine.ColorSpace) to spk_color_space
+// Map a Kotlin ColorSpace enum (com.argentroom.engine.ColorSpace) to spk_color_space
 // via its ordinal(). Ordinals match: SRGB=0, ADOBE_RGB=1, PROPHOTO=2, ... LINEAR_SRGB=5.
 spk_color_space enum_ordinal_cs(JNIEnv* env, jobject e) {
     if (!e) return SPK_CS_SRGB;
@@ -727,19 +727,19 @@ bool marshal_params(JNIEnv* env, jobject params, spk_params* out, ParamStorage* 
     if (!params) return true;
 
     jobject camera   = call_obj(env, params, "getCamera",
-        "()Lcom/spectrafilm/engine/CameraParams;");
+        "()Lcom/argentroom/engine/CameraParams;");
     jobject enlarger = call_obj(env, params, "getEnlarger",
-        "()Lcom/spectrafilm/engine/EnlargerParams;");
+        "()Lcom/argentroom/engine/EnlargerParams;");
     jobject scanner  = call_obj(env, params, "getScanner",
-        "()Lcom/spectrafilm/engine/ScannerParams;");
+        "()Lcom/argentroom/engine/ScannerParams;");
     jobject filmR    = call_obj(env, params, "getFilmRender",
-        "()Lcom/spectrafilm/engine/FilmRenderingParams;");
+        "()Lcom/argentroom/engine/FilmRenderingParams;");
     jobject printR   = call_obj(env, params, "getPrintRender",
-        "()Lcom/spectrafilm/engine/PrintRenderingParams;");
+        "()Lcom/argentroom/engine/PrintRenderingParams;");
     jobject io       = call_obj(env, params, "getIo",
-        "()Lcom/spectrafilm/engine/IoParams;");
+        "()Lcom/argentroom/engine/IoParams;");
     jobject settings = call_obj(env, params, "getSettings",
-        "()Lcom/spectrafilm/engine/SettingsParams;");
+        "()Lcom/argentroom/engine/SettingsParams;");
 
     // ---- camera ----
     if (camera) {
@@ -774,7 +774,7 @@ bool marshal_params(JNIEnv* env, jobject params, spk_params* out, ParamStorage* 
         read_float(env, camera, "getToneWhites", &out->camera_tone_whites);
         read_float(env, camera, "getToneBlacks", &out->camera_tone_blacks);
         jobject df = call_obj(env, camera, "getDiffusionFilter",
-            "()Lcom/spectrafilm/engine/DiffusionFilterParams;");
+            "()Lcom/argentroom/engine/DiffusionFilterParams;");
         if (!read_diffusion_filter(env, df, &out->camera_diffusion_family,
             &out->camera_diffusion_active,
             &out->camera_diffusion_strength, &out->camera_diffusion_spatial_scale,
@@ -784,7 +784,7 @@ bool marshal_params(JNIEnv* env, jobject params, spk_params* out, ParamStorage* 
             &out->camera_diffusion_bloom_size)) return false;
         if (df) env->DeleteLocalRef(df);
         jobject sl = call_obj(env, camera, "getSceneLatitude",
-            "()Lcom/spectrafilm/engine/SceneLatitudeParams;");
+            "()Lcom/argentroom/engine/SceneLatitudeParams;");
         if (sl) {
             read_bool_i32(env, sl, "getActive", &out->scene_latitude_active);
             read_float(env, sl, "getHighlightKnee", &out->scene_latitude_highlight_knee);
@@ -796,7 +796,7 @@ bool marshal_params(JNIEnv* env, jobject params, spk_params* out, ParamStorage* 
             env->DeleteLocalRef(sl);
         }
         jobject ds = call_obj(env, camera, "getDateStamp",
-            "()Lcom/spectrafilm/engine/DateStampParams;");
+            "()Lcom/argentroom/engine/DateStampParams;");
         if (ds) {
             read_bool_i32(env, ds, "getActive", &out->date_stamp_active);
             jobject text = call_obj(env, ds, "getText", "()Ljava/lang/String;");
@@ -814,7 +814,7 @@ bool marshal_params(JNIEnv* env, jobject params, spk_params* out, ParamStorage* 
             env->DeleteLocalRef(ds);
         }
         jobject edge = call_obj(env, camera, "getFilmEdge",
-            "()Lcom/spectrafilm/engine/FilmEdgeParams;");
+            "()Lcom/argentroom/engine/FilmEdgeParams;");
         if (edge) {
             auto read_edge_string = [&](const char* getter, std::string& owned, const char*& field) {
                 auto text = static_cast<jstring>(call_obj(env, edge, getter, "()Ljava/lang/String;"));
@@ -878,7 +878,7 @@ bool marshal_params(JNIEnv* env, jobject params, spk_params* out, ParamStorage* 
         read_float(env, enlarger, "getPreflashMFilterShift",
                    &out->preflash_m_filter_shift);
         jobject df = call_obj(env, enlarger, "getDiffusionFilter",
-            "()Lcom/spectrafilm/engine/DiffusionFilterParams;");
+            "()Lcom/argentroom/engine/DiffusionFilterParams;");
         if (!read_diffusion_filter(env, df, &out->enlarger_diffusion_family,
             &out->enlarger_diffusion_active,
             &out->enlarger_diffusion_strength, &out->enlarger_diffusion_spatial_scale,
@@ -905,13 +905,13 @@ bool marshal_params(JNIEnv* env, jobject params, spk_params* out, ParamStorage* 
     if (filmR) {
         read_float(env, filmR, "getDensityCurveGamma", &out->density_curve_gamma);
         jobject grain = call_obj(env, filmR, "getGrain",
-            "()Lcom/spectrafilm/engine/GrainParams;");
+            "()Lcom/argentroom/engine/GrainParams;");
         jobject halation = call_obj(env, filmR, "getHalation",
-            "()Lcom/spectrafilm/engine/HalationParams;");
+            "()Lcom/argentroom/engine/HalationParams;");
         jobject dir = call_obj(env, filmR, "getDirCouplers",
-            "()Lcom/spectrafilm/engine/DirCouplersParams;");
+            "()Lcom/argentroom/engine/DirCouplersParams;");
         jobject glare = call_obj(env, filmR, "getGlare",
-            "()Lcom/spectrafilm/engine/GlareParams;");
+            "()Lcom/argentroom/engine/GlareParams;");
 
         if (grain) {
             read_bool_i32(env, grain, "getActive", &out->grain_active);
@@ -1000,7 +1000,7 @@ bool marshal_params(JNIEnv* env, jobject params, spk_params* out, ParamStorage* 
         read_float(env, printR, "getDensityCurveGamma",
                    &out->print_density_curve_gamma);
         jobject pglare = call_obj(env, printR, "getGlare",
-            "()Lcom/spectrafilm/engine/GlareParams;");
+            "()Lcom/argentroom/engine/GlareParams;");
         if (pglare) {
             read_bool_i32(env, pglare, "getActive", &out->print_glare_active);
             read_float(env, pglare, "getPercent", &out->print_glare_percent);
@@ -1011,7 +1011,7 @@ bool marshal_params(JNIEnv* env, jobject params, spk_params* out, ParamStorage* 
         // OPT-IN s023 print density-curve morph. Absent / active=false -> the
         // engine defaults (off, identity) set in spk_default_params remain.
         jobject pmorph = call_obj(env, printR, "getDensityCurvesMorph",
-            "()Lcom/spectrafilm/engine/PrintCurvesMorphParams;");
+            "()Lcom/argentroom/engine/PrintCurvesMorphParams;");
         if (pmorph) {
             read_bool_i32(env, pmorph, "getActive", &out->print_morph_active);
             read_float(env, pmorph, "getGammaFactor", &out->print_morph_gamma_factor);
@@ -1034,7 +1034,7 @@ bool marshal_params(JNIEnv* env, jobject params, spk_params* out, ParamStorage* 
                       &out->extended_dynamic_range);
         // OPT-IN virtual contrast mask. Absent -> spk_default_params (off).
         jobject cmask = call_obj(env, printR, "getContrastMask",
-            "()Lcom/spectrafilm/engine/ContrastMaskParams;");
+            "()Lcom/argentroom/engine/ContrastMaskParams;");
         if (cmask) {
             read_bool_i32(env, cmask, "getActive", &out->contrast_mask_active);
             read_float(env, cmask, "getHighlights", &out->contrast_mask_highlights);
@@ -1077,18 +1077,18 @@ bool marshal_params(JNIEnv* env, jobject params, spk_params* out, ParamStorage* 
         read_pair_f(env, io, "getCropCenter", out->crop_center);
         read_pair_f(env, io, "getCropSize", out->crop_size);
         jobject ocs = call_obj(env, io, "getOutputColorSpace",
-            "()Lcom/spectrafilm/engine/ColorSpace;");
+            "()Lcom/argentroom/engine/ColorSpace;");
         out->output_color_space = enum_ordinal_cs(env, ocs);
         if (ocs) env->DeleteLocalRef(ocs);
         // OPT-IN gamut compression selectors. Ordinals mirror model/gamut_compression.h;
         // the default sentinels (output kLegacyClip=0 / input kOff=0) leave the render
         // path byte-identical, so an absent/old IoParams keeps the spk_default_params 0s.
         jobject ogc = call_obj(env, io, "getOutputGamutCompress",
-            "()Lcom/spectrafilm/engine/OutputGamutCompress;");
+            "()Lcom/argentroom/engine/OutputGamutCompress;");
         out->output_gamut_compress = enum_ordinal_int(env, ogc, 0);
         if (ogc) env->DeleteLocalRef(ogc);
         jobject igc = call_obj(env, io, "getInputGamutCompress",
-            "()Lcom/spectrafilm/engine/InputGamutCompress;");
+            "()Lcom/argentroom/engine/InputGamutCompress;");
         out->input_gamut_compress = enum_ordinal_int(env, igc, 0);
         if (igc) env->DeleteLocalRef(igc);
     }
@@ -1096,7 +1096,7 @@ bool marshal_params(JNIEnv* env, jobject params, spk_params* out, ParamStorage* 
     // ---- settings ----
     if (settings) {
         jobject m = call_obj(env, settings, "getRgbToRawMethod",
-            "()Lcom/spectrafilm/engine/Rgb2Raw;");
+            "()Lcom/argentroom/engine/Rgb2Raw;");
         out->rgb_to_raw_method = enum_ordinal_rgb2raw(env, m);
         if (m) env->DeleteLocalRef(m);
         read_bool_i32(env, settings, "getApplyHanatos2025AdaptationWindow",
@@ -1519,7 +1519,7 @@ JNI(jobject, nativeSimulate)(JNIEnv* env, jobject /*thiz*/, jlong handle,
     // NOTE: NewDirectByteBuffer does NOT take ownership — if SimResult is never
     // constructed below, the Kotlin side can't free native_buf, so every failure
     // path from here on must std::free(native_buf) to avoid leaking the result.
-    jclass csCls = env->FindClass("com/spectrafilm/engine/ColorSpace");
+    jclass csCls = env->FindClass("com/argentroom/engine/ColorSpace");
     if (!csCls) {
         env->ExceptionClear();
         env->DeleteLocalRef(outBuf);
@@ -1528,7 +1528,7 @@ JNI(jobject, nativeSimulate)(JNIEnv* env, jobject /*thiz*/, jlong handle,
         return nullptr;
     }
     jmethodID csValues = env->GetStaticMethodID(csCls, "values",
-        "()[Lcom/spectrafilm/engine/ColorSpace;");
+        "()[Lcom/argentroom/engine/ColorSpace;");
     jobjectArray csArr = nullptr;
     if (csValues) {
         csArr = static_cast<jobjectArray>(
@@ -1543,7 +1543,7 @@ JNI(jobject, nativeSimulate)(JNIEnv* env, jobject /*thiz*/, jlong handle,
     jobject csObj = csArr ? env->GetObjectArrayElement(csArr, ord) : nullptr;
     env->DeleteLocalRef(csCls);
 
-    jclass resCls = env->FindClass("com/spectrafilm/engine/SimResult");
+    jclass resCls = env->FindClass("com/argentroom/engine/SimResult");
     if (!resCls) {
         env->ExceptionClear();
         if (csArr) env->DeleteLocalRef(csArr);
@@ -1554,7 +1554,7 @@ JNI(jobject, nativeSimulate)(JNIEnv* env, jobject /*thiz*/, jlong handle,
         return nullptr;
     }
     jmethodID resCtor = env->GetMethodID(resCls, "<init>",
-        "(Ljava/nio/ByteBuffer;IILcom/spectrafilm/engine/ColorSpace;JJ)V");
+        "(Ljava/nio/ByteBuffer;IILcom/argentroom/engine/ColorSpace;JJ)V");
     jobject result = nullptr;
     if (resCtor) {
         result = env->NewObject(resCls, resCtor, outBuf, out_w, out_h, csObj,
@@ -1607,12 +1607,12 @@ JNI(jobject, nativeSimulate)(JNIEnv* env, jobject /*thiz*/, jlong handle,
  * engine-output buffer only when its opaque allocation token matches. The JNI ABI is
  * `(ByteBuffer, long token)`. Called from
  * SimResult.close(). Named to match the Kotlin
- * @JvmStatic companion method (Java_com_spectrafilm_engine_SimResult_freeDirectBuffer),
+ * @JvmStatic companion method (Java_com_argentroom_engine_SimResult_freeDirectBuffer),
  * NOT the SpektraEngine JNI() macro. Foreign, duplicate, stale-token, and wrong-token
  * release attempts are skipped.
  */
 extern "C" JNIEXPORT void JNICALL
-Java_com_spectrafilm_engine_SimResult_freeDirectBuffer(JNIEnv* env, jclass /*clazz*/,
+Java_com_argentroom_engine_SimResult_freeDirectBuffer(JNIEnv* env, jclass /*clazz*/,
                                                        jobject buf, jlong token) try {
     if (!buf || token <= 0) return;
     void* p = env->GetDirectBufferAddress(buf);
@@ -1640,7 +1640,7 @@ Java_com_spectrafilm_engine_SimResult_freeDirectBuffer(JNIEnv* env, jclass /*cla
  * consumers fold the latest event per renderId and exclude discarded work.
  */
 extern "C" JNIEXPORT void JNICALL
-Java_com_spectrafilm_engine_SimResult_nativeReportRenderOutcome(
+Java_com_argentroom_engine_SimResult_nativeReportRenderOutcome(
     JNIEnv* env, jclass /*clazz*/, jlong render_id, jint outcome_code) try {
     if (render_id <= 0 || !timing_automation_enabled()) return;
     if (outcome_code < static_cast<jint>(spk::ARO_CONSUMED) ||
@@ -1684,7 +1684,7 @@ Java_com_spectrafilm_engine_SimResult_nativeReportRenderOutcome(
  * required for release. Returns null on bad size or OOM (caller falls back to managed).
  */
 extern "C" JNIEXPORT jobject JNICALL
-Java_com_spectrafilm_engine_SimResult_allocDirectBuffer(JNIEnv* env, jclass /*clazz*/,
+Java_com_argentroom_engine_SimResult_allocDirectBuffer(JNIEnv* env, jclass /*clazz*/,
                                                         jlong size) try {
     if (size <= 0 || size > static_cast<jlong>(INT32_MAX) ||
         static_cast<std::uint64_t>(size) >
@@ -1720,7 +1720,7 @@ Java_com_spectrafilm_engine_SimResult_allocDirectBuffer(JNIEnv* env, jclass /*cl
         throw_native_oom(env);
         return nullptr;
     }
-    jclass allocation_cls = env->FindClass("com/spectrafilm/engine/NativeBufferAllocation");
+    jclass allocation_cls = env->FindClass("com/argentroom/engine/NativeBufferAllocation");
     if (!allocation_cls) {
         env->ExceptionClear();
         (void)free_registered_allocation(
@@ -1873,7 +1873,7 @@ JNI(jobject, nativeBakeCubeLut)(JNIEnv* env, jobject /*thiz*/, jlong handle,
         return nullptr;
     }
     jclass result_cls =
-        env->FindClass("com/spectrafilm/engine/LutBakeResult");
+        env->FindClass("com/argentroom/engine/LutBakeResult");
     if (!result_cls) {
         env->ExceptionClear();
         env->DeleteLocalRef(text);

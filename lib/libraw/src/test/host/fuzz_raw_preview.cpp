@@ -1,5 +1,5 @@
 /*
- * Spektrafilm Android -- embedded-preview extraction libFuzzer target (GPLv3).
+ * Argentroom Android -- embedded-preview extraction libFuzzer target (GPLv3).
  *
  * Drives the production preview route (raw_preview.cpp) exactly as the app
  * does: a seekable regular-file descriptor read lazily through
@@ -29,8 +29,8 @@ extern "C" int LLVMFuzzerTestOneInput(const std::uint8_t* data,
   }
   // The requested edge varies with the input so selection paths are explored.
   const int minEdge = static_cast<int>(data[size - 1]) * 16;
-  const auto preview = spectrafilm::extractEmbeddedPreview(fd, minEdge);
-  if (preview.status == spectrafilm::SFRAW_PREVIEW_OK) {
+  const auto preview = argentroom::extractEmbeddedPreview(fd, minEdge);
+  if (preview.status == argentroom::SFRAW_PREVIEW_OK) {
     // Contract: an OK preview is a non-empty, bounded JPEG from the input.
     if (preview.jpeg.size() < 4 || preview.jpeg.size() > size ||
         preview.jpeg[0] != 0xFF || preview.jpeg[1] != 0xD8) {

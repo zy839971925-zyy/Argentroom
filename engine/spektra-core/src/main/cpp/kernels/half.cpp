@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android — fp16 (half-float) SIMD conversion implementation. GPLv3.
+ * Argentroom for Android — fp16 (half-float) SIMD conversion implementation. GPLv3.
  * Film modeling powered by spektrafilm.
  */
 #include "kernels/half.h"

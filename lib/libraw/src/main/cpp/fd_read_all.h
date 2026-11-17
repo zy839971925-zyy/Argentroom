@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android — whole-file read from a descriptor (#287). GPLv3.
+ * Argentroom for Android — whole-file read from a descriptor (#287). GPLv3.
  *
  * The RAW decode used to pull the source through stdio in 64 KiB fread chunks into
  * a vector that grew by doubling. On a cold MediaStore/SAF descriptor (FUSE on

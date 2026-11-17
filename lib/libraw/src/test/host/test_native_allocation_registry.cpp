@@ -59,8 +59,8 @@ void injectedAbort(void* opaque) noexcept {
   ++static_cast<PublicationProbe*>(opaque)->aborts;
 }
 
-spectrafilm::DecodedFloatBuffer decodedFixture() {
-  spectrafilm::DecodedFloatBuffer decoded;
+argentroom::DecodedFloatBuffer decodedFixture() {
+  argentroom::DecodedFloatBuffer decoded;
   decoded.allocateUninitialized(4U);
   static_assert(sizeof(kDecodedFixtureBits) == 4U * sizeof(float));
   std::memcpy(decoded.data(), kDecodedFixtureBits,
@@ -89,14 +89,14 @@ int main() {
 
   NativeAllocationRegistry registry;
 
-  spectrafilm::DecodedFloatBuffer decoded;
+  argentroom::DecodedFloatBuffer decoded;
   decoded.allocateUninitialized(4U);
   decoded[0] = -0.25F;
   decoded[1] = 0.0F;
   decoded[2] = 1.0F;
   decoded[3] = 2.0F;
   float* decodedBase = decoded.data();
-  spectrafilm::DecodedFloatBuffer moved(std::move(decoded));
+  argentroom::DecodedFloatBuffer moved(std::move(decoded));
   check(decoded.empty() && moved.data() == decodedBase && moved.size() == 4U &&
             moved[0] == -0.25F && moved[3] == 2.0F,
         "decoded float storage moves without copying or changing bytes");

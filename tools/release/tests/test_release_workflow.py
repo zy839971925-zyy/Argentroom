@@ -15,7 +15,7 @@ APP_BUILD = (ROOT / "app/build.gradle.kts").read_text(encoding="utf-8")
 PROGUARD_RULES = (ROOT / "app/proguard-rules.pro").read_text(encoding="utf-8")
 RUNNER = (
     ROOT
-    / "app/src/androidTest/java/com/spectrafilm/app/ReleaseCandidateSmokeInstrumentation.java"
+    / "app/src/androidTest/java/com/argentroom/app/ReleaseCandidateSmokeInstrumentation.java"
 ).read_text(encoding="utf-8")
 PUBLISHER = (ROOT / "tools/release/github_release.py").read_text(encoding="utf-8")
 NATIVE_SAFETY_RUNNER = ROOT / "tools/release/run_native_safety.sh"
@@ -24,7 +24,7 @@ R8_DEX_CHECK = (ROOT / "tools/r8_check/check_release_dex.sh").read_text(
 )
 ENGINE_BOUNDARY_RUNNER = (
     ROOT
-    / "engine/spektra-core/src/androidTest/kotlin/com/spectrafilm/engine/EngineBoundaryInstrumentationTest.kt"
+    / "engine/spektra-core/src/androidTest/kotlin/com/argentroom/engine/EngineBoundaryInstrumentationTest.kt"
 ).read_text(encoding="utf-8")
 RELEASE_DEVICE_GATE = ROOT / "tools/android/run_release_device_gate.ps1"
 # The emulator action runs each `script:` line in its own `sh -c`, so the
@@ -110,7 +110,7 @@ class ReleaseWorkflowContractTest(unittest.TestCase):
             "@('install', '--no-streaming', '-r', $AppApk)",
             "@('install', '--no-streaming', '-r', $TestApk)",
             "pm', 'list', 'instrumentation",
-            "com.spectrafilm.app.test/com.spectrafilm.app.ReleaseCandidateSmokeInstrumentation",
+            "com.argentroom.app.test/com.argentroom.app.ReleaseCandidateSmokeInstrumentation",
         ):
             self.assertIn(contract, gate)
 
@@ -164,12 +164,12 @@ class ReleaseWorkflowContractTest(unittest.TestCase):
     def test_release_instrumentation_writer_tokens_survive_r8(self) -> None:
         for token, descriptor in (
             (
-                "com.spectrafilm.pngwriter.PngCancellationToken",
-                "Lcom/spectrafilm/pngwriter/PngCancellationToken;",
+                "com.argentroom.pngwriter.PngCancellationToken",
+                "Lcom/argentroom/pngwriter/PngCancellationToken;",
             ),
             (
-                "com.spectrafilm.tiffwriter.TiffCancellationToken",
-                "Lcom/spectrafilm/tiffwriter/TiffCancellationToken;",
+                "com.argentroom.tiffwriter.TiffCancellationToken",
+                "Lcom/argentroom/tiffwriter/TiffCancellationToken;",
             ),
         ):
             self.assertIn(f"-keep class {token} {{ *; }}", PROGUARD_RULES)
@@ -214,53 +214,53 @@ class ReleaseWorkflowContractTest(unittest.TestCase):
 
     def test_release_instrumentation_app_owned_abi_survives_r8(self) -> None:
         for boundary_type in (
-            "com.spectrafilm.app.EngineHolder",
-            "com.spectrafilm.app.ExportWorkRuntime",
-            "com.spectrafilm.app.ExportRuntimeState",
-            "com.spectrafilm.app.ExportRuntimeState$*",
-            "com.spectrafilm.app.ExportTerminalOutcome",
-            "com.spectrafilm.app.ExportTerminalOutcome$*",
-            "com.spectrafilm.app.ExportPhaseSnapshot",
-            "com.spectrafilm.app.ExportFormat",
-            "com.spectrafilm.app.PendingExportBackend$DefaultImpls",
+            "com.argentroom.app.EngineHolder",
+            "com.argentroom.app.ExportWorkRuntime",
+            "com.argentroom.app.ExportRuntimeState",
+            "com.argentroom.app.ExportRuntimeState$*",
+            "com.argentroom.app.ExportTerminalOutcome",
+            "com.argentroom.app.ExportTerminalOutcome$*",
+            "com.argentroom.app.ExportPhaseSnapshot",
+            "com.argentroom.app.ExportFormat",
+            "com.argentroom.app.PendingExportBackend$DefaultImpls",
         ):
             self.assertIn(f"-keep class {boundary_type} {{ *; }}", PROGUARD_RULES)
 
         for exact_check in (
-            "check_member 'Lcom/spectrafilm/app/PendingExportBackend$DefaultImpls;' "
+            "check_member 'Lcom/argentroom/app/PendingExportBackend$DefaultImpls;' "
             "method 'pendingTokens' "
-            "'(Lcom/spectrafilm/app/PendingExportBackend;)Ljava/util/Set;'",
-            "check_member 'Lcom/spectrafilm/app/EngineHolder;' field 'INSTANCE' "
-            "'Lcom/spectrafilm/app/EngineHolder;'",
-            "check_member 'Lcom/spectrafilm/app/EngineHolder;' method 'get' "
-            "'(Landroid/content/Context;)Lcom/spectrafilm/engine/SpektraEngine;'",
-            "check_member 'Lcom/spectrafilm/app/ExportWorkRuntime;' field 'INSTANCE' "
-            "'Lcom/spectrafilm/app/ExportWorkRuntime;'",
-            "check_member 'Lcom/spectrafilm/app/ExportWorkRuntime;' method 'getState' "
+            "'(Lcom/argentroom/app/PendingExportBackend;)Ljava/util/Set;'",
+            "check_member 'Lcom/argentroom/app/EngineHolder;' field 'INSTANCE' "
+            "'Lcom/argentroom/app/EngineHolder;'",
+            "check_member 'Lcom/argentroom/app/EngineHolder;' method 'get' "
+            "'(Landroid/content/Context;)Lcom/argentroom/engine/SpektraEngine;'",
+            "check_member 'Lcom/argentroom/app/ExportWorkRuntime;' field 'INSTANCE' "
+            "'Lcom/argentroom/app/ExportWorkRuntime;'",
+            "check_member 'Lcom/argentroom/app/ExportWorkRuntime;' method 'getState' "
             "'()Lkotlinx/coroutines/flow/StateFlow;'",
-            "check_member 'Lcom/spectrafilm/app/ExportWorkRuntime;' method 'launch' "
-            "'(Landroid/content/Context;Lcom/spectrafilm/app/ExportFormat;J"
+            "check_member 'Lcom/argentroom/app/ExportWorkRuntime;' method 'launch' "
+            "'(Landroid/content/Context;Lcom/argentroom/app/ExportFormat;J"
             "Lkotlin/jvm/functions/Function1;)Ljava/lang/Long;'",
-            "check_member 'Lcom/spectrafilm/app/ExportWorkRuntime;' method 'cancel' '(J)Z'",
-            "check_member 'Lcom/spectrafilm/app/ExportWorkRuntime;' method "
-            "'claimFinished' '(J)Lcom/spectrafilm/app/ExportTerminalOutcome;'",
-            "check_member 'Lcom/spectrafilm/app/ExportRuntimeState$Finished;' method "
+            "check_member 'Lcom/argentroom/app/ExportWorkRuntime;' method 'cancel' '(J)Z'",
+            "check_member 'Lcom/argentroom/app/ExportWorkRuntime;' method "
+            "'claimFinished' '(J)Lcom/argentroom/app/ExportTerminalOutcome;'",
+            "check_member 'Lcom/argentroom/app/ExportRuntimeState$Finished;' method "
             "'getRunId' '()J'",
-            "check_member 'Lcom/spectrafilm/app/ExportRuntimeState$Finished;' method "
-            "'getOutcome' '()Lcom/spectrafilm/app/ExportTerminalOutcome;'",
-            "check_member 'Lcom/spectrafilm/app/ExportRuntimeState$Running;' method "
+            "check_member 'Lcom/argentroom/app/ExportRuntimeState$Finished;' method "
+            "'getOutcome' '()Lcom/argentroom/app/ExportTerminalOutcome;'",
+            "check_member 'Lcom/argentroom/app/ExportRuntimeState$Running;' method "
             "'getRunId' '()J'",
             # #162 added publishedUri + publishedMimeType, so the constructor the
             # release AndroidTest dex resolves now carries two trailing Strings.
-            "check_member 'Lcom/spectrafilm/app/ExportTerminalOutcome$Success;' method "
-            "'<init>' '(Lcom/spectrafilm/app/ExportFormat;JLandroid/graphics/Bitmap;J"
-            "Lcom/spectrafilm/app/ExportPhaseSnapshot;Ljava/lang/String;Ljava/lang/String;)V'",
-            "check_member 'Lcom/spectrafilm/app/ExportPhaseSnapshot;' method '<init>' "
+            "check_member 'Lcom/argentroom/app/ExportTerminalOutcome$Success;' method "
+            "'<init>' '(Lcom/argentroom/app/ExportFormat;JLandroid/graphics/Bitmap;J"
+            "Lcom/argentroom/app/ExportPhaseSnapshot;Ljava/lang/String;Ljava/lang/String;)V'",
+            "check_member 'Lcom/argentroom/app/ExportPhaseSnapshot;' method '<init>' "
             "'(JJJJJJ)V'",
-            "check_member 'Lcom/spectrafilm/app/ExportFormat;' field 'PNG16' "
-            "'Lcom/spectrafilm/app/ExportFormat;'",
-            "check_class 'Lcom/spectrafilm/app/ExportRuntimeState$Idle;'",
-            "check_class 'Lcom/spectrafilm/app/ExportTerminalOutcome$Cancelled;'",
+            "check_member 'Lcom/argentroom/app/ExportFormat;' field 'PNG16' "
+            "'Lcom/argentroom/app/ExportFormat;'",
+            "check_class 'Lcom/argentroom/app/ExportRuntimeState$Idle;'",
+            "check_class 'Lcom/argentroom/app/ExportTerminalOutcome$Cancelled;'",
         ):
             self.assertIn(exact_check, R8_DEX_CHECK)
 
@@ -578,9 +578,9 @@ class ReleaseWorkflowContractTest(unittest.TestCase):
         self.assertNotIn("Create AVD", emulator)
         self.assertIn("api-level: 35", emulator)
         self.assertIn("target: google_apis", emulator)
-        self.assertIn("Spektrafilm-engine-boundary-debug-androidTest", emulator)
+        self.assertIn("Argentroom-engine-boundary-debug-androidTest", emulator)
         self.assertIn(
-            "com.spectrafilm.engine.test/com.spectrafilm.engine.EngineBoundaryInstrumentation",
+            "com.argentroom.engine.test/com.argentroom.engine.EngineBoundaryInstrumentation",
             emulator,
         )
         self.assertIn("grep -Fq 'ENGINE_BOUNDARY_INSTRUMENTATION: PASS'", emulator)
@@ -596,7 +596,7 @@ class ReleaseWorkflowContractTest(unittest.TestCase):
         assemble = step_block(candidate, "Assemble exact-candidate instrumentation APK")
         self.assertIn(":engine:spektra-core:assembleDebugAndroidTest", assemble)
         self.assertIn("spektra-core-debug-androidTest.apk", assemble)
-        self.assertIn("com.spectrafilm.engine.EngineBoundaryInstrumentation", assemble)
+        self.assertIn("com.argentroom.engine.EngineBoundaryInstrumentation", assemble)
         self.assertIn("engine-boundary-debug-androidTest.apk", candidate)
 
         create = step_block(candidate, "Stage hash-bound candidate and compliance materials")
@@ -614,7 +614,7 @@ class ReleaseWorkflowContractTest(unittest.TestCase):
         device += RELEASE_DEVICE_SMOKE
         self.assertIn("adb install --no-streaming -r candidate/engine-boundary-debug-androidTest.apk", device)
         self.assertIn(
-            "com.spectrafilm.engine.test/com.spectrafilm.engine.EngineBoundaryInstrumentation",
+            "com.argentroom.engine.test/com.argentroom.engine.EngineBoundaryInstrumentation",
             device,
         )
         self.assertIn("ENGINE_INSTRUMENT_STATUS=${PIPESTATUS[0]}", device)

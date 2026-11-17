@@ -1,7 +1,7 @@
 /*
- * Spektrafilm for Android — native engine: scanner black/white correction
+ * Argentroom for Android — native engine: scanner black/white correction
  * (ColorReferenceService port).
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -9,7 +9,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm.
+ * argentroom.
  */
 #include "runtime/color_reference.h"
 

@@ -31,11 +31,11 @@ for line in (ROOT / "app/gradle.lockfile").read_text().splitlines():
     lic, lurl = maven_license(g)
     maven.append({"name": f"{g}:{a}", "version": v, "license": lic, "url": maven_url(g, a), "kind": "library"})
 native_and_data = [
-    {"name": "spektrafilm (film model, engine port)", "version": "3bb2c2d / ad5c8d2 profiles", "license": "GPL-3.0-or-later (code), CC BY-SA 4.0 (profiles, LUTs)", "url": "https://github.com/andreavolpato/spektrafilm", "kind": "engine"},
-    {"name": "Spektrafilm for Android (base app)", "version": "1.0.0", "license": "GPL-3.0 + attribution term (GPLv3 7(b))", "url": "https://github.com/thetechgeekko/Spektrafilm-android", "kind": "app"},
+    {"name": "argentroom (film model, engine port)", "version": "3bb2c2d / ad5c8d2 profiles", "license": "GPL-3.0-or-later (code), CC BY-SA 4.0 (profiles, LUTs)", "url": "https://github.com/andreavolpato/spektrafilm", "kind": "engine"},
+    {"name": "Argentroom for Android (base app)", "version": "1.0.0", "license": "GPL-3.0 + attribution term (GPLv3 7(b))", "url": "https://github.com/thetechgeekko/Spektrafilm-android", "kind": "app"},
     {"name": "Silverphase (UI, film rebate, halation PSF, CineStill 800T alias, B&W profiles)", "version": "1.2.5", "license": "GPL-3.0-or-later; artwork CC BY-SA 4.0", "url": "https://github.com/JamesQiu2005", "kind": "app"},
     {"name": "SpektraLab (B&W profiles, paper grades)", "version": "445e314", "license": "GPL-3.0", "url": "https://github.com/JamesQiu2005", "kind": "data"},
-    {"name": "spektrafilm OFX (Vulkan orchestration reference)", "version": "", "license": "GPL-3.0", "url": "https://github.com/andreavolpato/spektrafilm", "kind": "engine"},
+    {"name": "argentroom OFX (Vulkan orchestration reference)", "version": "", "license": "GPL-3.0", "url": "https://github.com/andreavolpato/spektrafilm", "kind": "engine"},
     {"name": "colour-science (reference colour maths)", "version": "", "license": "BSD-3-Clause", "url": "https://github.com/colour-science/colour", "kind": "reference"},
     {"name": "LibRaw", "version": "0.22.2", "license": "LGPL-2.1-only (chosen route; CDDL-1.0 also offered)", "url": "https://github.com/LibRaw/LibRaw", "kind": "native"},
     {"name": "libjpeg-turbo", "version": "3.1.4", "license": "IJG, BSD-3-Clause, zlib", "url": "https://github.com/libjpeg-turbo/libjpeg-turbo", "kind": "native"},

@@ -8,7 +8,7 @@ point. When you add a file, put it in the package whose one-line job it shares.
 ## Layers
 
 ```
-app shell (com.spectrafilm.app)          MainActivity, AppContainer, AppRoot/AppHost, routes
+app shell (com.argentroom.app)          MainActivity, AppContainer, AppRoot/AppHost, routes
    |
 features   editor  camera  library  settings  diagnostics  update
    |          \       |       /
@@ -28,7 +28,7 @@ Arrows point down: a feature may use the layers below it, never a sibling featur
 
 | Package | Job |
 |---|---|
-| `com.spectrafilm.app` | App shell only: activity, DI container, navigation routes, launcher shortcuts, the atomic JSON store. |
+| `com.argentroom.app` | App shell only: activity, DI container, navigation routes, launcher shortcuts, the atomic JSON store. |
 | `.ui` | App-wide design primitives: theme, widgets, Material Symbols, dropdowns, sliders, adaptive panes. |
 | `.silverphase` | The Silverphase v1.2.5 design system and motion port (cards, panels, SpMotion, haptics). |
 | `.look` | What a picture looks like: parameter state and groups, film/print catalog and stock previews, Silverphase print pairing (`SilverPrint`), curves, colour grade, white balance, presets, recipes, film rebate and captions. |

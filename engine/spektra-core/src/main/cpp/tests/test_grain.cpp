@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — host STATISTICAL test for the film-grain model.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — host STATISTICAL test for the film-grain model.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,7 +8,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm.
+ * argentroom.
  *
  * Why statistical (not element-wise): the AgX particle grain draws Poisson +
  * Binomial variates per pixel. The C++ RNG (std::mt19937) and the Python

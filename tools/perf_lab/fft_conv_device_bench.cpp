@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android — #160: time the diffusion FFT convolution ON THE PHONE. GPLv3.
+ * Argentroom for Android — #160: time the diffusion FFT convolution ON THE PHONE. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * WHY A SEPARATE BINARY

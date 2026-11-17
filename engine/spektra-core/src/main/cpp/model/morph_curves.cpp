@@ -1,8 +1,8 @@
 /*
- * Spektrafilm for Android — native engine: print density-curve morph (s023).
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — native engine: print density-curve morph (s023).
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. See morph_curves.h for the parity contract.
+ * argentroom. See morph_curves.h for the parity contract.
  */
 #include "model/morph_curves.h"
 

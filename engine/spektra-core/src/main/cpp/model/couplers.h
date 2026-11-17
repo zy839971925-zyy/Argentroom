@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: DIR couplers.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — native engine: DIR couplers.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,8 +8,8 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Ports the no-diffusion (spatial-off) DIR-coupler path of
- * spektrafilm/model/couplers.py: compute_dir_couplers_matrix,
+ * argentroom. Ports the no-diffusion (spatial-off) DIR-coupler path of
+ * argentroom/model/couplers.py: compute_dir_couplers_matrix,
  * compute_density_curves_before_dir_couplers, compute_exposure_correction_dir_couplers
  * (with diffusion_size_pixel == 0) and apply_density_correction_dir_couplers.
  *
@@ -24,7 +24,7 @@
 namespace spk {
 
 // DIR-coupler parameters consumed by the develop stage. Field names mirror
-// spektrafilm.runtime.params_schema.DirCouplersParams. Defaults are filled by
+// argentroom.runtime.params_schema.DirCouplersParams. Defaults are filled by
 // runtime/params.h (digest) for the negative-film stock.
 struct DirCouplersParams {
     bool active = false;

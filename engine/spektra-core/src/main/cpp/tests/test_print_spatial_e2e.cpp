@@ -1,8 +1,8 @@
 /*
- * Spektrafilm for Android — END-TO-END host parity test for the PRINT-ROUTE
+ * Argentroom for Android — END-TO-END host parity test for the PRINT-ROUTE
  * SPATIAL BRANCH: halation/scatter + DIR-coupler spatial diffusion in the
  * negative-filming step of the print route (scan_film=False).
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * Historically the print route hard-forced the filming stage spatial-OFF
@@ -46,7 +46,7 @@
 
 namespace {
 
-const char* kAssetDir = "/home/user/spektrafilm/src/spektrafilm/data";
+const char* kAssetDir = "/home/user/spektrafilm/src/argentroom/data";
 const char* kGoldenDir =
     "/home/user/Spectrafilmandroid/tools/parity/goldens/print_portra_spatial";
 const char* kInputF64 =

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Spektrafilm for Android. GPLv3. -->
+<!-- Argentroom for Android. GPLv3. -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -79,7 +79,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:restoreAnyVersion="false"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Spektrafilm"
+        android:theme="@style/Theme.Argentroom"
         android:usesCleartextTraffic="false">
         <!-- Lets `adb shell simpleperf` attach to RELEASE builds (API 29+; ignored below).
              Grants profiling to the shell user only — no debugging surface is opened.
@@ -104,7 +104,7 @@
             android:exported="true"
             android:launchMode="singleTask"
             android:resizeableActivity="true"
-            android:theme="@style/Theme.Spektrafilm.Starting"
+            android:theme="@style/Theme.Argentroom.Starting"
             android:windowSoftInputMode="adjustResize">
             <layout
                 android:defaultWidth="1024dp"

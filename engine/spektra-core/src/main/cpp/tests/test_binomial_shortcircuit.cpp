@@ -1,7 +1,7 @@
 /*
- * Spektrafilm for Android — host test: fast_binomial_one's degenerate-CDF
+ * Argentroom for Android — host test: fast_binomial_one's degenerate-CDF
  * short-circuit is EXACTLY the loop it replaces.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -9,7 +9,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm.
+ * argentroom.
  *
  * WHY THIS TEST EXISTS. kernels/stats.cpp returns `n` directly when the binomial
  * CDF-inversion branch is entered with pow(1-p,n) underflowed to 0, instead of

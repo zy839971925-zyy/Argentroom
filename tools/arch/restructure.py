@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Argentroom 1.0.1 package-by-feature restructure (behaviour-preserving, mechanical).
 
-Moves the flat com.spectrafilm.app files into feature packages (see docs/ARCHITECTURE.md),
+Moves the flat com.argentroom.app files into feature packages (see docs/ARCHITECTURE.md),
 rewrites each file's package line, rewrites explicit imports of moved top-level symbols, adds
 star imports of the root and feature packages so cross-feature references keep resolving,
 and rewrites class names in AndroidManifest.xml and proguard-rules.pro.
@@ -11,8 +11,8 @@ Usage: restructure.py [--apply]   (dry run prints the plan)
 import re, sys, pathlib, subprocess
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
-SRC = ROOT / "app/src/main/java/com/spectrafilm/app"
-BASE = "com.spectrafilm.app"
+SRC = ROOT / "app/src/main/java/com/argentroom/app"
+BASE = "com.argentroom.app"
 
 # file stem -> feature package. Unlisted files stay in the root package (app shell: activity,
 # application, container, navigation, routes, launcher shortcuts, persistence primitives).

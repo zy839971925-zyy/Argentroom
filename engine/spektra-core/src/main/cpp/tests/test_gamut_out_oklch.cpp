@@ -1,7 +1,7 @@
 /*
- * Spektrafilm for Android — host parity test for the OkLch output gamut compression
+ * Argentroom for Android — host parity test for the OkLch output gamut compression
  * (model/gamut_compression.cpp::compress_rgb_oklch_chroma).
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * The oracle's OkLch chroma reduction (utils/gamut_compression.py::

@@ -1,6 +1,6 @@
 /*
- * Spektrafilm Android -- declared RAW precision/normalization contract.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom Android -- declared RAW precision/normalization contract.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  */
 #include "public_api_test_support.h"
 #include "raw_decoder.h"
@@ -28,8 +28,8 @@ void setLibRawOpenAttemptObserverForTest(
 
 namespace {
 
-static_assert(spectrafilm::RawPrecisionDescriptor::kJniWordCount == 136U);
-static_assert(spectrafilm::RawPrecisionDescriptor::kJniRealCount == 2U);
+static_assert(argentroom::RawPrecisionDescriptor::kJniWordCount == 136U);
+static_assert(argentroom::RawPrecisionDescriptor::kJniRealCount == 2U);
 
 int failures = 0;
 
@@ -41,13 +41,13 @@ void check(bool condition, const std::string& label,
   if (!condition) ++failures;
 }
 
-std::string describe(const spectrafilm::DecodeResult& result) {
+std::string describe(const argentroom::DecodeResult& result) {
   return "status=" + std::to_string(result.status) +
       " libraw=" + std::to_string(result.librawCode) +
       " error=" + result.error;
 }
 
-std::uint64_t exactDigest(const spectrafilm::DecodeResult& result) {
+std::uint64_t exactDigest(const argentroom::DecodeResult& result) {
   constexpr std::uint64_t kOffset = 1469598103934665603ULL;
   constexpr std::uint64_t kPrime = 1099511628211ULL;
   std::uint64_t digest = kOffset;
@@ -63,20 +63,20 @@ std::uint64_t exactDigest(const spectrafilm::DecodeResult& result) {
   return digest;
 }
 
-spectrafilm::DecodeResult decode(
+argentroom::DecodeResult decode(
     const sfraw::hosttest::PrecisionDngOptions& options,
     const std::vector<std::uint16_t>* samples = nullptr) {
   sfraw::hosttest::PrecisionDngOptions concrete = options;
   if (samples != nullptr) concrete.samples = *samples;
   const std::vector<std::uint8_t> dng =
       sfraw::hosttest::makePrecisionUncompressedDng(concrete);
-  spectrafilm::DecodeOptions decodeOptions;
-  decodeOptions.whiteBalance = spectrafilm::WhiteBalanceMode::Daylight;
-  return spectrafilm::decodeFromBuffer(dng.data(), dng.size(), decodeOptions);
+  argentroom::DecodeOptions decodeOptions;
+  decodeOptions.whiteBalance = argentroom::WhiteBalanceMode::Daylight;
+  return argentroom::decodeFromBuffer(dng.data(), dng.size(), decodeOptions);
 }
 
 std::uint32_t effectiveBlack(
-    const spectrafilm::RawPrecisionDescriptor& descriptor,
+    const argentroom::RawPrecisionDescriptor& descriptor,
     std::size_t channel, std::size_t cell) {
   const std::uint32_t repeat = descriptor.blackPatternCount == 0U
       ? 0U
@@ -85,7 +85,7 @@ std::uint32_t effectiveBlack(
       descriptor.blackLevelChannels.at(channel) + repeat;
 }
 
-float sampleAt(const spectrafilm::DecodeResult& result, int x, int y,
+float sampleAt(const argentroom::DecodeResult& result, int x, int y,
                int channel) {
   const std::size_t index =
       (static_cast<std::size_t>(y) * result.width + x) * 3U + channel;
@@ -476,7 +476,7 @@ std::vector<std::uint8_t> makeWrongMagicEndianHeader(
   return bytes;
 }
 
-spectrafilm::DecodeResult decodeFromTemporaryFd(
+argentroom::DecodeResult decodeFromTemporaryFd(
     const std::vector<std::uint8_t>& bytes) {
   FILE* file = std::tmpfile();
   if (file == nullptr) throw std::runtime_error("tmpfile failed");
@@ -487,8 +487,8 @@ spectrafilm::DecodeResult decodeFromTemporaryFd(
     std::fclose(file);
     throw std::runtime_error("temporary RAW fixture write failed");
   }
-  spectrafilm::DecodeResult result =
-      spectrafilm::decodeFromFd(::fileno(file), {});
+  argentroom::DecodeResult result =
+      argentroom::decodeFromFd(::fileno(file), {});
   std::fclose(file);
   return result;
 }
@@ -499,12 +499,12 @@ void checkHostilePreOpenMatrix(const std::vector<std::uint8_t>& bytes,
     std::atomic<unsigned> openAttempts{0U};
     sfraw::test::setLibRawOpenAttemptObserverForTest(
         countLibRawOpenAttempt, &openAttempts);
-    const spectrafilm::DecodeResult result = throughFd
+    const argentroom::DecodeResult result = throughFd
         ? decodeFromTemporaryFd(bytes)
-        : spectrafilm::decodeFromBuffer(bytes.data(), bytes.size(), {});
+        : argentroom::decodeFromBuffer(bytes.data(), bytes.size(), {});
     sfraw::test::setLibRawOpenAttemptObserverForTest(nullptr, nullptr);
     check(!result.ok &&
-              result.status == spectrafilm::SFRAW_ERR_PRECISION_METADATA &&
+              result.status == argentroom::SFRAW_ERR_PRECISION_METADATA &&
               result.error.find("before LibRaw open") != std::string::npos &&
               openAttempts.load(std::memory_order_relaxed) == 0U,
           label + (throughFd ? "/fd" : "/buffer") +
@@ -531,17 +531,17 @@ void checkPrecisionCase(std::uint16_t bits,
       pixelCount, static_cast<std::uint16_t>(options.blackLevel));
   const std::vector<std::uint16_t> whiteSamples(
       pixelCount, static_cast<std::uint16_t>(options.whiteLevel));
-  spectrafilm::DecodeResult black = decode(options, &blackSamples);
-  spectrafilm::DecodeResult white = decode(options, &whiteSamples);
-  spectrafilm::DecodeResult bands = decode(options);
-  spectrafilm::DecodeResult repeat = decode(options);
+  argentroom::DecodeResult black = decode(options, &blackSamples);
+  argentroom::DecodeResult white = decode(options, &whiteSamples);
+  argentroom::DecodeResult bands = decode(options);
+  argentroom::DecodeResult repeat = decode(options);
   const std::uint16_t adjacentCode = static_cast<std::uint16_t>(
       options.blackLevel + (options.whiteLevel - options.blackLevel) / 2U);
   const std::vector<std::uint16_t> adjacentLow(pixelCount, adjacentCode);
   const std::vector<std::uint16_t> adjacentHigh(
       pixelCount, static_cast<std::uint16_t>(adjacentCode + 1U));
-  spectrafilm::DecodeResult low = decode(options, &adjacentLow);
-  spectrafilm::DecodeResult high = decode(options, &adjacentHigh);
+  argentroom::DecodeResult low = decode(options, &adjacentLow);
+  argentroom::DecodeResult high = decode(options, &adjacentHigh);
 
   const std::string prefix = std::to_string(bits) + "-bit/" +
       (byteOrder == sfraw::hosttest::TiffByteOrder::kBigEndian ? "BE" : "LE");
@@ -553,40 +553,40 @@ void checkPrecisionCase(std::uint16_t bits,
   }
 
   const auto& descriptor = bands.descriptor;
-  check(descriptor.version == spectrafilm::RawPrecisionDescriptor::kVersion &&
+  check(descriptor.version == argentroom::RawPrecisionDescriptor::kVersion &&
             descriptor.sampleFormat ==
-                spectrafilm::RawSampleFormat::UnsignedInteger &&
+                argentroom::RawSampleFormat::UnsignedInteger &&
             descriptor.declaredBitsPerSample == bits &&
             descriptor.effectiveBitsPerSample == bits &&
             descriptor.processedBitsPerSample == 16,
         prefix + " preserves declared/effective/processed precision separately");
   check(descriptor.byteOrder ==
             (byteOrder == sfraw::hosttest::TiffByteOrder::kBigEndian
-                 ? spectrafilm::RawByteOrder::BigEndian
-                 : spectrafilm::RawByteOrder::LittleEndian) &&
+                 ? argentroom::RawByteOrder::BigEndian
+                 : argentroom::RawByteOrder::LittleEndian) &&
             descriptor.packing ==
-                (bits == 16U ? spectrafilm::RawPacking::TiffWord16
-                             : spectrafilm::RawPacking::TiffPackedBits),
+                (bits == 16U ? argentroom::RawPacking::TiffWord16
+                             : argentroom::RawPacking::TiffPackedBits),
         prefix + " records container byte order and packing");
-  check(descriptor.pixelLayout == spectrafilm::RawPixelLayout::Bayer2x2 &&
+  check(descriptor.pixelLayout == argentroom::RawPixelLayout::Bayer2x2 &&
             descriptor.cfaPatternRows == 2 &&
             descriptor.cfaPatternColumns == 2 &&
             descriptor.cfaPatternCount == 4U &&
             descriptor.colorChannels == 3,
         prefix + " records the bounded Bayer layout");
-  check(descriptor.decoderRoute == spectrafilm::RawDecoderRoute::LibRawNative &&
+  check(descriptor.decoderRoute == argentroom::RawDecoderRoute::LibRawNative &&
             descriptor.postprocessRoute ==
-                spectrafilm::RawPostprocessRoute::LibRawAcesToFloat32ProPhoto &&
+                argentroom::RawPostprocessRoute::LibRawAcesToFloat32ProPhoto &&
             descriptor.linearSpace ==
-                spectrafilm::RawLinearSpace::LinearProPhotoRgb &&
+                argentroom::RawLinearSpace::LinearProPhotoRgb &&
             !descriptor.halfSizeRequested &&
             descriptor.requestedMaxLongEdge == 0 &&
             descriptor.outputSubsampleStep == 1,
         prefix + " records the native route, f32 boundary, and non-proxy state");
   check(descriptor.whiteLevelProvenance ==
-            spectrafilm::RawLevelProvenance::DngMetadata &&
+            argentroom::RawLevelProvenance::DngMetadata &&
             descriptor.blackLevelProvenance ==
-                spectrafilm::RawLevelProvenance::DngMetadata &&
+                argentroom::RawLevelProvenance::DngMetadata &&
             std::all_of(descriptor.whiteLevels.begin(),
                         descriptor.whiteLevels.end(),
                         [&](std::uint32_t level) {
@@ -722,7 +722,7 @@ int main() {
             "structurally complete " + std::to_string(sampleCount) +
                 "-sample " + endian +
                 " LinearRaw has Orientation, UniqueCameraModel, and paired ColorMatrices");
-      const spectrafilm::DecodeResult linearResult = decode(linear);
+      const argentroom::DecodeResult linearResult = decode(linear);
       bool levelsExact = linearResult.ok &&
           linearResult.descriptor.colorChannels == sampleCount;
       for (std::size_t channel = 0U;
@@ -736,7 +736,7 @@ int main() {
       const std::string sampleLabel = std::to_string(sampleCount) + "-sample ";
       check(linearResult.ok && levelsExact &&
                 linearResult.descriptor.pixelLayout ==
-                    spectrafilm::RawPixelLayout::Linear &&
+                    argentroom::RawPixelLayout::Linear &&
                 linearResult.descriptor.cfaPatternCount == 0U &&
                 linearResult.descriptor.cfaPatternRows == 0 &&
                 linearResult.descriptor.cfaPatternColumns == 0,
@@ -753,7 +753,7 @@ int main() {
             (linear.whiteLevels[channel] - linear.blackPattern[channel]) / 2U;
         adjacentBase[index] = static_cast<std::uint16_t>(midpoint);
       }
-      const spectrafilm::DecodeResult linearBase = decode(linear, &adjacentBase);
+      const argentroom::DecodeResult linearBase = decode(linear, &adjacentBase);
       std::vector<std::uint64_t> perturbedDigests;
       for (std::uint16_t plane = 0U; plane < sampleCount; ++plane) {
         std::vector<std::uint16_t> perturbed = adjacentBase;
@@ -761,7 +761,7 @@ int main() {
              index += sampleCount) {
           ++perturbed[index];
         }
-        const spectrafilm::DecodeResult changed = decode(linear, &perturbed);
+        const argentroom::DecodeResult changed = decode(linear, &perturbed);
         const bool independentlyVisible = linearBase.ok && changed.ok &&
             exactDigest(linearBase) != exactDigest(changed);
         check(independentlyVisible,
@@ -786,12 +786,12 @@ int main() {
               std::atomic<unsigned> openAttempts{0U};
               sfraw::test::setLibRawOpenAttemptObserverForTest(
                   countLibRawOpenAttempt, &openAttempts);
-              const spectrafilm::DecodeResult result =
-                  spectrafilm::decodeFromBuffer(bytes.data(), bytes.size(), {});
+              const argentroom::DecodeResult result =
+                  argentroom::decodeFromBuffer(bytes.data(), bytes.size(), {});
               sfraw::test::setLibRawOpenAttemptObserverForTest(nullptr, nullptr);
               check(!result.ok &&
                         result.status ==
-                            spectrafilm::SFRAW_ERR_PRECISION_METADATA &&
+                            argentroom::SFRAW_ERR_PRECISION_METADATA &&
                         result.error.find("before LibRaw open") !=
                             std::string::npos &&
                         openAttempts.load() == 0U,
@@ -895,7 +895,7 @@ int main() {
         sfraw::hosttest::PrecisionDngOptions externalBoundary = linear;
         externalBoundary.blackPattern = {4092U, 4093U, 4094U};
         externalBoundary.whiteLevels = {4095U, 4095U, 4095U};
-        const spectrafilm::DecodeResult externalBoundaryResult =
+        const argentroom::DecodeResult externalBoundaryResult =
             decode(externalBoundary);
         check(externalBoundaryResult.ok &&
                   externalBoundaryResult.descriptor.effectiveBitsPerSample == 2,
@@ -910,12 +910,12 @@ int main() {
         const std::size_t externalBlackAt =
             ordered32(externalOverRange, externalBlackEntry + 8U);
         ordered32(&externalOverRange, externalBlackAt + 4U, 4096U);
-        const spectrafilm::DecodeResult externalOverRangeResult =
-            spectrafilm::decodeFromBuffer(
+        const argentroom::DecodeResult externalOverRangeResult =
+            argentroom::decodeFromBuffer(
                 externalOverRange.data(), externalOverRange.size(), {});
         check(!externalOverRangeResult.ok &&
                   externalOverRangeResult.status ==
-                      spectrafilm::SFRAW_ERR_PRECISION_METADATA &&
+                      argentroom::SFRAW_ERR_PRECISION_METADATA &&
                   externalOverRangeResult.error.find("before LibRaw open") !=
                       std::string::npos,
               endian +
@@ -926,12 +926,12 @@ int main() {
             sfraw::hosttest::makePrecisionUncompressedDng(linear);
         ordered32(&wrongBlackCount,
                   findIfdEntry(wrongBlackCount, 0xc61aU) + 4U, 1U);
-        const spectrafilm::DecodeResult wrongBlackCountResult =
-            spectrafilm::decodeFromBuffer(
+        const argentroom::DecodeResult wrongBlackCountResult =
+            argentroom::decodeFromBuffer(
                 wrongBlackCount.data(), wrongBlackCount.size(), {});
         check(!wrongBlackCountResult.ok &&
                   wrongBlackCountResult.status ==
-                      spectrafilm::SFRAW_ERR_PRECISION_METADATA,
+                      argentroom::SFRAW_ERR_PRECISION_METADATA,
               endian +
                   " LinearRaw BlackLevel count must equal repeat cells times samples",
               describe(wrongBlackCountResult));
@@ -940,12 +940,12 @@ int main() {
             sfraw::hosttest::makePrecisionUncompressedDng(linear);
         ordered32(&wrongWhiteCount,
                   findIfdEntry(wrongWhiteCount, 0xc61dU) + 4U, 1U);
-        const spectrafilm::DecodeResult wrongWhiteCountResult =
-            spectrafilm::decodeFromBuffer(
+        const argentroom::DecodeResult wrongWhiteCountResult =
+            argentroom::decodeFromBuffer(
                 wrongWhiteCount.data(), wrongWhiteCount.size(), {});
         check(!wrongWhiteCountResult.ok &&
                   wrongWhiteCountResult.status ==
-                      spectrafilm::SFRAW_ERR_PRECISION_METADATA,
+                      argentroom::SFRAW_ERR_PRECISION_METADATA,
               endian + " LinearRaw WhiteLevel count must equal samples",
               describe(wrongWhiteCountResult));
 
@@ -954,11 +954,11 @@ int main() {
         spatialLinear.blackPattern = {
             32U, 49U, 66U, 33U, 50U, 67U,
         };
-        const spectrafilm::DecodeResult spatialLinearResult =
+        const argentroom::DecodeResult spatialLinearResult =
             decode(spatialLinear);
         check(!spatialLinearResult.ok &&
                   spatialLinearResult.status ==
-                      spectrafilm::SFRAW_ERR_PRECISION_METADATA,
+                      argentroom::SFRAW_ERR_PRECISION_METADATA,
               endian +
                   " spatial LinearRaw BlackLevel matrix is explicit v1 unsupported",
               describe(spatialLinearResult));
@@ -967,11 +967,11 @@ int main() {
             sfraw::hosttest::makePrecisionUncompressedDng(linear);
         const std::size_t bitsEntry = findIfdEntry(mixedBits, 0x0102U);
         ordered16(&mixedBits, shortArrayAt(mixedBits, bitsEntry) + 2U, 10U);
-        const spectrafilm::DecodeResult mixedBitsResult =
-            spectrafilm::decodeFromBuffer(mixedBits.data(), mixedBits.size(), {});
+        const argentroom::DecodeResult mixedBitsResult =
+            argentroom::decodeFromBuffer(mixedBits.data(), mixedBits.size(), {});
         check(!mixedBitsResult.ok &&
                   mixedBitsResult.status ==
-                      spectrafilm::SFRAW_ERR_PRECISION_METADATA,
+                      argentroom::SFRAW_ERR_PRECISION_METADATA,
               "mixed " + endian + " BitsPerSample array fails closed",
               describe(mixedBitsResult));
 
@@ -979,12 +979,12 @@ int main() {
             sfraw::hosttest::makePrecisionUncompressedDng(linear);
         const std::size_t formatEntry = findIfdEntry(mixedFormat, 0x0153U);
         ordered16(&mixedFormat, shortArrayAt(mixedFormat, formatEntry) + 4U, 3U);
-        const spectrafilm::DecodeResult mixedFormatResult =
-            spectrafilm::decodeFromBuffer(
+        const argentroom::DecodeResult mixedFormatResult =
+            argentroom::decodeFromBuffer(
                 mixedFormat.data(), mixedFormat.size(), {});
         check(!mixedFormatResult.ok &&
                   mixedFormatResult.status ==
-                      spectrafilm::SFRAW_ERR_PRECISION_METADATA,
+                      argentroom::SFRAW_ERR_PRECISION_METADATA,
               "mixed " + endian + " SampleFormat array fails closed",
               describe(mixedFormatResult));
       }
@@ -1005,7 +1005,7 @@ int main() {
     sfraw::hosttest::PrecisionDngOptions defaultCfa = cfa;
     defaultCfa.includeCfaPlaneColor = false;
     defaultCfa.includeCfaLayout = false;
-    const spectrafilm::DecodeResult defaultCfaResult = decode(defaultCfa);
+    const argentroom::DecodeResult defaultCfaResult = decode(defaultCfa);
     check(defaultCfaResult.ok,
           endian + " CFA accepts the specified RGB/rectangular defaults",
           describe(defaultCfaResult));
@@ -1017,11 +1017,11 @@ int main() {
     std::vector<std::uint8_t> sevenBit =
         sfraw::hosttest::makePrecisionUncompressedDng(sevenBitOptions);
     ordered16(&sevenBit, findIfdEntry(sevenBit, 0x0102U) + 8U, 7U);
-    const spectrafilm::DecodeResult sevenBitResult =
-        spectrafilm::decodeFromBuffer(sevenBit.data(), sevenBit.size(), {});
+    const argentroom::DecodeResult sevenBitResult =
+        argentroom::decodeFromBuffer(sevenBit.data(), sevenBit.size(), {});
     check(!sevenBitResult.ok &&
               sevenBitResult.status ==
-                  spectrafilm::SFRAW_ERR_PRECISION_METADATA &&
+                  argentroom::SFRAW_ERR_PRECISION_METADATA &&
               sevenBitResult.error.find("before LibRaw open") !=
                   std::string::npos,
           endian + " BitsPerSample below the qualified 8-bit floor fails closed",
@@ -1029,10 +1029,10 @@ int main() {
 
     sfraw::hosttest::PrecisionDngOptions remappedCfa = cfa;
     remappedCfa.cfaPlaneColors = {0U, 2U, 1U};
-    const spectrafilm::DecodeResult remappedCfaResult = decode(remappedCfa);
+    const argentroom::DecodeResult remappedCfaResult = decode(remappedCfa);
     check(!remappedCfaResult.ok &&
               remappedCfaResult.status ==
-                  spectrafilm::SFRAW_ERR_PRECISION_METADATA &&
+                  argentroom::SFRAW_ERR_PRECISION_METADATA &&
               remappedCfaResult.error.find("before LibRaw open") !=
                   std::string::npos,
           endian + " non-identity CFAPlaneColor mapping fails before LibRaw open",
@@ -1040,10 +1040,10 @@ int main() {
 
     sfraw::hosttest::PrecisionDngOptions nonRgbPlane = cfa;
     nonRgbPlane.cfaPlaneColors = {0U, 1U, 2U, 3U};
-    const spectrafilm::DecodeResult nonRgbPlaneResult = decode(nonRgbPlane);
+    const argentroom::DecodeResult nonRgbPlaneResult = decode(nonRgbPlane);
     check(!nonRgbPlaneResult.ok &&
               nonRgbPlaneResult.status ==
-                  spectrafilm::SFRAW_ERR_PRECISION_METADATA &&
+                  argentroom::SFRAW_ERR_PRECISION_METADATA &&
               nonRgbPlaneResult.error.find("before LibRaw open") !=
                   std::string::npos,
           endian +
@@ -1052,40 +1052,40 @@ int main() {
 
     sfraw::hosttest::PrecisionDngOptions staggeredCfa = cfa;
     staggeredCfa.cfaLayout = 2U;
-    const spectrafilm::DecodeResult staggeredCfaResult = decode(staggeredCfa);
+    const argentroom::DecodeResult staggeredCfaResult = decode(staggeredCfa);
     check(!staggeredCfaResult.ok &&
               staggeredCfaResult.status ==
-                  spectrafilm::SFRAW_ERR_PRECISION_METADATA,
+                  argentroom::SFRAW_ERR_PRECISION_METADATA,
           endian + " staggered CFALayout fails closed for descriptor v1",
           describe(staggeredCfaResult));
 
     sfraw::hosttest::PrecisionDngOptions duplicatePlane = cfa;
     duplicatePlane.duplicateCfaPlaneColor = true;
-    const spectrafilm::DecodeResult duplicatePlaneResult = decode(duplicatePlane);
+    const argentroom::DecodeResult duplicatePlaneResult = decode(duplicatePlane);
     check(!duplicatePlaneResult.ok &&
               duplicatePlaneResult.status ==
-                  spectrafilm::SFRAW_ERR_PRECISION_METADATA,
+                  argentroom::SFRAW_ERR_PRECISION_METADATA,
           endian + " duplicate selected-IFD CFAPlaneColor fails closed",
           describe(duplicatePlaneResult));
 
     sfraw::hosttest::PrecisionDngOptions duplicateLayout = cfa;
     duplicateLayout.duplicateCfaLayout = true;
-    const spectrafilm::DecodeResult duplicateLayoutResult = decode(duplicateLayout);
+    const argentroom::DecodeResult duplicateLayoutResult = decode(duplicateLayout);
     check(!duplicateLayoutResult.ok &&
               duplicateLayoutResult.status ==
-                  spectrafilm::SFRAW_ERR_PRECISION_METADATA,
+                  argentroom::SFRAW_ERR_PRECISION_METADATA,
           endian + " duplicate selected-IFD CFALayout fails closed",
           describe(duplicateLayoutResult));
 
     std::vector<std::uint8_t> malformedPlane =
         sfraw::hosttest::makePrecisionUncompressedDng(cfa);
     ordered16(&malformedPlane, findIfdEntry(malformedPlane, 0xc616U) + 2U, 3U);
-    const spectrafilm::DecodeResult malformedPlaneResult =
-        spectrafilm::decodeFromBuffer(
+    const argentroom::DecodeResult malformedPlaneResult =
+        argentroom::decodeFromBuffer(
             malformedPlane.data(), malformedPlane.size(), {});
     check(!malformedPlaneResult.ok &&
               malformedPlaneResult.status ==
-                  spectrafilm::SFRAW_ERR_PRECISION_METADATA,
+                  argentroom::SFRAW_ERR_PRECISION_METADATA,
           endian + " malformed selected-IFD CFAPlaneColor type fails closed",
           describe(malformedPlaneResult));
 
@@ -1093,12 +1093,12 @@ int main() {
         sfraw::hosttest::makePrecisionUncompressedDng(cfa);
     ordered16(&malformedLayoutType,
               findIfdEntry(malformedLayoutType, 0xc617U) + 2U, 4U);
-    const spectrafilm::DecodeResult malformedLayoutTypeResult =
-        spectrafilm::decodeFromBuffer(
+    const argentroom::DecodeResult malformedLayoutTypeResult =
+        argentroom::decodeFromBuffer(
             malformedLayoutType.data(), malformedLayoutType.size(), {});
     check(!malformedLayoutTypeResult.ok &&
               malformedLayoutTypeResult.status ==
-                  spectrafilm::SFRAW_ERR_PRECISION_METADATA &&
+                  argentroom::SFRAW_ERR_PRECISION_METADATA &&
               malformedLayoutTypeResult.error.find("before LibRaw open") !=
                   std::string::npos,
           endian + " malformed CFALayout type fails before LibRaw open",
@@ -1108,12 +1108,12 @@ int main() {
         sfraw::hosttest::makePrecisionUncompressedDng(cfa);
     ordered32(&malformedLayoutCount,
               findIfdEntry(malformedLayoutCount, 0xc617U) + 4U, 2U);
-    const spectrafilm::DecodeResult malformedLayoutCountResult =
-        spectrafilm::decodeFromBuffer(
+    const argentroom::DecodeResult malformedLayoutCountResult =
+        argentroom::decodeFromBuffer(
             malformedLayoutCount.data(), malformedLayoutCount.size(), {});
     check(!malformedLayoutCountResult.ok &&
               malformedLayoutCountResult.status ==
-                  spectrafilm::SFRAW_ERR_PRECISION_METADATA &&
+                  argentroom::SFRAW_ERR_PRECISION_METADATA &&
               malformedLayoutCountResult.error.find("before LibRaw open") !=
                   std::string::npos,
           endian + " malformed CFALayout count fails before LibRaw open",
@@ -1122,12 +1122,12 @@ int main() {
 
   const std::vector<std::uint8_t> subIfd =
       sfraw::hosttest::makePrecisionSubIfdDngWithPreviewMetadata();
-  const spectrafilm::DecodeResult subIfdResult =
-      spectrafilm::decodeFromBuffer(subIfd.data(), subIfd.size(), {});
+  const argentroom::DecodeResult subIfdResult =
+      argentroom::decodeFromBuffer(subIfd.data(), subIfd.size(), {});
   check(subIfdResult.ok &&
             subIfdResult.descriptor.declaredBitsPerSample == 12 &&
             subIfdResult.descriptor.blackLevelProvenance ==
-                spectrafilm::RawLevelProvenance::DngMetadata &&
+                argentroom::RawLevelProvenance::DngMetadata &&
             effectiveBlack(subIfdResult.descriptor, 0U, 0U) == 64U &&
             std::all_of(
                 subIfdResult.descriptor.whiteLevels.begin(),
@@ -1165,11 +1165,11 @@ int main() {
   {
     const std::vector<std::uint8_t> previewFractional =
         withFractionalBlack(subIfdRoot, 3U, 2U);  // 8-bit preview: 1.5 -> 2
-    const spectrafilm::DecodeResult result = spectrafilm::decodeFromBuffer(
+    const argentroom::DecodeResult result = argentroom::decodeFromBuffer(
         previewFractional.data(), previewFractional.size(), {});
     check(result.ok &&
               result.descriptor.blackLevelProvenance ==
-                  spectrafilm::RawLevelProvenance::DngMetadata &&
+                  argentroom::RawLevelProvenance::DngMetadata &&
               effectiveBlack(result.descriptor, 0U, 0U) == 64U,
           "a fractional preview BlackLevel does not relabel the integral RAW SubIFD",
           describe(result));
@@ -1177,11 +1177,11 @@ int main() {
   {
     const std::vector<std::uint8_t> rawFractional =
         withFractionalBlack(rawSubIfd, 6406U, 100U);  // 64.06 -> 64
-    const spectrafilm::DecodeResult result = spectrafilm::decodeFromBuffer(
+    const argentroom::DecodeResult result = argentroom::decodeFromBuffer(
         rawFractional.data(), rawFractional.size(), {});
     check(result.ok &&
               result.descriptor.blackLevelProvenance ==
-                  spectrafilm::RawLevelProvenance::DngMetadataRounded &&
+                  argentroom::RawLevelProvenance::DngMetadataRounded &&
               effectiveBlack(result.descriptor, 0U, 0U) == 64U,
           "a fractional RAW SubIFD BlackLevel is reported as rounded",
           describe(result));
@@ -1201,12 +1201,12 @@ int main() {
   duplicateGeometry.insert(
       duplicateGeometry.end(), clonedIfd.begin(), clonedIfd.end());
   ordered32(&duplicateGeometry, rootIfd + rootIfdBytes - 4U, duplicateIfdAt);
-  const spectrafilm::DecodeResult duplicateGeometryResult =
-      spectrafilm::decodeFromBuffer(
+  const argentroom::DecodeResult duplicateGeometryResult =
+      argentroom::decodeFromBuffer(
           duplicateGeometry.data(), duplicateGeometry.size(), {});
   check(!duplicateGeometryResult.ok &&
             duplicateGeometryResult.status ==
-                spectrafilm::SFRAW_ERR_PRECISION_METADATA,
+                argentroom::SFRAW_ERR_PRECISION_METADATA,
         "multiple RAW IFDs matching LibRaw geometry fail closed",
         describe(duplicateGeometryResult));
 
@@ -1238,8 +1238,8 @@ int main() {
       countLibRawOpenAttempt, &validOpenAttempts);
   const std::vector<std::uint8_t> validOpenControl =
       sfraw::hosttest::makePrecisionUncompressedDng(multiIfdOptions);
-  const spectrafilm::DecodeResult validOpenControlResult =
-      spectrafilm::decodeFromBuffer(
+  const argentroom::DecodeResult validOpenControlResult =
+      argentroom::decodeFromBuffer(
           validOpenControl.data(), validOpenControl.size(), {});
   sfraw::test::setLibRawOpenAttemptObserverForTest(nullptr, nullptr);
   check(validOpenControlResult.ok && validOpenAttempts.load() == 1U,
@@ -1249,13 +1249,13 @@ int main() {
   std::atomic<unsigned> unsafeOpenAttempts{0U};
   sfraw::test::setLibRawOpenAttemptObserverForTest(
       countLibRawOpenAttempt, &unsafeOpenAttempts);
-  const spectrafilm::DecodeResult unsafeSecondaryResult =
-      spectrafilm::decodeFromBuffer(
+  const argentroom::DecodeResult unsafeSecondaryResult =
+      argentroom::decodeFromBuffer(
           unsafeSecondary.data(), unsafeSecondary.size(), {});
   sfraw::test::setLibRawOpenAttemptObserverForTest(nullptr, nullptr);
   check(!unsafeSecondaryResult.ok &&
             unsafeSecondaryResult.status ==
-                spectrafilm::SFRAW_ERR_PRECISION_METADATA &&
+                argentroom::SFRAW_ERR_PRECISION_METADATA &&
             unsafeSecondaryResult.error.find("before LibRaw open") !=
                 std::string::npos &&
             unsafeOpenAttempts.load() == 0U,
@@ -1303,8 +1303,8 @@ int main() {
     std::atomic<unsigned> hostileSiblingOpenAttempts{0U};
     sfraw::test::setLibRawOpenAttemptObserverForTest(
         countLibRawOpenAttempt, &hostileSiblingOpenAttempts);
-    const spectrafilm::DecodeResult hostileSiblingResult =
-        spectrafilm::decodeFromBuffer(
+    const argentroom::DecodeResult hostileSiblingResult =
+        argentroom::decodeFromBuffer(
             hostileSibling.data(), hostileSibling.size(), {});
     sfraw::test::setLibRawOpenAttemptObserverForTest(nullptr, nullptr);
     const std::string endianLabel = byteOrder ==
@@ -1313,7 +1313,7 @@ int main() {
         : "LE";
     check(!hostileSiblingResult.ok &&
               hostileSiblingResult.status ==
-                  spectrafilm::SFRAW_ERR_PRECISION_METADATA &&
+                  argentroom::SFRAW_ERR_PRECISION_METADATA &&
               hostileSiblingResult.error.find("before LibRaw open") !=
                   std::string::npos &&
               hostileSiblingOpenAttempts.load() == 0U,
@@ -1328,13 +1328,13 @@ int main() {
     std::atomic<unsigned> reducedHostileOpenAttempts{0U};
     sfraw::test::setLibRawOpenAttemptObserverForTest(
         countLibRawOpenAttempt, &reducedHostileOpenAttempts);
-    const spectrafilm::DecodeResult reducedHostileResult =
-        spectrafilm::decodeFromBuffer(
+    const argentroom::DecodeResult reducedHostileResult =
+        argentroom::decodeFromBuffer(
             reducedHostileSibling.data(), reducedHostileSibling.size(), {});
     sfraw::test::setLibRawOpenAttemptObserverForTest(nullptr, nullptr);
     check(!reducedHostileResult.ok &&
               reducedHostileResult.status ==
-                  spectrafilm::SFRAW_ERR_PRECISION_METADATA &&
+                  argentroom::SFRAW_ERR_PRECISION_METADATA &&
               reducedHostileResult.error.find("before LibRaw open") !=
                   std::string::npos &&
               reducedHostileOpenAttempts.load() == 0U,
@@ -1426,12 +1426,12 @@ int main() {
   duplicateWhite.duplicateWhiteLevel = true;
   const std::vector<std::uint8_t> duplicateWhiteDng =
       sfraw::hosttest::makePrecisionUncompressedDng(duplicateWhite);
-  const spectrafilm::DecodeResult duplicateWhiteResult =
-      spectrafilm::decodeFromBuffer(
+  const argentroom::DecodeResult duplicateWhiteResult =
+      argentroom::decodeFromBuffer(
           duplicateWhiteDng.data(), duplicateWhiteDng.size(), {});
   check(!duplicateWhiteResult.ok &&
             duplicateWhiteResult.status ==
-                spectrafilm::SFRAW_ERR_PRECISION_METADATA,
+                argentroom::SFRAW_ERR_PRECISION_METADATA,
         "conflicting selected-IFD WhiteLevel duplicates fail closed",
         describe(duplicateWhiteResult));
 
@@ -1439,10 +1439,10 @@ int main() {
   delta.includeBlackLevelDeltaH = true;
   const std::vector<std::uint8_t> deltaDng =
       sfraw::hosttest::makePrecisionUncompressedDng(delta);
-  const spectrafilm::DecodeResult deltaResult = spectrafilm::decodeFromBuffer(
+  const argentroom::DecodeResult deltaResult = argentroom::decodeFromBuffer(
       deltaDng.data(), deltaDng.size(), {});
   check(!deltaResult.ok &&
-            deltaResult.status == spectrafilm::SFRAW_ERR_PRECISION_METADATA,
+            deltaResult.status == argentroom::SFRAW_ERR_PRECISION_METADATA,
         "BlackLevelDeltaH is a typed unsupported transformation",
         describe(deltaResult));
 
@@ -1452,12 +1452,12 @@ int main() {
   oversizedRepeat.blackPattern.assign(64U, oversizedRepeat.blackLevel);
   const std::vector<std::uint8_t> oversizedRepeatDng =
       sfraw::hosttest::makePrecisionUncompressedDng(oversizedRepeat);
-  const spectrafilm::DecodeResult oversizedRepeatResult =
-      spectrafilm::decodeFromBuffer(
+  const argentroom::DecodeResult oversizedRepeatResult =
+      argentroom::decodeFromBuffer(
           oversizedRepeatDng.data(), oversizedRepeatDng.size(), {});
   check(!oversizedRepeatResult.ok &&
             oversizedRepeatResult.status ==
-                spectrafilm::SFRAW_ERR_PRECISION_METADATA,
+                argentroom::SFRAW_ERR_PRECISION_METADATA,
         "native and Kotlin both reject a 1x64 black repeat shape",
         describe(oversizedRepeatResult));
 
@@ -1470,11 +1470,11 @@ int main() {
   };
   const std::vector<std::uint8_t> customCfaDng =
       sfraw::hosttest::makePrecisionUncompressedDng(customCfa);
-  const spectrafilm::DecodeResult customCfaResult =
-      spectrafilm::decodeFromBuffer(customCfaDng.data(), customCfaDng.size(), {});
+  const argentroom::DecodeResult customCfaResult =
+      argentroom::decodeFromBuffer(customCfaDng.data(), customCfaDng.size(), {});
   check(!customCfaResult.ok &&
             customCfaResult.status ==
-                spectrafilm::SFRAW_ERR_PRECISION_METADATA,
+                argentroom::SFRAW_ERR_PRECISION_METADATA,
         "unrepresented custom CFA geometry fails closed",
         describe(customCfaResult));
 
@@ -1495,10 +1495,10 @@ int main() {
       0U, 1U, 0U, 2U, 1U, 2U,
       1U, 2U, 1U, 1U, 0U, 1U,
   };
-  const spectrafilm::DecodeResult xtransResult = decode(xtrans);
+  const argentroom::DecodeResult xtransResult = decode(xtrans);
   check(xtransResult.ok &&
             xtransResult.descriptor.pixelLayout ==
-                spectrafilm::RawPixelLayout::XTrans6x6 &&
+                argentroom::RawPixelLayout::XTrans6x6 &&
             xtransResult.descriptor.cfaPatternRows == 6 &&
             xtransResult.descriptor.cfaPatternColumns == 6 &&
             xtransResult.descriptor.cfaPatternCount == 36U,
@@ -1536,12 +1536,12 @@ int main() {
       sfraw::hosttest::makePrecisionUncompressedDng(malformedCfaPayload);
   ordered32(&malformedCfa, findIfdEntry(malformedCfa, 0x828eU) + 8U,
             static_cast<std::uint32_t>(malformedCfa.size() + 64U));
-  const spectrafilm::DecodeResult malformedCfaResult =
-      spectrafilm::decodeFromBuffer(
+  const argentroom::DecodeResult malformedCfaResult =
+      argentroom::decodeFromBuffer(
           malformedCfa.data(), malformedCfa.size(), {});
   check(!malformedCfaResult.ok &&
             malformedCfaResult.status ==
-                spectrafilm::SFRAW_ERR_PRECISION_METADATA,
+                argentroom::SFRAW_ERR_PRECISION_METADATA,
         "out-of-bounds selected-IFD CFA payload fails the bounded preflight",
         describe(malformedCfaResult));
 
@@ -1553,12 +1553,12 @@ int main() {
       sfraw::hosttest::makePrecisionUncompressedDng(malformedBlackPayload);
   ordered32(&malformedBlack, findIfdEntry(malformedBlack, 0xc61aU) + 8U,
             static_cast<std::uint32_t>(malformedBlack.size() + 64U));
-  const spectrafilm::DecodeResult malformedBlackResult =
-      spectrafilm::decodeFromBuffer(
+  const argentroom::DecodeResult malformedBlackResult =
+      argentroom::decodeFromBuffer(
           malformedBlack.data(), malformedBlack.size(), {});
   check(!malformedBlackResult.ok &&
             malformedBlackResult.status ==
-                spectrafilm::SFRAW_ERR_PRECISION_METADATA &&
+                argentroom::SFRAW_ERR_PRECISION_METADATA &&
             malformedBlackResult.error.find("before LibRaw open") !=
                 std::string::npos,
         "invalid external BlackLevel is rejected before LibRaw open_buffer",
@@ -1581,20 +1581,20 @@ int main() {
     ordered16(&shortBlack, shortEntry + 2U, 3U);
     ordered16(&shortBlack, shortEntry + 8U, 64U);
     ordered16(&shortBlack, shortEntry + 10U, 0U);
-    const spectrafilm::DecodeResult shortBlackResult =
-        spectrafilm::decodeFromBuffer(shortBlack.data(), shortBlack.size(), {});
+    const argentroom::DecodeResult shortBlackResult =
+        argentroom::decodeFromBuffer(shortBlack.data(), shortBlack.size(), {});
     check(shortBlackResult.ok,
           endian + " inline SHORT BlackLevel is value-checked and admitted",
           describe(shortBlackResult));
 
     std::vector<std::uint8_t> oversizedShort = shortBlack;
     ordered16(&oversizedShort, shortEntry + 8U, 4096U);
-    const spectrafilm::DecodeResult oversizedShortResult =
-        spectrafilm::decodeFromBuffer(
+    const argentroom::DecodeResult oversizedShortResult =
+        argentroom::decodeFromBuffer(
             oversizedShort.data(), oversizedShort.size(), {});
     check(!oversizedShortResult.ok &&
               oversizedShortResult.status ==
-                  spectrafilm::SFRAW_ERR_PRECISION_METADATA &&
+                  argentroom::SFRAW_ERR_PRECISION_METADATA &&
               oversizedShortResult.error.find("before LibRaw open") !=
                   std::string::npos,
           endian + " above-declared-range SHORT BlackLevel fails before LibRaw open",
@@ -1618,8 +1618,8 @@ int main() {
       ordered16(&externalShort, externalShortAt + channel * 2U,
                 static_cast<std::uint16_t>(typedLinear.blackPattern[channel]));
     }
-    const spectrafilm::DecodeResult externalShortResult =
-        spectrafilm::decodeFromBuffer(
+    const argentroom::DecodeResult externalShortResult =
+        argentroom::decodeFromBuffer(
             externalShort.data(), externalShort.size(), {});
     check(externalShortResult.ok,
           endian + " external SHORT LinearRaw BlackLevel checks all channels",
@@ -1627,12 +1627,12 @@ int main() {
 
     std::vector<std::uint8_t> externalShortBad = externalShort;
     ordered16(&externalShortBad, externalShortAt + 4U, 4096U);
-    const spectrafilm::DecodeResult externalShortBadResult =
-        spectrafilm::decodeFromBuffer(
+    const argentroom::DecodeResult externalShortBadResult =
+        argentroom::decodeFromBuffer(
             externalShortBad.data(), externalShortBad.size(), {});
     check(!externalShortBadResult.ok &&
               externalShortBadResult.status ==
-                  spectrafilm::SFRAW_ERR_PRECISION_METADATA &&
+                  argentroom::SFRAW_ERR_PRECISION_METADATA &&
               externalShortBadResult.error.find("before LibRaw open") !=
                   std::string::npos,
           endian +
@@ -1642,7 +1642,7 @@ int main() {
     sfraw::hosttest::PrecisionDngOptions longBoundary = numeric;
     longBoundary.blackLevel = 4094U;
     longBoundary.whiteLevel = 4095U;
-    const spectrafilm::DecodeResult longBoundaryResult = decode(longBoundary);
+    const argentroom::DecodeResult longBoundaryResult = decode(longBoundary);
     check(longBoundaryResult.ok &&
               effectiveBlack(longBoundaryResult.descriptor, 0U, 0U) == 4094U,
           endian +
@@ -1653,12 +1653,12 @@ int main() {
         sfraw::hosttest::makePrecisionUncompressedDng(numeric);
     const std::size_t longEntry = findIfdEntry(oversizedLong, 0xc61aU);
     ordered32(&oversizedLong, longEntry + 8U, 4096U);
-    const spectrafilm::DecodeResult oversizedLongResult =
-        spectrafilm::decodeFromBuffer(
+    const argentroom::DecodeResult oversizedLongResult =
+        argentroom::decodeFromBuffer(
             oversizedLong.data(), oversizedLong.size(), {});
     check(!oversizedLongResult.ok &&
               oversizedLongResult.status ==
-                  spectrafilm::SFRAW_ERR_PRECISION_METADATA &&
+                  argentroom::SFRAW_ERR_PRECISION_METADATA &&
               oversizedLongResult.error.find("before LibRaw open") !=
                   std::string::npos,
           endian + " above-declared-range LONG BlackLevel fails before LibRaw open",
@@ -1704,16 +1704,16 @@ int main() {
       return bytes;
     };
     const auto decodeBytes = [](const std::vector<std::uint8_t>& bytes) {
-      return spectrafilm::decodeFromBuffer(bytes.data(), bytes.size(), {});
+      return argentroom::decodeFromBuffer(bytes.data(), bytes.size(), {});
     };
 
-    const spectrafilm::DecodeResult integralRational =
+    const argentroom::DecodeResult integralRational =
         decodeBytes(rationalBlack(64U, 1U));
     check(integralRational.ok,
           endian + " integral RATIONAL BlackLevel is admitted",
           describe(integralRational));
 
-    const spectrafilm::DecodeResult integralRationalArray =
+    const argentroom::DecodeResult integralRationalArray =
         decodeBytes(rationalLinearBlack(0U, 0U));
     check(integralRationalArray.ok,
           endian +
@@ -1724,28 +1724,28 @@ int main() {
     // (e.g. 6406/100). Such a value is rounded to its nearest integer code
     // before LibRaw open, so the decode must be bit-identical to the same file
     // written with that integer, and must say so through its provenance.
-    const auto sameDecode = [](const spectrafilm::DecodeResult& a,
-                               const spectrafilm::DecodeResult& b) {
+    const auto sameDecode = [](const argentroom::DecodeResult& a,
+                               const argentroom::DecodeResult& b) {
       return a.ok && b.ok && a.width == b.width && a.height == b.height &&
           a.rgb.size() == b.rgb.size() &&
           std::memcmp(a.rgb.data(), b.rgb.data(),
                       a.rgb.size() * sizeof(float)) == 0;
     };
-    const auto roundedProvenance = [](const spectrafilm::DecodeResult& r) {
+    const auto roundedProvenance = [](const argentroom::DecodeResult& r) {
       return r.descriptor.blackLevelProvenance ==
-          spectrafilm::RawLevelProvenance::DngMetadataRounded;
+          argentroom::RawLevelProvenance::DngMetadataRounded;
     };
     {
-      const spectrafilm::DecodeResult fractionalRationalArray =
+      const argentroom::DecodeResult fractionalRationalArray =
           decodeBytes(rationalLinearBlack(161U, 2U));  // 80.5 -> 81
-      const spectrafilm::DecodeResult integralEquivalent =
+      const argentroom::DecodeResult integralEquivalent =
           decodeBytes(rationalLinearBlack(81U, 1U));
       check(sameDecode(fractionalRationalArray, integralEquivalent) &&
                 roundedProvenance(fractionalRationalArray) &&
                 effectiveBlack(fractionalRationalArray.descriptor, 1U, 0U) ==
                     81U &&
                 integralEquivalent.descriptor.blackLevelProvenance ==
-                    spectrafilm::RawLevelProvenance::DngMetadata,
+                    argentroom::RawLevelProvenance::DngMetadata,
             endian +
                 " fractional non-first LinearRaw BlackLevel decodes as its nearest integer",
             describe(fractionalRationalArray));
@@ -1761,9 +1761,9 @@ int main() {
       uniformCells.blackRepeatHeight = 2U;
       uniformCells.blackPattern = {64U, 80U, 96U, 64U, 80U, 96U,
                                    64U, 80U, 96U, 64U, 80U, 96U};
-      const spectrafilm::DecodeResult uniformResult = decodeBytes(
+      const argentroom::DecodeResult uniformResult = decodeBytes(
           sfraw::hosttest::makePrecisionUncompressedDng(uniformCells));
-      const spectrafilm::DecodeResult singleCell = decodeBytes(
+      const argentroom::DecodeResult singleCell = decodeBytes(
           sfraw::hosttest::makePrecisionUncompressedDng(typedLinear));
       check(sameDecode(uniformResult, singleCell),
             endian +
@@ -1772,11 +1772,11 @@ int main() {
 
       sfraw::hosttest::PrecisionDngOptions variedCells = uniformCells;
       variedCells.blackPattern[4] = 81U;
-      const spectrafilm::DecodeResult variedResult = decodeBytes(
+      const argentroom::DecodeResult variedResult = decodeBytes(
           sfraw::hosttest::makePrecisionUncompressedDng(variedCells));
       check(!variedResult.ok &&
                 variedResult.status ==
-                    spectrafilm::SFRAW_ERR_PRECISION_METADATA,
+                    argentroom::SFRAW_ERR_PRECISION_METADATA,
             endian + " a 2x2 LinearRaw BlackLevel matrix that varies stays refused",
             describe(variedResult));
     }
@@ -1792,9 +1792,9 @@ int main() {
         {40951U, 10U, 4095U, "40951/10 (rounds onto the declared maximum)"},
     };
     for (const auto& fractional : fractionalCases) {
-      const spectrafilm::DecodeResult fractionalResult = decodeBytes(
+      const argentroom::DecodeResult fractionalResult = decodeBytes(
           rationalBlack(fractional.numerator, fractional.denominator));
-      const spectrafilm::DecodeResult integralResult =
+      const argentroom::DecodeResult integralResult =
           decodeBytes(rationalBlack(fractional.rounded, 1U));
       const bool atWhite = fractional.rounded >= numeric.whiteLevel;
       if (atWhite) {
@@ -1822,8 +1822,8 @@ int main() {
       if (file != nullptr &&
           std::fwrite(bytes.data(), 1U, bytes.size(), file) == bytes.size() &&
           std::fflush(file) == 0 && std::fseek(file, 0, SEEK_SET) == 0) {
-        const spectrafilm::DecodeResult fdResult =
-            spectrafilm::decodeFromFd(fileno(file), {});
+        const argentroom::DecodeResult fdResult =
+            argentroom::decodeFromFd(fileno(file), {});
         fdAgrees = sameDecode(fdResult, fractionalResult) &&
             roundedProvenance(fdResult);
       }
@@ -1834,33 +1834,33 @@ int main() {
             describe(fractionalResult));
     }
 
-    const spectrafilm::DecodeResult fractionalAboveRange =
+    const argentroom::DecodeResult fractionalAboveRange =
         decodeBytes(rationalBlack(40961U, 10U));  // 4096.1 -> 4096 > 4095
     check(!fractionalAboveRange.ok &&
               fractionalAboveRange.status ==
-                  spectrafilm::SFRAW_ERR_PRECISION_METADATA &&
+                  argentroom::SFRAW_ERR_PRECISION_METADATA &&
               fractionalAboveRange.error.find("before LibRaw open") !=
                   std::string::npos,
           endian +
               " fractional RATIONAL BlackLevel rounding above range fails before LibRaw open",
           describe(fractionalAboveRange));
 
-    const spectrafilm::DecodeResult zeroDenominator =
+    const argentroom::DecodeResult zeroDenominator =
         decodeBytes(rationalBlack(64U, 0U));
     check(!zeroDenominator.ok &&
               zeroDenominator.status ==
-                  spectrafilm::SFRAW_ERR_PRECISION_METADATA &&
+                  argentroom::SFRAW_ERR_PRECISION_METADATA &&
               zeroDenominator.error.find("before LibRaw open") !=
                   std::string::npos,
           endian +
               " zero-denominator RATIONAL BlackLevel fails before LibRaw open",
           describe(zeroDenominator));
 
-    const spectrafilm::DecodeResult oversizedRational =
+    const argentroom::DecodeResult oversizedRational =
         decodeBytes(rationalBlack(4096U, 1U));
     check(!oversizedRational.ok &&
               oversizedRational.status ==
-                  spectrafilm::SFRAW_ERR_PRECISION_METADATA &&
+                  argentroom::SFRAW_ERR_PRECISION_METADATA &&
               oversizedRational.error.find("before LibRaw open") !=
                   std::string::npos,
           endian +
@@ -1870,14 +1870,14 @@ int main() {
 
   const std::vector<std::uint8_t> lj92 =
       sfraw::hosttest::makeValidLosslessJpegDng();
-  spectrafilm::DecodeOptions lj92Options;
-  lj92Options.whiteBalance = spectrafilm::WhiteBalanceMode::Daylight;
-  const spectrafilm::DecodeResult lj92Result = spectrafilm::decodeFromBuffer(
+  argentroom::DecodeOptions lj92Options;
+  lj92Options.whiteBalance = argentroom::WhiteBalanceMode::Daylight;
+  const argentroom::DecodeResult lj92Result = argentroom::decodeFromBuffer(
       lj92.data(), lj92.size(), lj92Options);
   check(lj92Result.ok &&
             lj92Result.descriptor.containerCompression == 7 &&
             lj92Result.descriptor.packing ==
-                spectrafilm::RawPacking::LosslessCompressed &&
+                argentroom::RawPacking::LosslessCompressed &&
             lj92Result.descriptor.processedBitsPerSample == 16,
         "qualified Compression 7/LJ92 publishes the precision descriptor",
         describe(lj92Result));
@@ -1905,16 +1905,16 @@ int main() {
   defaults.includeWhiteLevel = false;
   defaults.includeBaselineExposure = false;
   defaults.includeLinearResponseLimit = false;
-  const spectrafilm::DecodeResult defaultLevels = decode(defaults);
+  const argentroom::DecodeResult defaultLevels = decode(defaults);
   check(defaultLevels.ok,
         "absent optional DNG levels decode with declared-bit defaults",
         describe(defaultLevels));
   if (defaultLevels.ok) {
     const auto& descriptor = defaultLevels.descriptor;
     check(descriptor.blackLevelProvenance ==
-              spectrafilm::RawLevelProvenance::DeclaredBitsDefault &&
+              argentroom::RawLevelProvenance::DeclaredBitsDefault &&
               descriptor.whiteLevelProvenance ==
-                  spectrafilm::RawLevelProvenance::DeclaredBitsDefault &&
+                  argentroom::RawLevelProvenance::DeclaredBitsDefault &&
               descriptor.blackLevelCommon == 0U &&
               std::all_of(descriptor.whiteLevels.begin(),
                           descriptor.whiteLevels.end(),
@@ -1927,10 +1927,10 @@ int main() {
   sfraw::hosttest::PrecisionDngOptions proxyOptions;
   const std::vector<std::uint8_t> proxyDng =
       sfraw::hosttest::makePrecisionUncompressedDng(proxyOptions);
-  spectrafilm::DecodeOptions proxyDecodeOptions;
-  proxyDecodeOptions.whiteBalance = spectrafilm::WhiteBalanceMode::Daylight;
+  argentroom::DecodeOptions proxyDecodeOptions;
+  proxyDecodeOptions.whiteBalance = argentroom::WhiteBalanceMode::Daylight;
   proxyDecodeOptions.maxLongEdge = 20;
-  const spectrafilm::DecodeResult proxy = spectrafilm::decodeFromBuffer(
+  const argentroom::DecodeResult proxy = argentroom::decodeFromBuffer(
       proxyDng.data(), proxyDng.size(), proxyDecodeOptions);
   check(proxy.ok && proxy.width <= 20 && proxy.height <= 20 &&
             proxy.descriptor.requestedMaxLongEdge == 20 &&
@@ -1945,7 +1945,7 @@ int main() {
   patterned.blackRepeatWidth = 2U;
   patterned.blackRepeatHeight = 2U;
   patterned.blackPattern = {256U, 257U, 258U, 259U};
-  const spectrafilm::DecodeResult patternedResult = decode(patterned);
+  const argentroom::DecodeResult patternedResult = decode(patterned);
   check(patternedResult.ok, "per-cell BlackLevel fixture decodes",
         describe(patternedResult));
   if (patternedResult.ok) {
@@ -1968,10 +1968,10 @@ int main() {
 
   const std::vector<std::uint8_t> malformed =
       sfraw::hosttest::makeMalformedPrecisionLevelsDng();
-  const spectrafilm::DecodeResult malformedResult =
-      spectrafilm::decodeFromBuffer(malformed.data(), malformed.size(), {});
+  const argentroom::DecodeResult malformedResult =
+      argentroom::decodeFromBuffer(malformed.data(), malformed.size(), {});
   check(!malformedResult.ok &&
-            malformedResult.status == spectrafilm::SFRAW_ERR_PRECISION_METADATA,
+            malformedResult.status == argentroom::SFRAW_ERR_PRECISION_METADATA,
         "WhiteLevel <= BlackLevel fails closed before processing",
         describe(malformedResult));
 
@@ -1989,20 +1989,20 @@ int main() {
       break;
     }
   }
-  const spectrafilm::DecodeResult malformedTagResult =
-      spectrafilm::decodeFromBuffer(malformedTag.data(), malformedTag.size(), {});
+  const argentroom::DecodeResult malformedTagResult =
+      argentroom::decodeFromBuffer(malformedTag.data(), malformedTag.size(), {});
   check(baselinePatched && !malformedTagResult.ok &&
             malformedTagResult.status ==
-                spectrafilm::SFRAW_ERR_PRECISION_METADATA,
+                argentroom::SFRAW_ERR_PRECISION_METADATA,
         "malformed HDR metadata type fails the bounded preflight",
         describe(malformedTagResult));
 
   const std::vector<std::uint8_t> floatDng =
       sfraw::hosttest::makeDistinctTileFloatDeflateDng();
-  const spectrafilm::DecodeResult floatResult =
-      spectrafilm::decodeFromBuffer(floatDng.data(), floatDng.size(), {});
+  const argentroom::DecodeResult floatResult =
+      argentroom::decodeFromBuffer(floatDng.data(), floatDng.size(), {});
   check(!floatResult.ok &&
-            floatResult.status == spectrafilm::SFRAW_ERR_DEFLATE_DNG &&
+            floatResult.status == argentroom::SFRAW_ERR_DEFLATE_DNG &&
             floatResult.error.find("quantize") != std::string::npos,
         "float DNG is explicitly routed instead of claiming native precision parity",
         describe(floatResult));
@@ -2022,13 +2022,13 @@ int main() {
   const std::vector<std::uint8_t> cancellable =
       sfraw::hosttest::makePrecisionUncompressedDng(cancellationOptions);
   std::atomic<bool> cancelled{true};
-  spectrafilm::DecodeOptions decodeOptions;
+  argentroom::DecodeOptions decodeOptions;
   decodeOptions.cancelFlag = &cancelled;
-  const spectrafilm::DecodeResult cancelledResult =
-      spectrafilm::decodeFromBuffer(cancellable.data(), cancellable.size(),
+  const argentroom::DecodeResult cancelledResult =
+      argentroom::decodeFromBuffer(cancellable.data(), cancellable.size(),
                                     decodeOptions);
   check(!cancelledResult.ok &&
-            cancelledResult.status == spectrafilm::SFRAW_ERR_CANCELLED,
+            cancelledResult.status == argentroom::SFRAW_ERR_CANCELLED,
         "precision descriptor work obeys the pre-cancel budget",
         describe(cancelledResult));
 

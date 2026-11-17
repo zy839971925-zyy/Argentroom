@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: lognormal viewing glare.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — native engine: lognormal viewing glare.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,7 +8,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Ports spektrafilm/model/glare.py +
+ * argentroom. Ports argentroom/model/glare.py +
  * spektrafilm/utils/fast_stats.py::fast_lognormal[_from_mean_std].
  */
 #include "glare.h"
@@ -20,7 +20,7 @@
 #include "../kernels/gaussian.h"
 #include "../kernels/parallel.h"
 
-// NaN / Inf behavior — VERIFIED against the oracle (spektrafilm/model/glare.py
+// NaN / Inf behavior — VERIFIED against the oracle (argentroom/model/glare.py
 // + spektrafilm/utils/fast_stats.py). add_glare / compute_random_glare_amount do
 // NO NaN/Inf sanitization: there is no np.nan_to_num / np.isnan / np.isfinite on
 // this path. The glare amount is a lognormal random field (always finite for

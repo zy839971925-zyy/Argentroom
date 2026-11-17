@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Spektrafilm for Android — generate the JzCzhz (Safdar 2017) output-gamut-compression parity
+# Argentroom for Android — generate the JzCzhz (Safdar 2017) output-gamut-compression parity
 # golden (model/gamut_compression.cpp::compress_rgb_jzazbz_chroma) from the upstream
 # oracle utils/gamut_compression.py. GPLv3. Film modeling powered by spektrafilm.
 #

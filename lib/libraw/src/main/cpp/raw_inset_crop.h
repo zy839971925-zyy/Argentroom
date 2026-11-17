@@ -7,7 +7,7 @@
 // rendered as a dark stripe. This places that inset box in the processed bitmap so the copy out
 // of it can skip the band.
 //
-// The idea and the four flip cases come from Jing Yu's spektrafilm fork (arigatou1985, commits
+// The idea and the four flip cases come from Jing Yu's argentroom fork (arigatou1985, commits
 // 8374846 and 7e35f37), which measured where the band lands for each LibRaw flip code. Here the
 // mapping is derived from LibRaw's own flip_index() instead and the tests pin it to those
 // observations.
@@ -19,7 +19,7 @@
 
 #include <cstdint>
 
-namespace spectrafilm::rawcrop {
+namespace argentroom::rawcrop {
 
 struct InsetGeometry {
     // libraw_image_sizes_t at the end of unpack(), before dcraw_process().
@@ -121,4 +121,4 @@ inline OutputCrop insetCropForBitmap(const InsetGeometry& g, int bitmapWidth,
     return out;
 }
 
-}  // namespace spectrafilm::rawcrop
+}  // namespace argentroom::rawcrop

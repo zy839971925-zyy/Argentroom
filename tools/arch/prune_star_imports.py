@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Drop `import com.spectrafilm.app.<pkg>.*` lines whose package exports no name the file uses.
+"""Drop `import com.argentroom.app.<pkg>.*` lines whose package exports no name the file uses.
 Conservative: a name counts as used when it appears as a token anywhere in the file."""
 import re, pathlib, sys
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 import restructure as r
 ROOT = r.ROOT; BASE = r.BASE
-SRC = ROOT / "app/src/main/java/com/spectrafilm/app"
+SRC = ROOT / "app/src/main/java/com/argentroom/app"
 exports = {}
 for p in SRC.rglob("*.kt"):
     t = p.read_text()

@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android -- decoded RAW ownership publication seam.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android -- decoded RAW ownership publication seam.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  */
 #include "raw_result_publication.h"
 
@@ -18,7 +18,7 @@ bool cancellationRequested(PublicationCancellationCheck cancellation,
 }  // namespace
 
 PublicationOutcome publishDecodedAllocation(
-    spectrafilm::DecodedFloatBuffer& decoded, std::size_t byteCount,
+    argentroom::DecodedFloatBuffer& decoded, std::size_t byteCount,
     NativeAllocationRegistry& registry,
     PublicationCancellationCheck cancellation, void* cancellationContext,
     PublicationAttempt attemptPublication, void* publicationContext,

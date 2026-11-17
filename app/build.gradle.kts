@@ -1,4 +1,4 @@
-// Spektrafilm for Android — app. GPLv3.
+// Argentroom for Android — app. GPLv3.
 import java.util.Properties
 import org.gradle.api.artifacts.component.ModuleComponentIdentifier
 import org.gradle.api.artifacts.component.ProjectComponentIdentifier
@@ -25,7 +25,7 @@ val hasReleaseKeystore = keystorePropsFile.exists() &&
     keystoreProps.getProperty("storeFile") != null
 
 android {
-    namespace = "com.spectrafilm.app"
+    namespace = "com.argentroom.app"
     // The app module strips the packaged .so with this NDK's llvm-strip. AGP 9 defaults to
     // NDK r28.2 (not installed); left unpinned it packages every native library unstripped
     // (libspektra.so 0.9 MB -> 11.6 MB). Pin the same NDK as the native modules (r28c since
@@ -48,12 +48,12 @@ android {
     buildToolsVersion = "36.0.0"
 
     defaultConfig {
-        applicationId = "com.spectrafilm.app"
+        applicationId = "com.argentroom.app"
         minSdk = 24
         targetSdk = 36
         versionCode = 21
         versionName = "1.0.2"
-        testInstrumentationRunner = "com.spectrafilm.app.ReleaseCandidateSmokeInstrumentation"
+        testInstrumentationRunner = "com.argentroom.app.ReleaseCandidateSmokeInstrumentation"
         ndk { abiFilters += ((project.findProperty("spk.abis") as String?)?.split(",")?.map { it.trim() } ?: listOf("arm64-v8a", "armeabi-v7a", "x86_64")) }
     }
 

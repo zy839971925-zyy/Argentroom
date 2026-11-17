@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — lib:pngwriter native 16-bit PNG writer.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — lib:pngwriter native 16-bit PNG writer.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  *
  * A self-contained 16-bit-per-channel RGB PNG writer for the M2 export path.
  * Writes a valid PNG stream containing:
@@ -8,7 +8,7 @@
  *   PNG signature (8 bytes)
  *   IHDR  — bit_depth=16, color_type=2 (RGB), no interlace
  *   iCCP  — optional compressed ICC profile (gated on non-null/non-empty arg)
- *   tEXt  — optional "Software\0Spektrafilm" keyword:value pair
+ *   tEXt  — optional "Software\0Argentroom" keyword:value pair
  *   IDAT  — zlib-deflated scanlines; each scanline prefixed with a filter byte
  *             (filter 0 = None; correct output, no sub-pixel filtering)
  *   IEND  — zero-length end marker
@@ -30,12 +30,12 @@
 #include <string>
 #include <vector>
 
-namespace spectrafilm {
+namespace argentroom {
 
 // Metadata embedded in the PNG. All optional fields default to sensible values.
 struct PngMetadata {
     // Written as a tEXt chunk "Software\0<value>". Empty => chunk omitted.
-    std::string software = "Spektrafilm";
+    std::string software = "Argentroom";
 
     // Raw ICC profile bytes. Non-empty => iCCP chunk written ("ICC Profile\0" name,
     // compression method 0 = zlib-deflate, compressed profile data).
@@ -86,6 +86,6 @@ PngWriteResult writePngFloatToFile(const float* rgbFloat, int width, int height,
                                    const std::string& path,
                                    const PngCancellation* cancellation = nullptr);
 
-}  // namespace spectrafilm
+}  // namespace argentroom
 
 #endif  // SPECTRAFILM_PNG_WRITER_H

@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — lib:tiffwriter build.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — lib:tiffwriter build.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  *
  * Android library wrapping the native 16-bit baseline TIFF writer (libsftiff.so,
  * built via CMake/NDK; dependency-free) plus the Kotlin TiffWriter facade.
@@ -14,7 +14,7 @@ plugins {
 }
 
 android {
-    namespace = "com.spectrafilm.tiffwriter"
+    namespace = "com.argentroom.tiffwriter"
     compileSdk = 36
 
     // NDK r28c (28.2.13676358): 16 KB page-size support is the default (r27 introduced it), so

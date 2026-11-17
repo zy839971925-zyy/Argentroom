@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2026 Spektrafilm Android contributors
+// SPDX-FileCopyrightText: 2026 Argentroom Android contributors
 // SPDX-License-Identifier: GPL-3.0-only
 //
 // Embedded camera-JPEG extraction for fast RAW thumbnails and placeholders.
@@ -25,7 +25,7 @@
 #include <cstdint>
 #include <vector>
 
-namespace spectrafilm {
+namespace argentroom {
 
 enum PreviewStatus : int {
     SFRAW_PREVIEW_OK = 0,
@@ -82,6 +82,6 @@ struct EmbeddedPreview {
 // The caller keeps ownership of fd; it is duplicated internally.
 EmbeddedPreview extractEmbeddedPreview(int fd, int minLongEdge);
 
-}  // namespace spectrafilm
+}  // namespace argentroom
 
 #endif  // SPECTRAFILM_RAW_PREVIEW_H

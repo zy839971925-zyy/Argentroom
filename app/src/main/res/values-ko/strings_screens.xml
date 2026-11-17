@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Spektrafilm for Android. GPLv3. -->
+<!-- Argentroom for Android. GPLv3. -->
 <!-- Machine-drafted translation (Claude, 2026-11); needs review by a native speaker. -->
 <resources>
     <string name="screen_back">뒤로</string>
@@ -49,10 +49,10 @@
     <string name="screen_about_doc_libraw_lgpl">LibRaw LGPL 2.1</string>
     <string name="screen_about_doc_libraw_cddl">LibRaw CDDL 1.0</string>
     <string name="screen_about_legal_text_unavailable">포함된 법률 문서를 열 수 없습니다. 공식 원본은 %1$s을(를) 참고하세요.</string>
-    <string name="screen_howto_title">Spektrafilm 사용 방법</string>
+    <string name="screen_howto_title">Argentroom 사용 방법</string>
     <string name="screen_howto_step_number">%1$d단계</string>
-    <string name="screen_howto_s1_title">Spektrafilm이란</string>
-    <string name="screen_howto_s1_p1">Spektrafilm은 물리 기반 스펙트럼 필름 시뮬레이터입니다. 단순한 필터나 룩업 테이블과 달리 실제 아날로그 과정을 재현합니다. 가상의 네거티브가 사진의 빛으로 노광되고, 약품으로 현상되며, 필요하면 암실에서 인화지에 확대 인화된 다음 디지털 파일로 스캔됩니다. 이 모든 과정은 실제 필름의 실측 스펙트럼 데이터로 구동됩니다.</string>
+    <string name="screen_howto_s1_title">Argentroom이란</string>
+    <string name="screen_howto_s1_p1">Argentroom은 물리 기반 스펙트럼 필름 시뮬레이터입니다. 단순한 필터나 룩업 테이블과 달리 실제 아날로그 과정을 재현합니다. 가상의 네거티브가 사진의 빛으로 노광되고, 약품으로 현상되며, 필요하면 암실에서 인화지에 확대 인화된 다음 디지털 파일로 스캔됩니다. 이 모든 과정은 실제 필름의 실측 스펙트럼 데이터로 구동됩니다.</string>
     <string name="screen_howto_s1_p2">그 결과 색, 그레인, 할레이션, 염료 화학을 실제 암실에서 얻을 수 있는 것과 같이 충실하게 재현합니다. 근사치가 아닙니다.</string>
     <string name="screen_howto_attribution">Film modeling powered by spektrafilm (Andrea Volpato).</string>
     <string name="screen_howto_s2_title">사진 불러오기</string>
@@ -139,7 +139,7 @@
     <string name="screen_howto_s9_step4">자동 노출은 중간 회색을 기준으로 측광합니다. 피사체가 중간 회색보다 밝거나 어두우면 나중에 노출 슬라이더를 직접 조금 조정하는 것이 좋습니다.</string>
     <string name="screen_howto_s9_step5">그레인은 확률적(무작위)입니다. 미리보기는 렌더링할 때마다 조금씩 다를 수 있지만, 내보내기는 언제나 최종 전체 해상도 버전입니다.</string>
     <string name="screen_howto_s10_title">크레딧</string>
-    <string name="screen_howto_s10_p1">Film modeling powered by spektrafilm (Andrea Volpato). 과학, 필름 프로필, 스펙트럼 LUT는 Andrea의 작업입니다. Spektrafilm은 그 엔진을 Android로 네이티브 이식한 것으로, 원본과 비트 단위로 일치하는지 검증했습니다.</string>
+    <string name="screen_howto_s10_p1">Film modeling powered by spektrafilm (Andrea Volpato). 과학, 필름 프로필, 스펙트럼 LUT는 Andrea의 작업입니다. Argentroom은 그 엔진을 Android로 네이티브 이식한 것으로, 원본과 비트 단위로 일치하는지 검증했습니다.</string>
     <string name="screen_howto_s10_p2">색 계산은 colour-science, RAW 디코딩은 LibRaw를 사용합니다. GPLv3 자유 소프트웨어입니다.</string>
     <string name="screen_settings_title">설정</string>
     <string name="screen_settings_appearance">모양</string>
@@ -190,7 +190,7 @@
     <string name="update_try_again">다시 시도</string>
     <string name="update_open_release_page">릴리스 페이지 열기</string>
     <string name="update_downloading">다운로드 중… %1$d%%</string>
-    <string name="update_verifying">다운로드한 파일이 정품 Spektrafilm 릴리스인지 확인하는 중…</string>
+    <string name="update_verifying">다운로드한 파일이 정품 Argentroom 릴리스인지 확인하는 중…</string>
     <string name="update_installing">Android 설치 프로그램에서 업데이트를 확인하세요.</string>
     <string name="update_failed_download">다운로드가 완료되지 않았습니다. 연결을 확인하고 다시 시도하세요.</string>
     <string name="update_failed_signer">이 앱은 릴리스와 다른 키로 서명되어 있어(디버그 버전이나 직접 빌드한 버전 등) Android가 그대로 업데이트할 수 없습니다. 대신 GitHub 페이지에서 릴리스를 설치하세요.</string>
@@ -255,7 +255,7 @@
     <string name="export_format_scene_linear_tiff">장면 선형 입력(32비트 TIFF)</string>
     <string name="library_title">라이브러리</string>
     <string name="library_empty_title">둘러볼 폴더 선택</string>
-    <string name="library_empty_body">RAW 파일이나 사진이 있는 폴더(카메라의 DCIM 폴더나 SD 카드 등)를 선택하세요. Spektrafilm은 읽기만 합니다.</string>
+    <string name="library_empty_body">RAW 파일이나 사진이 있는 폴더(카메라의 DCIM 폴더나 SD 카드 등)를 선택하세요. Argentroom은 읽기만 합니다.</string>
     <string name="library_choose_folder">폴더 선택</string>
     <string name="library_change_folder">폴더 변경</string>
     <string name="library_refresh">새로고침</string>
@@ -268,7 +268,7 @@
     <string name="library_badge_edited">편집됨</string>
     <string name="library_cell_edited_desc">%1$s, 편집됨</string>
     <string name="library_save_sidecars">사진 옆에 편집 저장</string>
-    <string name="library_sidecars_need_access">이 폴더에 편집 파일을 저장하려면 폴더를 다시 선택하고 Spektrafilm이 변경하도록 허용하세요. 사진은 변경되지 않습니다.</string>
+    <string name="library_sidecars_need_access">이 폴더에 편집 파일을 저장하려면 폴더를 다시 선택하고 Argentroom이 변경하도록 허용하세요. 사진은 변경되지 않습니다.</string>
     <string name="library_sidecars_none">저장할 편집된 사진이 없습니다.</string>
     <plurals name="library_sidecars_saved">
         <item quantity="other">사진 옆에 편집 파일 %1$d개를 저장했습니다.</item>

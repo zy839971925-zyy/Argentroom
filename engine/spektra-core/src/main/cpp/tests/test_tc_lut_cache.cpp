@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — bounded filming tc_lut cache regressions.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — bounded filming tc_lut cache regressions.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  */
 #include <cassert>
 #include <atomic>

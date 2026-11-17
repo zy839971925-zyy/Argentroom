@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2026 Spektrafilm Android contributors
+// SPDX-FileCopyrightText: 2026 Argentroom Android contributors
 // SPDX-License-Identifier: GPL-3.0-only
 // Generated from fft_convolve.comp; see pointwise_spirv.sha256 for the command.
 #ifndef SPK_GPU_FFT_CONVOLVE_SPV_H

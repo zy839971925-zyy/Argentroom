@@ -40,7 +40,7 @@ void writeU32(std::ofstream& output, uint32_t value) {
 }
 
 bool writeResult(const std::string& path,
-                 const spectrafilm::DecodeResult& result) {
+                 const argentroom::DecodeResult& result) {
     std::ofstream output(path, std::ios::binary | std::ios::trunc);
     if (!output) return false;
     output.write("SFRF32\0\1", 8);
@@ -86,18 +86,18 @@ int main(int argc, char** argv) {
     }
     if (repeats < 1 || repeats > 20) return 2;
 
-    spectrafilm::DecodeOptions options;
-    options.whiteBalance = spectrafilm::WhiteBalanceMode::AsShot;
+    argentroom::DecodeOptions options;
+    options.whiteBalance = argentroom::WhiteBalanceMode::AsShot;
     if (argc >= 7) {
         const std::string mode = argv[4];
         if (mode == "as_shot") {
-            options.whiteBalance = spectrafilm::WhiteBalanceMode::AsShot;
+            options.whiteBalance = argentroom::WhiteBalanceMode::AsShot;
         } else if (mode == "daylight") {
-            options.whiteBalance = spectrafilm::WhiteBalanceMode::Daylight;
+            options.whiteBalance = argentroom::WhiteBalanceMode::Daylight;
         } else if (mode == "tungsten") {
-            options.whiteBalance = spectrafilm::WhiteBalanceMode::Tungsten;
+            options.whiteBalance = argentroom::WhiteBalanceMode::Tungsten;
         } else if (mode == "custom") {
-            options.whiteBalance = spectrafilm::WhiteBalanceMode::Custom;
+            options.whiteBalance = argentroom::WhiteBalanceMode::Custom;
         } else {
             std::cerr << "unsupported white-balance mode: " << mode << "\n";
             return 2;
@@ -151,9 +151,9 @@ int main(int argc, char** argv) {
             return 3;
         }
         const auto decodeAt = std::chrono::steady_clock::now();
-        spectrafilm::DecodeResult result = inputMode == "fd"
-            ? spectrafilm::decodeFromFd(inputFd.get(), options)
-            : spectrafilm::decodeFromBuffer(input.data(), input.size(), options);
+        argentroom::DecodeResult result = inputMode == "fd"
+            ? argentroom::decodeFromFd(inputFd.get(), options)
+            : argentroom::decodeFromBuffer(input.data(), input.size(), options);
         const double decodeMs = std::chrono::duration<double, std::milli>(
             std::chrono::steady_clock::now() - decodeAt).count();
         if (!result.ok) {

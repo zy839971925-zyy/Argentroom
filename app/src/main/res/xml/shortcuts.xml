@@ -10,9 +10,9 @@
         android:shortcutShortLabel="@string/shortcut_open_photo_short"
         android:shortcutLongLabel="@string/shortcut_open_photo_long">
         <intent
-            android:action="com.spectrafilm.app.action.SHORTCUT_OPEN_PHOTO"
-            android:targetPackage="com.spectrafilm.app"
-            android:targetClass="com.spectrafilm.app.MainActivity" />
+            android:action="com.argentroom.app.action.SHORTCUT_OPEN_PHOTO"
+            android:targetPackage="com.argentroom.app"
+            android:targetClass="com.argentroom.app.MainActivity" />
     </shortcut>
     <shortcut
         android:shortcutId="library"
@@ -21,8 +21,8 @@
         android:shortcutShortLabel="@string/shortcut_library_short"
         android:shortcutLongLabel="@string/shortcut_library_long">
         <intent
-            android:action="com.spectrafilm.app.action.SHORTCUT_LIBRARY"
-            android:targetPackage="com.spectrafilm.app"
-            android:targetClass="com.spectrafilm.app.MainActivity" />
+            android:action="com.argentroom.app.action.SHORTCUT_LIBRARY"
+            android:targetPackage="com.argentroom.app"
+            android:targetClass="com.argentroom.app.MainActivity" />
     </shortcut>
 </shortcuts>

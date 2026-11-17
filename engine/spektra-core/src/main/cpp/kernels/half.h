@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android — fp16 (half-float) SIMD conversion. GPLv3.
+ * Argentroom for Android — fp16 (half-float) SIMD conversion. GPLv3.
  * Film modeling powered by spektrafilm.
  *
  * fp16 storage for the interactive proxy (docs/PERF_ROADMAP.md #3): Lightroom carries

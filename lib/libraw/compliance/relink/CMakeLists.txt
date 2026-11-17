@@ -1,5 +1,5 @@
-# Recipient-controlled LibRaw relink project for the Spektrafilm Android JNI ABI.
-# Copyright (C) 2026 Spektrafilm Android contributors. GPL-3.0-only.
+# Recipient-controlled LibRaw relink project for the Argentroom Android JNI ABI.
+# Copyright (C) 2026 Argentroom Android contributors. GPL-3.0-only.
 #
 # This project deliberately does not include LibRawVendor.cmake and does not
 # impose the production patched-tree aggregate. A recipient must be able to
@@ -29,7 +29,7 @@ endif ()
 
 set(SFRAW_WRAPPER_SOURCE_DIR
     "${CMAKE_CURRENT_LIST_DIR}/../../src/main/cpp" CACHE PATH
-    "Spektrafilm JNI wrapper source directory")
+    "Argentroom JNI wrapper source directory")
 get_filename_component(SFRAW_WRAPPER_SOURCE_DIR
     "${SFRAW_WRAPPER_SOURCE_DIR}" ABSOLUTE)
 foreach (_wrapper_file IN ITEMS
@@ -51,7 +51,7 @@ endforeach ()
 
 message(WARNING
     "Building an UNOFFICIAL RECIPIENT RELINK of libsfraw.so from "
-    "${LIBRAW_SOURCE_DIR}; this output is not an official Spektrafilm release")
+    "${LIBRAW_SOURCE_DIR}; this output is not an official Argentroom release")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)

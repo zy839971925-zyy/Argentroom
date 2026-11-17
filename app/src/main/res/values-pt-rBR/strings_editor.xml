@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Spektrafilm for Android. GPLv3. -->
+<!-- Argentroom for Android. GPLv3. -->
 <!-- Machine-drafted translation (Claude, 2026-11); needs review by a native speaker. -->
 <resources>
     <string name="stock_browser_change">Trocar</string>
@@ -293,7 +293,7 @@
     <string name="editor_sim_camera_lens_blur">Desfoque da lente da câmera (µm)</string>
     <string name="editor_sim_camera_lens_blur_tooltip">Sigma do filtro gaussiano em µm para o desfoque da lente da câmera. Efeito espacial: só é aplicado quando a halação está ligada (o ramo espacial).</string>
     <string name="editor_sim_scene_latitude">Latitude de cena</string>
-    <string name="editor_sim_scene_latitude_tooltip">Encaixa no filme uma cena mais ampla que ele antes da exposição: realces e sombras além dos joelhos são comprimidos suavemente e os meios-tons não são alterados. Útil para DNGs de celular com muito contraste. Não faz parte do spektrafilm original; ideia do SpektraLab.</string>
+    <string name="editor_sim_scene_latitude_tooltip">Encaixa no filme uma cena mais ampla que ele antes da exposição: realces e sombras além dos joelhos são comprimidos suavemente e os meios-tons não são alterados. Útil para DNGs de celular com muito contraste. Não faz parte do argentroom original; ideia do SpektraLab.</string>
     <string name="editor_sim_scene_latitude_highlight_knee">Joelho dos realces (pontos)</string>
     <string name="editor_sim_scene_latitude_highlight_knee_tooltip">Pontos acima do cinza médio medido onde começa a compressão dos realces. Abaixo dele nada muda.</string>
     <string name="editor_sim_scene_latitude_highlight_room">Espaço dos realces (pontos)</string>
@@ -307,7 +307,7 @@
     <string name="editor_sim_scene_latitude_max_lift">Elevação máxima das sombras (pontos)</string>
     <string name="editor_sim_scene_latitude_max_lift_tooltip">Limite de quanto as sombras mais profundas são clareadas, por mais abaixo do joelho que estejam. Menor mantém os pretos pretos.</string>
     <string name="editor_sim_date_stamp">Data na foto</string>
-    <string name="editor_sim_date_stamp_tooltip">Expõe no negativo a impressão de data de uma câmera, para que os dígitos de LED revelem, brilhem e tenham grão junto com a imagem em vez de serem colados por cima. Não faz parte do spektrafilm original; ideia do SpektraLab.</string>
+    <string name="editor_sim_date_stamp_tooltip">Expõe no negativo a impressão de data de uma câmera, para que os dígitos de LED revelem, brilhem e tenham grão junto com a imagem em vez de serem colados por cima. Não faz parte do argentroom original; ideia do SpektraLab.</string>
     <string name="editor_sim_date_stamp_text">Impressão</string>
     <string name="editor_sim_date_stamp_text_help">Só dígitos, espaços e \' - . : /</string>
     <string name="editor_sim_date_stamp_photo_date">Data da foto</string>
@@ -347,7 +347,7 @@
     <string name="editor_sim_print_diffusion">Filtro de difusão da cópia</string>
     <string name="editor_sim_scan_lens_blur">Desfoque da lente do scanner (px)</string>
     <string name="editor_sim_scan_lens_blur_tooltip">Sigma do filtro gaussiano em pixels para o desfoque da lente do scanner. Efeito espacial: só é aplicado quando a halação está ligada (o ramo espacial).</string>
-    <string name="editor_sim_scan_correction_noop">A correção de branco/preto da digitalização não tem efeito no modo slide com um filme negativo: só se aplica a um filme slide/positivo ou no modo cópia. Igual ao motor spektrafilm.</string>
+    <string name="editor_sim_scan_correction_noop">A correção de branco/preto da digitalização não tem efeito no modo slide com um filme negativo: só se aplica a um filme slide/positivo ou no modo cópia. Igual ao motor argentroom.</string>
     <string name="editor_sim_scan_white_correction">Correção de branco da digitalização</string>
     <string name="editor_sim_scan_white_correction_tooltip">Fixa o ponto branco da digitalização no nível de branco alvo abaixo. Sutil no padrão 0,98: baixe o nível de branco para ver os realces descerem.</string>
     <string name="editor_sim_scan_white_level">Nível de branco da digitalização</string>

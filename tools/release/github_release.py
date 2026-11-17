@@ -252,7 +252,7 @@ class ApiClient:
         request = urllib.request.Request(url, data=data, method=method)
         request.add_header("Authorization", f"Bearer {self._token}")
         request.add_header("X-GitHub-Api-Version", API_VERSION)
-        request.add_header("User-Agent", "spektrafilm-exact-release-publisher/1")
+        request.add_header("User-Agent", "argentroom-exact-release-publisher/1")
         for name, value in headers.items():
             request.add_header(name, value)
         try:
@@ -282,7 +282,7 @@ class Publisher:
         self.config = config
         self.assets = tuple(assets)
         self.api = ApiClient(config)
-        self.marker = f"<!-- spektrafilm-release-run:v2:{secrets.token_hex(32)} -->"
+        self.marker = f"<!-- argentroom-release-run:v2:{secrets.token_hex(32)} -->"
         self._owned_release_id: int | None = None
 
     @property

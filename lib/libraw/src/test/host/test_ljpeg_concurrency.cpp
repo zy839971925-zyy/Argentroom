@@ -1,6 +1,6 @@
 /*
- * Spektrafilm Android -- concurrent lossless-JPEG first-use regression.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom Android -- concurrent lossless-JPEG first-use regression.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  */
 #include "public_api_test_support.h"
 

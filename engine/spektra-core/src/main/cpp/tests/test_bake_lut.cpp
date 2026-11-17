@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — host test for spk_bake_cube_lut.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — host test for spk_bake_cube_lut.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * Bakes a 17^3 3D LUT for the default scan_film look and validates the emitted
@@ -39,7 +39,7 @@
 
 namespace {
 
-const char* kAssetDir = "/home/user/spektrafilm/src/spektrafilm/data";
+const char* kAssetDir = "/home/user/spektrafilm/src/argentroom/data";
 
 // Extract the integer value following a header token, or -1 if absent.
 int header_int(const std::string& text, const std::string& token) {

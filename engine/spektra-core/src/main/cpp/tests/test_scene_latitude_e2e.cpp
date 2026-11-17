@@ -1,7 +1,7 @@
 /*
- * Spektrafilm for Android — END-TO-END host gate for the opt-in SCENE LATITUDE
+ * Argentroom for Android — END-TO-END host gate for the opt-in SCENE LATITUDE
  * mapping (spk_params.scene_latitude_*, model/scene_latitude.h).
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * Scene latitude is NOT an upstream spektrafilm stage (the idea is SpektraLab's

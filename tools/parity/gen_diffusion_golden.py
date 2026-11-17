@@ -1,5 +1,5 @@
-# Spektrafilm for Android — diffusion-filter golden generator.
-# Copyright (C) 2026 Spektrafilm Android contributors.
+# Argentroom for Android — diffusion-filter golden generator.
+# Copyright (C) 2026 Argentroom Android contributors.
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -7,10 +7,10 @@
 # version. See <https://www.gnu.org/licenses/>.
 #
 # Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
-# spektrafilm.
+# argentroom.
 """Generate a golden for the optical diffusion-filter PSF stage.
 
-The diffusion filter (``spektrafilm.model.diffusion.apply_diffusion_filter_um``)
+The diffusion filter (``argentroom.model.diffusion.apply_diffusion_filter_um``)
 is not a DebugParams tap — it runs mid-pipeline on the float64 pre-log irradiance.
 This script isolates it: it builds a deterministic float64 RGB irradiance image,
 runs the oracle ``apply_diffusion_filter_um`` for a NON-default diffusion-filter
@@ -25,7 +25,7 @@ the native ``spk::apply_diffusion_filter_um`` (double internals, float32 on
 store), and checks it against the golden under the manifest tolerances
 (max_abs <= 1e-4, rms <= 1e-5).
 
-Requires a working spektrafilm environment (see tools/parity/setup_env.sh):
+Requires a working argentroom environment (see tools/parity/setup_env.sh):
     PYTHONPATH=/home/user/spektrafilm/src:/tmp/spkstubs \
         python tools/parity/gen_diffusion_golden.py
 """
@@ -92,11 +92,11 @@ def make_diffusion_input(size: int):
 def main() -> int:
     try:
         import numpy as np
-        from spektrafilm.model.diffusion import apply_diffusion_filter_um
-        from spektrafilm.runtime.params_schema import DiffusionFilterParams
+        from argentroom.model.diffusion import apply_diffusion_filter_um
+        from argentroom.runtime.params_schema import DiffusionFilterParams
     except Exception as exc:  # noqa: BLE001
         sys.stderr.write(
-            "ERROR: could not import spektrafilm.\n"
+            "ERROR: could not import argentroom.\n"
             f"  ({type(exc).__name__}: {exc})\n"
             "Run tools/parity/setup_env.sh then re-run with PYTHONPATH set "
             "(see module docstring).\n")

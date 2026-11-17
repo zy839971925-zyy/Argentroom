@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Spektrafilm for Android — assert the R8-minified dex still contains every
+# Argentroom for Android — assert the R8-minified dex still contains every
 # member required across JNI and the separately packaged AndroidTest boundary.
 # Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
 #
@@ -7,7 +7,7 @@
 #
 # R8 removed kotlin.Triple.getFirst/getSecond/getThird (and the kotlin.Pair pair)
 # from every release APK this project has shipped. proguard-rules.pro keeps
-# com.spectrafilm.engine.**, so GrainParams.getAgxParticleScale() survived and
+# com.argentroom.engine.**, so GrainParams.getAgxParticleScale() survived and
 # returned a real Triple — but nothing in BYTECODE ever calls Triple.getFirst.
 # The only caller is spektra_jni.cpp, by literal string, which R8 cannot see. So
 # it shrank them as unreachable.
@@ -191,8 +191,8 @@ for m in getFirst getSecond; do check_member "Lkotlin/Pair;" method "$m" "()Ljav
 # APIs on the already-minified target APK. R8 cannot see that call edge and may
 # otherwise inline/remove cancel(), producing a device-only NoSuchMethodError.
 for token in \
-    "Lcom/spectrafilm/pngwriter/PngCancellationToken;" \
-    "Lcom/spectrafilm/tiffwriter/TiffCancellationToken;"
+    "Lcom/argentroom/pngwriter/PngCancellationToken;" \
+    "Lcom/argentroom/tiffwriter/TiffCancellationToken;"
 do
     check_member "$token" method "<init>" "()V"
     check_member "$token" method "cancel" "()V"
@@ -201,95 +201,95 @@ done
 # App-owned ABI invoked from the separate release AndroidTest APK. A source keep
 # rule is not evidence: assert the exact field types and method prototypes that
 # the test dex resolves after the target APK has been minified.
-check_member 'Lcom/spectrafilm/app/PendingExportBackend$DefaultImpls;' method 'pendingTokens' '(Lcom/spectrafilm/app/PendingExportBackend;)Ljava/util/Set;'
-check_member 'Lcom/spectrafilm/app/EngineHolder;' field 'INSTANCE' 'Lcom/spectrafilm/app/EngineHolder;'
-check_member 'Lcom/spectrafilm/app/EngineHolder;' method 'get' '(Landroid/content/Context;)Lcom/spectrafilm/engine/SpektraEngine;'
-check_member 'Lcom/spectrafilm/app/ExportWorkRuntime;' field 'INSTANCE' 'Lcom/spectrafilm/app/ExportWorkRuntime;'
-check_member 'Lcom/spectrafilm/app/ExportWorkRuntime;' method 'getState' '()Lkotlinx/coroutines/flow/StateFlow;'
-check_member 'Lcom/spectrafilm/app/ExportWorkRuntime;' method 'launch' '(Landroid/content/Context;Lcom/spectrafilm/app/ExportFormat;JLkotlin/jvm/functions/Function1;)Ljava/lang/Long;'
-check_member 'Lcom/spectrafilm/app/ExportWorkRuntime;' method 'cancel' '(J)Z'
-check_member 'Lcom/spectrafilm/app/ExportWorkRuntime;' method 'claimFinished' '(J)Lcom/spectrafilm/app/ExportTerminalOutcome;'
-check_member 'Lcom/spectrafilm/app/ExportRuntimeState$Finished;' method 'getRunId' '()J'
-check_member 'Lcom/spectrafilm/app/ExportRuntimeState$Finished;' method 'getOutcome' '()Lcom/spectrafilm/app/ExportTerminalOutcome;'
-check_member 'Lcom/spectrafilm/app/ExportRuntimeState$Running;' method 'getRunId' '()J'
-check_member 'Lcom/spectrafilm/app/ExportTerminalOutcome$Success;' method '<init>' '(Lcom/spectrafilm/app/ExportFormat;JLandroid/graphics/Bitmap;JLcom/spectrafilm/app/ExportPhaseSnapshot;Ljava/lang/String;Ljava/lang/String;)V'
-check_member 'Lcom/spectrafilm/app/ExportPhaseSnapshot;' method '<init>' '(JJJJJJ)V'
-check_member 'Lcom/spectrafilm/app/ExportFormat;' field 'PNG16' 'Lcom/spectrafilm/app/ExportFormat;'
-check_class 'Lcom/spectrafilm/app/ExportRuntimeState$Idle;'
-check_class 'Lcom/spectrafilm/app/ExportTerminalOutcome$Cancelled;'
+check_member 'Lcom/argentroom/app/PendingExportBackend$DefaultImpls;' method 'pendingTokens' '(Lcom/argentroom/app/PendingExportBackend;)Ljava/util/Set;'
+check_member 'Lcom/argentroom/app/EngineHolder;' field 'INSTANCE' 'Lcom/argentroom/app/EngineHolder;'
+check_member 'Lcom/argentroom/app/EngineHolder;' method 'get' '(Landroid/content/Context;)Lcom/argentroom/engine/SpektraEngine;'
+check_member 'Lcom/argentroom/app/ExportWorkRuntime;' field 'INSTANCE' 'Lcom/argentroom/app/ExportWorkRuntime;'
+check_member 'Lcom/argentroom/app/ExportWorkRuntime;' method 'getState' '()Lkotlinx/coroutines/flow/StateFlow;'
+check_member 'Lcom/argentroom/app/ExportWorkRuntime;' method 'launch' '(Landroid/content/Context;Lcom/argentroom/app/ExportFormat;JLkotlin/jvm/functions/Function1;)Ljava/lang/Long;'
+check_member 'Lcom/argentroom/app/ExportWorkRuntime;' method 'cancel' '(J)Z'
+check_member 'Lcom/argentroom/app/ExportWorkRuntime;' method 'claimFinished' '(J)Lcom/argentroom/app/ExportTerminalOutcome;'
+check_member 'Lcom/argentroom/app/ExportRuntimeState$Finished;' method 'getRunId' '()J'
+check_member 'Lcom/argentroom/app/ExportRuntimeState$Finished;' method 'getOutcome' '()Lcom/argentroom/app/ExportTerminalOutcome;'
+check_member 'Lcom/argentroom/app/ExportRuntimeState$Running;' method 'getRunId' '()J'
+check_member 'Lcom/argentroom/app/ExportTerminalOutcome$Success;' method '<init>' '(Lcom/argentroom/app/ExportFormat;JLandroid/graphics/Bitmap;JLcom/argentroom/app/ExportPhaseSnapshot;Ljava/lang/String;Ljava/lang/String;)V'
+check_member 'Lcom/argentroom/app/ExportPhaseSnapshot;' method '<init>' '(JJJJJJ)V'
+check_member 'Lcom/argentroom/app/ExportFormat;' field 'PNG16' 'Lcom/argentroom/app/ExportFormat;'
+check_class 'Lcom/argentroom/app/ExportRuntimeState$Idle;'
+check_class 'Lcom/argentroom/app/ExportTerminalOutcome$Cancelled;'
 
 # Ticket #139's separate test APK has exactly one target-app bridge. Assert every descriptor the
 # instrumentation resolves so a passing source keep rule can never hide a broken final APK.
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' field 'INSTANCE' 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'arm' '()V'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'reset' '()V'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'requestDestination' '(Ljava/lang/String;)J'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'currentDestination' '()Ljava/lang/String;'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'hostGeneration' '()J'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'checkpointGeneration' '()J'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'requestSourceProbe' '(Ljava/lang/String;)J'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'currentProbeSource' '()Ljava/lang/String;'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'sourceRetirementGeneration' '()J'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'liveEditorReadyGeneration' '()J'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'livePreviewGeneration' '()J'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'currentLivePreviewSource' '()Ljava/lang/String;'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'previewCompletionEnteredGeneration' '()J'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'previewCompletionCleanupGeneration' '()J'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'overlayDraftGeneration' '()J'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'currentOverlayDraftTool' '()Ljava/lang/String;'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'requestExportProbe' '()J'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'exportProbeHandledGeneration' '()J'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'verifyRevokedExportProbe' '(J)V'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'prepareActivityProbe' '(Landroid/content/Context;)V'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'prepareAuthorizedMaskActivityProbe' '(Landroid/content/Context;)V'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'verifyActivityCursor' '(Landroid/content/Context;Ljava/lang/String;)V'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'expectActivityExportRun' '(J)V'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'verifyOverlayDraft' '(JLjava/lang/String;)V'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'prepareProcessDeathProbe' '(Landroid/content/Context;)V'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'beginProcessDeathExportProbe' '(Landroid/content/Context;)J'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'verifyProcessDeathSeedAfterLaunch' '(Landroid/content/Context;J)Ljava/lang/String;'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'abortProcessDeathExportProbe' '(J)V'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'verifyProcessRecoveryBeforeLaunch' '(Landroid/content/Context;)Ljava/lang/String;'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'verifyProcessRecoveryAfterLaunch' '(Landroid/content/Context;)V'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'verifySourceProbeAfterSwitch' '(Landroid/content/Context;Ljava/lang/String;J)V'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'verifyLiveEditorCursor' '(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)V'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'armCompletedPreviewProbe' '()J'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'releaseCompletedPreviewProbe' '(J)V'
-check_member 'Lcom/spectrafilm/app/Ticket139EditorTestBridge;' method 'verifyCompletedPreviewProbe' '(J)V'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' field 'INSTANCE' 'Lcom/argentroom/app/Ticket139EditorTestBridge;'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'arm' '()V'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'reset' '()V'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'requestDestination' '(Ljava/lang/String;)J'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'currentDestination' '()Ljava/lang/String;'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'hostGeneration' '()J'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'checkpointGeneration' '()J'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'requestSourceProbe' '(Ljava/lang/String;)J'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'currentProbeSource' '()Ljava/lang/String;'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'sourceRetirementGeneration' '()J'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'liveEditorReadyGeneration' '()J'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'livePreviewGeneration' '()J'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'currentLivePreviewSource' '()Ljava/lang/String;'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'previewCompletionEnteredGeneration' '()J'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'previewCompletionCleanupGeneration' '()J'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'overlayDraftGeneration' '()J'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'currentOverlayDraftTool' '()Ljava/lang/String;'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'requestExportProbe' '()J'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'exportProbeHandledGeneration' '()J'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'verifyRevokedExportProbe' '(J)V'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'prepareActivityProbe' '(Landroid/content/Context;)V'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'prepareAuthorizedMaskActivityProbe' '(Landroid/content/Context;)V'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'verifyActivityCursor' '(Landroid/content/Context;Ljava/lang/String;)V'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'expectActivityExportRun' '(J)V'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'verifyOverlayDraft' '(JLjava/lang/String;)V'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'prepareProcessDeathProbe' '(Landroid/content/Context;)V'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'beginProcessDeathExportProbe' '(Landroid/content/Context;)J'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'verifyProcessDeathSeedAfterLaunch' '(Landroid/content/Context;J)Ljava/lang/String;'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'abortProcessDeathExportProbe' '(J)V'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'verifyProcessRecoveryBeforeLaunch' '(Landroid/content/Context;)Ljava/lang/String;'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'verifyProcessRecoveryAfterLaunch' '(Landroid/content/Context;)V'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'verifySourceProbeAfterSwitch' '(Landroid/content/Context;Ljava/lang/String;J)V'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'verifyLiveEditorCursor' '(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)V'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'armCompletedPreviewProbe' '()J'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'releaseCompletedPreviewProbe' '(J)V'
+check_member 'Lcom/argentroom/app/Ticket139EditorTestBridge;' method 'verifyCompletedPreviewProbe' '(J)V'
 
 # Ticket #181's accessibility scan (same test APK) walks the editor categories by tab label.
-check_member 'Lcom/spectrafilm/app/Category;' method 'values' '()[Lcom/spectrafilm/app/Category;'
-check_member 'Lcom/spectrafilm/app/Category;' method 'getLabelRes' '()I'
-check_member 'Lcom/spectrafilm/app/Category;' field 'GRAIN' 'Lcom/spectrafilm/app/Category;'
+check_member 'Lcom/argentroom/app/Category;' method 'values' '()[Lcom/argentroom/app/Category;'
+check_member 'Lcom/argentroom/app/Category;' method 'getLabelRes' '()I'
+check_member 'Lcom/argentroom/app/Category;' field 'GRAIN' 'Lcom/argentroom/app/Category;'
 
 # Ticket #177's benchmark phase drives the production export path across the APK boundary.
-check_member 'Lcom/spectrafilm/app/ImagePipelineKt;' method 'decodeToLinearProPhoto' '(Landroid/content/Context;Landroid/net/Uri;ILkotlin/jvm/functions/Function0;Lcom/spectrafilm/app/DecodeTimings;)Lcom/spectrafilm/engine/LinearImage;'
+check_member 'Lcom/argentroom/app/ImagePipelineKt;' method 'decodeToLinearProPhoto' '(Landroid/content/Context;Landroid/net/Uri;ILkotlin/jvm/functions/Function0;Lcom/argentroom/app/DecodeTimings;)Lcom/argentroom/engine/LinearImage;'
 # #198: the bench's decode breakdown sink; app code never constructs or reads it.
-check_member 'Lcom/spectrafilm/app/DecodeTimings;' method '<init>' '()V'
-check_member 'Lcom/spectrafilm/app/DecodeTimings;' method 'getBitmapDecodeMs' '()J'
-check_member 'Lcom/spectrafilm/app/DecodeTimings;' method 'getGetPixelsMs' '()J'
-check_member 'Lcom/spectrafilm/app/DecodeTimings;' method 'getConvertMs' '()J'
-check_member 'Lcom/spectrafilm/app/GalleryExportKt;' method 'saveSimResultAsTiff' '(Landroid/content/Context;Lcom/spectrafilm/engine/SimResult;Lcom/spectrafilm/app/OutputDescriptor;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function3;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;'
-check_member 'Lcom/spectrafilm/app/GalleryExportKt;' method 'saveSimResultAsPng16' '(Landroid/content/Context;Lcom/spectrafilm/engine/SimResult;Lcom/spectrafilm/app/OutputDescriptor;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function3;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;'
+check_member 'Lcom/argentroom/app/DecodeTimings;' method '<init>' '()V'
+check_member 'Lcom/argentroom/app/DecodeTimings;' method 'getBitmapDecodeMs' '()J'
+check_member 'Lcom/argentroom/app/DecodeTimings;' method 'getGetPixelsMs' '()J'
+check_member 'Lcom/argentroom/app/DecodeTimings;' method 'getConvertMs' '()J'
+check_member 'Lcom/argentroom/app/GalleryExportKt;' method 'saveSimResultAsTiff' '(Landroid/content/Context;Lcom/argentroom/engine/SimResult;Lcom/argentroom/app/OutputDescriptor;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function3;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;'
+check_member 'Lcom/argentroom/app/GalleryExportKt;' method 'saveSimResultAsPng16' '(Landroid/content/Context;Lcom/argentroom/engine/SimResult;Lcom/argentroom/app/OutputDescriptor;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function3;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;'
 # #174's output-contract check packs a reference row and calls the 3-argument helper.
-check_member 'Lcom/spectrafilm/app/DisplayBitmapsKt;' method 'packToArgb' '([F[II)V'
-check_member 'Lcom/spectrafilm/app/DisplayBitmapsKt;' method 'simResultToBitmap$default' '(Ljava/nio/ByteBuffer;IILcom/spectrafilm/engine/ColorSpace;ILjava/lang/Object;)Landroid/graphics/Bitmap;'
-check_member 'Lcom/spectrafilm/app/DisplayBitmapsKt;' method 'simResultToBitmapGraded' '(Lcom/spectrafilm/engine/SimResult;ZFFFLjava/util/List;Lcom/spectrafilm/engine/RenderCancellation;)Landroid/graphics/Bitmap;'
+check_member 'Lcom/argentroom/app/DisplayBitmapsKt;' method 'packToArgb' '([F[II)V'
+check_member 'Lcom/argentroom/app/DisplayBitmapsKt;' method 'simResultToBitmap$default' '(Ljava/nio/ByteBuffer;IILcom/argentroom/engine/ColorSpace;ILjava/lang/Object;)Landroid/graphics/Bitmap;'
+check_member 'Lcom/argentroom/app/DisplayBitmapsKt;' method 'simResultToBitmapGraded' '(Lcom/argentroom/engine/SimResult;ZFFFLjava/util/List;Lcom/argentroom/engine/RenderCancellation;)Landroid/graphics/Bitmap;'
 # The instrumentation calls these with default arguments, so the call it actually makes is the
 # synthetic $default bridge; both it and the full method are pinned to today's prototypes
 # (the old 3-arg toParams / 3-arg attachRenderedGainmap entries had drifted after new params).
-check_member 'Lcom/spectrafilm/app/ParamsState;' method 'toParams' '(Ljava/lang/Integer;Ljava/lang/Float;ZLjava/lang/String;Ljava/lang/String;)Lcom/spectrafilm/engine/SpektraParams;'
-check_member 'Lcom/spectrafilm/app/ParamsState;' method 'toParams$default' '(Lcom/spectrafilm/app/ParamsState;Ljava/lang/Integer;Ljava/lang/Float;ZLjava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/spectrafilm/engine/SpektraParams;'
-check_member 'Lcom/spectrafilm/app/BuiltInPresets;' method 'load' '(Landroid/content/Context;)Ljava/util/List;'
-check_member 'Lcom/spectrafilm/app/ExportClock;' method 'exifDateTime' '()Ljava/lang/String;'
+check_member 'Lcom/argentroom/app/ParamsState;' method 'toParams' '(Ljava/lang/Integer;Ljava/lang/Float;ZLjava/lang/String;Ljava/lang/String;)Lcom/argentroom/engine/SpektraParams;'
+check_member 'Lcom/argentroom/app/ParamsState;' method 'toParams$default' '(Lcom/argentroom/app/ParamsState;Ljava/lang/Integer;Ljava/lang/Float;ZLjava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/argentroom/engine/SpektraParams;'
+check_member 'Lcom/argentroom/app/BuiltInPresets;' method 'load' '(Landroid/content/Context;)Ljava/util/List;'
+check_member 'Lcom/argentroom/app/ExportClock;' method 'exifDateTime' '()Ljava/lang/String;'
 # #179/#140: the benchmark also drives the export cache and the render-derived gain map.
-check_member 'Lcom/spectrafilm/app/ExportCaches;' method 'of' '(Landroid/content/Context;)Lcom/spectrafilm/app/ExportCache;'
-check_member 'Lcom/spectrafilm/app/ExportCaches;' method 'contractVersionOf' '(Landroid/content/Context;)Ljava/lang/String;'
-check_member 'Lcom/spectrafilm/app/ExportCache;' method 'get' '(Ljava/lang/String;)Lcom/spectrafilm/app/ExportCacheEntry;'
-check_member 'Lcom/spectrafilm/app/ExportCache;' method 'adopt' '(Ljava/lang/String;Ljava/io/File;JLjava/lang/String;)Z'
-check_member 'Lcom/spectrafilm/app/ExportCacheKey;' method 'digestSource' '(Lkotlin/jvm/functions/Function0;)Lkotlin/Pair;'
-check_member 'Lcom/spectrafilm/app/GalleryExportKt;' method 'attachRenderedGainmap' '(Lcom/spectrafilm/engine/SimResult;Landroid/graphics/Bitmap;Lcom/spectrafilm/app/OutputDescriptor;Lcom/spectrafilm/app/BorderLayout;Lcom/spectrafilm/app/SceneLuma;)Lcom/spectrafilm/app/HdrGainMap$Result;'
-check_member 'Lcom/spectrafilm/app/GalleryExportKt;' method 'attachRenderedGainmap$default' '(Lcom/spectrafilm/engine/SimResult;Landroid/graphics/Bitmap;Lcom/spectrafilm/app/OutputDescriptor;Lcom/spectrafilm/app/BorderLayout;Lcom/spectrafilm/app/SceneLuma;ILjava/lang/Object;)Lcom/spectrafilm/app/HdrGainMap$Result;'
+check_member 'Lcom/argentroom/app/ExportCaches;' method 'of' '(Landroid/content/Context;)Lcom/argentroom/app/ExportCache;'
+check_member 'Lcom/argentroom/app/ExportCaches;' method 'contractVersionOf' '(Landroid/content/Context;)Ljava/lang/String;'
+check_member 'Lcom/argentroom/app/ExportCache;' method 'get' '(Ljava/lang/String;)Lcom/argentroom/app/ExportCacheEntry;'
+check_member 'Lcom/argentroom/app/ExportCache;' method 'adopt' '(Ljava/lang/String;Ljava/io/File;JLjava/lang/String;)Z'
+check_member 'Lcom/argentroom/app/ExportCacheKey;' method 'digestSource' '(Lkotlin/jvm/functions/Function0;)Lkotlin/Pair;'
+check_member 'Lcom/argentroom/app/GalleryExportKt;' method 'attachRenderedGainmap' '(Lcom/argentroom/engine/SimResult;Landroid/graphics/Bitmap;Lcom/argentroom/app/OutputDescriptor;Lcom/argentroom/app/BorderLayout;Lcom/argentroom/app/SceneLuma;)Lcom/argentroom/app/HdrGainMap$Result;'
+check_member 'Lcom/argentroom/app/GalleryExportKt;' method 'attachRenderedGainmap$default' '(Lcom/argentroom/engine/SimResult;Landroid/graphics/Bitmap;Lcom/argentroom/app/OutputDescriptor;Lcom/argentroom/app/BorderLayout;Lcom/argentroom/app/SceneLuma;ILjava/lang/Object;)Lcom/argentroom/app/HdrGainMap$Result;'
 check_member 'Lkotlin/io/CloseableKt;' method 'closeFinally' '(Ljava/io/Closeable;Ljava/lang/Throwable;)V'
 check_member 'Lkotlin/jvm/internal/Ref$ObjectRef;' method '<init>' '()V'
 
@@ -379,7 +379,7 @@ done
 # and every JNI-exported native method), generated from the C++ sources by
 # jni_inventory.py so the list cannot drift. The hand-written Pair/Triple lines
 # above stay as the documented origin of this check. Today these all survive only
-# because proguard-rules.pro keeps com.spectrafilm.** wholesale; this is what
+# because proguard-rules.pro keeps com.argentroom.** wholesale; this is what
 # makes narrowing that rule safe.
 echo "checking every member native code resolves by name (jni_inventory.py)"
 PY=""

@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — host test for the OPT-IN Highway SIMD FIR (#124).
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — host test for the OPT-IN Highway SIMD FIR (#124).
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * Proves the claim the whole opt-in rests on: the Highway lanes are a BYTE-IDENTICAL

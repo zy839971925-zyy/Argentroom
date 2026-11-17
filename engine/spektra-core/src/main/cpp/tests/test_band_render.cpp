@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android — host gate for BAND RENDERING (bounded-memory
+ * Argentroom for Android — host gate for BAND RENDERING (bounded-memory
  * full-resolution export). GPLv3. Film modeling powered by spektrafilm.
  *
  * spk_simulate renders a one-shot frame above a pixel threshold as horizontal

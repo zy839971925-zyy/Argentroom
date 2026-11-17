@@ -1,8 +1,8 @@
 /*
- * Spektrafilm for Android — END-TO-END host parity test for the HIGHLIGHT BOOST
+ * Argentroom for Android — END-TO-END host parity test for the HIGHLIGHT BOOST
  * (film_render.halation.boost_ev / boost_range / protect_ev) run through the WHOLE
  * scan_film pipeline.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * The highlight boost is the pre-clip highlight reconstruction
@@ -51,7 +51,7 @@
 
 namespace {
 
-const char* kAssetDir = "/home/user/spektrafilm/src/spektrafilm/data";
+const char* kAssetDir = "/home/user/spektrafilm/src/argentroom/data";
 const char* kBoostGoldenDir =
     "/home/user/Spectrafilmandroid/tools/parity/goldens/scan_portra_boost";
 const char* kInputF64 =

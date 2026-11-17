@@ -1,8 +1,8 @@
 /*
- * Spektrafilm for Android — host parity test for the scanning stage output
+ * Argentroom for Android — host parity test for the scanning stage output
  * color spaces (Adobe RGB, ProPhoto RGB, ITU-R BT.2020, ACES2065-1, linear
  * sRGB, plus sRGB).
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -10,7 +10,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm.
+ * argentroom.
  *
  * Loads the scan_portra golden input (film_density_cmy.spkvec) and the
  * kodak_portra_400 profile, runs the C++ scanning stage once per output color
@@ -49,7 +49,7 @@
 namespace {
 
 const char* kProfilePath =
-    "/home/user/spektrafilm/src/spektrafilm/data/profiles/kodak_portra_400.json";
+    "/home/user/spektrafilm/src/argentroom/data/profiles/kodak_portra_400.json";
 const char* kGoldenDir =
     "/home/user/Spectrafilmandroid/tools/parity/goldens/scan_portra";
 const char* kRefDir =

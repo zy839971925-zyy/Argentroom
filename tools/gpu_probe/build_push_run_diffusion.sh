@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Spektrafilm for Android — camera-diffusion CPU-vs-GPU probe (#213). GPLv3.
+# Argentroom for Android — camera-diffusion CPU-vs-GPU probe (#213). GPLv3.
 # Film modeling powered by spektrafilm.
 #
 # Builds tools/gpu_probe/probe_diffusion_main.cpp against the UNMODIFIED engine,

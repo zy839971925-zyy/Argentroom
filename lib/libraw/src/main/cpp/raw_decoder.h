@@ -1,11 +1,11 @@
 /*
- * Spektrafilm for Android — lib:libraw native decoder.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — lib:libraw native decoder.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Uses statically included, dual-offered LibRaw; distribution is governed by the
  * bundled decision record and fail-closed release audit.
  *
  * Decodes a camera RAW / DNG buffer into a linear, scene-referred RGB image with
- * the same processing-option contract as spektrafilm's desktop rawpy path:
+ * the same processing-option contract as argentroom's desktop rawpy path:
  *   output_color = ACES (LibRaw code 6, ACES2065-1 primaries)
  *   output_bps   = 16
  *   no_auto_bright = 1
@@ -13,7 +13,7 @@
  * White balance mirrors raw_file_processor.py: as-shot (camera WB), daylight
  * (LibRaw daylight base), tungsten / custom (temperature+tint -> CAT02
  * Von-Kries chromatic adaptation in linear ACES + a separate float32 tint step).
- * The result is then converted ACES2065-1 -> linear ProPhoto RGB (the spektrafilm
+ * The result is then converted ACES2065-1 -> linear ProPhoto RGB (the argentroom
  * engine's input space), mirroring load_and_process_raw_file's output_colorspace
  * step, so DecodeResult.colorSpace is "ProPhoto RGB" — ACES is only intermediate.
  */
@@ -30,7 +30,7 @@
 #include <string>
 #include <utility>
 
-namespace spectrafilm {
+namespace argentroom {
 
 // Mirrors RawDecoder.WhiteBalance in Kotlin and raw_file_processor.py modes.
 enum class WhiteBalanceMode {
@@ -375,7 +375,7 @@ struct DecodeResult {
     std::string colorSpace = "ProPhoto RGB";
     bool ok = false;
     std::string error;            // populated when ok == false
-    // Stable Spektrafilm status (DecodeStatus). SFRAW_OK on success.
+    // Stable Argentroom status (DecodeStatus). SFRAW_OK on success.
     int status = SFRAW_ERR_UNKNOWN;
     // Underlying LibRaw error code (LIBRAW_*), for diagnostics. 0 if N/A.
     int librawCode = 0;
@@ -423,6 +423,6 @@ bool buildAcesWbMultiplier(const DecodeOptions& options, float outMul[3]);
 // RGB. Exposed for unit testing / parity checks. Does not clamp out-of-gamut values.
 void aces2065ToProPhotoRGB(float* rgb, size_t pixelCount);
 
-}  // namespace spectrafilm
+}  // namespace argentroom
 
 #endif  // SPECTRAFILM_RAW_DECODER_H

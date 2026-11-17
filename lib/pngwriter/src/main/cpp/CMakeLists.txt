@@ -1,5 +1,5 @@
-# Spektrafilm for Android — lib:pngwriter native build.
-# Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+# Argentroom for Android — lib:pngwriter native build.
+# Copyright (C) 2026 Argentroom Android contributors. GPLv3.
 #
 # Builds libsfpng.so: a 16-bit-per-channel RGB PNG writer backed by zlib for
 # deflate (IDAT) and CRC32 per chunk, plus its JNI bridge.

@@ -1,7 +1,7 @@
 // Host contract for raw_inset_crop.h: where LibRaw's raw_inset_crops[0] lands in the processed
 // bitmap. GPLv3.
 //
-// The flip cases are pinned to what Jing Yu measured on a Sony A1 II through rawpy (spektrafilm
+// The flip cases are pinned to what Jing Yu measured on a Sony A1 II through rawpy (argentroom
 // fork arigatou1985, 7e35f37): with the usable box at the top-left of the sensor frame, the
 // masked band comes out at
 //   flip 0 -> bottom rows, right cols      flip 3 -> top rows, left cols
@@ -12,9 +12,9 @@
 
 namespace {
 
-using spectrafilm::rawcrop::InsetGeometry;
-using spectrafilm::rawcrop::OutputCrop;
-using spectrafilm::rawcrop::insetCropForBitmap;
+using argentroom::rawcrop::InsetGeometry;
+using argentroom::rawcrop::OutputCrop;
+using argentroom::rawcrop::insetCropForBitmap;
 
 int failures = 0;
 

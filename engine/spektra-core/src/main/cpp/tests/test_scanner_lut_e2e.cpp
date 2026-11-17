@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — end-to-end host test for the OPT-IN scanner 3D-LUT.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — end-to-end host test for the OPT-IN scanner 3D-LUT.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * Proves the WIRED scanner-LUT path is correct end-to-end (not just the isolated
@@ -18,7 +18,7 @@
  *  1. The direct (A) output matches each committed oracle final_rgb golden
  *     (max_abs <= 1e-4, rms <= 1e-5). The cinema-print cases therefore lock the
  *     K75P spectral integral + output-white adaptation on the CPU direct route.
- *  2. The K75P LUT (B) output matches a committed, pinned-spektrafilm fixture
+ *  2. The K75P LUT (B) output matches a committed, pinned-argentroom fixture
  *     generated with the same lut_resolution=17 (max_abs <= 1e-4, rms <= 1e-5).
  *     This is a like-for-like oracle-parity gate: coarse LUT output is
  *     intentionally not conflated with direct spectral integration.
@@ -45,7 +45,7 @@
 
 namespace {
 
-const char* kAssetDir = "/home/user/spektrafilm/src/spektrafilm/data";
+const char* kAssetDir = "/home/user/spektrafilm/src/argentroom/data";
 const char* kGoldenDir =
     "/home/user/Spectrafilmandroid/tools/parity/goldens/scan_portra";
 const char* kInputF64 =

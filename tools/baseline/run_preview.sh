@@ -18,7 +18,7 @@ SERIAL=${3:-}
 REPO=$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)
 host_path() { (cd "$(dirname "$1")" && printf "%s/%s" "$(pwd -W 2>/dev/null || pwd)" "$(basename "$1")"); }
 OUT=${SPK_BENCH_OUT:-$REPO/build/ticket177-preview}
-PKG=com.spectrafilm.app
+PKG=com.argentroom.app
 DEVICE_DIR=/sdcard/Android/data/$PKG/files
 py_() { env -u MSYS2_ARG_CONV_EXCL -u MSYS_NO_PATHCONV python "$@"; }
 

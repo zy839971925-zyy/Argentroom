@@ -1,6 +1,6 @@
 /*
- * Spektrafilm Android -- bounded LibRaw public-API regression support.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom Android -- bounded LibRaw public-API regression support.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  */
 #include "public_api_test_support.h"
 
@@ -798,7 +798,7 @@ std::vector<std::uint8_t> makeValidUncompressedDng(
 std::vector<std::uint8_t> makePrecisionUncompressedDng(
     const PrecisionDngOptions& options) {
   constexpr char kLinearRawUniqueCameraModel[] =
-      "Spektrafilm LinearRaw fixture";
+      "Argentroom LinearRaw fixture";
   const bool supportedBits = options.bitsPerSample == 8U ||
       options.bitsPerSample == 10U || options.bitsPerSample == 12U ||
       options.bitsPerSample == 14U || options.bitsPerSample == 16U;

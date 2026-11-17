@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android -- decoded RAW ownership publication seam.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android -- decoded RAW ownership publication seam.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  */
 #ifndef SFRAW_RAW_RESULT_PUBLICATION_H
 #define SFRAW_RAW_RESULT_PUBLICATION_H
@@ -49,7 +49,7 @@ struct PublicationOutcome {
  * leaves the registry as owner for the public result's later close().
  */
 PublicationOutcome publishDecodedAllocation(
-    spectrafilm::DecodedFloatBuffer& decoded, std::size_t byteCount,
+    argentroom::DecodedFloatBuffer& decoded, std::size_t byteCount,
     NativeAllocationRegistry& registry,
     PublicationCancellationCheck cancellation, void* cancellationContext,
     PublicationAttempt attemptPublication, void* publicationContext,

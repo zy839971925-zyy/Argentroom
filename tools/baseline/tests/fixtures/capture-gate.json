@@ -2,7 +2,7 @@
   "schema": "spk.bench_capture.v1",
   "captured_at_millis": 1756700000000,
   "app": {
-    "package": "com.spectrafilm.app",
+    "package": "com.argentroom.app",
     "apk_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
     "version_code": 11,
     "version_name": "0.9.0",

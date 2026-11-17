@@ -1,8 +1,8 @@
 /*
- * Spektrafilm for Android — host parity test for np_interp_array
+ * Argentroom for Android — host parity test for np_interp_array
  * (model/couplers.cpp), the numpy.interp port used by the DIR-coupler
  * non-monotonic interpolation.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * The DIR-coupler axis le0 = le - silver_curve @ M can be NON-MONOTONIC, where a

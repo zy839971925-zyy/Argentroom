@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — Highway SIMD lanes for the f32 separable-FIR Gaussian.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3 (see gaussian_hwy.h).
+ * Argentroom for Android — Highway SIMD lanes for the f32 separable-FIR Gaussian.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3 (see gaussian_hwy.h).
  * Film modeling powered by spektrafilm.
  *
  * Compiled only when SPK_ENABLE_HIGHWAY is defined; otherwise this file is an

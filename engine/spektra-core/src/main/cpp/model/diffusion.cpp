@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: in-emulsion scatter + halation.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — native engine: in-emulsion scatter + halation.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,7 +8,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Implements model/diffusion.h (apply_highlight_boost,
+ * argentroom. Implements model/diffusion.h (apply_highlight_boost,
  * apply_halation_um, apply_diffusion_filter_um).
  */
 #include "model/diffusion.h"
@@ -45,7 +45,7 @@
 #define M_PI 3.14159265358979323846
 #endif
 
-// NaN / Inf behavior — VERIFIED against the oracle (spektrafilm/model/diffusion.py).
+// NaN / Inf behavior — VERIFIED against the oracle (argentroom/model/diffusion.py).
 // The oracle's apply_halation_um and apply_diffusion_filter_um do NO NaN/Inf
 // sanitization: there is no np.nan_to_num / np.isnan / np.isfinite anywhere on
 // this path. They use only np.maximum(..., 1e-6) on the FILTER PARAMETERS
@@ -244,7 +244,7 @@ void apply_halation_um(double* raw, int w, int h, const HalationParams& params,
 
 // ---------------------------------------------------------------------------
 // Optical diffusion filter (Black Pro-Mist family) — port of
-// spektrafilm/model/diffusion.py::apply_diffusion_filter_um and the PSF helpers.
+// argentroom/model/diffusion.py::apply_diffusion_filter_um and the PSF helpers.
 // ---------------------------------------------------------------------------
 namespace {
 

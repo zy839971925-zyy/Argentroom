@@ -8,7 +8,7 @@
 <full-backup-content>
     <include
         domain="sharedpref"
-        path="spectrafilm_settings.xml"
+        path="argentroom_settings.xml"
         requireFlags="clientSideEncryption" />
     <include
         domain="file"
@@ -16,6 +16,6 @@
         requireFlags="clientSideEncryption" />
     <include
         domain="file"
-        path="datastore/spectrafilm_settings.preferences_pb"
+        path="datastore/argentroom_settings.preferences_pb"
         requireFlags="clientSideEncryption" />
 </full-backup-content>

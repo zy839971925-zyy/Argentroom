@@ -1,21 +1,21 @@
 #!/usr/bin/env bash
-# Reproducible environment for generating spektrafilm golden vectors.
+# Reproducible environment for generating argentroom golden vectors.
 #
-# spektrafilm's full install pulls GUI/RAW/IO deps (napari, rawpy, OpenImageIO, exiv2,
+# argentroom's full install pulls GUI/RAW/IO deps (napari, rawpy, OpenImageIO, exiv2,
 # lensfunpy) that the *math* path never touches. For golden generation we only need the
-# numeric stack + a few stubs so `import spektrafilm` succeeds without those heavy libs.
+# numeric stack + a few stubs so `import argentroom` succeeds without those heavy libs.
 #
 # Usage:
-#   git clone https://github.com/andreavolpato/spektrafilm /path/to/spektrafilm
-#   git -C /path/to/spektrafilm checkout "$SPEKTRAFILM_ORACLE_SHA"   # see below
-#   export SPEKTRAFILM_SRC=/path/to/spektrafilm/src      # the package source root
+#   git clone https://github.com/andreavolpato/spektrafilm /path/to/argentroom
+#   git -C /path/to/argentroom checkout "$SPEKTRAFILM_ORACLE_SHA"   # see below
+#   export SPEKTRAFILM_SRC=/path/to/argentroom/src      # the package source root
 #   source tools/parity/setup_env.sh
 #   python tools/parity/gen_goldens.py --case scan_portra
 #
 # This is what produced the committed goldens under tools/parity/goldens/.
 #
 # ORACLE PROVENANCE — the Python algorithms come from this exact upstream
-# spektrafilm commit. C06 fixture generation supplies the app's bundled
+# argentroom commit. C06 fixture generation supplies the app's bundled
 # profiles and neutral filters as inputs and records their hashes separately.
 #
 #   SPEKTRAFILM_ORACLE_REPO = https://github.com/andreavolpato/spektrafilm
@@ -42,7 +42,7 @@ _spk_repo_root="$(git -C "${SPEKTRAFILM_SRC}" rev-parse --show-toplevel 2>/dev/n
 if [ -n "${_spk_repo_root}" ]; then
   _spk_head="$(git -C "${_spk_repo_root}" rev-parse HEAD 2>/dev/null || true)"
   if [ "${_spk_head}" != "${SPEKTRAFILM_ORACLE_SHA}" ]; then
-    echo "WARNING: spektrafilm checkout is NOT on the pinned oracle SHA." >&2
+    echo "WARNING: argentroom checkout is NOT on the pinned oracle SHA." >&2
     echo "  HEAD   = ${_spk_head:-<unknown>}" >&2
     echo "  pinned = ${SPEKTRAFILM_ORACLE_SHA}" >&2
     echo "  Goldens will only reproduce after:" >&2
@@ -70,7 +70,7 @@ def imread(*a, **k):
     raise RuntimeError("rawpy stub: RAW decode not available in parity env")
 PY
 cat > "$STUBS/OpenImageIO.py" <<'PY'
-# OpenImageIO stub: colour-science + spektrafilm.utils.io import names here at load but
+# OpenImageIO stub: colour-science + argentroom.utils.io import names here at load but
 # only use them for file I/O, which the parity path never does. Return harmless dummies.
 from unittest.mock import MagicMock as _MM
 def __getattr__(name):

@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — host parity test for the spatial-effects branch.
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — host parity test for the spatial-effects branch.
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,7 +8,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm.
+ * argentroom.
  *
  * Runs the scan_film pipeline with the spatial-effects branch ON (in-emulsion
  * scatter + back-reflection halation in expose, DIR-coupler spatial diffusion in
@@ -47,11 +47,11 @@
 namespace {
 
 const char* kProfilePath =
-    "/home/user/spektrafilm/src/spektrafilm/data/profiles/kodak_portra_400.json";
+    "/home/user/spektrafilm/src/argentroom/data/profiles/kodak_portra_400.json";
 const char* kGoldenDir =
     "/home/user/Spectrafilmandroid/tools/parity/goldens/scan_portra_spatial";
 const char* kSpectraLut =
-    "/home/user/spektrafilm/src/spektrafilm/data/luts/spectral_upsampling/"
+    "/home/user/spektrafilm/src/argentroom/data/luts/spectral_upsampling/"
     "irradiance_xy_tc.npy";
 const char* kInputF64 =
     "/home/user/Spectrafilmandroid/engine/spektra-core/src/main/cpp/tests/"

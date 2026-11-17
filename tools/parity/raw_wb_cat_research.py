@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Reproduce the RAW white-balance CAT decision without production code.
 
-The pinned Spektrafilm oracle calls ``colour.chromatic_adaptation`` with
+The pinned Argentroom oracle calls ``colour.chromatic_adaptation`` with
 ``method="Von Kries"`` and no explicit ``transform``.  In colour-science 0.4.7
 that resolves to CAT02.  This research-only program evaluates that oracle
 against the Android decoder's current XYZ-scaling approximation, Bradford, and

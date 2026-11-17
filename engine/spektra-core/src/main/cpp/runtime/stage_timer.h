@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — per-stage/per-filter render timing (DIAGNOSTIC).
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — per-stage/per-filter render timing (DIAGNOSTIC).
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Film modeling powered by spektrafilm.
  *
  * Wall-clock accumulators for the render pipeline's stages and filters, surfaced

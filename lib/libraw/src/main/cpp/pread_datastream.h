@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2026 Spektrafilm Android contributors
+// SPDX-FileCopyrightText: 2026 Argentroom Android contributors
 // SPDX-License-Identifier: GPL-3.0-only
 //
 // A LibRaw datastream over pread() on a file descriptor, with a small read
@@ -24,7 +24,7 @@
 #include <unistd.h>
 #include <vector>
 
-namespace spectrafilm {
+namespace argentroom {
 
 class PreadDatastream final : public LibRaw_abstract_datastream {
  public:
@@ -223,6 +223,6 @@ class PreadDatastream final : public LibRaw_abstract_datastream {
     size_t cacheLen_ = 0;
 };
 
-}  // namespace spectrafilm
+}  // namespace argentroom
 
 #endif  // SPECTRAFILM_PREAD_DATASTREAM_H

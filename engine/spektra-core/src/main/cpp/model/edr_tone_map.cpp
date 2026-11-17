@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: print-side Highlight Expansion (EDR).
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — native engine: print-side Highlight Expansion (EDR).
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of Silverphase v1.2.5 spk_edr; see edr_tone_map.h.
  */
 #include "model/edr_tone_map.h"

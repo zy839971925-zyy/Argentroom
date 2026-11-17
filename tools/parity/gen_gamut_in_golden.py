@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Spektrafilm for Android — generate the INPUT-gamut-compression parity golden
+# Argentroom for Android — generate the INPUT-gamut-compression parity golden
 # (model/gamut_compression.cpp::spectral_locus_xy / compress_pixel_xy and
 # kernels/spectral_upsampling.cpp::remap_tc_lut_for_compression) from the upstream
 # oracle utils/gamut_compression.py. GPLv3. Film modeling powered by spektrafilm.
@@ -33,9 +33,9 @@
 # import colour FIRST (real), then shim a minimal matplotlib.path so the module's top
 # level imports, and register it in sys.modules before exec (its frozen @dataclass
 # under `from __future__ import annotations` introspects sys.modules). Separately,
-# remap_tc_lut_for_compression lazily does `from spektrafilm.utils.spectral_upsampling
+# remap_tc_lut_for_compression lazily does `from argentroom.utils.spectral_upsampling
 # import _quad2tri, _tri2quad`; the real spectral_upsampling.py pulls in the whole
-# spektrafilm package (which fails here on missing lensfunpy), so we shim that single
+# argentroom package (which fails here on missing lensfunpy), so we shim that single
 # submodule with the EXACT oracle _tri2quad/_quad2tri source (verified byte-identical
 # at spectral_upsampling.py:42-61) — the bake math is therefore real-oracle.
 import importlib.util
@@ -56,10 +56,10 @@ _mpl.path = _mplp
 sys.modules["matplotlib"] = _mpl
 sys.modules["matplotlib.path"] = _mplp
 
-# --- shim 2: spektrafilm.utils.spectral_upsampling with the EXACT oracle
+# --- shim 2: argentroom.utils.spectral_upsampling with the EXACT oracle
 #     _tri2quad/_quad2tri (verified byte-identical to spectral_upsampling.py:42-61),
 #     so remap_tc_lut_for_compression's lazy import resolves without dragging in the
-#     full spektrafilm package (lensfunpy etc.). ---
+#     full argentroom package (lensfunpy etc.). ---
 def _tri2quad(tc):
     tc = np.array(tc)
     tx = tc[..., 0]
@@ -79,18 +79,18 @@ def _quad2tri(xy):
     return np.stack((tx, ty), axis=-1)
 
 
-_sf = types.ModuleType("spektrafilm")
+_sf = types.ModuleType("argentroom")
 _sf.__path__ = []
-_sfu = types.ModuleType("spektrafilm.utils")
+_sfu = types.ModuleType("argentroom.utils")
 _sfu.__path__ = []
-_sfsu = types.ModuleType("spektrafilm.utils.spectral_upsampling")
+_sfsu = types.ModuleType("argentroom.utils.spectral_upsampling")
 _sfsu._tri2quad = _tri2quad
 _sfsu._quad2tri = _quad2tri
 _sfu.spectral_upsampling = _sfsu
 _sf.utils = _sfu
-sys.modules["spektrafilm"] = _sf
-sys.modules["spektrafilm.utils"] = _sfu
-sys.modules["spektrafilm.utils.spectral_upsampling"] = _sfsu
+sys.modules["argentroom"] = _sf
+sys.modules["argentroom.utils"] = _sfu
+sys.modules["argentroom.utils.spectral_upsampling"] = _sfsu
 
 ORACLE = "/home/user/spektrafilm/src/spektrafilm/utils/gamut_compression.py"
 _spec = importlib.util.spec_from_file_location("gamut_compression", ORACLE)

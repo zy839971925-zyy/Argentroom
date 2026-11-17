@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — host regression for fork-join exception safety.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — host regression for fork-join exception safety.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  */
 #include "kernels/parallel.h"
 

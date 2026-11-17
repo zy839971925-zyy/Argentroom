@@ -30,7 +30,7 @@ projected through an enlarger onto a measured paper, and is scanned back out. Th
 the things a LUT cannot: how a stock rolls off its highlights, how halation blooms red around
 a street lamp, how grain sits in the shadows.
 
-*Argentroom* (银间) means "the room of silver": the darkroom where the image is made.
+*Argentroom* means "the room of silver": the darkroom where the image is made.
 
 ## Highlights
 

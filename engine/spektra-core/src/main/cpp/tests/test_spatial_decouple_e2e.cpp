@@ -1,8 +1,8 @@
 /*
- * Spektrafilm for Android — END-TO-END host parity test for the SPATIAL-EFFECT
+ * Argentroom for Android — END-TO-END host parity test for the SPATIAL-EFFECT
  * DECOUPLING: the camera lens blur (camera.lens_blur_um) must run with the
  * halation/scatter kernels independently disabled.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * Historically the engine gated EVERY spatial effect (DIR-coupler diffusion,
@@ -48,7 +48,7 @@
 
 namespace {
 
-const char* kAssetDir = "/home/user/spektrafilm/src/spektrafilm/data";
+const char* kAssetDir = "/home/user/spektrafilm/src/argentroom/data";
 const char* kGoldenDir =
     "/home/user/Spectrafilmandroid/tools/parity/goldens/"
     "scan_portra_lensblur_nohalation";

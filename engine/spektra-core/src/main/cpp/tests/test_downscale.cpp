@@ -1,7 +1,7 @@
 /*
- * Spektrafilm for Android — host parity test for the downscale (minification)
+ * Argentroom for Android — host parity test for the downscale (minification)
  * anti-aliasing prefilter on the crop/resize geometry stage.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * Exercises a sub-unity upscale_factor=0.5 (MINIFICATION) on the scan_film route
@@ -39,7 +39,7 @@
 
 namespace {
 
-const char* kAssetDir  = "/home/user/spektrafilm/src/spektrafilm/data";
+const char* kAssetDir  = "/home/user/spektrafilm/src/argentroom/data";
 const char* kGoldenDir =
     "/home/user/Spectrafilmandroid/tools/parity/goldens/scan_portra_downscale";
 const char* kInputF64  =

@@ -134,7 +134,7 @@ SHA-256. It runs on the device; no photo leaves it. The Apache License 2.0 text 
 ## Icons: Material Symbols
 
 The app's icons are Google's **Material Symbols** (Outlined, weight 400, 24 px), built into
-`app/src/main/java/com/spectrafilm/app/MaterialSymbols.kt` as vector paths from the upstream
+`app/src/main/java/com/argentroom/app/MaterialSymbols.kt` as vector paths from the upstream
 SVGs, unmodified.
 
 - Upstream: https://github.com/google/material-design-icons

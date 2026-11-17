@@ -1,6 +1,6 @@
-# Spektrafilm for Android — oracle reference generator for scanning output
+# Argentroom for Android — oracle reference generator for scanning output
 # color spaces.
-# Copyright (C) 2026 Spektrafilm Android contributors.
+# Copyright (C) 2026 Argentroom Android contributors.
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -8,9 +8,9 @@
 # version. See <https://www.gnu.org/licenses/>.
 #
 # Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
-# spektrafilm.
+# argentroom.
 #
-# Reproduces spektrafilm.runtime.stages.scanning for the scan_film route on the
+# Reproduces argentroom.runtime.stages.scanning for the scan_film route on the
 # committed scan_portra golden input (film_density_cmy.spkvec), once per
 # io.output_color_space, and writes tests/scan_portra_ref_<space>.spkvec.
 #
@@ -37,12 +37,12 @@ PARITY = REPO / "tools/parity"
 sys.path.insert(0, str(PARITY))
 
 import spkvec  # tools/parity/spkvec.py
-from gen_goldens import BUNDLED_ASSETS, _import_spektrafilm
+from gen_goldens import BUNDLED_ASSETS, _import_argentroom
 
-from spektrafilm.config import STANDARD_OBSERVER_CMFS
-from spektrafilm.model.emulsion import compute_density_spectral
-from spektrafilm.model.illuminants import standard_illuminant
-from spektrafilm.utils.conversions import density_to_light
+from argentroom.config import STANDARD_OBSERVER_CMFS
+from argentroom.model.emulsion import compute_density_spectral
+from argentroom.model.illuminants import standard_illuminant
+from argentroom.utils.conversions import density_to_light
 
 GOLDEN = PARITY / "goldens/scan_portra"
 PROFILE = BUNDLED_ASSETS / "profiles/kodak_portra_400.json"
@@ -59,7 +59,7 @@ SPACES = [
 
 
 def main() -> int:
-    _import_spektrafilm()
+    _import_argentroom()
     dcmy = np.ascontiguousarray(
         spkvec.read(GOLDEN / "film_density_cmy.spkvec"), dtype=np.float32
     )

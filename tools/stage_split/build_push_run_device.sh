@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Spektrafilm for Android — on-device per-stage export split. GPLv3.
+# Argentroom for Android — on-device per-stage export split. GPLv3.
 # Film modeling powered by spektrafilm.
 #
 # stage_split's own header says its absolute milliseconds are HOST numbers that

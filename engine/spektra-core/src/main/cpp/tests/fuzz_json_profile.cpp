@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android — bounded libFuzzer entry point for native JSON seams.
+ * Argentroom for Android — bounded libFuzzer entry point for native JSON seams.
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 

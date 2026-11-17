@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — host test for the optional tone-curve stage.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — host test for the optional tone-curve stage.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by spektrafilm.
  *
  * Three checks:
@@ -38,7 +38,7 @@
 namespace {
 
 const char* kProfilePath =
-    "/home/user/spektrafilm/src/spektrafilm/data/profiles/kodak_portra_400.json";
+    "/home/user/spektrafilm/src/argentroom/data/profiles/kodak_portra_400.json";
 const char* kGoldenDir =
     "/home/user/Spectrafilmandroid/tools/parity/goldens/scan_portra";
 

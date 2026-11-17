@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — native engine: filming stage (rgb -> raw -> density).
- * Copyright (C) 2026 Spektrafilm Android contributors.
+ * Argentroom for Android — native engine: filming stage (rgb -> raw -> density).
+ * Copyright (C) 2026 Argentroom Android contributors.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -8,7 +8,7 @@
  * version. See <https://www.gnu.org/licenses/>.
  *
  * Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
- * spektrafilm. Implements runtime/stages/filming.h.
+ * argentroom. Implements runtime/stages/filming.h.
  */
 #include "runtime/stages/filming.h"
 
@@ -1086,7 +1086,7 @@ void expose_impl(const Src& src, int width, int height,
     if (params.halation.active) {
         ScopedStage _t(STG_HALATION);
         // Fast GPU export (#206): the same scatter + halation model on the
-        // GPU (gpu/halation_scatter.comp, adapted from spektrafilm OFX, f32).
+        // GPU (gpu/halation_scatter.comp, adapted from argentroom OFX, f32).
         // The result lands in a private buffer and replaces `raw` only when
         // the whole pass succeeded; any failure or refusal falls through to the
         // f64 CPU pass, which is the ground truth and stays byte-identical.

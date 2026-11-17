@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android — host gate for kernels/pack_display (#289). GPLv3.
+ * Argentroom for Android — host gate for kernels/pack_display (#289). GPLv3.
  * Film modeling powered by spektrafilm.
  *
  * The native display pack replaces the Kotlin `packToArgb` loop

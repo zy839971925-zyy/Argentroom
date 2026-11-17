@@ -1,6 +1,6 @@
 /*
- * Spektrafilm for Android — lib:libraw build.
- * Copyright (C) 2026 Spektrafilm Android contributors. GPLv3.
+ * Argentroom for Android — lib:libraw build.
+ * Copyright (C) 2026 Argentroom Android contributors. GPLv3.
  * Decoding powered by statically included, dual-offered LibRaw. The selected
  * distribution route is a fail-closed release decision tracked by ticket #166.
  *
@@ -17,7 +17,7 @@ plugins {
 }
 
 android {
-    namespace = "com.spectrafilm.libraw"
+    namespace = "com.argentroom.libraw"
     compileSdk = 36
 
     // NDK r28c (28.2.13676358): 16 KB page-size support is the default (r27 introduced it), so
@@ -29,7 +29,7 @@ android {
     defaultConfig {
         minSdk = 24
         testInstrumentationRunner =
-            "com.spectrafilm.libraw.RawDecoderBoundaryInstrumentation"
+            "com.argentroom.libraw.RawDecoderBoundaryInstrumentation"
         externalNativeBuild {
             cmake {
                 cppFlags += "-std=c++17"

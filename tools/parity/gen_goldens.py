@@ -1,5 +1,5 @@
-# Spektrafilm for Android — golden-vector parity harness.
-# Copyright (C) 2026 Spektrafilm Android contributors.
+# Argentroom for Android — golden-vector parity harness.
+# Copyright (C) 2026 Argentroom Android contributors.
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -7,11 +7,11 @@
 # version. See <https://www.gnu.org/licenses/>.
 #
 # Port of spektrafilm (GPLv3) by Andrea Volpato — film modeling powered by
-# spektrafilm.
-"""Generate golden intermediate vectors from the Python ``spektrafilm`` engine.
+# argentroom.
+"""Generate golden intermediate vectors from the Python ``argentroom`` engine.
 
 For each parity *case* (a film/print profile pair plus toggles) this script runs
-``spektrafilm.simulate`` once per debug *tap*, capturing the intermediate buffer
+``argentroom.simulate`` once per debug *tap*, capturing the intermediate buffer
 the engine exposes via ``DebugParams`` (``output_film_log_raw``,
 ``output_film_density_cmy``, ``output_print_density_cmy``) as well as the final
 RGB scan. Each buffer is written to ``goldens/<case>/<tap>.spkvec`` and the case
@@ -20,10 +20,10 @@ is described in ``goldens/<case>/manifest.json``.
 The C++ engine port reproduces each tap via ``spk_simulate_tap`` and is checked
 against these goldens by ``compare_main.cpp`` within a documented tolerance.
 
-This module REQUIRES a working ``spektrafilm`` environment (see the upstream
+This module REQUIRES a working ``argentroom`` environment (see the upstream
 README — install the package and its data assets). The import is guarded so the
 failure mode is a clear, actionable message rather than a traceback. The rest of
-the harness (format spec, readers, C++ comparator) does NOT need spektrafilm.
+the harness (format spec, readers, C++ comparator) does NOT need argentroom.
 
 Usage::
 
@@ -58,12 +58,12 @@ ORACLE_COMMIT = "c1d0e44b962d80a51ea096d33faea346e4f3836c"
 
 
 class OracleProvenanceError(RuntimeError):
-    """The selected spektrafilm checkout cannot be trusted as the oracle."""
+    """The selected argentroom checkout cannot be trusted as the oracle."""
 
 
 @dataclass(frozen=True)
 class OracleProvenance:
-    """Git identity verified for the checkout that supplies spektrafilm."""
+    """Git identity verified for the checkout that supplies argentroom."""
 
     repository_root: Path
     commit: str
@@ -264,7 +264,7 @@ def publish_verified_artifacts(
         raise
     return final_provenance
 
-# Taps exposed by spektrafilm DebugParams, in pipeline order. The final RGB scan
+# Taps exposed by argentroom DebugParams, in pipeline order. The final RGB scan
 # is captured with debug off ("final_rgb"). The mapping value is the DebugParams
 # field that selects the tap; None means "run the full pipeline, no tap".
 TAPS = {
@@ -941,10 +941,10 @@ CASES = [
 ]
 
 
-def _import_spektrafilm() -> tuple[object, OracleProvenance]:
-    """Verify and import the exact clean spektrafilm oracle checkout."""
+def _import_argentroom() -> tuple[object, OracleProvenance]:
+    """Verify and import the exact clean argentroom oracle checkout."""
     try:
-        spec = importlib.util.find_spec("spektrafilm")
+        spec = importlib.util.find_spec("argentroom")
     except Exception as exc:  # noqa: BLE001 - import hooks may raise arbitrary errors
         spec = None
         find_error = exc
@@ -958,9 +958,9 @@ def _import_spektrafilm() -> tuple[object, OracleProvenance]:
             else "module could not be resolved to a source file"
         )
         sys.stderr.write(
-            "ERROR: could not locate 'spektrafilm'.\n"
+            "ERROR: could not locate 'argentroom'.\n"
             f"  ({detail})\n\n"
-            "gen_goldens.py needs a working spektrafilm source checkout to "
+            "gen_goldens.py needs a working argentroom source checkout to "
             "PRODUCE goldens.\n"
         )
         raise SystemExit(2) from find_error
@@ -969,7 +969,7 @@ def _import_spektrafilm() -> tuple[object, OracleProvenance]:
         provenance = verify_oracle_provenance(Path(spec.origin), ORACLE_COMMIT)
     except OracleProvenanceError as exc:
         sys.stderr.write(
-            "ERROR: refusing unverified spektrafilm oracle checkout.\n"
+            "ERROR: refusing unverified argentroom oracle checkout.\n"
             f"  {exc}\n"
         )
         raise SystemExit(2) from exc
@@ -977,21 +977,21 @@ def _import_spektrafilm() -> tuple[object, OracleProvenance]:
     previous_dont_write_bytecode = sys.dont_write_bytecode
     sys.dont_write_bytecode = True
     try:
-        import spektrafilm  # noqa: F401
-        from spektrafilm import init_params, simulate  # noqa: F401
-        imported = sys.modules["spektrafilm"]
+        import argentroom  # noqa: F401
+        from argentroom import init_params, simulate  # noqa: F401
+        imported = sys.modules["argentroom"]
     except Exception as exc:  # noqa: BLE001 - upstream can raise asset/runtime errors
         sys.stderr.write(
-            "ERROR: could not import 'spektrafilm'.\n"
+            "ERROR: could not import 'argentroom'.\n"
             f"  ({type(exc).__name__}: {exc})\n\n"
-            "gen_goldens.py needs a working spektrafilm environment to PRODUCE\n"
-            "goldens. Set it up per the spektrafilm README (clone the repo,\n"
+            "gen_goldens.py needs a working argentroom environment to PRODUCE\n"
+            "goldens. Set it up per the argentroom README (clone the repo,\n"
             "install the package and its data assets), then run this script from\n"
             "that environment, e.g.:\n\n"
-            "    cd /path/to/spektrafilm && pip install -e .\n"
+            "    cd /path/to/argentroom && pip install -e .\n"
             "    python /path/to/Spectrafilmandroid/tools/parity/gen_goldens.py\n\n"
             "Reading/inspecting existing .spkvec goldens and building the C++\n"
-            "comparator do NOT require spektrafilm.\n"
+            "comparator do NOT require argentroom.\n"
         )
         raise SystemExit(2) from exc
     finally:
@@ -1000,7 +1000,7 @@ def _import_spektrafilm() -> tuple[object, OracleProvenance]:
     imported_file = getattr(imported, "__file__", None)
     if imported_file is None:
         sys.stderr.write(
-            "ERROR: refusing spektrafilm import without a concrete source file.\n"
+            "ERROR: refusing argentroom import without a concrete source file.\n"
         )
         raise SystemExit(2)
     try:
@@ -1009,13 +1009,13 @@ def _import_spektrafilm() -> tuple[object, OracleProvenance]:
         )
     except OracleProvenanceError as exc:
         sys.stderr.write(
-            "ERROR: refusing unverified imported spektrafilm oracle checkout.\n"
+            "ERROR: refusing unverified imported argentroom oracle checkout.\n"
             f"  {exc}\n"
         )
         raise SystemExit(2) from exc
     if imported_provenance.repository_root != provenance.repository_root:
         sys.stderr.write(
-            "ERROR: spektrafilm import resolved from a different checkout after "
+            "ERROR: argentroom import resolved from a different checkout after "
             "verification.\n"
             f"  verified: {provenance.repository_root}\n"
             f"  imported: {imported_provenance.repository_root}\n"
@@ -1032,7 +1032,7 @@ def make_test_image(size: int) -> "object":
       * a coarse grid of saturated/neutral patches (Macbeth-like) in the center,
       * a few near-black and near-white tiles for shadow/highlight clipping.
 
-    Values are scene-linear in [0, ~1.2] (ProPhoto RGB linear, the spektrafilm
+    Values are scene-linear in [0, ~1.2] (ProPhoto RGB linear, the argentroom
     default input space). Fully deterministic for a given ``size``.
     """
     import numpy as np
@@ -1077,9 +1077,9 @@ def make_test_image(size: int) -> "object":
 
 def build_bundled_params(film_profile: str, print_profile: str):
     """Run pinned Python algorithms on C06's bundled profiles and filters."""
-    from spektrafilm.profiles.io import _validate_profile, profile_from_dict
-    from spektrafilm.runtime.params_builder import apply_database_neutral_print_filters
-    from spektrafilm.runtime.params_schema import RuntimePhotoParams
+    from argentroom.profiles.io import _validate_profile, profile_from_dict
+    from argentroom.runtime.params_builder import apply_database_neutral_print_filters
+    from argentroom.runtime.params_schema import RuntimePhotoParams
 
     inputs = {}
 
@@ -1365,7 +1365,7 @@ def main(argv=None) -> int:
     parser.add_argument("--size", type=int, default=64,
                         help="edge length of the square synthetic test image (px)")
     parser.add_argument("--list", action="store_true",
-                        help="list available cases and exit (no spektrafilm needed)")
+                        help="list available cases and exit (no argentroom needed)")
     args = parser.parse_args(argv)
 
     by_id = {c.case_id: c for c in CASES}
@@ -1385,7 +1385,7 @@ def main(argv=None) -> int:
     else:
         cases = CASES
 
-    sf, oracle_provenance = _import_spektrafilm()
+    sf, oracle_provenance = _import_argentroom()
     GOLDENS_DIR.mkdir(parents=True, exist_ok=True)
     print(f"Generating goldens into {GOLDENS_DIR} (image {args.size}x{args.size})")
     for case in cases:

@@ -1,15 +1,15 @@
 #version 450
-// SPDX-FileCopyrightText: 2026 Aedan Oskar Otto Diez (spektrafilm OFX)
-// SPDX-FileCopyrightText: 2026 Spektrafilm Android contributors
+// SPDX-FileCopyrightText: 2026 Aedan Oskar Otto Diez (argentroom OFX)
+// SPDX-FileCopyrightText: 2026 Argentroom Android contributors
 // SPDX-License-Identifier: GPL-3.0-only
 //
 // In-emulsion scatter + back-reflection halation on the GPU (issue #206).
 //
-// Adapted from chaert-s/spektrafilm-ofx shaders/vulkan/SpektraHalation.comp at
+// Adapted from chaert-s/argentroom-ofx shaders/vulkan/SpektraHalation.comp at
 // 86476afc5b077de77e2278e3658d1ba9309892a1 (GPL-3.0-only). Upstream's pass
 // structure (op-multiplexed kernel, X-then-Y separable blurs accumulated into
 // a sum buffer, scatter and bounce resolves) is kept. Android changes (this
-// file is a MODIFIED copy; see docs/research/spektrafilm-ofx-port.md):
+// file is a MODIFIED copy; see docs/research/argentroom-ofx-port.md):
 //   * every film-dependent constant upstream hard-coded (scatter core/tail
 //     sigmas, tail mix, bounce decay/normalisation) comes from FrameFloats, so
 //     the pass follows this engine's digested HalationParams per film;
