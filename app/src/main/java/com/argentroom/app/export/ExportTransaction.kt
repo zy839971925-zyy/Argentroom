@@ -46,6 +46,24 @@ internal data class EncodedArtifact(
             val measured = digest(file, isCancelled)
             return EncodedArtifact(file, measured.length, measured.sha256)
         }
+
+        /**
+         * perf r5: an artifact whose SHA-256 was taken over the exact bytes the encoder handed
+         * to the (fsynced) stage file as it wrote them, so the stage need not be read back just
+         * to hash it. Only for a stage nothing rewrote after the encoder (no EXIF pass). The
+         * guarantee is unchanged: the commit hashes every byte it copies from the stage and
+         * every byte it reads back from the destination against this digest.
+         */
+        fun fromHashedStage(file: File, writtenBytes: Long, sha256: String): EncodedArtifact {
+            if (!file.isFile) throw IOException("encoded artifact is missing: $file")
+            if (writtenBytes <= 0L) throw IOException("encoder returned no bytes")
+            val actualLength = file.length()
+            if (writtenBytes != actualLength) {
+                throw IOException("encoder wrote $writtenBytes bytes but staged file has $actualLength")
+            }
+            require(sha256.length == 64) { "not a SHA-256 hex digest" }
+            return EncodedArtifact(file, writtenBytes, sha256.lowercase())
+        }
     }
 }
 
