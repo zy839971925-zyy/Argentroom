@@ -51,8 +51,8 @@ android {
         applicationId = "com.argentroom.app"
         minSdk = 24
         targetSdk = 36
-        versionCode = 21
-        versionName = "1.0.2"
+        versionCode = 22
+        versionName = "1.1.0"
         testInstrumentationRunner = "com.argentroom.app.ReleaseCandidateSmokeInstrumentation"
         ndk { abiFilters += ((project.findProperty("spk.abis") as String?)?.split(",")?.map { it.trim() } ?: listOf("arm64-v8a", "armeabi-v7a", "x86_64")) }
     }

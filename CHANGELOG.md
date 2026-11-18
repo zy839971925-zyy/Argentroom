@@ -2,6 +2,27 @@
 
 ## Unreleased
 
+## Argentroom v1.1.0 (versionCode 22) — unreleased — performance round R5
+
+> **Application ID is `com.argentroom.app`** (renamed on `main` in a70d7e2). It installs as a separate
+> app and cannot upgrade an existing `com.spectrafilm.app` (v1.0.2 and earlier) install. 新的应用 ID
+> 无法覆盖升级旧版 `com.spectrafilm.app`，两者会并存；请先从旧版导出需要的内容。
+
+- **Export speed (engine):** large banded exports run the print side, scan and grain only over
+  the rows each band keeps (exact, byte-identical output); grain's Mersenne-Twister draws are
+  batched (identical stream); the Fast GPU route keeps the filming expose chain on the device
+  instead of round-tripping each stage. A/B switches: `SPK_BAND_WINDOW=0`, `SPK_GPU_RESIDENT=0`.
+- **Export speed (app):** a confirmed source fingerprint is reused across export and idle
+  pre-render instead of re-hashing the whole source; the ungraded film render is kept so a
+  re-export that only changes post-engine settings skips decode + simulation; PNG-8 / JPEG
+  without source EXIF are hashed while written; ColorGrade runs band-wise.
+- **Memory:** pre-render is gated on thermal headroom and battery; GPU context teardown is
+  skipped when no GPU memory is held; payload sizes use 64-bit arithmetic.
+- **CI:** also installs `platforms;android-36` (library modules compile against 36); `gradlew`
+  is executable in git.
+- No rendering defaults changed. Performance figures in `docs/PERF_R5_REPORT.md` are from a
+  host sandbox, not from Android devices.
+
 ## Argentroom v1.0.2 (versionCode 21) — 2026-11-17 — first public release
 
 **First public release.** 首个公开正式版。
