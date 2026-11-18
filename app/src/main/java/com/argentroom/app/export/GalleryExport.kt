@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android — gallery export writers. GPLv3.
+ * Argentroom for Android — gallery export writers. GPLv3.
  * Film modeling powered by spektrafilm.
  *
  * Export formats and the MediaStore/legacy publication paths for JPEG, Ultra HDR, PNG, TIFF and
@@ -246,7 +246,7 @@ suspend fun saveToGallery(
 
     // Encode completely into a unique app-private stage. This makes Bitmap.compress(false),
     // EXIF failure, ENOSPC and interruption fail before any public gallery item is visible.
-    val stage = File.createTempFile("spectrafilm-export-", ".${format.ext}.part", ctx.cacheDir)
+    val stage = File.createTempFile("argentroom-export-", ".${format.ext}.part", ctx.cacheDir)
     // perf r5: hash the encoded bytes as they are written, so a stage that no EXIF pass rewrites
     // afterwards is not read back in full just to digest it.
     val writeDigest = java.security.MessageDigest.getInstance("SHA-256")
@@ -380,7 +380,7 @@ suspend fun saveSimResultAsTiff(
 
     // Write to a temp file in cacheDir first; this avoids holding a MediaStore
     // output stream open for the entire (potentially large) TiffWriter write.
-    val tmpFile = File.createTempFile("spectrafilm-export-", ".tif.part", ctx.cacheDir)
+    val tmpFile = File.createTempFile("argentroom-export-", ".tif.part", ctx.cacheDir)
 
     try {
         val encodedBytes = if (float32) {
@@ -509,7 +509,7 @@ private fun publishLegacyArtifact(
         EXPORT_BRAND,
     )
     if (!dir.isDirectory && !dir.mkdirs()) error("Could not create legacy export directory")
-    val part = File.createTempFile(".spectrafilm-", ".part", dir)
+    val part = File.createTempFile(".argentroom-", ".part", dir)
     var destination: File? = null
     var destinationCommitted = false
     try {
@@ -625,7 +625,7 @@ internal fun recoverAbandonedLegacyExportStages(
     dir.listFiles()?.forEach { candidate ->
         if (
             candidate.isFile &&
-            candidate.name.startsWith(".spectrafilm-") &&
+            candidate.name.startsWith(".argentroom-") &&
             candidate.name.endsWith(".part") &&
             candidate.lastModified() < priorProcessCutoffMillis
         ) {
@@ -661,7 +661,7 @@ suspend fun saveLinearInputAsTiff32f(
     val exportJob = currentCoroutineContext()[Job]
     val isCancelled = { exportJob?.isActive == false }
     val dateTime = ExportClock.exifDateTime()
-    val tmpFile = File.createTempFile("spectrafilm-export-", ".tif.part", ctx.cacheDir)
+    val tmpFile = File.createTempFile("argentroom-export-", ".tif.part", ctx.cacheDir)
     try {
         val encodedBytes = runCancellableTiffWrite { cancellation ->
             image.acquireDataLease().use { lease ->
@@ -752,7 +752,7 @@ suspend fun saveSimResultAsPng16(
     // Write to a temp file in cacheDir first; avoids holding a MediaStore output stream
     // open for the whole (potentially large) PNG deflate. Deleted on ALL paths by the
     // try/finally below — a writer/publish throw must not leave it behind.
-    val tmpFile = File.createTempFile("spectrafilm-export-", ".png.part", ctx.cacheDir)
+    val tmpFile = File.createTempFile("argentroom-export-", ".png.part", ctx.cacheDir)
 
     try {
         // The engine's float buffer goes straight to the writer, which quantises one

@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android — confirmed source identity memo tests (perf r5). GPLv3.
+ * Argentroom for Android — confirmed source identity memo tests (perf r5). GPLv3.
  *
  * The memo may only ever return the digest a full hash would return right now. Every test that
  * changes the file in some way must therefore see a fresh full hash and the new digest.

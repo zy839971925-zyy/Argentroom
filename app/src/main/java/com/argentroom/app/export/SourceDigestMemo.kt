@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android — confirmed source identity memo (perf r5). GPLv3.
+ * Argentroom for Android — confirmed source identity memo (perf r5). GPLv3.
  * Film modeling powered by spektrafilm.
  *
  * Every export and every idle pre-render keys its caches on the SHA-256 of the whole source

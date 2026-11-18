@@ -1,5 +1,5 @@
 /*
- * Spektrafilm for Android — perf r5 app-side contracts. GPLv3.
+ * Argentroom for Android — perf r5 app-side contracts. GPLv3.
  *
  *  * the band-wise ColorGrade is bit-identical to the per-pixel absolute-access loop it replaced
  *    (and a coarse JVM timing of the two is printed, not asserted);
