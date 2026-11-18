@@ -105,6 +105,14 @@ bool frame_close(double*, FrameDiagnostics* d) {
     if (d) { *d = FrameDiagnostics{}; d->attempted = true; d->reason = "vulkan-disabled"; }
     return false;
 }
+bool frame_open_source(const double*, const float*, int, int, FrameDiagnostics* d) {
+    if (d) { *d = FrameDiagnostics{}; d->attempted = true; d->reason = "vulkan-disabled"; }
+    return false;
+}
+bool frame_close_f32(float*, FrameDiagnostics* d) {
+    if (d) { *d = FrameDiagnostics{}; d->attempted = true; d->reason = "vulkan-disabled"; }
+    return false;
+}
 void frame_discard() {}
 bool frame_active(int, int) { return false; }
 bool filming_expose(const double*, const float*, double, uint32_t, int, int,
@@ -332,6 +340,10 @@ struct Ctx {
         int height = 0;
         uint32_t front = 0;
         bool open = false;
+        std::thread::id owner{};  // r5: the thread that opened it
+        // r5: open AND owned by the calling thread. Every resident decision goes
+        // through this; `open` alone still guards the reclaim/teardown paths.
+        bool mine() const { return open && owner == std::this_thread::get_id(); }
     } frame;
     // filming_stage.comp (#218): four bindings again -- source, destination,
     // the tc_lut and the concatenated axis|curve table.
@@ -2509,8 +2521,13 @@ bool ensure_frame(Ctx& c, int width, int height) {
 
 }  // namespace
 
-bool frame_open(const double* rgb, int width, int height,
-                FrameDiagnostics* diagnostics) {
+namespace {
+
+// One upload into the front plane. `exact_source` selects the r5 conversion
+// (identical to the staged filming upload) over frame_open's historical finite
+// clamp, which stays as it was for its existing callers.
+bool frame_open_impl(const double* rgb, const float* rgb_f32, bool exact_source,
+                     int width, int height, FrameDiagnostics* diagnostics) {
     FrameDiagnostics d{};
     d.attempted = true;
     auto give_up = [&](const char* reason) {
@@ -2518,7 +2535,8 @@ bool frame_open(const double* rgb, int width, int height,
         if (diagnostics) *diagnostics = d;
         return false;
     };
-    if (rgb == nullptr || width <= 0 || height <= 0) return give_up("invalid-request");
+    if ((rgb == nullptr) == (rgb_f32 == nullptr) || width <= 0 || height <= 0)
+        return give_up("invalid-request");
     const uint64_t comps = static_cast<uint64_t>(width) * height * 3;
     if (comps > UINT32_MAX) return give_up("frame-too-large");
 
@@ -2534,12 +2552,20 @@ bool frame_open(const double* rgb, int width, int height,
     c.frame.front = 0;
     {
         float* dst = static_cast<float*>(c.frame.staging.mapped);
-        parallel_for(0, static_cast<int>(comps), [&](int lo, int hi) {
-            for (int i = lo; i < hi; ++i) {
-                const double v = rgb[i];
-                dst[i] = std::isfinite(v) ? static_cast<float>(v) : 0.0f;
-            }
-        });
+        if (rgb_f32) {
+            std::memcpy(dst, rgb_f32, static_cast<size_t>(comps) * sizeof(float));
+        } else if (exact_source) {
+            parallel_for(0, static_cast<int>(comps), [&](int lo, int hi) {
+                for (int i = lo; i < hi; ++i) dst[i] = static_cast<float>(rgb[i]);
+            });
+        } else {
+            parallel_for(0, static_cast<int>(comps), [&](int lo, int hi) {
+                for (int i = lo; i < hi; ++i) {
+                    const double v = rgb[i];
+                    dst[i] = std::isfinite(v) ? static_cast<float>(v) : 0.0f;
+                }
+            });
+        }
     }
     if (!c.frameCopy(/*toDevice=*/true, comps * sizeof(float))) {
         c.destroyFrame();
@@ -2547,6 +2573,7 @@ bool frame_open(const double* rgb, int width, int height,
     }
     c.frame.width = width;
     c.frame.height = height;
+    c.frame.owner = std::this_thread::get_id();
     c.frame.open = true;
     d.ms = std::chrono::duration<double, std::milli>(
                std::chrono::steady_clock::now() - t0).count();
@@ -2556,7 +2583,9 @@ bool frame_open(const double* rgb, int width, int height,
     return true;
 }
 
-bool frame_close(double* rgb, FrameDiagnostics* diagnostics) {
+// One readback of the front plane, then the frame closes. Exactly one of the
+// destinations is non-null.
+bool frame_close_impl(double* rgb, float* out_f32, FrameDiagnostics* diagnostics) {
     FrameDiagnostics d{};
     d.attempted = true;
     auto give_up = [&](const char* reason) {
@@ -2564,11 +2593,11 @@ bool frame_close(double* rgb, FrameDiagnostics* diagnostics) {
         if (diagnostics) *diagnostics = d;
         return false;
     };
-    if (rgb == nullptr) return give_up("invalid-request");
+    if ((rgb == nullptr) == (out_f32 == nullptr)) return give_up("invalid-request");
 
     std::lock_guard<GpuMutex> lk(gpu_mutex());
     Ctx& c = ctx();
-    if (!c.ok || !c.frame.open) return give_up("not-open");
+    if (!c.ok || !c.frame.mine()) return give_up("not-open");
     const uint64_t comps =
         static_cast<uint64_t>(c.frame.width) * c.frame.height * 3;
     const auto t0 = std::chrono::steady_clock::now();
@@ -2578,9 +2607,13 @@ bool frame_close(double* rgb, FrameDiagnostics* diagnostics) {
     }
     {
         const float* src = static_cast<const float*>(c.frame.staging.mapped);
-        parallel_for(0, static_cast<int>(comps), [&](int lo, int hi) {
-            for (int i = lo; i < hi; ++i) rgb[i] = static_cast<double>(src[i]);
-        });
+        if (out_f32) {
+            std::memcpy(out_f32, src, static_cast<size_t>(comps) * sizeof(float));
+        } else {
+            parallel_for(0, static_cast<int>(comps), [&](int lo, int hi) {
+                for (int i = lo; i < hi; ++i) rgb[i] = static_cast<double>(src[i]);
+            });
+        }
     }
     c.frame.open = false;
     d.ms = std::chrono::duration<double, std::milli>(
@@ -2591,10 +2624,55 @@ bool frame_close(double* rgb, FrameDiagnostics* diagnostics) {
     return true;
 }
 
+}  // namespace
+
+bool frame_open(const double* rgb, int width, int height,
+                FrameDiagnostics* diagnostics) {
+    if (rgb == nullptr) {
+        if (diagnostics) {
+            *diagnostics = FrameDiagnostics{};
+            diagnostics->attempted = true;
+            diagnostics->reason = "invalid-request";
+        }
+        return false;
+    }
+    return frame_open_impl(rgb, nullptr, /*exact_source=*/false, width, height, diagnostics);
+}
+
+bool frame_open_source(const double* rgb_f64, const float* rgb_f32, int width,
+                       int height, FrameDiagnostics* diagnostics) {
+    return frame_open_impl(rgb_f64, rgb_f32, /*exact_source=*/true, width, height,
+                           diagnostics);
+}
+
+bool frame_close_f32(float* out, FrameDiagnostics* diagnostics) {
+    if (out == nullptr) {
+        if (diagnostics) {
+            *diagnostics = FrameDiagnostics{};
+            diagnostics->attempted = true;
+            diagnostics->reason = "invalid-request";
+        }
+        return false;
+    }
+    return frame_close_impl(nullptr, out, diagnostics);
+}
+
+bool frame_close(double* rgb, FrameDiagnostics* diagnostics) {
+    if (rgb == nullptr) {
+        if (diagnostics) {
+            *diagnostics = FrameDiagnostics{};
+            diagnostics->attempted = true;
+            diagnostics->reason = "invalid-request";
+        }
+        return false;
+    }
+    return frame_close_impl(rgb, nullptr, diagnostics);
+}
+
 void frame_discard() {
     std::lock_guard<GpuMutex> lk(gpu_mutex());
     Ctx& c = ctx();
-    if (!c.ok) return;
+    if (!c.ok || !c.frame.mine()) return;
     // The plane stays allocated -- it is grow-only scratch like every other
     // buffer here -- but it must stop being ADVERTISED, or the next frame reads
     // a stale image as if it were its own input.
@@ -2604,7 +2682,7 @@ void frame_discard() {
 bool frame_active(int width, int height) {
     std::lock_guard<GpuMutex> lk(gpu_mutex());
     Ctx& c = ctx();
-    return c.ok && c.frame.open && c.frame.width == width && c.frame.height == height;
+    return c.ok && c.frame.mine() && c.frame.width == width && c.frame.height == height;
 }
 
 // --- filming pointwise stages (#218) ----------------------------------------
@@ -2736,7 +2814,7 @@ bool run_filming_stage(const FilmingStageRun& r, FilmingStageDiagnostics* diagno
     // MODE_LAYERS writes npix*9, which is not the frame's shape, so it can never
     // BE the resident plane -- it is the grain sampler's input buffer instead.
     const bool frame_shaped = r.mode != kFilmModeLayers;
-    const bool resident = frame_shaped && c.frame.open && r.width > 0 && r.height > 0 &&
+    const bool resident = frame_shaped && c.frame.mine() && r.width > 0 && r.height > 0 &&
                           c.frame.width == r.width && c.frame.height == r.height &&
                           geom_elems == r.npix;
     // MODE_MAX produces its answer in the table buffer, not in the plane, so it
@@ -4160,7 +4238,7 @@ bool halation_scatter_locked(Ctx& c, const HalationScatterRequest& r, double* ou
     // device-to-device copy each: ~50 ms of conversion and bus traffic per call
     // at 12.5 MP, and this pass runs three times per frame (halation, the DIR
     // diffusion, and every gaussian_blur_rgb caller).
-    const bool resident = c.frame.open && c.frame.width == r.width &&
+    const bool resident = c.frame.mine() && c.frame.width == r.width &&
                           c.frame.height == r.height;
     const bool src_is_f32 = r.raw_rgb_f32 != nullptr;
     if (r.raw_rgb && r.raw_rgb_f32) { d.reason = "bad-request"; return false; }

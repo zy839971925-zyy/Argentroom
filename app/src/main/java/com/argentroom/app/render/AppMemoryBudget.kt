@@ -149,5 +149,21 @@ internal object AppMemoryBudget {
     }
 }
 
+/**
+ * The app-side model of what one full-resolution engine render costs. Kept in one place so the
+ * engine's next measured bytes/pixel is a one-line update here, and every gate built on it (the
+ * idle pre-render admission in RenderPayloads) moves with it.
+ */
+internal object EngineMemoryModel {
+    /**
+     * System memory a full-resolution render takes per source pixel, GPU included. On the
+     * SM-S948W a 41.2 MP pre-render took MemAvailable from 5.7 GB to 1.9 GB while lmkd
+     * reaped 22 cached apps (~1.5 GB) to keep up: ~5.4 GB, ~132 B per pixel. At 100 the
+     * gate passed and the render still caused those kills. Measured on engine-2026-09-02;
+     * update when the engine reports a new peak.
+     */
+    const val FULL_RES_PEAK_BYTES_PER_PIXEL = 135L
+}
+
 private const val MIB = 1_048_576L
 private const val GIB = 1_073_741_824L

@@ -22,9 +22,42 @@ import com.argentroom.engine.SpektraEngine
  * Call from a background thread: it waits for the GPU lock if a render holds it.
  */
 internal fun releaseGpuAfterFullResRender(reason: String) {
+    // perf r5: releasing tears down the whole GPU context (pipelines included), which the next
+    // GPU call rebuilds. When the budget shows no GPU-domain bytes there is nothing to give back,
+    // so keep the context warm instead of destroying and recomputing it for no memory.
+    val snapshot = runCatching { SpektraEngine.memoryBudgetSnapshotJson() }.getOrNull()
+    if (!gpuReleaseWorthwhile(snapshot)) {
+        Diag.i("gpu release skipped before/after $reason: no gpu-domain bytes held")
+        return
+    }
     runCatching { SpektraEngine.releaseGpuResources() }
         .onSuccess { released -> if (released) Diag.i("gpu resources released after $reason") }
         .onFailure { Diag.w("gpu resource release after $reason failed: ${it.message}") }
+}
+
+/**
+ * Whether [releaseGpuAfterFullResRender] can return anything: true unless the engine's memory
+ * budget snapshot is readable AND shows zero current bytes in both GPU domains (`gpu_host`,
+ * `gpu_device`). Any doubt (no snapshot, unknown schema) keeps the old always-release behaviour.
+ */
+internal fun gpuReleaseWorthwhile(snapshotJson: String?): Boolean {
+    if (snapshotJson == null) return true
+    return runCatching {
+        val json = org.json.JSONObject(snapshotJson)
+        if (json.optString("schema") != "spk.memory_budget.v1") return true
+        val domains = json.getJSONArray("domains")
+        var seen = 0
+        var gpuBytes = 0L
+        for (i in 0 until domains.length()) {
+            val d = domains.getJSONObject(i)
+            val name = d.optString("name")
+            if (name == "gpu_host" || name == "gpu_device") {
+                seen++
+                gpuBytes += d.getLong("current_bytes")
+            }
+        }
+        seen < 2 || gpuBytes > 0L
+    }.getOrDefault(true)
 }
 
 /** True for the failures a reclaim can plausibly cure: budget denial or a native/ART OOM. */

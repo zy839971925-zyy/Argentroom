@@ -45,6 +45,17 @@ target_compile_features(spektra_tc_lut_cache_regression PRIVATE cxx_std_17)
 target_include_directories(spektra_tc_lut_cache_regression PRIVATE ..)
 target_link_libraries(spektra_tc_lut_cache_regression PRIVATE Threads::Threads)
 
+# r5: the batched mt19937 behind StatsRng must emit std::mt19937's exact stream
+# (strict-CPU grain/glare byte identity). Header-only.
+add_executable(spektra_batched_mt19937_regression
+    test_batched_mt19937.cpp
+)
+target_compile_features(spektra_batched_mt19937_regression PRIVATE cxx_std_17)
+target_include_directories(spektra_batched_mt19937_regression PRIVATE ..)
+add_test(NAME spektra.stats.batched-mt19937-identity
+    COMMAND spektra_batched_mt19937_regression)
+set_tests_properties(spektra.stats.batched-mt19937-identity PROPERTIES TIMEOUT 60)
+
 # These small regression executables use assert as their fail-closed test primitive. CMake's
 # Release flags define NDEBUG; explicitly undo it so CI/release builds execute every assertion
 # instead of compiling the tests into no-ops.

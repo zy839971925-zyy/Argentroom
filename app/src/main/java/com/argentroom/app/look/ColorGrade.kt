@@ -58,35 +58,54 @@ object ColorGrade {
         val f = data.order(ByteOrder.nativeOrder()).asFloatBuffer()
         val rgb = FloatArray(3)  // reused per pixel for the gamut-compress triple (no per-pixel alloc)
         val n = w * h
-        var i = 0
-        while (i < n) {
-            val k = i * 3
-            // display → linear (in the output space's primaries)
-            var rl = OutputCctf.decode(cs, f.get(k), cctfEncoded)
-            var gl = OutputCctf.decode(cs, f.get(k + 1), cctfEncoded)
-            var bl = OutputCctf.decode(cs, f.get(k + 2), cctfEncoded)
+        // perf r5: one bulk read and one bulk write per band instead of six bounds-checked
+        // absolute FloatBuffer get/put calls per pixel (perf-lab §16.9 measured per-element
+        // buffer ops at ~half the loop's cost). The per-element arithmetic is unchanged, so the
+        // output is bit-identical (ColorGradeBandTest pins that against the per-pixel loop).
+        val bandPixels = minOf(n, BAND_PIXELS)
+        val band = FloatArray(bandPixels * 3)
+        var start = 0
+        while (start < n) {
+            val count = minOf(bandPixels, n - start)
+            val base = start * 3
+            f.position(base)
+            f.get(band, 0, count * 3)
+            var k = 0
+            val end = count * 3
+            while (k < end) {
+                // display → linear (in the output space's primaries)
+                var rl = OutputCctf.decode(cs, band[k], cctfEncoded)
+                var gl = OutputCctf.decode(cs, band[k + 1], cctfEncoded)
+                var bl = OutputCctf.decode(cs, band[k + 2], cctfEncoded)
 
-            // Gamut compression first: pull the most-saturated colors toward neutral (softens clip).
-            if (gamut) {
-                rgb[0] = rl; rgb[1] = gl; rgb[2] = bl
-                GamutCompress.apply(rgb, gamutCompress)
-                rl = rgb[0]; gl = rgb[1]; bl = rgb[2]
+                // Gamut compression first: pull the most-saturated colors toward neutral (softens clip).
+                if (gamut) {
+                    rgb[0] = rl; rgb[1] = gl; rgb[2] = bl
+                    GamutCompress.apply(rgb, gamutCompress)
+                    rl = rgb[0]; gl = rgb[1]; bl = rgb[2]
+                }
+
+                var r2 = rl; var g2 = gl; var b2 = bl
+                if (chroma) {
+                    // Oklab chroma grade (shared with the per-mask Saturation op): scale C by
+                    // (1+sat)·(1+vib·exp(-C/C0)), preserving lightness + hue. Neutral → a=b=0 (rows sum to 1).
+                    rgb[0] = rl; rgb[1] = gl; rgb[2] = bl
+                    Oklab.scaleChromaLinear(rgb, sat, vib)
+                    r2 = rgb[0]; g2 = rgb[1]; b2 = rgb[2]
+                }
+
+                // linear → display, clamp back into the encoded [0,1] range
+                band[k] = OutputCctf.encode(cs, r2, cctfEncoded)
+                band[k + 1] = OutputCctf.encode(cs, g2, cctfEncoded)
+                band[k + 2] = OutputCctf.encode(cs, b2, cctfEncoded)
+                k += 3
             }
-
-            var r2 = rl; var g2 = gl; var b2 = bl
-            if (chroma) {
-                // Oklab chroma grade (shared with the per-mask Saturation op): scale C by
-                // (1+sat)·(1+vib·exp(-C/C0)), preserving lightness + hue. Neutral → a=b=0 (rows sum to 1).
-                rgb[0] = rl; rgb[1] = gl; rgb[2] = bl
-                Oklab.scaleChromaLinear(rgb, sat, vib)
-                r2 = rgb[0]; g2 = rgb[1]; b2 = rgb[2]
-            }
-
-            // linear → display, clamp back into the encoded [0,1] range
-            f.put(k, OutputCctf.encode(cs, r2, cctfEncoded))
-            f.put(k + 1, OutputCctf.encode(cs, g2, cctfEncoded))
-            f.put(k + 2, OutputCctf.encode(cs, b2, cctfEncoded))
-            i++
+            f.position(base)
+            f.put(band, 0, count * 3)
+            start += count
         }
     }
+
+    /** Pixels per bulk band: 64 Ki px = 768 KiB of managed scratch, independent of image size. */
+    private const val BAND_PIXELS = 64 * 1024
 }

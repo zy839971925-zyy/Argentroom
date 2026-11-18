@@ -431,6 +431,22 @@ bool frame_close(double* rgb, FrameDiagnostics* diagnostics);
 // the next frame to pick up.
 void frame_discard();
 
+// r5: opens the resident frame from the FILMING SOURCE plane, converted exactly
+// as the staged filming_expose upload converts it (f64 -> f32 static_cast, f32
+// copied verbatim, no finite clamp) so a resident expose reads the very bits a
+// staged one would. Exactly one source must be non-null.
+bool frame_open_source(const double* rgb_f64, const float* rgb_f32, int width,
+                       int height, FrameDiagnostics* diagnostics);
+
+// r5: reads the resident f32 plane straight into `out` (width*height*3 floats,
+// no widening) and closes the frame. Same failure contract as frame_close.
+bool frame_close_f32(float* out, FrameDiagnostics* diagnostics);
+
+// r5: a frame is OWNED by the thread that opened it. frame_active, frame_close*
+// and frame_discard only see the caller's own frame, and the passes only run
+// resident for the owning thread, so a concurrent render on another thread (a
+// preview during an export) can never read or flip a plane it did not open.
+//
 // True when a frame of exactly this geometry is resident. Passes use it to
 // decide whether to transfer; callers use it to decide whether the GPU route is
 // still live after a pass refused.

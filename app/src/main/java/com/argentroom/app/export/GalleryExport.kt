@@ -247,6 +247,10 @@ suspend fun saveToGallery(
     // Encode completely into a unique app-private stage. This makes Bitmap.compress(false),
     // EXIF failure, ENOSPC and interruption fail before any public gallery item is visible.
     val stage = File.createTempFile("argentroom-export-", ".${format.ext}.part", ctx.cacheDir)
+    // perf r5: hash the encoded bytes as they are written, so a stage that no EXIF pass rewrites
+    // afterwards is not read back in full just to digest it.
+    val writeDigest = java.security.MessageDigest.getInstance("SHA-256")
+    var writtenBytes = 0L
     try {
         FileOutputStream(stage).use { fileOutput ->
             // Bitmap.compress is native, but it emits encoded chunks through this stream.
@@ -255,11 +259,15 @@ suspend fun saveToGallery(
                 override fun write(value: Int) {
                     ensureExportActive()
                     fileOutput.write(value)
+                    writeDigest.update(value.toByte())
+                    writtenBytes++
                 }
 
                 override fun write(buffer: ByteArray, offset: Int, length: Int) {
                     ensureExportActive()
                     fileOutput.write(buffer, offset, length)
+                    writeDigest.update(buffer, offset, length)
+                    writtenBytes += length
                     ensureExportActive()
                 }
 
@@ -283,7 +291,12 @@ suspend fun saveToGallery(
             descriptor.metadata.exifColorSpace,
         )
         ensureExportActive()
-        val artifact = EncodedArtifact.fromCompletedFile(stage, isCancelled = isCancelled)
+        val artifact = if (writeExif) {
+            // The EXIF pass rewrote the stage after the encoder: hash what is on disk now.
+            EncodedArtifact.fromCompletedFile(stage, isCancelled = isCancelled)
+        } else {
+            EncodedArtifact.fromHashedStage(stage, writtenBytes, ExportCache.hex(writeDigest.digest()))
+        }
         val published = publishStagedToGallery(
             ctx,
             artifact,

@@ -232,10 +232,11 @@ internal fun startEditorExport(
                         if (exportFmt == ExportFormat.SCENE_LINEAR_TIFF) {
                             null
                         } else {
-                            ExportCacheKey.digestSource {
-                                exportSourceUri?.let {
-                                    exportContext.contentResolver.openInputStream(it)
-                                }
+                            // perf r5: a digest confirmed earlier (by the idle pre-render
+                            // or a previous export) is reused when the file's fstat identity
+                            // and head/tail content sample still match; otherwise full hash.
+                            exportSourceUri?.let {
+                                SourceDigests.of(exportContext, it)
                             }?.let { (sha, bytes) ->
                                 ExportCacheKey.Source(
                                     sha, bytes, EXPORT_MAX_EDGE_PX,
@@ -402,6 +403,18 @@ internal fun startEditorExport(
                         phSim = System.currentTimeMillis() - tSim0
                         if (restored != null) {
                             Diag.i("export used pre-rendered payload in $phSim ms")
+                        } else {
+                            // perf r5: keep this render (still ungraded: the grade below is
+                            // in place) so a re-export that changes only post-engine choices
+                            // skips the film simulation, and the idle pre-render does not
+                            // repeat it. Same key as the pre-render; physical edits miss.
+                            exportPrerenderKey?.let { k ->
+                                if (res.colorSpace == outputDescriptor.engineColorSpace) {
+                                    withContext(dispatchers.io) {
+                                        RenderPayloads.storeExportRender(exportContext, k, res, sceneTap)
+                                    }
+                                }
+                            }
                         }
                         try {
                             check(res.colorSpace == outputDescriptor.engineColorSpace) {
